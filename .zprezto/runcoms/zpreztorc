@@ -223,13 +223,6 @@ zstyle ':prezto:module:terminal' auto-title 'yes'
 
 #Aliases
 
-if [ -f $HOME/.zsh_aliases ]; then
-    . $HOME/.zsh_aliases
-fi
-
-
-#Climate Completion
-#not working, added to .zshrc
-#if [ -f /etc/bash_completion.d/climate_completion ]; then
-#	source /etc/bash_completion.d/climate_completion
+#if [ -f $HOME/.zsh_aliases ]; then
+#    . $HOME/.zsh_aliases
 #fi
