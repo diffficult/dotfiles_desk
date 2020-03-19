@@ -14,18 +14,10 @@ source /usr/share/doc/pkgfile/command-not-found.bash
 #---Auto CD 
 shopt -s autocd
 
-# >>> BEGIN ADDED BY CNCHI INSTALLER
 BROWSER=/usr/bin/chromium
 EDITOR=/usr/bin/nano
-# <<< END ADDED BY CNCHI INSTALLER
-
 
 #-------- External Files {{{
-
-# load alias/functions that works with both zsh/bash
-if [[ -f ~/.aliasrc ]]; then
-    source ~/.aliasrc
-fi
 
 # load alias/functions that works with both zsh/bash
 if [[ -f ~/.aliasrc ]]; then
@@ -46,5 +38,5 @@ fi
 
 #}}} -----------------------
 
-source /etc/bash_completion.d/climate_completion
+
 source /home/rx/.config/broot/launcher/bash/br
