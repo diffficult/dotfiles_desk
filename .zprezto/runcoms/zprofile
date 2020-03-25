@@ -6,6 +6,20 @@
 #
 
 #
+#### XDG VARIABLES ####
+#
+
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
+export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+
+
+#export XDG_RUNTIMEDIR
+#export XDG_DATA_DIRS = /usr/local/share:/usr/share
+#export XDG_CONFIG_DIRS = /etc/xdg
+
+
+#
 # Browser
 #
 
@@ -18,8 +32,15 @@ fi
 #
 
 export EDITOR='nano'
-export VISUAL='nano'
+export VISUAL='subl'
 export PAGER='less'
+
+
+
+export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
+export ANDROID_SDK_HOME="$XDG_CONFIG_HOME"/android
+export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
+export WINEPREFIX="$XDG_DATA_HOME"/wineprefixes/default
 
 #
 # Language
