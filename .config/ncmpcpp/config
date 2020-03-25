@@ -101,7 +101,7 @@ active_window_border = "red"
 
 
 ###Execute external commands
-execute_on_song_change = ~/.ncmpcpp/mpdnotify
+execute_on_song_change = ~/.config/ncmpcpp/mpdnotify
 
 
 ###●▋▒ ▋▋
