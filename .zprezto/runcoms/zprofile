@@ -37,10 +37,14 @@ export PAGER='less'
 
 
 
-export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
-export ANDROID_SDK_HOME="$XDG_CONFIG_HOME"/android
-export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
-export WINEPREFIX="$XDG_DATA_HOME"/wineprefixes/default
+export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
+export ANDROID_SDK_HOME="$XDG_CONFIG_HOME/android"
+export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
+export WINEPREFIX="$XDG_DATA_HOME/wineprefixes/default"
+export GTK2_RC_FILES="$HOME/.config/gtk-2.0/gtkrc-2.0"
+
+#export GNUPGHOME="$XDG_DATA_HOME/gnupg"
+
 
 #
 # Language
