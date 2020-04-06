@@ -44,7 +44,10 @@ Xft.rgba: 					rgb
 Xft.hinting: 				true
 Xft.hintstyle: 				hintfull
 Xft.lcdfilter: 				lcddefault
-Xcursor.theme:				Paper
+
+Xcursor.theme:    OSX-ElCap
+Xcursor.size:    16
+Xcursor.theme_core:    1				
 
 URxvt*depth:                32
 URxvt*geometry:             90x30
