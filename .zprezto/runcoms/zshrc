@@ -49,3 +49,6 @@ eval $(thefuck --alias)
 
 source /etc/bash_completion.d/climate_completion
 source /home/rx/.config/broot/launcher/bash/br
+
+# autocompletion for zsh to get completion of command flags
+autoload -U compinit && compinit
