@@ -17,7 +17,6 @@ MiscTabCloseMiddleClick=TRUE
 MiscTabPosition=GTK_POS_TOP
 MiscHighlightUrls=TRUE
 MiscScrollAlternateScreen=TRUE
-BackgroundMode=TERMINAL_BACKGROUND_TRANSPARENT
 ScrollingBar=TERMINAL_SCROLLBAR_NONE
 ColorSelection=#163b59
 ColorSelectionUseDefault=FALSE
@@ -42,4 +41,5 @@ ColorBackground=#121215151a1a
 ColorPalette=rgb(33,49,70);rgb(249,25,48);#1212e6e68989;rgb(244,253,34);#0202a4a4fcfc;rgb(140,84,254);rgb(56,200,181);rgb(204,204,198);rgb(80,83,84);rgb(255,27,109);rgb(147,234,0);rgb(255,102,0);rgb(72,116,255);rgb(158,111,254);rgb(35,207,213);rgb(248,248,242)
 MiscSearchDialogOpacity=100
 MiscShowUnsafePasteDialog=TRUE
+BackgroundMode=TERMINAL_BACKGROUND_TRANSPARENT
 

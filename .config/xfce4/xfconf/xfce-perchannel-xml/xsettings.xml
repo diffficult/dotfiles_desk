@@ -33,7 +33,7 @@
     <property name="MenuImages" type="empty"/>
     <property name="ButtonImages" type="empty"/>
     <property name="MenuBarAccel" type="empty"/>
-    <property name="CursorThemeName" type="string" value="McMojave-cursors"/>
+    <property name="CursorThemeName" type="string" value="OSX-ElCap"/>
     <property name="CursorThemeSize" type="int" value="16"/>
     <property name="DecorationLayout" type="empty"/>
   </property>
