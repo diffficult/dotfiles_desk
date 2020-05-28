@@ -1209,3 +1209,13 @@ se() { du -a ~/bin/* ~/.scripts/* ~/.scripts/tools/* ~/.config/i3/myblocks/* ~/.
 
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.deskdots/ --work-tree=$HOME'
 #alias dotpush= '/usr/bin/git --git-dir=$HOME/.deskdots/ --work-tree=$HOME push origin master'
+
+
+
+###############################
+##### extra aliases       #####
+###############################
+
+alias btcprice='curl -s https://rate.sx/BTC'
+alias ethprice='curl -s https://rate.sx/ETH'
+alias zrxprice='curl -s https://rate.sx/ZRX'
