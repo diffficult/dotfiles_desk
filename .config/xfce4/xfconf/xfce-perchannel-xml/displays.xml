@@ -36,7 +36,7 @@
       <property name="Primary" type="bool" value="true"/>
       <property name="Position" type="empty">
         <property name="X" type="int" value="2560"/>
-        <property name="Y" type="int" value="204"/>
+        <property name="Y" type="int" value="166"/>
       </property>
       <property name="EDID" type="string" value="6b39c742198bb45abc7fdc98151192806d4c7923"/>
     </property>
@@ -66,7 +66,7 @@
       <property name="Primary" type="bool" value="true"/>
       <property name="Position" type="empty">
         <property name="X" type="int" value="2560"/>
-        <property name="Y" type="int" value="204"/>
+        <property name="Y" type="int" value="166"/>
       </property>
     </property>
   </property>
