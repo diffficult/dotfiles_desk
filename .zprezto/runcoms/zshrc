@@ -52,3 +52,9 @@ source /home/rx/.config/broot/launcher/bash/br
 
 # autocompletion for zsh to get completion of command flags
 autoload -U compinit && compinit
+
+
+#sourcing nvm to install and run different node.js versions
+if [[ -f ~/usr/share/nvm/init-nvm.sh ]]; then
+	source /usr/share/nvm/init-nvm.sh
+fi
