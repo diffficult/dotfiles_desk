@@ -40,3 +40,5 @@ fi
 
 
 source /home/rx/.config/broot/launcher/bash/br
+
+source /etc/bash_completion.d/climate_completion
