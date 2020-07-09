@@ -35,13 +35,14 @@ export EDITOR='nano'
 export VISUAL='subl'
 export PAGER='less'
 
-
+# Other shit
 
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 export ANDROID_SDK_HOME="$XDG_CONFIG_HOME/android"
 export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
 export WINEPREFIX="$XDG_DATA_HOME/wineprefixes/default"
 export GTK2_RC_FILES="$HOME/.config/gtk-2.0/gtkrc-2.0"
+
 
 #export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 
@@ -86,3 +87,6 @@ export LESS='-F -g -i -M -R -S -w -X -z-4'
 if (( $#commands[(i)lesspipe(|.sh)] )); then
   export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
 fi
+
+
+
