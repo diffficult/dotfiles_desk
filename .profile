@@ -51,4 +51,4 @@ export BROWSER=/usr/bin/chromium
 
 #change opengl shader cache directory var
 
-# export __GL_SHADER_DISK_CACHE_PATH="$XDG_CACHE_HOME/nv"
+#export __GL_SHADER_DISK_CACHE_PATH="/home/rx/.cache/nv"

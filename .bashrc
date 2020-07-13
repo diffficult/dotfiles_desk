@@ -42,3 +42,6 @@ fi
 source /home/rx/.config/broot/launcher/bash/br
 
 source /etc/bash_completion.d/climate_completion
+
+
+#export __GL_SHADER_DISK_CACHE_PATH="$HOME/.cache/nv"
