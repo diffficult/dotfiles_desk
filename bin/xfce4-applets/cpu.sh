@@ -38,7 +38,7 @@ else
   INFO="<txt>"
 fi
 #INFO+=" ${STDOUT}"
-INFO+="$TEMP "
+INFO+=" $TEMP "
 INFO+="</txt>"
 
 # Output panel
