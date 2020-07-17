@@ -7,7 +7,7 @@ readonly DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 readonly ICON="${DIR}/icons/gpu.png"
 
 # GPU values
-readonly GPU_NAME="$(nvidia-smi -i 0 -q | grep " Product Name" | cut -c38-)"
+readonly GPU_NAME="$(nvidia-smi -i 0 -q | grep " Product Name" | cut -c45-)"
 readonly GPU_TEMP="$(nvidia-smi -q -d temperature | grep "GPU Current Temp" | cut -c45-46)"
 readonly CUDA_VERSION="$(nvidia-smi -q -d performance | grep "CUDA Version" | cut -c45-)"
 readonly DRIVER_VERSION="$(nvidia-smi -q -d performance | grep "Driver Version" | cut -c45-)"

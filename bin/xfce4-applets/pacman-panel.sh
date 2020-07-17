@@ -28,9 +28,9 @@ INFO+="</txt>"
 
 # Tooltip
 MORE_INFO="<tool>"
-MORE_INFO+="┌ Updates Available\n"
-MORE_INFO+="├─ From official repos: ${OFFICIAL}\n"
-MORE_INFO+="└─ From AUR: ${AUR}"
+MORE_INFO+="┌─ 📦 Updates Available\n"
+MORE_INFO+="├─ ${OFFICIAL}  from repos\n"
+MORE_INFO+="└─ ${AUR}  from AUR"
 MORE_INFO+="</tool>"
 
 # Panel Print
