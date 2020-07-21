@@ -71,8 +71,8 @@ export QUEUER=$(find_alt tsp fq ts )
 #export PATH="$PATH:$GOPATH/bin"
 
 # NPM NodeJS Packages
-if [ -d "$HOME/node_modules/.bin" ] ; then
-    export PATH="$HOME/node_modules/.bin:$PATH"
+if [ -d "$HOME/node_modules/bin" ] ; then
+    export PATH="$HOME/node_modules/bin:$PATH"
 fi
 
 #NPM config
@@ -91,18 +91,18 @@ if [ -d "$HOME/bin/Alison_Desktop" ] ; then
 fi
 
 # local/bin directory
-if [ -d "$HOME/.local/bin" ] ; then
-    export PATH="$HOME/.local/bin:$PATH"
-fi
+#if [ -d "$HOME/.local/bin" ] ; then
+#    export PATH="$HOME/.local/bin:$PATH"
+#fi
 
 # tools directory
-if [ -d "$HOME/.scripts/tools" ] ; then
-    export PATH="$HOME/.scripts/tools:$PATH"
+if [ -d "$HOME/.local/bin/scripts/tools" ] ; then
+    export PATH="$HOME/.local/bin/scripts/tools:$PATH"
 fi
 
 # i3cmds directory
-if [ -d "$HOME/.scripts/i3cmds" ] ; then
-    export PATH="$HOME/.scripts/i3cmds:$PATH"
+if [ -d "$HOME/.local/bin/scripts/i3cmds" ] ; then
+    export PATH="$HOME/.local/bin/scripts/i3cmds:$PATH"
 fi
 
 
@@ -126,7 +126,7 @@ cfg-aliasrc() { $EDITORCLI ~/.aliasrc ;}
 cfg-bashrc() { $EDITORCLI ~/.bashrc ;}
 #cfg-blocklist() { $EDITORCLI ~/.scripts/blocklist.sh ;}
 cfg-cava() { $EDITORCLI ~/.config/cava/config ;}
-cfg-compton() { $EDITORCLI ~/.config/compton.conf ;}
+cfg-compton() { $EDITORCLI ~/.config/picom.conf ;}
 #cfg-clonezilla() { sudo $EDITORCLI /etc/drbl/drbl.conf ;}
 # https://wiki.archlinux.org/index.php/Cursor_Themes#Choosing_and_Configuring_Cursor_Themes
 #cfg-cursor() { $EDITORCLI ~/.icons/default/index.theme ;}
