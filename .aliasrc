@@ -266,7 +266,7 @@ alias rmdir='rmdir -v'			                # rm empty directory only
 #alias sr='sr -browser=$BROWSERCLI'			# open in cli browser
 #alias surfraw='surfraw -browser=$BROWSER'		# open in gui browser
 alias w3m='w3m -num'					# w3m web browser with line number
-alias wget='wget -N -c'					# continues/resumes
+alias wget='wget -N -c --hsts-file ~/.config/wget/wget-hsts'					# continues/resumes
 #alias youtube-viewer='youtube-viewer -C -f -4 --results=6'  # color, fullscreen, 480p, number of results
 alias visudo='sudo EDITOR="$EDITOR" visudo'
 
