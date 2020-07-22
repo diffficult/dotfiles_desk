@@ -37,11 +37,31 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
+#
 # set PATH so it includes user's private bin if it exists
+#
+
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
+if [ -d "$HOME/.local/bin/scripts" ] ; then
+    PATH="$HOME/.local/bin/scripts:$PATH"
+fi
+
+
+#
+# Alison Desktop
+#
+
+if [ -d "$HOME/.local/bin/Alison_Desktop" ] ; then
+    PATH="$HOME/.local/bin/Alison_Desktop:$PATH"
+fi
+
+
+#
+# .bashrc 
+#
 
 #if [[ -n "$BASH_VERSION" && -f "$HOME/.bashrc" ]]; then
 #  source "$HOME/.bashrc"
@@ -70,10 +90,7 @@ fi
 # NVIDIA CACHE LOCATION ###
 #
 
-
 #export __GL_SHADER_DISK_CACHE_PATH="$HOME/.cache/nv"
-
-
 
 #
 # Browser
@@ -91,7 +108,11 @@ export EDITOR='nano'
 export VISUAL='subl'
 export PAGER='less'
 
-# Other shit
+
+#
+# XDG directories cleanup
+#
+
 
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 export ANDROID_SDK_HOME="$XDG_CONFIG_HOME/android"
@@ -99,8 +120,6 @@ export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
 export WINEPREFIX="$XDG_DATA_HOME/wineprefixes/default"
 export GTK2_RC_FILES="$HOME/.config/gtk-2.0/gtkrc-2.0"
 export CARGO_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/cargo"
-
-
 #export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 
 
@@ -115,8 +134,8 @@ fi
 #
 # Paths
 #
-
 # Ensure path arrays do not contain duplicates.
+
 typeset -gU cdpath fpath mailpath path
 
 # Set the list of directories that cd searches.
@@ -155,6 +174,22 @@ export LESS_TERMCAP_ue="$(printf '%b' '[0m')"
 
 
 #
+# TLDR options
+#
+
+export TLDR_COLOR_NAME="cyan"
+export TLDR_COLOR_DESCRIPTION="white"
+export TLDR_COLOR_EXAMPLE="green"
+export TLDR_COLOR_COMMAND="red"
+export TLDR_COLOR_PARAMETER="white"
+export TLDR_CACHE_ENABLED=1
+export TLDR_CACHE_MAX_AGE=720
+export TLDR_PAGES_SOURCE_LOCATION="https://raw.githubusercontent.com/tldr-pages/tldr/master/pages"
+export TLDR_DOWNLOAD_CACHE_LOCATION="https://tldr-pages.github.io/assets/tldr.zip"
+export TLDR_LANGUAGE="en"
+
+
+#
 # SOURCE stuff
 #
 
@@ -162,11 +197,6 @@ export LESS_TERMCAP_ue="$(printf '%b' '[0m')"
 
 if [ -d "$HOME/.config/broot" ] ; then
     source $HOME/.config/broot/launcher/bash/br
-fi 
+fi
 
 
-
-
-#change opengl shader cache directory var
-
-#export __GL_SHADER_DISK_CACHE_PATH="/home/rx/.cache/nv"
