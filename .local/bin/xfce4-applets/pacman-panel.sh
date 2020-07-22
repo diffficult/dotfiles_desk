@@ -35,7 +35,7 @@ MORE_INFO+="</tool>"
 
 # Panel Print
 if [[ ${ALL} -eq "0" ]]; then
-  echo -e "<img>${ICON}</img><txt>👌🏻</txt>"
+  echo -e "<img>${ICON}</img><txt>🟢</txt>"
 else
   echo -e "${INFO}"
 fi
