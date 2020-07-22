@@ -34,7 +34,7 @@ MORE_INFO+="└─ ${AUR}  from AUR"
 MORE_INFO+="</tool>"
 
 # Panel Print
-if [[ ${ALL} =~ 0 ]]; then
+if [[ ${ALL} -eq "0" ]]; then
   echo -e "<img>${ICON}</img><txt>👌🏻</txt>"
 else
   echo -e "${INFO}"
