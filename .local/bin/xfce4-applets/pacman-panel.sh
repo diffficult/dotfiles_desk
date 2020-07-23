@@ -8,8 +8,8 @@ readonly DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # Insert the absolute path of the icon
 # Recommended size is 24x24 px
 #readonly ICON="${DIR}/icons/package-manager/pacman.svg"
-readonly ICON="${DIR}/icons/package-manager/pacman2.png"
-
+readonly ICON="${DIR}/icons/package-manager/pacman3.png"
+readonly ICONOK="${DIR}/icons/package-manager/packageok.png"
 # Calculate updates
 readonly AUR=$(yay -Qua | wc -l)
 readonly OFFICIAL=$(checkupdates | wc -l)
@@ -27,17 +27,25 @@ INFO+=" ${ALL} "
 INFO+="</txt>"
 
 # Tooltip
-MORE_INFO="<tool>"
-MORE_INFO+="┌─ 📦 Updates Available\n"
-MORE_INFO+="├─ ${OFFICIAL}  from repos\n"
-MORE_INFO+="└─ ${AUR}  from AUR"
-MORE_INFO+="</tool>"
+#MORE_INFO="<tool>"
+#MORE_INFO+="┌─ 📦 Updates Available\n"
+#MORE_INFO+="├─ ${OFFICIAL}  from repos\n"
+#MORE_INFO+="└─ ${AUR}  from AUR"
+#MORE_INFO+="</tool>"
 
 # Panel Print
 if [[ ${ALL} -eq "0" ]]; then
-  echo -e "<img>${ICON}</img><txt>🟢</txt>"
+  echo -e "<img>${ICONOK}</img>"
+  MORE_INFO="<tool>"
+  MORE_INFO+=" ✅ Packages up to date"
+  MORE_INFO+="</tool>"
 else
   echo -e "${INFO}"
+  MORE_INFO="<tool>"
+  MORE_INFO+="┌─ ⚠️ Updates Available\n"
+  MORE_INFO+="├─ ${OFFICIAL}  from repos\n"
+  MORE_INFO+="└─ ${AUR}  from AUR"
+  MORE_INFO+="</tool>"
 fi
 
 # Tooltip Print
