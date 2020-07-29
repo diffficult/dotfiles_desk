@@ -1,6 +1,6 @@
 [Configuration]
 TitleInitial=xfce-term
-FontName=FantasqueSansMono Nerd Font Mono 10
+FontName=FantasqueSansMono Nerd Font 10
 MiscAlwaysShowTabs=FALSE
 MiscBell=FALSE
 MiscBordersDefault=TRUE
