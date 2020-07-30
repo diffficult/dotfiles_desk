@@ -89,7 +89,7 @@ my $night = "🌜";
 binmode(STDOUT, ":utf8");
 print "$night";
 }
-$values[1] =~ s/C/ °C/g; print"$values[1]"; }')"
+$values[1] =~ s/C/°C/g; print"$values[1]"; }')"
 
 #### Panel
 ###if [[ $(file -b "${ICON}") =~ PNG|SVG ]]; then
