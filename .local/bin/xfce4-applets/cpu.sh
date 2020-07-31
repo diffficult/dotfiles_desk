@@ -42,7 +42,7 @@ INFO+=" $TEMP "
 INFO+="</txt>"
 
 # Output panel
-echo -e "${INFO}"
+echo -e "${INFO} "
 
 # Output hover menu
 echo -e "${MORE_INFO}"
