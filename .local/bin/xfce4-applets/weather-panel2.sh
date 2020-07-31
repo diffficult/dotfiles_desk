@@ -31,7 +31,7 @@ readonly CURRENT_TEMP="$(echo -e "${WTTR_IN_PANEL}" | awk '{print substr($0,14,4
 # Panel
 INFO="<txt> "
 INFO+="${PANEL_ICON}"
-INFO+="  ${CURRENT_TEMP}"
+INFO+=" ${CURRENT_TEMP}"
 INFO+=" </txt>"
 
 # Tooltip
