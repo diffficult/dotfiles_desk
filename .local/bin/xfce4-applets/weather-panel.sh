@@ -20,9 +20,13 @@ readonly DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # Size used for the icons is 24x24 (16x16 is also ok for a smaller panel)
 readonly ICON="${DIR}/icons/gpu.png"
 
-# GPU values
-readonly WEATHER_REPORT="$(curl --silent http://wttr.in/$1?T0F)"
-#readonly CURRENT_TEMP="$(curl --silent http://wttr.in/$1 | head $s | cut -c45-46)"
+
+# Weather Values
+
+#readonly WEATHER_REPORT="$(curl --silent http://wttr.in/$1?T0F)"
+#readonly WEATHER_REPORT="$(curl --silent http://wttr.in/-32.89,-68.85?T0F)"
+readonly WEATHER_REPORT="$(curl --silent http://wttr.in/Mendoza?T0F)"
+
 readonly CURRENT_TEMP="$(curl -s http://rss.accuweather.com/rss/liveweather_rss.asp\?metric\=1\&locCode\="SAM|AR|AR013|MENDOZA" | perl -ne 'use utf8; if (/Currently/) {chomp;/\<title\>Currently: (.*)?\<\/title\>/; my @values=split(":",$1); if( $values[0] eq "Sunny" || $values[0] eq "Intermittent Clouds" || $values[0] eq "Hazy Sunshine" || $values[0] eq "Hazy Sunshine" || $values[0] eq "Hot") 
 {
 my $sun1 = "☀️";
@@ -112,6 +116,3 @@ echo -e "<txt> ${CURRENT_TEMP} </txt>"
 
 # Output hover menu
 echo -e "${MORE_INFO}"
-
-
-
