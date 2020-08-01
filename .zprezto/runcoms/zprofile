@@ -58,6 +58,14 @@ if [ -d "$HOME/.local/bin/Alison_Desktop" ] ; then
     PATH="$HOME/.local/bin/Alison_Desktop:$PATH"
 fi
 
+#
+# npm-global path
+#
+
+if [ -d "$HOME/.npm-global/bin" ] ; then
+    PATH="$HOME/.npm-global/bin:$PATH"
+fi
+
 
 #
 # .bashrc 
@@ -113,7 +121,7 @@ export PAGER='less'
 # XDG directories cleanup
 #
 
-
+export NPM_CONFIG_PREFIX="$HOME/.npm-global"
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 export ANDROID_SDK_HOME="$XDG_CONFIG_HOME/android"
 export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
