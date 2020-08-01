@@ -29,10 +29,11 @@ readonly PANEL_ICON="$(echo -e "${WTTR_IN_PANEL}" | awk '{print substr($0,10,3);
 readonly CURRENT_TEMP="$(echo -e "${WTTR_IN_PANEL}" | awk '{print substr($0,14,4);exit}')"
 
 # Panel
-INFO="<txt> "
+INFO="<txt>"
 INFO+="${PANEL_ICON}"
-INFO+=" ${CURRENT_TEMP}"
+INFO+="${CURRENT_TEMP}"
 INFO+=" </txt>"
+INFO+="<txtclick>surf http://wttr.in/Mendoza?F</txtclick>"
 
 # Tooltip
 MORE_INFO="<tool>"
@@ -44,5 +45,3 @@ echo -e "${INFO}"
 
 # Output hover menu
 echo -e "${MORE_INFO}"
-
-
