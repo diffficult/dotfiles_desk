@@ -39,7 +39,7 @@ else
 fi
 #INFO+=" ${STDOUT}"
 INFO+=" $TEMP "
-INFO+="</txt>"
+INFO+="</txt><txtclick>st -g 140x50 -e bpytop</txtclick>"
 
 # Output panel
 echo -e "${INFO} "
