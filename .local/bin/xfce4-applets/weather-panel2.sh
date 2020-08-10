@@ -33,7 +33,7 @@ INFO="<txt>"
 INFO+="${PANEL_ICON}"
 INFO+="${CURRENT_TEMP}"
 INFO+=" </txt>"
-INFO+="<txtclick>surf http://wttr.in/Mendoza?F</txtclick>"
+INFO+="<txtclick>st -g 126x36 -t 'Weather Report' -e sh -c 'curl wttr.in/Mendoza\?QF; read'</txtclick>"
 
 # Tooltip
 MORE_INFO="<tool>"
