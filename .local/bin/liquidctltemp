@@ -41,7 +41,7 @@ gpu_temperatures() {
        # ...print with red background
        liquidctl set logo color breathing FF0000 FF00FF FF0000
        # if the temperature is between 60 and 80 degrees...
-       elif [[ "$GPU_TEMP" -ge 45 ]]; then
+       elif [[ "$GPU_TEMP" -ge 55 ]]; then
        # print the background orange
            liquidctl set logo color fading FFFF66 FFCC00 FFCC00 FF9900 FF9900 FFA500 FFA500 FFA500
        # if the temperature is lower tha 60 degress...
