@@ -30,7 +30,6 @@ readonly WTTR_ICON="$(echo -e "${WTTR_IN_PANEL}" | awk '{print substr($0,10,2);e
 # Get hour of the day
 DAYNIGHT=$(date +%k)
 
-
 # evaluate if it is below -0°C or above +0°C and add the "-" sign 
 
 if [[ "$(echo -e "${WTTR_IN_PANEL}" | awk '{print substr($0,13,1);exit}')" == "-" ]]; then
@@ -52,17 +51,30 @@ else
 fi
 
 
-# Panel
-INFO="<txt>"
-INFO+="${PANEL_ICON} "
-INFO+="${CURRENT_TEMP}"
-INFO+=" </txt>"
-INFO+="<txtclick>st -g 126x36 -t 'Weather Report' -e sh -c 'curl wttr.in/Mendoza\?QF; read'</txtclick>"
+# evaluate if wttr.in is actually up, if so display temp and icon and add additional info to Tooltip
+# if it is down, then just show  ⚠️ icon and make Tooltip to display error message ❗
 
-# Tooltip
-MORE_INFO="<tool>"
-MORE_INFO+="${WEATHER_REPORT}"
-MORE_INFO+="</tool>"
+if [[ "$(echo -e "${WTTR_IN_PANEL}")" == *"Unknown"* ]]; then
+     # Panel
+     INFO="<txt>"
+     INFO+="⚠️"
+     INFO+=" </txt>"
+     # Tooltip
+     MORE_INFO="<tool>"
+     MORE_INFO+="⚠️ unknown error, check wttr.in for more info ⚠️"
+     MORE_INFO+="</tool>"	
+else
+	# Panel
+    INFO="<txt>"
+    INFO+="${PANEL_ICON} "
+    INFO+="${CURRENT_TEMP}"
+    INFO+=" </txt>"
+    INFO+="<txtclick>st -g 126x36 -t 'Weather Report' -e sh -c 'curl wttr.in/Mendoza\?QF; read'</txtclick>"
+    # Tooltip
+    MORE_INFO="<tool>"
+    MORE_INFO+="${WEATHER_REPORT}"
+    MORE_INFO+="</tool>"
+fi
 
 # Output panel
 echo -e "${INFO}"
