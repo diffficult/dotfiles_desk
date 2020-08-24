@@ -63,13 +63,13 @@
       <property name="&lt;Primary&gt;&lt;Super&gt;l" type="string" value="xflock4"/>
       <property name="XF86AudioPlay" type="string" value="mpc toggle"/>
       <property name="XF86AudioNext" type="string" value="mpc next"/>
-      <property name="XF86AudioPrev" type="string" value="/home/rx/bin/mpcPrevSong"/>
       <property name="&lt;Super&gt;e" type="string" value="exo-open --launch FileManager"/>
       <property name="XF86Music" type="string" value="xfce4-terminal -e &apos;bash -c &quot;ncmpcpp&quot;&apos;  --geometry 120x25+100+50"/>
       <property name="&lt;Super&gt;m" type="string" value="xfce4-terminal -e &apos;bash -c &quot;ncmpcpp&quot;&apos;  --geometry 120x25+100+50"/>
       <property name="&lt;Super&gt;space" type="string" value="xfce4-popup-whiskermenu"/>
       <property name="Print" type="string" value="xfce4-screenshooter -r"/>
       <property name="&lt;Super&gt;d" type="string" value="rofi -show combi -lines 4 -eh 2"/>
+      <property name="AudioPrev" type="string" value="/home/rx/.local/bin/mpcPrevSong"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">
