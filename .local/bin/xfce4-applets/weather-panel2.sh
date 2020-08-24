@@ -38,10 +38,10 @@ else
 	CURRENT_TEMP="$(echo -e "${WTTR_IN_PANEL}" | awk '{print substr($0,14,5);exit}')"
 fi
 
-# evaluate if it is "clear ☀" if so, check the time of the day and use "🌛" at night
+# evaluate if it is "clear ☀" if so, check the time of the day and use "🌛" at night (after 8pm til 6am)
 
 if [[ "$(echo -e "${WTTR_ICON}")" == "☀️" ]]; then
-   if (( "$(echo -e "${DAYNIGHT}")" >= "19" )) || (( "$(echo -e "${DAYNIGHT}")" <= "5" )); then
+   if (( "$(echo -e "${DAYNIGHT}")" >= "20" )) || (( "$(echo -e "${DAYNIGHT}")" <= "6" )); then
 	   PANEL_ICON="🌛"
    else
 	   PANEL_ICON="☀️"
