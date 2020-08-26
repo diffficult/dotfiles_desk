@@ -8,8 +8,8 @@ readonly DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # Insert the absolute path of the icon
 # Recommended size is 24x24 px
 #readonly ICON="${DIR}/icons/package-manager/pacman.svg"
-readonly ICON="${DIR}/icons/package-manager/pacman3.png"
-readonly ICONOK="${DIR}/icons/package-manager/packageok.png"
+readonly ICON="${DIR}/icons/package-manager/pacman51.png"
+readonly ICONOK="${DIR}/icons/package-manager/packageok11.png"
 
 # Calculate updates
 readonly AUR=$(yay -Qua | wc -l)
@@ -19,7 +19,7 @@ readonly ALL=$(( AUR + OFFICIAL ))
 # Panel and Tooltip display
 if [[ ${ALL} -eq "0" ]]; then
   if [[ $(file -b "${ICONOK}") =~ PNG|SVG ]]; then
-    INFO="<img>${ICONOK}</img><click>pamac-manager</click>"
+    INFO="<img>${ICONOK}</img><click>st -g 120x1 -t 'Checking for packages...' -e sh -c 'xfce4-panel --plugin-event=genmon-16:refresh:bool:true && sleep 3'</click>"
   else
   INFO="<txt>⚠️</txt>"
   fi
@@ -32,6 +32,7 @@ else
   fi
   INFO+=" ${ALL} "
   INFO+="</txt>"
+  INFO+="<txtclick>st -g 126x36 -t 'Updating packages' -e sh -c 'yay ; xfce4-panel --plugin-event=genmon-16:refresh:bool:true ; read'</txtclick>"
   MORE_INFO="<tool>"
   MORE_INFO+="┌─ ⚠️ Updates Available\n"
   MORE_INFO+="├─ ${OFFICIAL}  from repos\n"
