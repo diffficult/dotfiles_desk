@@ -24,8 +24,9 @@ else
   INFO="<txt>"
 fi
 #INFO+="${GPU_UTIL}"
-INFO+=" $GPU_TEMP"°C"  "
+INFO+=" $GPU_TEMP"°C" "
 INFO+="</txt>"
+    INFO+="<txtclick>gwe</txtclick>"
 
 # Tooltip
 MORE_INFO="<tool>"
