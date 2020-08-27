@@ -25,17 +25,20 @@ readonly DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 readonly WEATHER_REPORT="$(curl --silent http://wttr.in/Mendoza?T0F)"
 readonly WTTR_IN_PANEL="$(curl --silent http://wttr.in/Mendoza?format=3)"
-readonly WTTR_ICON="$(echo -e "${WTTR_IN_PANEL}" | awk '{print substr($0,10,2);exit}')"
+#readonly WTTR_ICON="$(echo -e "${WTTR_IN_PANEL}" | awk '{print substr($0,10,2);exit}')"
+readonly WTTR_ICON="$(echo -e "${WTTR_IN_PANEL}" | sed 's/[[:alnum:][:space:]\-\+\°\:]//g')"
 
 # Get hour of the day
 DAYNIGHT=$(date +%k)
 
 # evaluate if it is below -0°C or above +0°C and add the "-" sign 
 
-if [[ "$(echo -e "${WTTR_IN_PANEL}" | awk '{print substr($0,13,1);exit}')" == "-" ]]; then
-	CURRENT_TEMP="$(echo -e "${WTTR_IN_PANEL}" | awk '{print substr($0,13,5);exit}')"
+if [[ "$(echo -e "${WTTR_IN_PANEL}")" == *"-"* ]]; then
+    CURRENT_TEMP="$(echo -e "${WTTR_IN_PANEL}" | sed 's/-/ -/g' | awk '{print substr($0,13,5);exit}')"
+	#CURRENT_TEMP="$(echo -e "${WTTR_IN_PANEL}" | awk '{print substr($0,13,5);exit}')"
 else
-	CURRENT_TEMP="$(echo -e "${WTTR_IN_PANEL}" | awk '{print substr($0,14,5);exit}')"
+	CURRENT_TEMP="$(echo -e "${WTTR_IN_PANEL}" | sed 's/+/ /g' | awk '{print substr($0,13,5);exit}')"
+	#CURRENT_TEMP="$(echo -e "${WTTR_IN_PANEL}" | awk '{print substr($0,15,5);exit}')"
 fi
 
 # evaluate if it is "clear ☀" if so, check the time of the day and use "🌛" at night (after 8pm til 6am)
@@ -66,10 +69,10 @@ if [[ "$(echo -e "${WTTR_IN_PANEL}")" == *"Unknown"* ]]; then
 else
 	# Panel
     INFO="<txt>"
-    INFO+="${PANEL_ICON} "
+    INFO+="${PANEL_ICON}"
     INFO+="${CURRENT_TEMP}"
     INFO+=" </txt>"
-    INFO+="<txtclick>st -g 126x36 -t 'Weather Report' -e sh -c 'curl wttr.in/Mendoza\?QF; read'</txtclick>"
+    INFO+="<txtclick>st -g 126x36 -t 'Weather Report' -e sh -c 'curl wttr.in/Mendoza\?QF ; xfce4-panel --plugin-event=genmon-24:refresh:bool:true ; read'</txtclick>"
     # Tooltip
     MORE_INFO="<tool>"
     MORE_INFO+="${WEATHER_REPORT}"
