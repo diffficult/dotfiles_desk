@@ -220,6 +220,11 @@ zstyle ':prezto:module:terminal' auto-title 'yes'
 # Set the default session name:
 # zstyle ':prezto:module:tmux:session' name 'YOUR DEFAULT SESSION NAME'
 
+#
+# command-not-found
+#
+#zstyle ':prezto:module:command-not-found'
+
 
 #Aliases
 
