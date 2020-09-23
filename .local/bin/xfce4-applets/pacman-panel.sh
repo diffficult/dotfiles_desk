@@ -32,11 +32,11 @@ else
   fi
   INFO+=" ${ALL} "
   INFO+="</txt>"
-  INFO+="<txtclick>st -g 126x36 -t 'Updating packages' -e sh -c 'yay ; xfce4-panel --plugin-event=genmon-16:refresh:bool:true ; read -p "Press ENTER to continue..."'</txtclick>"
+  INFO+="<txtclick>st -g 126x36 -t 'Updating packages' -e sh -c 'yay; read; xfce4-panel --plugin-event=genmon-16:refresh:bool:true'</txtclick>"
   MORE_INFO="<tool>"
   MORE_INFO+="┌─ ⚠️ Updates Available\n"
-  MORE_INFO+="├─ ${OFFICIAL}  from repos\n"
-  MORE_INFO+="└─ ${AUR}  from AUR"
+  MORE_INFO+="├─ <span weight='Bold'>${OFFICIAL}</span> 📦 from repos\n"
+  MORE_INFO+="└─ <span weight='Bold'>${AUR}</span> 📦 from AUR"
   MORE_INFO+="</tool>"
 fi
 

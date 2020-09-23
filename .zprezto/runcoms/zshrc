@@ -52,7 +52,7 @@ fi
 #    bindkey '^[[B' history-substring-search-down
 #fi
 
-#zplug load
+# zplug load
 
 #bindkey "^[OA" history-substring-search-up
 #bindkey "^[OB" history-substring-search-down
@@ -68,7 +68,10 @@ fi
 autoload -U compinit && compinit
 
 
-#sourcing nvm to install and run different node.js versions
+# sourcing nvm to install and run different node.js versions
 if [[ -f ~/usr/share/nvm/init-nvm.sh ]]; then
 	source /usr/share/nvm/init-nvm.sh
 fi
+
+# navi command line cheatsheets
+source <(echo "$(navi widget zsh)")

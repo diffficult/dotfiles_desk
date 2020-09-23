@@ -1,8 +1,8 @@
 configuration {
 	modi:                           "combi,drun,run,window,emoji,ssh";
-	icon-theme:			"Arc-X-P";
+	icon-theme:						"Arc-X-P";
 	display-combi:                  "";
-        display-drun:			"";
+        display-drun:				"";
         display-run:                    "";
         display-window:                 "";
         display-emoji:                  "";
@@ -10,7 +10,7 @@ configuration {
         drun-display-format:            "{name}";
 	width:                          30;
 	lines:                          4;
-	hide-scrollbar:			true;
+	hide-scrollbar:					true;
 	font:                           "PragmataPro 12";
 	bw:                             0;
 	padding:                        0;
@@ -31,6 +31,6 @@ configuration {
 
 
 element-icon {
-    size:                           28px;
+    size:                           36px;
     border:                         0px;
 }

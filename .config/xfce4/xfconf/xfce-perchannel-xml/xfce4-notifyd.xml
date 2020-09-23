@@ -34,6 +34,9 @@
       <value type="string" value="xfce4-settings-helper"/>
       <value type="string" value="xfdesktop"/>
     </property>
+    <property name="muted_applications" type="array">
+      <value type="string" value="Antergos"/>
+    </property>
   </property>
   <property name="primary-monitor" type="uint" value="0"/>
   <property name="log-level" type="uint" value="0"/>

@@ -2,5 +2,5 @@
 player=mpv --cache 2048 --ontop --no-border --force-window --autofit=640x480 --geometry=-15-60
 player-no-close
 #stream options
-default-stream=720p,1080p,480p,medium,best
+default-stream=720p,480p,medium,best,1080p
 twitch-oauth-token=zafim3v6xq75ehkr5c4v4bn7nihpbt

@@ -19,7 +19,7 @@
     <property name="volume" type="int" value="100"/>
   </property>
   <property name="folders" type="empty">
-    <property name="last-used-media" type="string" value="/run/media/rx/WD Backup/RW/progs/progs_26 win7/misc"/>
+    <property name="last-used-media" type="string" value="/home/rx/Videos/misc/LR"/>
   </property>
   <property name="playlist" type="empty">
     <property name="show-playlist" type="bool" value="false"/>
