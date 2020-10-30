@@ -34,14 +34,18 @@ gpu_temperatures() {
     # get the cpu core temeperatures with sensors and grep it
     # to a number per line per core
 
-    GPU_TEMP="$(nvidia-smi -q -d temperature | grep "GPU Current Temp" | cut -c45-46)"
+    #NVIDIA GPUs
+    #GPU_TEMP="$(nvidia-smi -q -d temperature | grep "GPU Current Temp" | cut -c45-46)"
+
+    #AMD GPUs
+    GPU_TEMP="$(rocm-smi -t | grep "GPU" | cut -c43-44)"
 
     # if the temperature is higher than 80 degree...
     if [[ "$GPU_TEMP" -ge 65 ]]; then
        # ...print with red background
        liquidctl set logo color breathing FF0000 FF00FF FF0000
        # if the temperature is between 60 and 80 degrees...
-       elif [[ "$GPU_TEMP" -ge 55 ]]; then
+       elif [[ "$GPU_TEMP" -ge 75 ]]; then
        # print the background orange
            liquidctl set logo color fading FFFF66 FFCC00 FFCC00 FF9900 FF9900 FFA500 FFA500 FFA500
        # if the temperature is lower tha 60 degress...
