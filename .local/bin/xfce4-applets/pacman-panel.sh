@@ -12,7 +12,7 @@ readonly ICON="${DIR}/icons/package-manager/pacman51.png"
 readonly ICONOK="${DIR}/icons/package-manager/packageok11.png"
 
 # Calculate updates
-readonly AUR=$(yay -Qua | wc -l)
+readonly AUR=$(paru -Qua | wc -l)
 readonly OFFICIAL=$(checkupdates | wc -l)
 readonly ALL=$(( AUR + OFFICIAL ))
 
@@ -32,7 +32,7 @@ else
   fi
   INFO+=" ${ALL} "
   INFO+="</txt>"
-  INFO+="<txtclick>st -g 126x36 -t 'Updating packages' -e sh -c 'yay; read; xfce4-panel --plugin-event=genmon-16:refresh:bool:true'</txtclick>"
+  INFO+="<txtclick>st -g 126x36 -t 'Updating packages' -e sh -c 'paru; read; xfce4-panel --plugin-event=genmon-16:refresh:bool:true'</txtclick>"
   MORE_INFO="<tool>"
   MORE_INFO+="┌─ ⚠️ Updates Available\n"
   MORE_INFO+="├─ <span weight='Bold'>${OFFICIAL}</span> 📦 from repos\n"
