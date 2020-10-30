@@ -36,7 +36,7 @@
       <property name="Primary" type="bool" value="true"/>
       <property name="Position" type="empty">
         <property name="X" type="int" value="2560"/>
-        <property name="Y" type="int" value="160"/>
+        <property name="Y" type="int" value="192"/>
       </property>
       <property name="EDID" type="string" value="6b39c742198bb45abc7fdc98151192806d4c7923"/>
     </property>
@@ -60,10 +60,10 @@
       <property name="RefreshRate" type="double" value="59.950550"/>
       <property name="Rotation" type="int" value="0"/>
       <property name="Reflection" type="string" value="0"/>
-      <property name="Primary" type="bool" value="false"/>
+      <property name="Primary" type="bool" value="true"/>
       <property name="Position" type="empty">
         <property name="X" type="int" value="2560"/>
-        <property name="Y" type="int" value="160"/>
+        <property name="Y" type="int" value="192"/>
       </property>
     </property>
   </property>
@@ -92,7 +92,7 @@
       <property name="Primary" type="bool" value="true"/>
       <property name="Position" type="empty">
         <property name="X" type="int" value="2560"/>
-        <property name="Y" type="int" value="160"/>
+        <property name="Y" type="int" value="192"/>
       </property>
     </property>
     <property name="DisplayPort-1" type="string" value="Dell Inc. 27&quot;">
@@ -115,10 +115,10 @@
       <property name="RefreshRate" type="double" value="59.950550"/>
       <property name="Rotation" type="int" value="0"/>
       <property name="Reflection" type="string" value="0"/>
-      <property name="Primary" type="bool" value="false"/>
+      <property name="Primary" type="bool" value="true"/>
       <property name="Position" type="empty">
         <property name="X" type="int" value="2560"/>
-        <property name="Y" type="int" value="160"/>
+        <property name="Y" type="int" value="192"/>
       </property>
     </property>
   </property>
