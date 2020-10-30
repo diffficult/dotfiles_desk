@@ -34,7 +34,7 @@
 # }}}
 
 find_pkm() { for i;do which "$i" >/dev/null && { echo "$i"; return 0;};done;return 1; }
-export PKMGR=$(find_pkm yay pacman pacaur yaourt)
+export PKMGR=$(find_pkm paru pacman pacaur yaourt)
 
 # {{{ pacaur
 if [ "$PKMGR" = "pacaur" ]; then
@@ -103,46 +103,46 @@ elif [ "$PKMGR" = "pacman" ]; then
   pkm-remove() { sudo pacman -Rcs "$@" ;}
   pkm-remove-nodepends() { sudo pacman -Rdd "$@" ;}
   pkm-remove-orphans() { sudo pacman -Rs $(pacman -Qqtd) ;}
-  pkm-search() { yay "$@" ;}
+  pkm-search() { paru "$@" ;}
   #pkm-search() { pacman -Ss "$@" ;}
   pkm-search-local() { pacman -Qs "$@" ;}
   pkm-upgrade() { sudo pacman -Syu ;}
   pkm-list-upgraded() { cat /var/log/pacman.log | grep -i upgraded ;}
 # }}}
-# {{{ yay
-elif [ "$PKMGR" = "yay" ]; then
+# {{{ paru
+elif [ "$PKMGR" = "paru" ]; then
   pkm-build() { tar xvzf "$1" && cd "${1%%.tar.gz}" && makepkg -csi ;}
-  pkm-cleanall() { yay -Sc ;}
-  pkm-cleanold() { yay -Scc ;}
+  pkm-cleanall() { paru -Sc ;}
+  pkm-cleanold() { paru -Scc ;}
   if type -p downgrade > /dev/null; then
   # require: https://aur.archlinux.org/packages/downgrade/
     pkm-downgrade() { downgrade "$@" ;}
   fi
   pkm-download() { sudo pacman -Sw "$@" ;} # need better shit to dl from aur also
   pkm-info() { for arg in "$@"; do
-    yay -Qi $arg 2> /dev/null \
-    || yay -Si $arg; done ;}
-  pkm-install() { yay --noconfirm -S "$@" ;}
+    paru -Qi $arg 2> /dev/null \
+    || paru -Si $arg; done ;}
+  pkm-install() { paru --noconfirm -S "$@" ;}
   # https://wiki.archlinux.org/index.php/Pacman-key#Resetting_all_the_keys
   pkm-key() { sudo pacman-key --init \
     && sudo pacman-key --populate archlinux \
     && sudo pacman-key --refresh-keys ;}
-  pkm-list() { yay -Qql "$@" ;}
-  pkm-listinstalled() { yay -Qe ;}
+  pkm-list() { paru -Qql "$@" ;}
+  pkm-listinstalled() { paru -Qe ;}
   pkm-listcache() { ls -1 /var/cache/pacman/pkg "$@" && echo "pwd: /var/cache/pacman/pkg" ;}
   pkm-localinstall() { sudo pacman --noconfirm -U "$@" ;}
   pkm-own() { pacman -Qo "$@" ;}
   pkm-pkgsearch() { pkgfile -s "$@" ;}
-  pkm-purge() { yay -Rcs "$@" ;}
+  pkm-purge() { paru -Rcs "$@" ;}
   pkm-query() { pacman -Qqs "$@" ;}
-  pkm-query-detail() { yay -Qs "$@" ;}
-  pkm-refresh() { yay -Syy ;}
-  pkm-remove() { yay -R "$@" ;}
-  pkm-remove-nodepends() { yay -Rdd "$@" ;}
-  pkm-remove-orphans() { yay -Rs $(pacman -Qqtd) ;}
-  pkm-search() { yay "$@" ;}
-  pkm-search-local() { yay -Qs "$@" ;}
-  pkm-upgrade() { yay ;}	# upgrade everything 
+  pkm-query-detail() { paru -Qs "$@" ;}
+  pkm-refresh() { paru -Syy ;}
+  pkm-remove() { paru -R "$@" ;}
+  pkm-remove-nodepends() { paru -Rdd "$@" ;}
+  pkm-remove-orphans() { paru -Rs $(pacman -Qqtd) ;}
+  pkm-search() { paru "$@" ;}
+  pkm-search-local() { paru -Qs "$@" ;}
+  pkm-upgrade() { paru ;}	# upgrade everything 
   #pkm-upgrade-aur() { yaourt --noconfirm -Sbua ;} # only upgrade aur package
   pkm-list-upgraded() { cat /var/log/pacman.log | grep -i upgraded ;}
 # }}}
