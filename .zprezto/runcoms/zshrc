@@ -75,3 +75,5 @@ fi
 
 # navi command line cheatsheets
 source <(echo "$(navi widget zsh)")
+
+source /etc/bash_completion.d/climate_completion

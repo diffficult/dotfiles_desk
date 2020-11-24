@@ -221,3 +221,8 @@ if [ -d "$HOME/.config/broot" ] ; then
 fi
 
 
+#
+# set default QT themes
+#
+
+export QT_QPA_PLATFORMTHEME=gtk2

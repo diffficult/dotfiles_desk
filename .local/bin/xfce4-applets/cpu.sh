@@ -21,11 +21,11 @@ for CPU in "${CPU_ARRAY[@]}"; do
   let STEP+=1
 done
 #MORE_INFO+="└─ Temperature: $(sensors | grep -A 0 SMBUSMASTER | cut -c26-30)"
-MORE_INFO+="└─ Temperature: $(sensors | grep Package | cut -c17-23)"
+MORE_INFO+="└─ Temperature: $(sensors | grep Tctl: | cut -c16-19)"
 MORE_INFO+="</tool>"
 STDOUT=$(( STDOUT / NUM_OF_CPUS )) # calculate average clock speed
 STDOUT=$(awk '{$1 = $1 / 1024; printf "%.2f%s", $1, "GHz"}' <<< "${STDOUT}")
-TEMP="$(sensors | grep Package | cut -c17-23)"
+TEMP="$(sensors | grep Tctl: | cut -c16-19)"
 
 # Panel
 if [[ $(file -b "${ICON}") =~ PNG|SVG ]]; then
@@ -38,7 +38,7 @@ else
   INFO="<txt>"
 fi
 #INFO+=" ${STDOUT}"
-INFO+=" $TEMP "
+INFO+=" $TEMP°C"
 INFO+="</txt><txtclick>st -g 140x50 -e bpytop</txtclick>"
 
 # Output panel

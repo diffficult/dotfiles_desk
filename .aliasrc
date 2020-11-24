@@ -354,7 +354,7 @@ alias lifx-off="lifx -0"
 #####  RANDOM  #####
 ####################
 
-alias subl='subl3'
+#alias subl='subl3'
 
 se() { du -a ~/bin/* ~/.scripts/* ~/.scripts/tools/* ~/.config/i3/myblocks/* ~/.config/i3/blocks/* | awk '{print $2}' | fzf | xargs  -r subl ;}
 
@@ -378,7 +378,7 @@ se() { du -a ~/bin/* ~/.scripts/* ~/.scripts/tools/* ~/.config/i3/myblocks/* ~/.
 ###############################
 
 
-alias dotfiles='/usr/bin/git --git-dir=$HOME/.deskdots/ --work-tree=$HOME'
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME'
 #alias dotpush= '/usr/bin/git --git-dir=$HOME/.deskdots/ --work-tree=$HOME push origin master'
 
 
