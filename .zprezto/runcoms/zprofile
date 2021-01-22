@@ -9,7 +9,7 @@
 #export PATH="$PATH:$(du "$HOME/.local/bin" | cut -f2 | paste -sd ':')"
 
 # Default programs:
-export EDITOR="vim"
+#export EDITOR="vim"
 export TERMINAL="xfce4-terminal"
 export BROWSER="chromium"
 export READER="zathura"
@@ -142,6 +142,16 @@ export GOPATH="${XDG_DATA_HOME:-$HOME/.local/share}/go"
 
 export HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/history"
 
+#
+# VIM Cleanup
+#
+
+# if you are using only vim
+#export VIMINIT='source "$XDG_CONFIG_HOME/vim/vimrc"'
+export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
+
+# if you are using vim and neovim with separate configs
+#export VIMINIT='if !has('nvim') | source "$XDG_CONFIG_HOME/vim/vimrc" | endif'
 
 
 #
