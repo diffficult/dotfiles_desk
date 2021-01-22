@@ -7,7 +7,7 @@ readonly DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 readonly ICON="${DIR}/icons/gpu.png"
 
 # GPU values
-readonly GPU_NAME="MSI RX 470 Armour 4GB"
+readonly GPU_NAME="Radeon RX 5700 XT (Navi 10)"
 #readonly GPU_TEMP="$(rocm-smi -t | grep GPU | cut -c43-47)"
 readonly GPU_TEMP="$(rocm-smi -t | grep "Sensor edge" | cut -c43-47)"
 readonly DRIVER_VERSION="$(rocm-smi --showdriverversion | grep Driver | cut -c17-)"
