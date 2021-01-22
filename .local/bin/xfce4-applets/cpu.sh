@@ -21,7 +21,7 @@ for CPU in "${CPU_ARRAY[@]}"; do
   let STEP+=1
 done
 #MORE_INFO+="└─ Temperature: $(sensors | grep -A 0 SMBUSMASTER | cut -c26-30)"
-MORE_INFO+="└─ Temperature: $(sensors | grep Tctl: | cut -c16-19)"
+MORE_INFO+="└─ Temperature: $(sensors | grep Tdie: | cut -c16-19)"
 MORE_INFO+="</tool>"
 STDOUT=$(( STDOUT / NUM_OF_CPUS )) # calculate average clock speed
 STDOUT=$(awk '{$1 = $1 / 1024; printf "%.2f%s", $1, "GHz"}' <<< "${STDOUT}")
