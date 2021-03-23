@@ -26,7 +26,8 @@ find_alt() { for i;do which "$i" >/dev/null && { echo "$i"; return 0;};done;retu
 # the first program in the array that is detected on your system will be chosen as the default
 export OPENER=$(find_alt xdg-open exo-open gnome-open )
 #export BROWSER=$(find_alt chromium-browser chromium qutebrowser google-chrome firefox $OPENER )
-export BROWSER=/usr/bin/chromium
+#export BROWSER=/usr/bin/chromium
+export BROWSER=/usr/bin/google-chrome-stable
 # export BROWSER=$(find_alt qutebrowser chromium chromium-browser google-chrome firefox $OPENER )
 #export BROWSERCLI=$(find_alt w3m links2 links lynx elinks $OPENER )
 export BROWSERTOR=$(find_alt tor-browser-en)
