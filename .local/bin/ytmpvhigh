@@ -1,8 +1,0 @@
-#!/bin/bash
-#echo "Input the URL"
-
-## ORIGINAL 1080p res
-mpv $1 --ytdl --ytdl-format=137+bestaudio/248+bestaudio/22/135+bestaudio/18/best --volume=50
-
-## uncomment to get 720p video dash or 480p if not available
-#mpv $1 --ytdl --ytdl-format=136+bestaudio/247+bestaudio/22/135+bestaudio/18/best --volume=50
