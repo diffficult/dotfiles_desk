@@ -136,34 +136,34 @@
         <property name="workspace0" type="empty">
           <property name="color-style" type="int" value="0"/>
           <property name="image-style" type="int" value="5"/>
-          <property name="last-image" type="string" value="/usr/share/backgrounds/Blur_of_Light.jpg"/>
+          <property name="last-image" type="string" value="/usr/share/backgrounds/halo_2.jpg"/>
         </property>
         <property name="workspace1" type="empty">
           <property name="color-style" type="int" value="0"/>
           <property name="image-style" type="int" value="5"/>
-          <property name="last-image" type="string" value="/usr/share/backgrounds/mountain_17.jpg"/>
+          <property name="last-image" type="string" value="/usr/share/backgrounds/mandilux_7.jpg"/>
         </property>
         <property name="workspace2" type="empty">
           <property name="color-style" type="int" value="0"/>
           <property name="image-style" type="int" value="5"/>
-          <property name="last-image" type="string" value="/usr/share/backgrounds/minimal_wall_3.jpg"/>
+          <property name="last-image" type="string" value="/usr/share/backgrounds/girldragontatoo_4.jpg"/>
         </property>
       </property>
       <property name="monitorDisplayPort-2" type="empty">
         <property name="workspace0" type="empty">
           <property name="color-style" type="int" value="0"/>
           <property name="image-style" type="int" value="5"/>
-          <property name="last-image" type="string" value="/usr/share/backgrounds/art_5.jpg"/>
+          <property name="last-image" type="string" value="/usr/share/backgrounds/comfy_51.jpg"/>
         </property>
         <property name="workspace1" type="empty">
           <property name="color-style" type="int" value="0"/>
           <property name="image-style" type="int" value="5"/>
-          <property name="last-image" type="string" value="/usr/share/backgrounds/chrome_os_8.jpg"/>
+          <property name="last-image" type="string" value="/usr/share/backgrounds/mandilux_6.jpg"/>
         </property>
         <property name="workspace2" type="empty">
           <property name="color-style" type="int" value="0"/>
           <property name="image-style" type="int" value="5"/>
-          <property name="last-image" type="string" value="/usr/share/backgrounds/mountain_32.jpg"/>
+          <property name="last-image" type="string" value="/usr/share/backgrounds/japan_79.jpg"/>
         </property>
       </property>
     </property>

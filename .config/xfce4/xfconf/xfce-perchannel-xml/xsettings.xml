@@ -2,8 +2,8 @@
 
 <channel name="xsettings" version="1.0">
   <property name="Net" type="empty">
-    <property name="ThemeName" type="string" value="Arc-Dark"/>
-    <property name="IconThemeName" type="string" value="Arc-X-P"/>
+    <property name="ThemeName" type="string" value="Nordic-darker"/>
+    <property name="IconThemeName" type="string" value="WhiteSur-Arc"/>
     <property name="DoubleClickTime" type="empty"/>
     <property name="DoubleClickDistance" type="empty"/>
     <property name="DndDragThreshold" type="empty"/>
@@ -36,6 +36,8 @@
     <property name="CursorThemeName" type="string" value="McMojave-cursors"/>
     <property name="CursorThemeSize" type="int" value="16"/>
     <property name="DecorationLayout" type="empty"/>
+    <property name="DialogsUseHeader" type="empty"/>
+    <property name="TitlebarMiddleClick" type="empty"/>
   </property>
   <property name="Gdk" type="empty">
     <property name="WindowScalingFactor" type="empty"/>
