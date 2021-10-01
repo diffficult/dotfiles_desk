@@ -1,13 +1,13 @@
 configuration {
-	modi:                           "combi,drun,run,window,emoji,ssh";
+	modi:                           "combi,drun,run,window,emoji,ssh,calc";
 	icon-theme:						"Arc-X-P";
-	display-combi:                  "";
-        display-drun:				"";
-        display-run:                    "";
-        display-window:                 "";
-        display-emoji:                  "";
-        display-ssh:                    "";
-        drun-display-format:            "{name}";
+	display-combi:                  " ";
+    display-drun:				    " ";
+    display-run:                    " ";
+    display-window:                 " ";
+    display-emoji:                  " ";
+    display-ssh:                    " ";
+    drun-display-format:            "{name}";
 	width:                          30;
 	lines:                          4;
 	hide-scrollbar:					true;
@@ -22,15 +22,11 @@ configuration {
 	line-padding:                   6;
 	separator-style:                "none";
 	hide-scrollbar:                 true;
-	theme:                          "nord.rasi";
 	color-normal:                   "argb:BF1f222d, #a6d1fa, argb:BF383c4a, #7780a1, #d1d4e0";
 	color-urgent:                   "argb:BF1f222d, #dc322f, argb:BF383c4a, #dc322f, #d1d4e0";
 	color-active:                   "argb:BF1f222d, #268bd2, argb:BF383c4a, #268bd2, #d1d4e0";
 	color-window:                   "argb:BF1f222d, #1f222d, #000000";
+	
 }
 
-
-element-icon {
-    size:                           36px;
-    border:                         0px;
-}
+@theme                          "nord"
