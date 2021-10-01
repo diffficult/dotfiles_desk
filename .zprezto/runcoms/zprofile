@@ -1,105 +1,9 @@
-#!/bin/zsh
-
-# zsh profile file. Runs on login. Environmental variables are set here.
-
-# If you don't plan on reverting to bash, you can remove the link in ~/.profile
-# to clean up.
-
-# Adds `~/.local/bin` to $PATH
-#export PATH="$PATH:$(du "$HOME/.local/bin" | cut -f2 | paste -sd ':')"
-
-# Default programs:
-#export EDITOR="vim"
-export TERMINAL="xfce4-terminal"
-#export BROWSER="chromium"
-export BROWSER="google-chrome"
-export READER="zathura"
-
-
 #
-#### XDG VARIABLES ####
+# Executes commands at login pre-zshrc.
 #
-
-export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
-export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
-export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
-
-
-#export XDG_RUNTIMEDIR
-#export XDG_DATA_DIRS = /usr/local/share:/usr/share
-#export XDG_CONFIG_DIRS = /etc/xdg
-
-
-# if running bash
-if [ -n "$BASH_VERSION" ]; then
-    # include .bashrc if it exists
-    if [ -f "$HOME/.bashrc" ]; then
-	. "$HOME/.bashrc"
-    fi
-fi
-
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
-# set PATH so it includes user's private bin if it exists
-#
-
-if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$HOME/.local/bin:$PATH"
-fi
-
-if [ -d "$HOME/.local/bin/scripts" ] ; then
-    PATH="$HOME/.local/bin/scripts:$PATH"
-fi
-
-
-#
-# Alison Desktop
-#
-
-if [ -d "$HOME/.local/bin/Alison_Desktop" ] ; then
-    PATH="$HOME/.local/bin/Alison_Desktop:$PATH"
-fi
-
-#
-# npm-global path
-#
-
-if [ -d "$HOME/.npm-global/bin" ] ; then
-    PATH="$HOME/.npm-global/bin:$PATH"
-fi
-
-
-#
-# .bashrc 
-#
-
-#if [[ -n "$BASH_VERSION" && -f "$HOME/.bashrc" ]]; then
-#  source "$HOME/.bashrc"
-#fi
-
-#dirs=(
-#  '/bin'
-#  '/sbin'
-#  '/usr/bin'
-#  '/usr/sbin'
-#  '/usr/local/bin'
-#  '/usr/local/sbin'
-#  '/usr/games'
-#  '/usr/local/games'
-#  "$HOME/.local/bin"
-#)
-
-#for d in "${dirs[@]}"; do
-#  if [[ -d "$d" ]]; then
-#    PATH="$d:$PATH"
-#  fi
-#done
-
-
-#
-# NVIDIA CACHE LOCATION ###
-#
-
-#export __GL_SHADER_DISK_CACHE_PATH="$HOME/.cache/nv"
 
 #
 # Browser
@@ -114,46 +18,8 @@ fi
 #
 
 export EDITOR='nano'
-export VISUAL='subl'
+export VISUAL='nano'
 export PAGER='less'
-
-
-#
-# XDG directories cleanup
-#
-
-export NPM_CONFIG_PREFIX="$HOME/.npm-global"
-export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
-export ANDROID_SDK_HOME="$XDG_CONFIG_HOME/android"
-export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
-export WINEPREFIX="$XDG_DATA_HOME/wineprefixes/default"
-export GTK2_RC_FILES="$HOME/.config/gtk-2.0/gtkrc-2.0"
-export CARGO_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/cargo"
-#export GNUPGHOME="$XDG_DATA_HOME/gnupg"
-export GEM_HOME="$XDG_DATA_HOME"/gem
-export GEM_SPEC_CACHE="$XDG_CACHE_HOME"/gem
-
-export WGETRC="${XDG_CONFIG_HOME:-$HOME/.config}/wget/wgetrc"
-export INPUTRC="${XDG_CONFIG_HOME:-$HOME/.config}/inputrc"
-
-export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
-
-export ANDROID_SDK_HOME="${XDG_CONFIG_HOME:-$HOME/.config}/android"
-export GOPATH="${XDG_DATA_HOME:-$HOME/.local/share}/go"
-
-export HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/history"
-
-#
-# VIM Cleanup
-#
-
-# if you are using only vim
-#export VIMINIT='source "$XDG_CONFIG_HOME/vim/vimrc"'
-export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
-
-# if you are using vim and neovim with separate configs
-#export VIMINIT='if !has('nvim') | source "$XDG_CONFIG_HOME/vim/vimrc" | endif'
-
 
 #
 # Language
@@ -163,11 +29,12 @@ if [[ -z "$LANG" ]]; then
   export LANG='en_US.UTF-8'
 fi
 
+
 #
 # Paths
 #
-# Ensure path arrays do not contain duplicates.
 
+# Ensure path arrays do not contain duplicates.
 typeset -gU cdpath fpath mailpath path
 
 # Set the list of directories that cd searches.
@@ -195,45 +62,3 @@ export LESS='-F -g -i -M -R -S -w -X -z-4'
 if (( $#commands[(i)lesspipe(|.sh)] )); then
   export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
 fi
-
-export LESS_TERMCAP_mb="$(printf '%b' '[1;31m')"
-export LESS_TERMCAP_md="$(printf '%b' '[1;36m')"
-export LESS_TERMCAP_me="$(printf '%b' '[0m')"
-export LESS_TERMCAP_so="$(printf '%b' '[01;44;33m')"
-export LESS_TERMCAP_se="$(printf '%b' '[0m')"
-export LESS_TERMCAP_us="$(printf '%b' '[1;32m')"
-export LESS_TERMCAP_ue="$(printf '%b' '[0m')"
-
-
-#
-# TLDR options
-#
-
-export TLDR_COLOR_NAME="cyan"
-export TLDR_COLOR_DESCRIPTION="white"
-export TLDR_COLOR_EXAMPLE="green"
-export TLDR_COLOR_COMMAND="red"
-export TLDR_COLOR_PARAMETER="white"
-export TLDR_CACHE_ENABLED=1
-export TLDR_CACHE_MAX_AGE=720
-export TLDR_PAGES_SOURCE_LOCATION="https://raw.githubusercontent.com/tldr-pages/tldr/master/pages"
-export TLDR_DOWNLOAD_CACHE_LOCATION="https://tldr-pages.github.io/assets/tldr.zip"
-export TLDR_LANGUAGE="en"
-
-
-#
-# SOURCE stuff
-#
-
-# BROOT
-
-if [ -d "$HOME/.config/broot" ] ; then
-    source $HOME/.config/broot/launcher/bash/br
-fi
-
-
-#
-# set default QT themes
-#
-
-export QT_QPA_PLATFORMTHEME=gtk2
