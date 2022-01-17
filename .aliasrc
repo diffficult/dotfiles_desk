@@ -106,6 +106,16 @@ if [ -d "$HOME/.local/bin/scripts/i3cmds" ] ; then
     export PATH="$HOME/.local/bin/scripts/i3cmds:$PATH"
 fi
 
+# rofi menues applets commands
+if [ -d "$HOME/.config/rofi/bin" ] ; then
+    export PATH="$HOME/.config/rofi/bin:$PATH"
+fi
+
+# cargo/bin executables
+if [ -d "$HOME/.cargo/bin" ] ; then
+    export PATH="$HOME/.cargo/bin:$PATH"
+fi
+
 # if [ -d "$HOME/.scripts/command" ] ; then
 #     export PATH="$HOME/.scripts/command:$PATH"
 # fi
@@ -223,9 +233,10 @@ alias uhaul='mv -iv --'					# mv prompt confirmation
 
 ### ls replacement with exa written in rust
 
-alias ls='exa --icons --group-directories-first'
-alias ll='exa -l --icons --group-directories-first'
-alias la='ll -aa -s changed --icons --group-directories-first'
+alias exa="exa --icons"
+alias ls='exa --group-directories-first'
+alias ll='exa -l --group-directories-first'
+alias la='ll -aa -s changed --group-directories-first'
 
 # general use
 
