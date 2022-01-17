@@ -52,6 +52,8 @@
       <value type="string" value="Workspace 1"/>
       <value type="string" value="Workspace 2"/>
       <value type="string" value="Workspace 3"/>
+      <value type="string" value="4"/>
+      <value type="string" value="5"/>
     </property>
     <property name="wrap_resistance" type="int" value="11"/>
     <property name="wrap_windows" type="bool" value="true"/>

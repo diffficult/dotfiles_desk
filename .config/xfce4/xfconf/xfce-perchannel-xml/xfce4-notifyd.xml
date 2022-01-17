@@ -7,6 +7,7 @@
   <property name="applications" type="empty">
     <property name="known_applications" type="array">
       <value type="string" value="Antergos"/>
+      <value type="string" value="balena-etcher-electron"/>
       <value type="string" value="blueman"/>
       <value type="string" value="Blueman"/>
       <value type="string" value="brave-browser"/>
@@ -28,6 +29,7 @@
       <value type="string" value="org.gnome.Nautilus"/>
       <value type="string" value="org.manjaro.pamac.manager"/>
       <value type="string" value="Package Manager"/>
+      <value type="string" value="Quickgui"/>
       <value type="string" value="Solaar"/>
       <value type="string" value="Syncthing GTK"/>
       <value type="string" value="thunar"/>
