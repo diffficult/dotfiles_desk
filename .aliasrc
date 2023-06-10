@@ -293,8 +293,10 @@ alias neocrux='neofetch --ascii --ascii_distro crux_small'
 alias neowin='neofetch --ascii --ascii_distro windows'
 alias disks='echo "╓───── m o u n t . p o i n t s"; echo "╙────────────────────────────────────── ─ ─ "; lsblk -a; echo ""; echo "╓───── d i s k . u s a g e"; echo "╙────────────────────────────────────── ─ ─ "; df -h;'
 
-alias runalison='cd ~/.local/bin/Alison_Desktop && ./start-alison && clear && echo "Alison Desktop is running" && cd ~' 
-alias killalison='cd ~/.local/bin/Alison_Desktop && ./stop-alison && clear && echo "Alison Desktop stopped" && cd ~'
+#alias runalison='cd ~/.local/bin/Alison_Desktop && ./start-alison && clear && echo "Alison Desktop is running" && cd ~' 
+#alias killalison='cd ~/.local/bin/Alison_Desktop && ./stop-alison && clear && echo "Alison Desktop stopped" && cd ~'
+alias runalison='~/.local/bin/alison.sh'
+alias killalison='~/.local/bin/salison.sh'
 
 alias fzfb='fzf --preview "bat --color \"always\" {}"'
 
