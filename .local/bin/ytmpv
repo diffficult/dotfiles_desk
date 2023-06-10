@@ -1,11 +1,11 @@
 #!/bin/bash
 ## uncomment to get 720p video dash or 480p if not available
 VIDURL=$(xclip -o)
+notify-send -t 3500 'Streaming @ 720p' --icon="/home/rx/.local/share/icons/notify/youtube.png"
 mpv $VIDURL --ytdl --ytdl-format=247+bestaudio/136+bestaudio/22/135+bestaudio/18/best --volume=50
 
 ## uncomment to get 480p video dash
 #mpv $1 --ytdl --ytdl-format=135+bestaudio/244+bestaudio/18/134+bestaudio/242/best --volume=50
-
 ## youtube video quality table, use the number to get the desired ytdl-format
 #
 ### 249          webm       audio only tiny   59k , opus @ 50k (48000Hz)
