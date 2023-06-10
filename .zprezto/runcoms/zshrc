@@ -42,7 +42,7 @@ setopt HIST_IGNORE_ALL_DUPS
 # thefuck #
 ##
 
-eval $(thefuck --alias)
+# eval $(thefuck --alias)
 
 ##
 # External Crap
