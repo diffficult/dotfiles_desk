@@ -1,11 +1,11 @@
 [Configuration]
 TitleInitial=xfce-term
-FontName=CaskaydiaCove Nerd Font 9
+FontName=FantasqueSansMono Nerd Font 12
 MiscAlwaysShowTabs=FALSE
 MiscBell=FALSE
 MiscBordersDefault=TRUE
 MiscCursorBlinks=FALSE
-MiscDefaultGeometry=134x40
+MiscDefaultGeometry=128x36
 MiscInheritGeometry=FALSE
 MiscMenubarDefault=FALSE
 MiscMouseAutohide=FALSE
@@ -42,4 +42,5 @@ ColorPalette=#39393b3b4444;#c9c94f4f6d6d;#8181b2b29a9a;#dbdbc0c07474;#71719c9cd6
 MiscSearchDialogOpacity=100
 MiscShowUnsafePasteDialog=TRUE
 BackgroundMode=TERMINAL_BACKGROUND_TRANSPARENT
+MiscRightClickAction=TERMINAL_RIGHT_CLICK_ACTION_CONTEXT_MENU
 
