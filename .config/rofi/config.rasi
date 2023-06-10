@@ -11,7 +11,7 @@ configuration {
 	width:                          30;
 	lines:                          4;
 	hide-scrollbar:					true;
-	font:                           "PragmataPro 12";
+	font:                           "PragmataPro 14";
 	bw:                             0;
 	padding:                        0;
 	show-icons:                     true;
