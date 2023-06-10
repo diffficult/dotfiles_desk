@@ -19,7 +19,7 @@ readonly ALL=$(( AUR + OFFICIAL ))
 # Panel and Tooltip display
 if [[ ${ALL} -eq "0" ]]; then
   if [[ $(file -b "${ICONOK}") =~ PNG|SVG ]]; then
-    INFO="<img>${ICONOK}</img><click>st -g 120x1 -t 'Checking for packages...' -e sh -c 'xfce4-panel --plugin-event=genmon-24:refresh:bool:true && sleep 3'</click>"
+    INFO="<img>${ICONOK}</img><click>st -g 120x1 -t 'Checking for packages...' -e sh -c 'xfce4-panel --plugin-event=genmon-16:refresh:bool:true && sleep 3'</click>"
   else
   INFO="<txt>⚠️</txt>"
   fi
@@ -32,7 +32,7 @@ else
   fi
   INFO+=" ${ALL} "
   INFO+="</txt>"
-  INFO+="<txtclick>st -g 126x36 -t 'Updating packages' -e sh -c 'yay; read; xfce4-panel --plugin-event=genmon-24:refresh:bool:true'</txtclick>"
+  INFO+="<txtclick>st -g 126x36 -t 'Updating packages' -e sh -c 'yay; read; xfce4-panel --plugin-event=genmon-16:refresh:bool:true'</txtclick>"
   MORE_INFO="<tool>"
   MORE_INFO+="┌─ ⚠️ Updates Available\n"
   MORE_INFO+="├─ <span weight='Bold'>${OFFICIAL}</span> 📦 from repos\n"

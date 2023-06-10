@@ -34,10 +34,10 @@ DAYNIGHT=$(date +%k)
 # evaluate if it is below -0°C or above +0°C and add the "-" sign 
 
 if [[ "$(echo -e "${WTTR_IN_PANEL}")" == *"-"* ]]; then
-    CURRENT_TEMP="$(echo -e "${WTTR_IN_PANEL}" | sed 's/-/ -/g' | awk '{print substr($0,13,5);exit}')"
+    CURRENT_TEMP="$(echo -e "${WTTR_IN_PANEL}" | sed 's/  -/ -/g' | awk '{print substr($0,13,5);exit}')"
 	#CURRENT_TEMP="$(echo -e "${WTTR_IN_PANEL}" | awk '{print substr($0,13,5);exit}')"
 else
-	CURRENT_TEMP="$(echo -e "${WTTR_IN_PANEL}" | sed 's/+/ /g' | awk '{print substr($0,13,5);exit}')"
+	CURRENT_TEMP="$(echo -e "${WTTR_IN_PANEL}" | sed 's/  +/ /g' | awk '{print substr($0,13,5);exit}')"
 	#CURRENT_TEMP="$(echo -e "${WTTR_IN_PANEL}" | awk '{print substr($0,15,5);exit}')"
 fi
 
