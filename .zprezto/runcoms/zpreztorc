@@ -1,9 +1,7 @@
 #
 # Sets Prezto options.
 #
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
+
 
 #
 # General
@@ -26,7 +24,6 @@ zstyle ':prezto:*:*' color 'yes'
 
 # Set the Zsh functions to load (man zshcontrib).
 # zstyle ':prezto:load' zfunction 'zargs' 'zmv'
-
 
 # Set the Prezto modules to load (browse modules).
 # The order matters.
@@ -57,6 +54,15 @@ zstyle ':prezto:load' pmodule \
 zstyle ':prezto:module:autosuggestions:color' found ''
 zstyle ':prezto:module:autosuggestions' color 'yes'
 
+
+#
+# Completions
+#
+
+# Set the entries to ignore in static '/etc/hosts' for host completion.
+# zstyle ':prezto:module:completion:*:hosts' etc-host-ignores \
+#   '0.0.0.0' '127.0.0.1'
+
 #
 # Editor
 #
@@ -85,6 +91,19 @@ zstyle ':prezto:module:editor' key-bindings 'emacs'
 # zstyle ':prezto:module:gnu-utility' prefix 'g'
 
 #
+# History
+#
+
+# Set the file to save the history in when an interactive shell exits.
+# zstyle ':prezto:module:history' histfile "${ZDOTDIR:-$HOME}/.zsh_history"
+
+# Set the maximum  number  of  events  stored  in  the  internal history list.
+# zstyle ':prezto:module:history' histsize 10000
+
+# Set the maximum number of history events to save in the history file.
+# zstyle ':prezto:module:history' savehist 10000
+
+#
 # History Substring Search
 #
 
@@ -98,11 +117,18 @@ zstyle ':prezto:module:editor' key-bindings 'emacs'
 # zstyle ':prezto:module:history-substring-search' globbing-flags ''
 
 #
+# macOS
+#
+
+# Set the keyword used by `mand` to open man pages in Dash.app
+# zstyle ':prezto:module:osx:man' dash-keyword 'manpages'
+
+#
 # Pacman
 #
 
 # Set the Pacman frontend.
-#zstyle ':prezto:module:pacman' frontend 'yay'
+# zstyle ':prezto:module:pacman' frontend 'yaourt'
 
 #
 # Prompt
@@ -113,10 +139,14 @@ zstyle ':prezto:module:editor' key-bindings 'emacs'
 # Auto set to 'off' on dumb terminals.
 zstyle ':prezto:module:prompt' theme 'pure'
 
-
-# Set how themes that use promptpwd function display the pwd, can be 'short', 'long', or 'full'
+# Set the working directory prompt display length.
+# By default, it is set to 'short'. Set it to 'long' (without '~' expansion)
+# for longer or 'full' (with '~' expansion) for even longer prompt display.
 # zstyle ':prezto:module:prompt' pwd-length 'short'
 
+# Set the prompt to display the return code along with an indicator for non-zero
+# return codes. This is not supported by all prompts.
+# zstyle ':prezto:module:prompt' show-return-val 'yes'
 
 # Pure Prompt Styling and Options
 # new  updated config to follow new pure.zsh formatting
@@ -148,7 +178,6 @@ PURE_PROMPT_SYMBOL='%(?.%F{red}❯%F{yellow}❯%F{green}.%F{$prompt_pure_colors[
 # zstyle :prompt:pure:prompt:success color green
 # zstyle :prompt:pure:prompt:continuation color 242
 zstyle :prompt:pure:prompt:error color red 
-
 
 #
 # Python
@@ -216,13 +245,13 @@ zstyle ':prezto:module:syntax-highlighting' highlighters \
 zstyle ':prezto:module:terminal' auto-title 'yes'
 
 # Set the window title format.
-#zstyle ':prezto:module:terminal:window-title' format '%n@%m: %s'
+# zstyle ':prezto:module:terminal:window-title' format '%n@%m: %s'
 
 # Set the tab title format.
 # zstyle ':prezto:module:terminal:tab-title' format '%m: %s'
 
 # Set the terminal multiplexer title format.
-#zstyle ':prezto:module:terminal:multiplexer-title' format '%s'
+# zstyle ':prezto:module:terminal:multiplexer-title' format '%s'
 
 #
 # Tmux
@@ -298,3 +327,12 @@ zstyle ':prezto:module:fzf' tmux 'yes'
 # https://github.com/junegunn/fzf/wiki/Color-schemes and add values to the
 # color.zsh file accordingly
 zstyle ':prezto:module:fzf' colorscheme 'JellyX'
+
+#
+# Utility
+#
+
+# Enabled safe options. This aliases cp, ln, mv and rm so that they prompt
+# before deleting or overwriting files. Set to 'no' to disable this safer
+# behavior.
+# zstyle ':prezto:module:utility' safe-ops 'yes'
