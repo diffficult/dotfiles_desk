@@ -8,13 +8,13 @@ readonly ICON="${DIR}/icons/gpu.png"
 
 # GPU values
 readonly GPU_NAME="Radeon RX 5700 XT (Navi 10)"
-#readonly GPU_TEMP="$(rocm-smi -t | grep GPU | cut -c43-47)"
-readonly GPU_TEMP="$(rocm-smi -t | grep "Sensor edge" | cut -c43-47)"
-readonly DRIVER_VERSION="$(rocm-smi --showdriverversion | grep Driver | cut -c17-)"
-readonly GPU_UTIL="$(rocm-smi --showuse | grep GPU | cut -c24-)"
-readonly GPU_MEMORY="$(rocm-smi --showmemuse | grep GPU | cut -c31-)"
-readonly GPU_POWER="$(rocm-smi --showpower | grep Average | cut -c48-) W"
-readonly GPU_FAN_SPEED="$(rocm-smi -f | grep Fan | cut -c22-)"
+#readonly GPU_TEMP="$(/opt/rocm/bin/rocm-smi -t | grep GPU | cut -c43-47)"
+readonly GPU_TEMP="$(/opt/rocm/bin/rocm-smi -t | grep "Sensor edge" | cut -c42-46)"
+readonly DRIVER_VERSION="$(/opt/rocm/bin/rocm-smi --showdriverversion | grep Driver | cut -c17-)"
+readonly GPU_UTIL="$(/opt/rocm/bin/rocm-smi --showuse | grep "GPU use" | cut -c24-27)"
+readonly GPU_MEMORY="$(/opt/rocm/bin/rocm-smi --showmemuse | grep GPU | cut -c31-)"
+readonly GPU_POWER="$(/opt/rocm/bin/rocm-smi --showpower | grep Average | cut -c48-) W"
+readonly GPU_FAN_SPEED="$(/opt/rocm/bin/rocm-smi -f | grep "Fan Level:" | cut -c25-)"
 
 # Panel
 if [[ $(file -b "${ICON}") =~ PNG|SVG ]]; then

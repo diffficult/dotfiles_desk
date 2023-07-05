@@ -39,7 +39,7 @@ else
 fi
 #INFO+=" ${STDOUT}"
 INFO+=" $TEMP°C"
-INFO+="</txt><txtclick>st -g 140x50 -e bpytop</txtclick>"
+INFO+="</txt><txtclick>st -g 140x50 -e btop</txtclick>"
 
 # Output panel
 echo -e "${INFO} "
