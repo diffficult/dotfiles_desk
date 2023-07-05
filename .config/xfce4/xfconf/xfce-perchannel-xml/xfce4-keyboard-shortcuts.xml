@@ -29,6 +29,7 @@
       <property name="&lt;Super&gt;r" type="empty">
         <property name="startup-notify" type="empty"/>
       </property>
+      <property name="&lt;Alt&gt;&lt;Super&gt;s" type="empty"/>
       <property name="XF86HomePage" type="empty"/>
       <property name="&lt;Super&gt;w" type="empty"/>
       <property name="&lt;Super&gt;m" type="empty"/>
@@ -135,8 +136,8 @@
       <property name="&lt;Primary&gt;F12" type="empty"/>
       <property name="&lt;Super&gt;KP_Left" type="empty"/>
       <property name="&lt;Super&gt;KP_Right" type="empty"/>
-      <property name="&lt;Super&gt;KP_Up" type="empty"/>
       <property name="&lt;Super&gt;KP_Down" type="empty"/>
+      <property name="&lt;Super&gt;KP_Up" type="empty"/>
       <property name="&lt;Super&gt;KP_Page_Up" type="empty"/>
       <property name="&lt;Super&gt;KP_Home" type="empty"/>
       <property name="&lt;Super&gt;KP_End" type="empty"/>
@@ -195,6 +196,8 @@
       <property name="&lt;Primary&gt;F6" type="string" value="workspace_6_key"/>
       <property name="&lt;Alt&gt;F12" type="string" value="above_key"/>
       <property name="&lt;Alt&gt;Tab" type="string" value="cycle_windows_key"/>
+      <property name="&lt;Shift&gt;&lt;Super&gt;Left" type="string" value="move_window_to_monitor_left_key"/>
+      <property name="&lt;Shift&gt;&lt;Super&gt;Right" type="string" value="move_window_to_monitor_right_key"/>
     </property>
   </property>
   <property name="providers" type="array">
