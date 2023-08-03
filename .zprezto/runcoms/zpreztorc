@@ -14,10 +14,10 @@
 zstyle ':prezto:*:*' color 'yes'
 
 # Add additional directories to load prezto modules from
-# zstyle ':prezto:load' pmodule-dirs $HOME/.zprezto-contrib
+zstyle ':prezto:load' pmodule-dirs $HOME/.zprezto/contrib
 
 # Allow module overrides when pmodule-dirs causes module name collisions
-# zstyle ':prezto:load' pmodule-allow-overrides 'yes'
+zstyle ':prezto:load' pmodule-allow-overrides 'yes'
 
 # Set the Zsh modules to load (man zshmodules).
 # zstyle ':prezto:load' zmodule 'attr' 'stat'
@@ -31,6 +31,7 @@ zstyle ':prezto:load' pmodule \
   'environment' \
   'terminal' \
   'editor' \
+  'rsync' \
   'history' \
   'directory' \
   'spectrum' \
@@ -40,11 +41,14 @@ zstyle ':prezto:load' pmodule \
   'completion' \
   'docker' \
   'autosuggestions' \
+  'command-not-found' \
   'syntax-highlighting' \
   'history-substring-search' \
   'contrib-prompt' \
   'fzf' \
   'prompt'
+
+##  'enhancd' \
 
 #
 # Autosuggestions
@@ -71,7 +75,7 @@ zstyle ':prezto:module:autosuggestions' color 'yes'
 zstyle ':prezto:module:editor' key-bindings 'emacs'
 
 # Auto convert .... to ../..
-# zstyle ':prezto:module:editor' dot-expansion 'yes'
+zstyle ':prezto:module:editor' dot-expansion 'yes'
 
 # Allow the zsh prompt context to be shown.
 #zstyle ':prezto:module:editor' ps-context 'yes'
@@ -95,13 +99,13 @@ zstyle ':prezto:module:editor' key-bindings 'emacs'
 #
 
 # Set the file to save the history in when an interactive shell exits.
-# zstyle ':prezto:module:history' histfile "${ZDOTDIR:-$HOME}/.zsh_history"
+zstyle ':prezto:module:history' histfile "${ZDOTDIR:-$HOME}/.zsh_history"
 
 # Set the maximum  number  of  events  stored  in  the  internal history list.
-# zstyle ':prezto:module:history' histsize 10000
+zstyle ':prezto:module:history' histsize 10000
 
 # Set the maximum number of history events to save in the history file.
-# zstyle ':prezto:module:history' savehist 10000
+zstyle ':prezto:module:history' savehist 10000
 
 #
 # History Substring Search
@@ -117,18 +121,18 @@ zstyle ':prezto:module:editor' key-bindings 'emacs'
 # zstyle ':prezto:module:history-substring-search' globbing-flags ''
 
 #
-# macOS
+# Utility
 #
 
-# Set the keyword used by `mand` to open man pages in Dash.app
-# zstyle ':prezto:module:osx:man' dash-keyword 'manpages'
+# To configure the download helper to be used with alias get, replace '<helper>' with 'curl', 'wget' or 'aria2c'.
+zstyle -s ':prezto:module:utility:download' helper 'aria2c'
 
 #
 # Pacman
 #
 
 # Set the Pacman frontend.
-# zstyle ':prezto:module:pacman' frontend 'yaourt'
+zstyle ':prezto:module:pacman' frontend 'yay'
 
 #
 # Prompt
@@ -157,15 +161,15 @@ zstyle :prompt:pure:git:stash show yes
 # change the path color
 #zstyle :prompt:pure:path color white
 
-# OPTION to change the symbol used 
+# OPTION to change the symbol used
 # ie PURE_PROMPT_SYMBOL=❯❯❯ to display only ❯❯❯ or you could set symbol and colors as the old config
 # first part makes normal prompt red/yellow/green and takes the color for each ❯ from the style prompt:error when a wrong command is entered
 PURE_PROMPT_SYMBOL='%(?.%F{red}❯%F{yellow}❯%F{green}.%F{$prompt_pure_colors[prompt:error]}❯%F{$prompt_pure_colors[prompt:error]}❯%F{$prompt_pure_colors[prompt:error]})❯%f'
 
 # Other options include
 # PURE_CMD_MAX_EXEC_TIME  The max execution time of a process before its run time is shown when it exits. 5 seconds
-# PURE_GIT_PULL=0 Prevents Pure from checking whether the current Git remote has been updated.  
-# PURE_GIT_UNTRACKED_DIRTY=0  Do not include untracked files in dirtiness check. Mostly useful on large repos (like WebKit).  
+# PURE_GIT_PULL=0 Prevents Pure from checking whether the current Git remote has been updated.
+# PURE_GIT_UNTRACKED_DIRTY=0  Do not include untracked files in dirtiness check. Mostly useful on large repos (like WebKit).
 # PURE_GIT_DELAY_DIRTY_CHECK  Time in seconds to delay git dirty checking when git status takes > 5 seconds.  1800 seconds
 # PURE_PROMPT_SYMBOL  Defines the prompt symbol.  ❯
 # PURE_PROMPT_VICMD_SYMBOL  Defines the prompt symbol used when the vicmd keymap is active (VI-mode). ❮
@@ -177,7 +181,7 @@ PURE_PROMPT_SYMBOL='%(?.%F{red}❯%F{yellow}❯%F{green}.%F{$prompt_pure_colors[
 # change colors for success or error (default to magenta for success and red for error)
 # zstyle :prompt:pure:prompt:success color green
 # zstyle :prompt:pure:prompt:continuation color 242
-zstyle :prompt:pure:prompt:error color red 
+zstyle :prompt:pure:prompt:error color red
 
 #
 # Python
@@ -223,7 +227,7 @@ zstyle ':prezto:module:syntax-highlighting' highlighters \
    'main' \
    'brackets' \
    'pattern' \
-   'line' 
+   'line'
 #   'cursor' \
 #   'root'
 #
@@ -248,7 +252,7 @@ zstyle ':prezto:module:terminal' auto-title 'yes'
 # zstyle ':prezto:module:terminal:window-title' format '%n@%m: %s'
 
 # Set the tab title format.
-# zstyle ':prezto:module:terminal:tab-title' format '%m: %s'
+zstyle ':prezto:module:terminal:tab-title' format '%m: %s'
 
 # Set the terminal multiplexer title format.
 # zstyle ':prezto:module:terminal:multiplexer-title' format '%s'
@@ -294,20 +298,20 @@ zstyle ':completion:*:default' list-colors "$LS_COLORS"
 
 # Alias Tips
 # Alias-tips is a plugin to help remembering aliases you once defined. It works by trying to find>
-zstyle ":prezto:module:alias-tips" text "Alias tip: "
+#zstyle ":prezto:module:alias-tips" text "Alias tip: "
 
 
 # enhancd
 #
 
-#zstyle ':prezto:module:enhancd' command 'fzy'
-#zstyle ':prezto:module:enhancd' command 'cd'
-#zstyle ':prezto:module:enhancd' show-fullpath "ENHANCD_DOT_SHOW_FULLPATH"
+zstyle ':prezto:module:enhancd' command 'fzy'
+zstyle ':prezto:module:enhancd' command 'cd'
+zstyle ':prezto:module:enhancd' show-fullpath "ENHANCD_DOT_SHOW_FULLPATH"
 
 # fzf
-# 
+#
 # https://github.com/gpanders/fzf-prezto >> old unmaitained in use @x220
-# https://github.com/lildude/fzf-prezto >> newest currently in use @Desktop 
+# https://github.com/lildude/fzf-prezto >> newest currently in use @Desktop
 
 # Use keybindings
 zstyle ':prezto:module:fzf' key-bindings 'yes'
