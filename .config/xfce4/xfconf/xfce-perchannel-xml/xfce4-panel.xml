@@ -101,7 +101,7 @@
       <property name="enable-multimedia-keys" type="bool" value="true"/>
       <property name="enable-wnck" type="bool" value="false"/>
       <property name="enable-mpris" type="bool" value="true"/>
-      <property name="known-players" type="string" value="Brave;Chrome"/>
+      <property name="known-players" type="string" value="Brave;Chrome;Ledger Live"/>
     </property>
     <property name="plugin-5" type="string" value="separator">
       <property name="style" type="uint" value="0"/>
@@ -160,6 +160,28 @@
         <value type="string" value="megasync"/>
       </property>
       <property name="known-items" type="array">
+        <value type="string" value="dropbox-client-2788687"/>
+        <value type="string" value="dropbox-client-2309"/>
+        <value type="string" value="dropbox-client-1049"/>
+        <value type="string" value="dropbox-client-1914"/>
+        <value type="string" value="dropbox-client-998"/>
+        <value type="string" value="dropbox-client-2264379"/>
+        <value type="string" value="dropbox-client-326837"/>
+        <value type="string" value="dropbox-client-2398"/>
+        <value type="string" value="dropbox-client-1048"/>
+        <value type="string" value="dropbox-client-2154"/>
+        <value type="string" value="dropbox-client-982"/>
+        <value type="string" value="dropbox-client-1940"/>
+        <value type="string" value="dropbox-client-1063"/>
+        <value type="string" value="dropbox-client-2915629"/>
+        <value type="string" value="dropbox-client-779311"/>
+        <value type="string" value="dropbox-client-464646"/>
+        <value type="string" value="dropbox-client-1961"/>
+        <value type="string" value="dropbox-client-1040"/>
+        <value type="string" value="dropbox-client-2408"/>
+        <value type="string" value="dropbox-client-1051"/>
+        <value type="string" value="dropbox-client-2579"/>
+        <value type="string" value="dropbox-client-979"/>
         <value type="string" value="dropbox-client-1888632"/>
         <value type="string" value="dropbox-client-1944"/>
         <value type="string" value="dropbox-client-990"/>

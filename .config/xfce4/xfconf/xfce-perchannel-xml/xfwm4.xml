@@ -39,7 +39,7 @@
     <property name="snap_width" type="int" value="19"/>
     <property name="theme" type="string" value="Nordic-darker"/>
     <property name="title_alignment" type="string" value="left"/>
-    <property name="title_font" type="string" value="M+ 1m Bold 9"/>
+    <property name="title_font" type="string" value="JetBrainsMonoNL Nerd Font Mono Semi-Bold 9"/>
     <property name="title_horizontal_offset" type="int" value="0"/>
     <property name="title_shadow_active" type="string" value="false"/>
     <property name="title_shadow_inactive" type="string" value="false"/>
