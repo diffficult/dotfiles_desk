@@ -251,7 +251,7 @@ alias la='ll -a -s changed'
 
 ##alias lS='exa -1'                                                              # one column, just names
 
-alias lt='exa --tree --level=2'                                         # tree
+alias lt='exa --icons --tree --level=2'                                         # tree
 
 
 
@@ -293,7 +293,7 @@ alias neocrux='neofetch --ascii --ascii_distro crux_small'
 alias neowin='neofetch --ascii --ascii_distro windows'
 alias disks='echo "╓───── m o u n t . p o i n t s"; echo "╙────────────────────────────────────── ─ ─ "; lsblk -a; echo ""; echo "╓───── d i s k . u s a g e"; echo "╙────────────────────────────────────── ─ ─ "; df -h;'
 
-#alias runalison='cd ~/.local/bin/Alison_Desktop && ./start-alison && clear && echo "Alison Desktop is running" && cd ~' 
+#alias runalison='cd ~/.local/bin/Alison_Desktop && ./start-alison && clear && echo "Alison Desktop is running" && cd ~'
 #alias killalison='cd ~/.local/bin/Alison_Desktop && ./stop-alison && clear && echo "Alison Desktop stopped" && cd ~'
 alias runalison='~/.local/bin/alison.sh'
 alias killalison='~/.local/bin/salison.sh'
@@ -320,7 +320,7 @@ alias fzfb='fzf --preview "bat --color \"always\" {}"'
 ### Single Wallpapers
 ######
 
-alias wall-skull='feh --bg-fill ~/Pictures/just-another-skull.jpg'
+#alias wall-skull='feh --bg-fill ~/Pictures/just-another-skull.jpg'
 
 
 ### find  -name '*fanart.jpg' -exec mogrify -resize 1920x1080\> {} \;
@@ -455,3 +455,10 @@ alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME'
 alias btcprice='curl -s https://rate.sx/BTC'
 alias ethprice='curl -s https://rate.sx/ETH'
 alias zrxprice='curl -s https://rate.sx/ZRX'
+
+
+###############################
+##### telebit aliases     #####
+###############################
+
+#alias telebit-pi4colegio="ssh -o ProxyCommand='openssl s_client -connect %h:443 -servername %h -quiet' raspi@chatty-skunk-9.telebit.io"
