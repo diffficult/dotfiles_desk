@@ -149,6 +149,7 @@
       <property name="names-hidden" type="array">
       </property>
       <property name="known-legacy-items" type="array">
+        <value type="string" value="syncthing"/>
         <value type="string" value="anydesk"/>
         <value type="string" value="syncthing-gtk"/>
         <value type="string" value="alison-desktop"/>
@@ -160,6 +161,12 @@
         <value type="string" value="megasync"/>
       </property>
       <property name="known-items" type="array">
+        <value type="string" value="dropbox-client-1767"/>
+        <value type="string" value="dropbox-client-691552"/>
+        <value type="string" value="dropbox-client-1923"/>
+        <value type="string" value="dropbox-client-1030"/>
+        <value type="string" value="dropbox-client-2004"/>
+        <value type="string" value="dropbox-client-1084"/>
         <value type="string" value="dropbox-client-2788687"/>
         <value type="string" value="dropbox-client-2309"/>
         <value type="string" value="dropbox-client-1049"/>
