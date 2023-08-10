@@ -7,10 +7,14 @@ syntax on
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'default'
-let g:airline_theme = 'embark'
+let g:airline_theme = "simple" " embark 
 
-" LEADER set to \ 
-" laptop using , 
+set termguicolors
+
+colorscheme embark
+
+" LEADER set to \
+" laptop using ,
 "
 " let mapleader = ","
 "
@@ -157,6 +161,10 @@ Plug 'https://github.com/ap/vim-css-color' " CSS Color Preview
 
 " --- Auto complete, you need to run install.py
 Plug 'ycm-core/YouCompleteMe'
+
+" --- themes
+Plug 'catppuccin/vim', { 'as': 'catppuccin' }
+Plug 'ghifarit53/tokyonight-vim'
 
 call plug#end()
 
