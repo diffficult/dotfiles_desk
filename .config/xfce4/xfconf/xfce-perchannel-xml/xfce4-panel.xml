@@ -161,6 +161,7 @@
         <value type="string" value="megasync"/>
       </property>
       <property name="known-items" type="array">
+        <value type="string" value="dropbox-client-1089749"/>
         <value type="string" value="dropbox-client-1767"/>
         <value type="string" value="dropbox-client-691552"/>
         <value type="string" value="dropbox-client-1923"/>
