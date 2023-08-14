@@ -42,8 +42,8 @@ set smarttab
 set number
 set noswapfile
 
-syntax on 			     " enable color syntax
-" syntax enable                        " Enable syntax highlights
+" syntax on 			     " enable color syntax
+syntax enable                        " Enable syntax highlights
 set ttyfast                          " Faster refraw
 " set mouse=nv                         " Mouse activated in Normal and Visual Mode
 set shortmess+=I                     " No intro when starting Vim
