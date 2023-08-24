@@ -1,1 +1,1 @@
-/home/rx/.zprezto/runcoms/zprofile
+/home/rx/.config/zsh/prezto_runcoms/zprofile
