@@ -261,6 +261,8 @@ alias lt='exa --icons --tree --level=2'                                         
 
 alias f='fzf --preview "bat --color \"always\" {}"'
 
+### ytfzf alias for rofi
+# alias yt="~/.local/bin/yt-r"
 
 # color for common commands
 # tutorial video: http://www.youtube.com/watch?v=RbVCzxnKJL4
