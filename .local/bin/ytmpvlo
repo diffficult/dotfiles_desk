@@ -1,8 +1,8 @@
 #!/bin/bash
 ## uncomment to get 720p video dash or 480p if not available
 VIDURL=$(xclip -o)
-notify-send -t 3500 'Streaming @ 720p' --icon="/usr/share/icons/Nordzy/apps/scalable/youtube.svg"
-mpv $VIDURL --ytdl --ytdl-format=247+bestaudio/136+bestaudio/22/135+bestaudio/18/best --volume=50
+notify-send -t 3500 'Streaming @ 480p' --icon="/usr/share/icons/Nordzy/apps/scalable/youtube.svg"
+mpv $VIDURL --ytdl --ytdl-format=244+bestaudio/135+bestaudio/18/134+bestaudio/242/best --volume=50
 
 ## uncomment to get 480p video dash
 #mpv $1 --ytdl --ytdl-format=135+bestaudio/244+bestaudio/18/134+bestaudio/242/best --volume=50
