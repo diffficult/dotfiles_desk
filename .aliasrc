@@ -13,7 +13,6 @@
 #export TERM="screen-256color"
 # export TERM="xterm-256color"
 
-
 #}}}
 #-------- Set Default Programs {{{
 #------------------------------------------------------
@@ -27,21 +26,21 @@ find_alt() { for i;do which "$i" >/dev/null && { echo "$i"; return 0;};done;retu
 export OPENER=$(find_alt xdg-open exo-open gnome-open )
 #export BROWSER=$(find_alt chromium-browser chromium qutebrowser google-chrome firefox $OPENER )
 #export BROWSER=/usr/bin/chromium
-export BROWSER=/usr/bin/google-chrome-stable
-# export BROWSER=$(find_alt qutebrowser chromium chromium-browser google-chrome firefox $OPENER )
-#export BROWSERCLI=$(find_alt w3m links2 links lynx elinks $OPENER )
+# export BROWSER=/usr/bin/google-chrome-stable
+export BROWSER=$(find_alt google-chrome-stable google-chrome-unstale chromium chromium-browser firefox $OPENER )
+export BROWSERCLI=$(find_alt w3m links2 links lynx elinks $OPENER )
 export BROWSERTOR=$(find_alt tor-browser-en)
 export EBOOKER=$(find_alt ebook-viewer $OPENER )
-export EDITOR=$(find_alt vim vi emacs nano leafpad gedit pluma $OPENER )
-export EDITORCLI=$(find_alt nano pico vim vi gedit pluma $OPENER )
-export EDITORGUI=$(find_alt mousepad leafpad gedit pluma $OPENER )
-export FILEMANAGER=$(find_alt nautilus dolphin spacefm thunar enlightenment_filemanager $OPENER )
+export EDITOR=$(find_alt vim nvim vi nanor $OPENER )
+export EDITORCLI=$(find_alt vim nano nvim pico vi $OPENER )
+export EDITORGUI=$(find_alt code subl mousepad leafpad gedit pluma $OPENER )
+export FILEMANAGER=$(find_alt nemo nautilus thunar dolphin spacefm thunar enlightenment_filemanager $OPENER )
 export FILEMANAGERCLI=$(find_alt ranger vifm mc $OPENER )
 export PAGER=$(find_alt less more most)
 export PLAYER=$(find_alt mpv mplayer ffplay cvlc $OPENER )
 export READER=$(find_alt mupdf zathura evince $OPENER )
 #export ROOTER=$(find_alt gksudo kdesudo )
-export IMAGEVIEWER=$(find_alt feh ristretto display eog $OPENER )
+export IMAGEVIEWER=$(find_alt sxiv feh ristretto display eog $OPENER )
 export QUEUER=$(find_alt tsp fq ts )
 #export TERMER=$(find_alt urxvt xterm uxterm termite sakura lxterminal terminator mate-terminal pantheon-terminal konsole gnome-terminal xfce4-terminal $OPENER )
 
@@ -132,10 +131,9 @@ fi
 cfg-aliasrc() { $EDITORCLI ~/.aliasrc ;}
 cfg-bashrc() { $EDITORCLI ~/.bashrc ;}
 cfg-cava() { $EDITORCLI ~/.config/cava/config ;}
-cfg-compton() { $EDITORCLI ~/.config/picom.conf ;}
+cfg-picom() { $EDITORCLI ~/.config/picom.conf ;}
 cfg-fstab() { sudo $EDITORCLI /etc/fstab ;}
 cfg-group() { sudo $EDITORCLI /etc/group ;}
-cfg-grub() { sudo $EDITORCLI /etc/default/grub ;}
 cfg-hintrc() { $EDITORCLI ~/.hintrc ;}
 cfg-hosts() { sudo $EDITORCLI /etc/hosts ;}
 cfg-i3wm() { $EDITORCLI ~/.i3/config ;}
@@ -164,7 +162,7 @@ cfg-sudoers() { sudo $EDITORCLI /etc/sudoers ;}
 cfg-sakura() { $EDITORCLI ~/.config/sakura/sakura.conf ;}
 cfg-surfraw() { $EDITORCLI ~/.config/surfraw/conf ;}
 cfg-syncthing() { $EDITORCLI ~/.config/syncthing/config.xml ;}
-cfg-tmuxrc() { $EDITORCLI ~/.tmux.conf ;}
+cfg-tmuxrc() { $EDITORCLI ~/.config/tmux/tmux.conf.local ;}
 cfg-tor() { sudo $EDITORCLI /etc/tor/torrc ;}
 cfg-tor-user() { $EDITORCLI ~/.torrc ;}
 cfg-torrentflix() { torrentflix --config=$EDITORCLI ;}
@@ -176,6 +174,7 @@ cfg-xmodmap() { $EDITORCLI ~/.Xmodmap ;}
 cfg-xresources() { $EDITORCLI ~/.Xresources ;}
 cfg-yaourtrc() { $EDITORCLI ~/.yaourtrc ;}
 cfg-zshrc() { $EDITORCLI ~/.zshrc ;}
+cfg-zprezto() { $EDITORCLI ~/.zpreztorc ;}
 #}}}
 
 #-------- Configurations Reload {{{
@@ -231,11 +230,11 @@ alias visudo='sudo EDITOR="$EDITOR" visudo'
 alias derez='rm -Iv'			                # rm interactive, prompt once only
 alias uhaul='mv -iv --'					# mv prompt confirmation
 
-### ls replacement with exa written in rust
+### ls replacement with eza (exa was deprecated) written in rust 
 
-alias ls='exa --icons --group-directories-first'
+alias ls='eza --icons --group-directories-first'
 alias l='ls -a -s changed'
-alias ll='exa -l --icons --group-directories-first'
+alias ll='eza -l --icons --group-directories-first'
 alias la='ll -a -s changed'
 
 # general use
@@ -251,7 +250,7 @@ alias la='ll -a -s changed'
 
 ##alias lS='exa -1'                                                              # one column, just names
 
-alias lt='exa --icons --tree --level=2'                                         # tree
+alias lt='eza --icons --tree --level=2'                                         # tree
 
 
 
@@ -415,6 +414,19 @@ alias lifx-on="lifx -1"
 alias lifx-off="lifx -0"
 
 # }}}
+
+####################
+##### LIFX COM #####
+####################
+
+alias hue-desk-on="lampe -s 8 y"
+alias hue-desk-off="lampe -s 8 n"
+# alias lifx-day="lifx -B 60 -K 40"
+# alias lifx-on="lifx -1"
+# alias lifx-off="lifx -0"
+
+# }}}
+
 
 
 ####################
