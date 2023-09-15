@@ -15,7 +15,7 @@ do
 	"Y")
 		echo -n "$(readlink -f "$file")" | xclip -selection clipboard && notify-send "$(readlink -f "$file") copied to clipboard" --icon=/home/poole/.local/share/icons/notify/wallpaper.svg & ;;
 	"d")
-		rm "$file" && notify-send "$file deleted." --icon=application-exit ;;
+		trash "$file" && notify-send "$file deleted." --icon=application-exit ;;
 	"G")
 		gimp "$file" & ;;
     esac
