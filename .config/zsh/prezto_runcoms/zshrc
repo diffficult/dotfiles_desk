@@ -10,11 +10,19 @@ fi
 # extras #
 ##
 
-#if [ -f /etc/bash_completion.d/climate_completion ]; then
-#fi
-
-if [ -f ~/.config/climate_completion ]; then
+if [ -f /etc/bash_completion.d/climate_completion ]; then
+  source /etc/bash_completion.d/climate_completion
 fi
+
+if [ -f "$HOME/.config/climate_completion" ]; then
+  source "$HOME/.config/climate_completion"
+fi
+
+##
+# FZF
+##
+
+export FZF_BASE=/usr/share/fzf
 
 ##
 # Aliases #
@@ -22,7 +30,7 @@ fi
 
 # load alias/functions that works with both zsh/bash
 if [[ -f ~/.aliasrc ]]; then
-    source ~/.aliasrc
+    source "$HOME/.aliasrc"
 fi
 
 ##
@@ -63,7 +71,6 @@ fi
 
 # autocompletion for zsh to get completion of command flags
 autoload -U compinit && compinit
-
 
 # sourcing nvm to install and run different node.js versions
 if [[ -f ~/usr/share/nvm/init-nvm.sh ]]; then
