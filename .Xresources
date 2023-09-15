@@ -39,15 +39,15 @@
 !-------------------------------------------------------------------------------
 
 Xft.dpi:					96
-Xft.antialias: 				true
-Xft.rgba: 					rgb
-Xft.hinting: 				true
-Xft.hintstyle: 				hintfull
-Xft.lcdfilter: 				lcddefault
+Xft.antialias:					true
+Xft.rgba:					rgb
+Xft.hinting:					true
+Xft.hintstyle:					hintfull
+Xft.lcdfilter:					lcddefault
 
 Xcursor.theme:    OSX-ElCap
 Xcursor.size:    16
-Xcursor.theme_core:    1				
+Xcursor.theme_core:    1
 
 URxvt*depth:                32
 URxvt*geometry:             90x30
@@ -101,14 +101,66 @@ URxvt*pointerBlank:         true
 ! URxvt.color1  : #000000
 
 
-!! Transparency (0-255):
+!! st (suckless terminal) settings ----------------
 
-*.alpha: 230
+!! Transparency (0-1):
+
+st.alpha: 0.92
+st.alphaOffset: 0.3
 
 !! Set a default font and font size for st below:
 
-*.font: tewi-8;
+!! *.font: JetBrainsMono NF-10;
+*.font: JetBrainsMono NF:pixelsize=14:antialias=true:autohint=true;
 
+!! colorscheme ---- 
+! TokyoNight colors for Xresources
+
+!! *.background: #1a1b26
+!! *.foreground: #c0caf5
+!! 
+!! *.color0: #15161e
+!! *.color1: #f7768e
+!! *.color2: #9ece6a
+!! *.color3: #e0af68
+!! *.color4: #7aa2f7
+!! *.color5: #bb9af7
+!! *.color6: #7dcfff
+!! *.color7: #a9b1d6
+!! *.color9: #414868
+!! *.color9: #f7768e
+!! *.color10: #9ece6a
+!! *.color11: #e0af68
+!! *.color12: #7aa2f7
+!! *.color13: #bb9af7
+!! *.color14: #7dcfff
+!! *.color15: #c0caf5
+
+! TokyoNight Storm colors for Xresources
+
+*.background: #24283b
+*.foreground: #c0caf5
+
+*.color0: #1d202f
+*.color1: #f7768e
+*.color2: #9ece6a
+*.color3: #e0af68
+*.color4: #7aa2f7
+*.color5: #bb9af7
+*.color6: #7dcfff
+*.color7: #a9b1d6
+*.color8: #414868
+*.color9: #f7768e
+*.color10: #9ece6a
+*.color11: #e0af68
+*.color12: #7aa2f7
+*.color13: #bb9af7
+*.color14: #7dcfff
+*.color15: #c0caf5
+
+
+!! end st settings -----------------
+!
 
 !#include "/home/rx/.config/colors/nord"
 
