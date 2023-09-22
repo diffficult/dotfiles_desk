@@ -31,8 +31,8 @@ export BROWSER=$(find_alt google-chrome-stable google-chrome-unstale chromium ch
 export BROWSERCLI=$(find_alt w3m links2 links lynx elinks $OPENER )
 export BROWSERTOR=$(find_alt tor-browser-en)
 export EBOOKER=$(find_alt ebook-viewer $OPENER )
-export EDITOR=$(find_alt vim nvim vi nanor $OPENER )
-export EDITORCLI=$(find_alt vim nano nvim pico vi $OPENER )
+export EDITOR=$(find_alt nvim vim vi nano $OPENER )
+export EDITORCLI=$(find_alt nvim vim nano pico vi $OPENER )
 export EDITORGUI=$(find_alt code subl mousepad leafpad gedit pluma $OPENER )
 export FILEMANAGER=$(find_alt nemo nautilus thunar dolphin spacefm thunar enlightenment_filemanager $OPENER )
 export FILEMANAGERCLI=$(find_alt ranger vifm mc $OPENER )
@@ -230,14 +230,17 @@ alias visudo='sudo EDITOR="$EDITOR" visudo'
 alias derez='rm -Iv'			                # rm interactive, prompt once only
 alias uhaul='mv -iv --'					# mv prompt confirmation
 
+################################################################
 ### ls replacement with eza (exa was deprecated) written in rust 
-
+################################################################
+#
+#
 alias ls='eza --icons --group-directories-first'
 alias l='eza -a -s changed --icons --group-directories-first'
 alias ll='eza -l --icons --group-directories-first'
 alias la='eza -l -a -s changed --icons --group-directories-first'
-
-# general use
+#
+# general use ######################
 
 ## alias ls='exa'                                                          # ls
 ## alias l='exa -lbF --git'                                                # list, size, type, git
@@ -246,15 +249,13 @@ alias la='eza -l -a -s changed --icons --group-directories-first'
 ## alias la='exa -lbhHigUmuSa --time-style=long-iso --git --color-scale'  # all list
 ## alias lx='exa -lbhHigUmuSa@ --time-style=long-iso --git --color-scale' # all + extended list
 
-# specialty views
+# specialty views ##################
 
 ##alias lS='exa -1'                                                              # one column, just names
 
 alias lt='eza --icons --tree --level=2'                                         # tree
 
-
-
-###
+##################################################
 
 ### fzf
 
@@ -274,6 +275,8 @@ alias f='fzf --preview "bat --color \"always\" {}"'
 #    alias fgrep='fgrep --color=auto'
 #    alias egrep='egrep --color=auto'
 #fi
+
+alias cat="bat"
 
 ## }}}
 
