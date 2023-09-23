@@ -53,12 +53,10 @@
       <property name="&lt;Alt&gt;F2" type="string" value="xfrun4">
         <property name="startup-notify" type="bool" value="true"/>
       </property>
-      <property name="&lt;Super&gt;p" type="string" value="xfce4-display-settings --minimal"/>
       <property name="&lt;Primary&gt;&lt;Alt&gt;t" type="string" value="exo-open --launch TerminalEmulator"/>
       <property name="&lt;Super&gt;r" type="string" value="xfce4-appfinder"/>
       <property name="&lt;Super&gt;t" type="string" value="exo-open --launch TerminalEmulator"/>
       <property name="&lt;Super&gt;w" type="string" value="exo-open --launch WebBrowser"/>
-      <property name="XF86Display" type="string" value="xfce4-display-settings --minimal"/>
       <property name="XF86WWW" type="string" value="exo-open --launch WebBrowser"/>
       <property name="XF86Mail" type="string" value="exo-open --launch MailReader"/>
       <property name="&lt;Primary&gt;&lt;Alt&gt;Escape" type="string" value="xkill"/>
@@ -79,6 +77,8 @@
       <property name="&lt;Super&gt;o" type="string" value="/usr/local/bin/color-gpick"/>
       <property name="&lt;Super&gt;space" type="string" value="xfce4-popup-whiskermenu"/>
       <property name="&lt;Super&gt;y" type="string" value="/home/rx/.local/bin/yt-r"/>
+      <property name="&lt;Super&gt;p" type="string" value="/usr/bin/rofi-pass"/>
+      <property name="&lt;Shift&gt;&lt;Super&gt;p" type="string" value="xfce4-display-settings --minimal"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">
