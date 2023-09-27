@@ -1,6 +1,3 @@
-ncmpcpp_directory = ~/.config/ncmpcpp
-lyrics_directory = ~/.config/ncmpcpp/lyrics
-
 ##### connection settings #####
 mpd_host = "localhost"
 mpd_port = "6600"
@@ -11,20 +8,16 @@ mpd_crossfade_time = "2"
 playlist_disable_highlight_delay = "3"
 message_delay_time = "2"
 
-##### visualizer settings #####
-#visualizer_fifo_path = "/tmp/mpd.fifo"
+##### visualizer settins #####
+#visualizer_fifo_path = "/tmp/mpd.fifo" # DEPRECATED >> replaced by visualizer_data_source
 visualizer_data_source = "/tmp/mpd.fifo"
 visualizer_output_name = "visualizer"
 #visualizer_sync_interval = "1"
 visualizer_type = "ellipse" (spectrum/wave/ellipse)
-#visualizer_look = "▪▫"
+visualizer_look = "▪▫"
 #visualizer_look = "▋∙"
 #visualizer_look = "●▮"
-visualizer_look = "▮●"
-visualizer_color = red, yellow, green, cyan, blue, red, yellow, green, cyan, blue, red, yellow, green, cyan, blue, red
-#visualizer_color = blue, cyan, green, yellow, magenta, red
-#visualizer_color = 41, 83, 119, 155, 185, 215, 209, 203, 197, 161
-
+visualizer_color = "red,yellow,green,cyan,blue,red,yellow,green,cyan,blue,red,yellow,green,cyan,blue,red"
 
 song_status_format = "$2%a $7• $4%t $7• $3%b {}$7• $5%y$7"
 now_playing_prefix = "$b$8»$2»$4»$3» "
@@ -97,7 +90,8 @@ alternative_ui_separator_color = "white"
 #fix
 current_item_inactive_column_prefix = "$(white)$r"
 current_item_inactive_column_suffix = "$/r$(end)"
-#window_border_color = "green"
+## visualizer_color = "white"
+## window_border_color = "green"
 active_window_border = "red"
 
 
