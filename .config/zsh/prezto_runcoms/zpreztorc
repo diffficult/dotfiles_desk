@@ -40,10 +40,10 @@ zstyle ':prezto:load' pmodule \
   'git' \
   'completion' \
   'docker' \
-  'autosuggestions' \
   'command-not-found' \
   'syntax-highlighting' \
   'history-substring-search' \
+  'autosuggestions' \
   'contrib-prompt' \
   'fzf' \
   'prompt'
@@ -66,6 +66,8 @@ zstyle ':prezto:module:autosuggestions' color 'yes'
 # Set the entries to ignore in static '/etc/hosts' for host completion.
 # zstyle ':prezto:module:completion:*:hosts' etc-host-ignores \
 #   '0.0.0.0' '127.0.0.1'
+
+ zstyle ':completion:*:ssh:*' hosts
 
 #
 # Editor
@@ -227,7 +229,7 @@ zstyle ':prezto:module:syntax-highlighting' highlighters \
    'main' \
    'brackets' \
    'pattern' \
-   'line'
+   'line' 
 #   'cursor' \
 #   'root'
 #
