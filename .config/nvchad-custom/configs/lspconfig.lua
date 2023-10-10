@@ -1,5 +1,24 @@
+-- local on_attach = require("plugins.configs.lspconfig").on_attach
+-- local capabilities = require("plugins.configs.lspconfig").capabilities
+--
+-- local lspconfig = require "lspconfig"
+--
+-- -- if you just want default config for the servers then put them in a table
+-- local servers = { "html", "cssls", "tsserver", "clangd" }
+--
+-- for _, lsp in ipairs(servers) do
+--   lspconfig[lsp].setup {
+--     on_attach = on_attach,
+--     capabilities = capabilities,
+--   }
+-- end
+--
+-- --
+-- -- lspconfig.pyright.setup { blabla}
+--
+
 -- Load defaults from NvChad
-require("plugins.configs.lspconfig").defaults()
+-- require("plugins.configs.lspconfig").defaults()
 
 local on_attach = require("plugins.configs.lspconfig").on_attach
 local capabilities = require("plugins.configs.lspconfig").capabilities
@@ -51,6 +70,7 @@ local servers = {
   "eslint",
   "jdtls",
   "astro",
+  -- "gopls",
   "grammarly",
   "marksman",
   "emmet_ls",
@@ -109,6 +129,49 @@ require("mason-lspconfig").setup_handlers {
             maxPreload = 100000,
             preloadFileSize = 10000,
           },
+        },
+      },
+    }
+  end,
+
+  ["gopls"] = function()
+    lspconfig["gopls"].setup {
+      on_attach = custom_on_attach,
+      capabilities = capabilities,
+      filetypes = { "go", "gomod", "gowork", "gosum", "goimpl" },
+      settings = {
+        gopls = {
+          buildFlags = { "-tags=wireinject" },
+          usePlaceholders = true,
+          completeUnimported = true,
+          vulncheck = "Imports",
+          analyses = {
+            nilness = true,
+            shadow = true,
+            unusedparams = true,
+            unusewrites = true,
+            fieldalignment = true,
+            useany = true,
+          },
+          staticcheck = true,
+          codelenses = {
+            references = true,
+            test = true,
+            tidy = true,
+            upgrade_dependency = true,
+            regenerate_cgo = true,
+            generate = true,
+          },
+          hints = {
+            assignVariableTypes = true,
+            compositeLiteralFields = true,
+            compositeLiteralTypes = true,
+            constantValues = true,
+            functionTypeParameters = true,
+            parameterNames = true,
+            rangeVariableTypes = true,
+          },
+          gofumpt = true,
         },
       },
     }
@@ -236,7 +299,7 @@ vim.diagnostic.config {
   virtual_lines = false,
   virtual_text = {
     source = "always",
-    prefix = "â� ",
+    prefix = "■",
   },
   -- virtual_text = false,
   float = {

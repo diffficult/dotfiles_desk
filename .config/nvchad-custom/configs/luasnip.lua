@@ -1,251 +1,44 @@
--- Load defaults from NvChad
-require("plugins.configs.lspconfig").defaults()
+local present, luasnip = pcall(require, "luasnip")
 
-local on_attach = require("plugins.configs.lspconfig").on_attach
-local capabilities = require("plugins.configs.lspconfig").capabilities
-
-local lspconfig = require "lspconfig"
-
-local present, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-if present then
-  capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+if not present then
+  return
 end
 
-local present, ufo = pcall(require, "ufo")
-if present then
-  capabilities.textDocument.foldingRange = {
-    dynamicRegistration = false,
-    lineFoldingOnly = true,
-  }
-end
+luasnip.filetype_extend("javascriptreact", { "html" })
+luasnip.filetype_extend("typescriptreact", { "react-ts", "typescript", "html" })
+luasnip.filetype_extend("javascriptreact", { "react", "javascript", "html" })
+luasnip.filetype_extend("javascript", { "react" })
+luasnip.filetype_extend("vue", { "html" })
 
-local custom_on_attach = function(client, bufnr)
-  on_attach(client, bufnr)
+require("luasnip/loaders/from_vscode").lazy_load()
+require("luasnip.loaders.from_lua").load { paths = "~/.config/nvim/lua/custom/luasnip" }
 
-  if client.server_capabilities.inlayHintProvider then
-    vim.lsp.inlay_hint(bufnr, true)
-  end
-end
+local types = require "luasnip.util.types"
 
-local filter_list = function(list, predicate)
-  local res_len = #list
-  local move_item_by = 0
-
-  for i = 1, res_len do
-    local item = list[i]
-    list[i] = nil
-    if not predicate(item) then
-      move_item_by = move_item_by - 1
-    else
-      list[i + move_item_by] = item
-    end
-  end
-end
-
--- if you just want default config for the servers then put them in a table
-local servers = {
-  "html",
-  "cssls",
-  -- "tsserver",
-  "clangd",
-  "eslint",
-  "jdtls",
-  "astro",
-  "grammarly",
-  "marksman",
-  "emmet_ls",
-  "yamlls",
-  "jsonls",
-  "dockerls",
-  "lua_ls",
-  "vuels",
-}
-
-require("mason-lspconfig").setup {
-  ensure_installed = servers,
-}
-
--- for _, lsp in ipairs(servers) do
---   lspconfig[lsp].setup {
---     on_attach = on_attach,
---     capabilities = capabilities,
---   }
--- end
-
-require("mason-lspconfig").setup_handlers {
-  function(server_name)
-    lspconfig[server_name].setup {
-      on_attach = custom_on_attach,
-      capabilities = capabilities,
-    }
-  end,
-
-  ["lua_ls"] = function()
-    lspconfig["lua_ls"].setup {
-      on_attach = custom_on_attach,
-      capabilities = capabilities,
-      settings = {
-        Lua = {
-          runtime = {
-            version = "LuaJIT",
-          },
-          diagnostics = {
-            globals = { "use", "vim" },
-          },
-          hint = {
-            enable = true,
-            setType = true,
-          },
-          telemetry = {
-            enable = false,
-          },
-          workspace = {
-            library = {
-              [vim.fn.expand "$VIMRUNTIME/lua"] = true,
-              [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
-              [vim.fn.stdpath "data" .. "/lazy/ui/nvchad_types"] = true,
-              [vim.fn.stdpath "data" .. "/lazy/lazy.nvim/lua/lazy"] = true,
-            },
-            maxPreload = 100000,
-            preloadFileSize = 10000,
-          },
-        },
+luasnip.setup {
+  history = true,
+  delete_check_events = "TextChanged",
+  region_check_events = "CursorMoved",
+  ext_opts = {
+    [types.insertNode] = {
+      unvisited = {
+        virt_text = { { "|", "Conceal" } },
+        -- virt_text_pos = "inline",
       },
-    }
-  end,
-
-  ["eslint"] = function()
-    lspconfig["eslint"].setup {
-      on_attach = custom_on_attach,
-      capabilities = capabilities,
-      filetypes = {
-        "javascript",
-        "javascriptreact",
-        "javascript.jsx",
-        "typescript",
-        "typescriptreact",
-        "typescript.tsx",
-        "vue",
-        "astro",
+      active = {
+        virt_text = { { "●", "yellow" } },
       },
-      cmd = { "vscode-eslint-language-server", "--stdio" },
-      handlers = {
-        ["eslint/confirmESLintExecution"] = function(_, result)
-          if not result then
-            return
-          end
-          return 4 -- approved
-        end,
-
-        ["eslint/noLibrary"] = function()
-          vim.notify("[lspconfig] Unable to find ESLint library.", vim.log.levels.WARN)
-          return {}
-        end,
-
-        ["eslint/openDoc"] = function(_, result)
-          if not result then
-            return
-          end
-          local sysname = vim.loop.os_uname().sysname
-          if sysname:match "Windows_NT" then
-            os.execute(string.format("start %q", result.url))
-          elseif sysname:match "Linux" then
-            os.execute(string.format("xdg-open %q", result.url))
-          else
-            os.execute(string.format("open %q", result.url))
-          end
-          return {}
-        end,
-
-        ["eslint/probeFailed"] = function()
-          vim.notify("[lspconfig] ESLint probe failed.", vim.log.levels.WARN)
-          return {}
-        end,
+    },
+    [types.exitNode] = {
+      unvisited = {
+        virt_text = { { "|", "Conceal" } },
+        -- virt_text_pos = "inline",
       },
-      root_dir = require("lspconfig").util.root_pattern(
-        ".eslintrc",
-        ".eslintrc.js",
-        ".eslintrc.cjs",
-        ".eslintrc.yaml",
-        ".eslintrc.yml",
-        ".eslintrc.json",
-        "package.json"
-      ),
-      settings = {
-        codeAction = {
-          disableRuleComment = {
-            enable = true,
-            location = "separateLine",
-          },
-          showDocumentation = {
-            enable = true,
-          },
-        },
-        codeActionOnSave = {
-          enable = false,
-          mode = "all",
-        },
-        format = true,
-        nodePath = "",
-        onIgnoredFiles = "off",
-        packageManager = "npm",
-        quiet = false,
-        rulesCustomizations = {},
-        run = "onType",
-        useESLintClass = false,
-        validate = "on",
-        workingDirectory = {
-          mode = "location",
-        },
+    },
+    [types.choiceNode] = {
+      active = {
+        virt_text = { { "●", "blue" } },
       },
-    }
-  end,
-}
-
-vim.lsp.handlers["textDocument/hover"] = require("noice").hover
-vim.lsp.handlers["textDocument/signatureHelp"] = require("noice").signature
-
-vim.lsp.handlers["textDocument/inlayHint"] = function(result)
-  filter_list(result, function(item)
-    if
-      item.label == "x:"
-      or item.label == "y:"
-      or item.label == "z:"
-      or item.label == "a:"
-      or item.label == "b:"
-      or item.label == "v:"
-      or item.label == "m:"
-      or item.label == "s:"
-      or item.label == "nptr:"
-      or item.label == "scalar:"
-      or item.lable == "argv0"
-    then
-      return false
-    end
-    -- local line = item.position.line
-    -- local col = item.position.character
-    -- local node = vim.treesitter.get_node({pos = {line,col}})
-    -- I(vim.treesitter.get_node_text(node:parent(), 0))
-    return true
-  end)
-  -- accept request.
-  return true
-end
-
-vim.diagnostic.config {
-  virtual_lines = false,
-  virtual_text = {
-    source = "always",
-    prefix = "■",
+    },
   },
-  -- virtual_text = false,
-  float = {
-    source = "always",
-    border = "rounded",
-  },
-  signs = true,
-  underline = false,
-  update_in_insert = false,
-  severity_sort = true,
 }
-

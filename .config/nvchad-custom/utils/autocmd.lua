@@ -265,11 +265,11 @@ autocmd({ "FileType" }, {
 })
 
 -- Disable scrolloff in blacklisted filetypes
--- autocmd({ "BufEnter" }, {
---   callback = function()
---     vim.o.scrolloff = (vim.tbl_contains(settings.blacklist, vim.bo.ft) and 0 or settings.so_size)
---   end,
--- })
+autocmd({ "BufEnter" }, {
+  callback = function()
+    vim.o.scrolloff = (vim.tbl_contains(settings.blacklist, vim.bo.ft) and 0 or settings.so_size)
+  end,
+})
 
 -- Restore cursor
 autocmd({ "BufReadPost" }, {
@@ -348,15 +348,15 @@ vim.api.nvim_create_autocmd("BufEnter", {
 })
 
 -- Go exclusive mappings
--- autocmd("FileType", {
---   callback = function()
---     if vim.bo.ft == "go" then
---       require("core.utils").load_mappings "go"
---     else
---       require("custom.utils.core").remove_mappings "go"
---     end
---   end,
--- })
+autocmd("FileType", {
+  callback = function()
+    if vim.bo.ft == "go" then
+      require("core.utils").load_mappings "go"
+    else
+      require("custom.utils.core").remove_mappings "go"
+    end
+  end,
+})
 
 -- Unlink the snippet and restore completion
 -- autocmd("ModeChanged", {
@@ -563,4 +563,3 @@ autocmd({ "InsertEnter", "WinLeave" }, {
 --     vim.lsp.buf.format { async = false }
 --   end,
 -- })
-

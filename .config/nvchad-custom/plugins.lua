@@ -1,7 +1,10 @@
-local overrides = require("custom.configs.overrides")
+local overrides = require "custom.configs.overrides"
 
 ---@type NvPluginSpec[]
 local plugins = {
+
+  { "BrunoKrugel/nvcommunity" },
+  -- Override plugin definition options
   {
     "neovim/nvim-lspconfig",
     dependencies = {
@@ -21,7 +24,7 @@ local plugins = {
           vim.api.nvim_create_user_command("MasonInstallAll", function()
             vim.cmd("MasonInstall " .. table.concat(opts.ensure_installed, " "))
           end, {})
-          -- require "custom.configs.lspconfig"
+          require "custom.configs.lspconfig"
         end,
       },
       "williamboman/mason-lspconfig.nvim",
@@ -29,29 +32,7 @@ local plugins = {
     },
     config = function() end,
   },
-  {
-    "jose-elias-alvarez/null-ls.nvim",
-    enabled = false,
-  },
-  {
-    "folke/which-key.nvim",
-    enabled = true,
-  },
-  {
-    "lewis6991/gitsigns.nvim",
-    opts = function()
-      return require("plugins.configs.others").gitsigns
-    end,
-    config = function(_, opts)
-      dofile(vim.g.base46_cache .. "git")
-      require("scrollbar.handlers.gitsigns").setup()
-      require("gitsigns").setup(opts)
-    end,
-  },
-  {
-    "nvim-tree/nvim-web-devicons",
-    opts = overrides.devicons,
-  },
+
   {
     "nvim-treesitter/nvim-treesitter",
     dependencies = {
@@ -96,23 +77,133 @@ local plugins = {
     },
     opts = overrides.treesitter,
   },
+
   {
     "nvim-tree/nvim-tree.lua",
     dependencies = { "antosha417/nvim-lsp-file-operations" },
     opts = overrides.nvimtree,
   },
+
   {
     "NvChad/nvim-colorizer.lua",
     opts = overrides.colorizer,
   },
+--  {
+--    "hrsh7th/nvim-cmp",
+--    opts = cmp_opt.cmp,
+--    dependencies = {
+--      "delphinus/cmp-ctags",
+--      "hrsh7th/cmp-nvim-lsp-document-symbol",
+--      "ray-x/cmp-treesitter",
+--      "tzachar/cmp-fuzzy-buffer",
+--      "roobert/tailwindcss-colorizer-cmp.nvim",
+--      "tzachar/fuzzy.nvim",
+--      "rcarriga/cmp-dap",
+--      "js-everts/cmp-tailwind-colors",
+--      { "jcdickinson/codeium.nvim", config = true },
+--      {
+--        "tzachar/cmp-tabnine",
+--        build = "./install.sh",
+--        config = function()
+--          local tabnine = require "cmp_tabnine.config"
+--          tabnine:setup {
+--            max_lines = 1000,
+--            max_num_results = 3,
+--            sort = true,
+--            show_prediction_strength = false,
+--            run_on_every_keystroke = true,
+--            snipper_placeholder = "..",
+--            ignored_file_types = {},
+--          }
+--        end,
+--      },
+--      {
+--        "L3MON4D3/LuaSnip",
+--        build = "make install_jsregexp",
+--        config = function(_, opts)
+--          require("plugins.configs.others").luasnip(opts)
+--          require "custom.configs.luasnip"
+--          require "custom.configs.autotag"
+--        end,
+--      },
+--      {
+--        "windwp/nvim-autopairs",
+--        config = function()
+--          require "custom.configs.autopair"
+--        end,
+--      },
+--    },
+--    config = function(_, opts)
+--      dofile(vim.g.base46_cache .. "cmp")
+--      local format_kinds = opts.formatting.format
+--      opts.formatting.format = function(entry, item)
+--        if item.kind == "Color" then
+--          item.kind = "⬤"
+--          format_kinds(entry, item)
+--          return require("tailwindcss-colorizer-cmp").formatter(entry, item)
+--        end
+--        return format_kinds(entry, item)
+--      end
+--      local cmp = require "cmp"
+--
+--      cmp.setup(opts)
+--
+--      local cmp_autopairs = require "nvim-autopairs.completion.cmp"
+--      cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+--
+--      cmp.setup.cmdline({ "/", "?" }, {
+--        mapping = opts.mapping,
+--        sources = {
+--          { name = "buffer" },
+--        },
+--      })
+--
+--      cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
+--        sources = {
+--          { name = "dap" },
+--        },
+--      })
+--    end,
+--  },
   {
-    "rainbowhxch/accelerated-jk.nvim",
-    event = "CursorMoved",
+    "karb94/neoscroll.nvim",
+    keys = { "<C-d>", "<C-u>" },
     config = function()
-      require "custom.configs.accelerated"
+      require("neoscroll").setup { mappings = {
+        "<C-u>",
+        "<C-d>",
+      } }
     end,
   },
-  ----------------------------------------- ui plugins ------------------------------------------
+  {
+    "razak17/tailwind-fold.nvim",
+    opts = {
+      min_chars = 50,
+    },
+    ft = { "html", "svelte", "astro", "vue", "typescriptreact" },
+  },
+
+  {
+    "nvim-telescope/telescope.nvim",
+    opts = overrides.telescope,
+    dependencies = {
+      "debugloop/telescope-undo.nvim",
+      "gnfisher/nvim-telescope-ctags-plus",
+      "tom-anders/telescope-vim-bookmarks.nvim",
+      "benfowler/telescope-luasnip.nvim",
+      "nvim-telescope/telescope-dap.nvim",
+      "Marskey/telescope-sg",
+      {
+        "nvim-telescope/telescope-fzf-native.nvim",
+        build = "make",
+      },
+      {
+        "nvim-telescope/telescope-frecency.nvim",
+        dependencies = { "kkharji/sqlite.lua" },
+      },
+    },
+  },
+
   {
     "folke/noice.nvim",
     event = "VeryLazy",
@@ -222,10 +313,6 @@ local plugins = {
     cmd = "LazyGit",
   },
   {
-    "BrunoKrugel/lazydocker.nvim",
-    cmd = "LazyDocker",
-  },
-  {
     "smjonas/inc-rename.nvim",
     cmd = "IncRename",
     opts = {
@@ -233,11 +320,13 @@ local plugins = {
         if not results.changes then
           return
         end
+
         -- if more than one file is changed, save all buffers
         local filesChang = #vim.tbl_keys(results.changes)
         if filesChang > 1 then
           vim.cmd.wall()
         end
+
         -- FIX making the cmdline-history not navigable, pending: https://github.com/smjonas/inc-rename.nvim/issues/40
         vim.fn.histdel("cmd", "^IncRename ")
       end,
@@ -594,6 +683,105 @@ local plugins = {
       snippet_engine = "luasnip",
     },
   },
+--
+  {
+    "ThePrimeagen/harpoon",
+    cmd = "Harpoon",
+  },
+  {
+    "mfussenegger/nvim-dap",
+    cmd = { "DapContinue", "DapStepOver", "DapStepInto", "DapStepOut", "DapToggleBreakpoint" },
+    dependencies = {
+      {
+        "theHamsta/nvim-dap-virtual-text",
+        config = function()
+          require "custom.configs.virtual-text"
+        end,
+      },
+      {
+        "rcarriga/nvim-dap-ui",
+        config = function()
+          require "custom.configs.dapui"
+        end,
+      },
+    },
+  },
+  {
+    "nguyenvukhang/nvim-toggler",
+    event = "BufReadPost",
+    config = function()
+      require("nvim-toggler").setup {
+        remove_default_keybinds = true,
+      }
+    end,
+  },
+-------- added
+  {
+    "rainbowhxch/accelerated-jk.nvim",
+    event = "CursorMoved",
+    config = function()
+      require "custom.configs.accelerated"
+    end,
+  },
+  {
+    "m-demare/hlargs.nvim",
+    event = "BufWinEnter",
+    config = function()
+      require("hlargs").setup {
+        hl_priority = 200,
+      }
+    end,
+  },
+  {
+    "MattesGroeger/vim-bookmarks",
+    cmd = { "BookmarkToggle", "BookmarkClear" },
+  },
+  {
+    "tzachar/local-highlight.nvim",
+    event = { "CursorHold", "CursorHoldI" },
+    opts = {
+      hlgroup = "Visual",
+    },
+  },
+  {
+    "smoka7/hop.nvim",
+    cmd = { "HopWord", "HopLine", "HopLineStart", "HopWordCurrentLine", "HopNodes" },
+    config = function()
+      require("hop").setup { keys = "etovxqpdygfblzhckisuran" }
+      dofile(vim.g.base46_cache .. "hop")
+    end,
+  },
+  {
+    "code-biscuits/nvim-biscuits",
+    event = "LspAttach",
+    config = function()
+      require "custom.configs.biscuits"
+    end,
+  },
+  {
+    "epwalsh/obsidian.nvim",
+    ft = "markdown",
+    config = function()
+      require("obsidian").setup {
+        dir = "/home/rx/Meg/shared/obsidian/",
+        disable_frontmatter = true,
+        completion = {
+          nvim_cmp = true,
+        },
+        mappings = {
+          ["ogf"] = require("obsidian.mapping").gf_passthrough(),
+        },
+      }
+    end,
+  },
+  {
+    "chrisgrieser/nvim-early-retirement",
+    event = "VeryLazy",
+    opts = {
+      retirementAgeMins = 5,
+      notificationOnAutoClose = false,
+    },
+  },
   -- Install a plugin
   {
     "max397574/better-escape.nvim",
@@ -602,6 +790,7 @@ local plugins = {
       require("better_escape").setup()
     end,
   },
+
 
   -- To make a plugin not be loaded
   -- {

@@ -242,6 +242,7 @@ M.mason = {
   },
 }
 
+-- git support in nvimtree
 M.nvterm = {
   terminals = {
     shell = vim.o.shell,
