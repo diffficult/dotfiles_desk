@@ -7,11 +7,13 @@ syntax on
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'default'
-let g:airline_theme = "simple" " embark 
+" -- let g:airline#extensions#tabline#left_sep = ' '
+" -- let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline_theme = "night_owl" " embark 
 
 set termguicolors
 
-colorscheme embark
+
 
 " LEADER set to \
 " laptop using ,
@@ -154,6 +156,7 @@ Plug 'PhilRunninger/nerdtree-visual-selection'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 " ---
 
+" --- Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'ryanoasis/vim-devicons'
 Plug 'junegunn/vim-easy-align'
@@ -164,8 +167,11 @@ Plug 'ycm-core/YouCompleteMe'
 
 " --- themes
 Plug 'catppuccin/vim', { 'as': 'catppuccin' }
-Plug 'ghifarit53/tokyonight-vim'
+Plug 'ghifarit53/tokyonight-vim' " ---, { 'as': 'tokyonight'}
 
 call plug#end()
 
 "}}}
+"
+
+colorscheme tokyonight
