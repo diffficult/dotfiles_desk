@@ -1,6 +1,11 @@
 ##
-# prezto #
-##
+#       :::::::::.::::::.  ::   .:
+#       '`````;;;;;`    ` ,;;   ;;,
+#           .n[['[==/[[[[,[[[,,,[[[
+#         ,$$P"   '''    "$$$"""$$$
+#       ,888bo,_ 88b    dP888   "88o
+#        `""*UMM  "YMmMY" MMM    YMM
+#
 
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
@@ -31,7 +36,7 @@ export FZF_BASE=/usr/share/fzf
 # GPG_TTY=$(tty)
 # export GPG_TTY
 
-## 
+##
 # SSH autocompletion fix >> solved by using "zstyle ':completion:*:ssh:*' hosts"
 ##
 
@@ -112,7 +117,7 @@ if [ -d "$HOME/.config/functions" ]; then
   done
 fi
 
-# ytfzf variables to be used with rofi 
+# ytfzf variables to be used with rofi
 #
 export YTFZF_EXTMENU='rofi -dmenu -fuzzy -width 1000'
 export YTFZF_ENABLE_FZF_DEFUALT_OPTS=0
