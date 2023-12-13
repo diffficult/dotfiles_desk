@@ -37,6 +37,7 @@
       <value type="string" value="org.gnome.baobab"/>
       <value type="string" value="org.gnome.Nautilus"/>
       <value type="string" value="org.manjaro.pamac.manager"/>
+      <value type="string" value="org.manjaro.pamac.tray"/>
       <value type="string" value="org.Nemo"/>
       <value type="string" value="org.x.Warpinator"/>
       <value type="string" value="org.xfce.Thunar"/>
