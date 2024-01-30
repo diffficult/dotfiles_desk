@@ -231,7 +231,7 @@ alias derez='rm -Iv'			                # rm interactive, prompt once only
 alias uhaul='mv -iv --'					# mv prompt confirmation
 
 ################################################################
-### ls replacement with eza (exa was deprecated) written in rust 
+### ls replacement with eza (exa was deprecated) written in rust
 ################################################################
 #
 #
@@ -440,7 +440,7 @@ alias hue-desk-off="lampe -s 8 n"
 
 se() { du -a ~/bin/* ~/.scripts/* ~/.scripts/tools/* ~/.config/i3/myblocks/* ~/.config/i3/blocks/* | awk '{print $2}' | fzf | xargs  -r subl ;}
 
-
+alias long-time-no-update="sudo pacman -Sy archlinux-keyring --needed && sudo pacman -Su"
 
 # }}}
 
