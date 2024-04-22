@@ -1,9 +1,19 @@
-[user]
+ [user]
 	email = spaulo@gmail.com
 	name = diffficult
 [core]
-	editor = nano
+	editor = nvim
 	excludesfile = ~/.gitignore
+    pager = delta
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    navigate = true
+	side-by-side = true
+[diff]
+    colorMoved = default
+[init]
+    defaultBranch = main
 [color]
 	diff = auto
 	status = auto
