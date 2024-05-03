@@ -186,3 +186,11 @@ export YTFZF_EXTMENU='rofi -dmenu -fuzzy -width 1000'
 export YTFZF_ENABLE_FZF_DEFUALT_OPTS=0
 #
 ##
+
+
+## RUBY GEM PATH
+#
+export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
+export PATH="$PATH:$GEM_HOME/bin"
+#
+##
