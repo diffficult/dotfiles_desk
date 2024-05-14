@@ -390,6 +390,9 @@ tmux_conf_copy_to_os_clipboard=false
 # move status line to top
 # set -g status-position top
 
+# use navi as a tmux widget
+bind-key -T prefix C-g split-window \
+  "$SHELL --login -i -c 'navi --print | head -n 1 | tmux load-buffer -b tmp - ; tmux paste-buffer -p -t {last} -b tmp -d'"
 
 # -- tpm -----------------------------------------------------------------------
 
@@ -436,6 +439,8 @@ set -g @plugin 'tmux-plugins/tmux-continuum'
 #set -g @continuum-restore 'on'
 set -g @plugin 'sainnhe/tmux-fzf'
 set -g @plugin 'omerxx/tmux-sessionx'
+set -g @plugin 'fcsonline/tmux-thumbs'
+
 
 # -- tpm tmux-sessionx config ------
 
@@ -475,7 +480,7 @@ set -g @sessionx-preview-ratio '55%'
 set -g @sessionx-preview-enabled 'false'
 
 # Change window dimensions
-set -g @sessionx-window-height '90%'
+set -g @sessionx-window-height '85%'
 set -g @sessionx-window-width '75%'
 
 # If you want change the layout to top you can set
@@ -489,7 +494,7 @@ set -g @sessionx-pointer "▶ "
 
 # When set to 'on' a non-result will be sent to zoxide for path matching
 # Requires zoxide installed
-set -g @sessionx-zoxide-mode 'on'
+set -g @sessionx-zoxide-mode 'off'
 
 # If you want to pass in your own FZF options. This is passed in before all other
 # arguments to FZF to ensure that other options like `sessionx-pointer` and
@@ -504,6 +509,11 @@ set -g @sessionx-legacy-fzf-support 'on'
 # and look for a tmuxinator project with that name.
 # If found, it'll launch the template using tmuxinator
 set -g @sessionx-tmuxinator-mode 'off'
+
+# ------- Other plugins options ---------
+
+set -g @continuum-restore 'on'
+set -g @resurrect-strategy-nvim 'session'
 
 # -- custom variables ----------------------------------------------------------
 
