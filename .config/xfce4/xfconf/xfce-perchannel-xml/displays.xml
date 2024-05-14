@@ -67,7 +67,7 @@
       <property name="Primary" type="bool" value="true"/>
       <property name="Position" type="empty">
         <property name="X" type="int" value="2560"/>
-        <property name="Y" type="int" value="178"/>
+        <property name="Y" type="int" value="175"/>
       </property>
       <property name="Scale" type="empty">
         <property name="X" type="double" value="1"/>
@@ -147,7 +147,7 @@
       <property name="Primary" type="bool" value="true"/>
       <property name="Position" type="empty">
         <property name="X" type="int" value="2560"/>
-        <property name="Y" type="int" value="178"/>
+        <property name="Y" type="int" value="175"/>
       </property>
       <property name="Scale" type="empty">
         <property name="X" type="double" value="1"/>
