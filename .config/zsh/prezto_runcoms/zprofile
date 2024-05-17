@@ -15,8 +15,10 @@ export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 
 export GTK_THEME=Arc-Dark
 
-
+## rofi-emoji stored /usr/share/rofi-emoji/all_emojis.txt 
 #
+export XDG_DATA_DIRS="$HOME/.local/share/data:$XDG_DATA_DIRS"
+
 # Editors --- defined in .aliasrc
 #
 
