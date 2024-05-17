@@ -1,6 +1,6 @@
 configuration {
 	modes: "combi,emoji,ssh,calc";
-	font: "PragmataPro 14";
+	font: "Iosevka Nerd Font Bold 14";
 /*	location: 0;*/
 /*	yoffset: 0;*/
 /*	xoffset: 0;*/
@@ -56,16 +56,16 @@ configuration {
 /*	refilter-timeout-limit: 8192;*/
 /*	xserver-i300-workaround: false;*/
 /*	pid: "/run/user/1000/rofi.pid";*/
-	display-window: " ";
+	display-window: "  ";
 /*	display-windowcd: ;*/
-	display-run: " ";
-	display-ssh: " ";
-	display-drun: " ";
-	display-combi: " ";
+	display-run: "  ";
+	display-ssh: "  ";
+	display-drun: "  ";
+	display-combi: "  ";
 /*	display-keys: ;*/
 /*	display-filebrowser: ;*/
-	display-calc: " ";
-	display-emoji: " ";
+	display-calc: "  ";
+	display-emoji: "  ";
 /*	kb-primary-paste: "Control+V,Shift+Insert";*/
 /*	kb-secondary-paste: "Control+v,Insert";*/
 /*	kb-clear-line: "Control+w";*/
