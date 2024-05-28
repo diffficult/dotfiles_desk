@@ -53,6 +53,7 @@
     border-radius: 0px;
     border: 0 0 1 0;
     border-color: @separatorcolor;
+    highlight: bold;
 }
 
 #element.alternate.normal {
@@ -73,6 +74,7 @@
     border-radius: 0px;
     border: 0 0 1 0;
     border-color: @separatorcolor;
+    highlight: bold;
 }
 
 #inputbar {
@@ -106,7 +108,7 @@
     border-color: #ff0000;
 }
 
-element-icon {
+#element-icon {
     size:                           36px;
     border:                         0px;
     padding:                   0px;
@@ -115,3 +117,6 @@ element-icon {
     highlight:                      none;
 }
 
+#element-text {
+    highlight: bold italic;
+}
