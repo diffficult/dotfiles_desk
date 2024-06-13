@@ -19,10 +19,13 @@ if wezterm.config_builder then config = wezterm.config_builder() end
 -- Settings
 config.default_prog = { zsh_path, "-l" }
 
+config.initial_rows = 34
+config.initial_cols = 112
+
 config.color_scheme = "Tokyo Night"
 config.font = wezterm.font_with_fallback({
-  { family = "Iosevka Nerd Font",       scale = 1.2, weight = "Medium", },
-  { family = "JetBrainsMono Nerd Font", scale = 1.5, },
+  -- { family = "Iosevka Nerd Font",       scale = 1.2, weight = "Medium", },
+  { family = "JetBrainsMono Nerd Font", scale = 1, },
 })
 config.window_background_opacity = 0.9
 config.window_decorations = "RESIZE"
