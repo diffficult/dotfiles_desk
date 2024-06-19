@@ -6,16 +6,34 @@
 # Variables
 #
 
-export XDG_CONFIG_HOME="/home/rx/.config"
+# default folders
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_SCREENSHOTS_DIR="$HOME/Pictures/screenshots"
+
+# cleanup HOME directory
+export ANDROID_USER_HOME="$XDG_DATA_HOME/android"
+export ANSIBLE_HOME="$XDG_DATA_HOME/ansible"
+export CARGO_HOME="$XDG_DATA_HOME/cargo"
+export GOPATH="$XDG_DATA_HOME/go"
+export MPLAYER_HOME="$XDG_CONFIG_HOME/mplayer"
+export NIMBLE_DIR="$XDG_DATA_HOME/nimble"
+export BUNDLE_USER_CONFIG="$XDG_CONFIG_HOME/bundle"
+export BUNDLE_USER_CACHE="$XDG_CACHE_HOME/bundle"
+export BUNDLE_USER_PLUGIN="$XDG_DATA_HOME/bundle"
+export W3M_DIR="$XDG_DATA_HOME/w3m"
+
 
 #export EDITOR=/usr/bin/nano
 export QT_QPA_PLATFORMTHEME="qt5ct"
 export QT_AUTO_SCREEN_SCALE_FACTOR=0
-export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
+export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
 
 export GTK_THEME=Arc-Dark
 
-## rofi-emoji stored /usr/share/rofi-emoji/all_emojis.txt 
+## rofi-emoji stored /usr/share/rofi-emoji/all_emojis.txt
 #
 export XDG_DATA_DIRS="$HOME/.local/share/data:$XDG_DATA_DIRS"
 
