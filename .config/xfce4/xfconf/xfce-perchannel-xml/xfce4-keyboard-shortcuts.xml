@@ -79,6 +79,7 @@
       <property name="&lt;Super&gt;y" type="string" value="/home/rx/.local/bin/yt-r"/>
       <property name="&lt;Super&gt;p" type="string" value="/usr/bin/rofi-pass"/>
       <property name="&lt;Shift&gt;&lt;Super&gt;p" type="string" value="xfce4-display-settings --minimal"/>
+      <property name="&lt;Super&gt;k" type="string" value="rofi -show shortcut"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">
