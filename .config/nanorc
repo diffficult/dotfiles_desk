@@ -1,3 +1,17 @@
+#
+set constantshow
+set linenumbers
+set brackets ""')>]}"
+set historylog
+#unset nowrap
+set regexp
+set smarthome
+set suspend
+set tabsize 4
+set tabstospaces
+set mouse
+set indicator
+# 
 # include ~/.config/nano/ALL.nanorc
 include "~/.config/nano/apacheconf.nanorc"
 include "~/.config/nano/arduino.nanorc"
