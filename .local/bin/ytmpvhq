@@ -1,9 +1,21 @@
 #!/bin/bash
-## uncomment to get 720p video dash or 480p if not available
+
+# Function to run a command in a new st instance
+run_st() {
+    st -T "1080p stream" -e zsh -c "$* ; read -p 'Press Enter to close...'" &
+}
+
 VIDURL=$(xclip -o)
 notify-send -t 3500 'Streaming @ 1080p' --icon="/usr/share/icons/Nordzy/apps/scalable/youtube.svg"
 ## ORIGINAL 1080p res
-mpv $VIDURL --ytdl --ytdl-format=248+bestaudio/137+bestaudio/22/135+bestaudio/18/best --volume=50
+#mpv $VIDURL --ytdl --ytdl-format=137+bestaudio/270+bestaudio/136+bestaudio/232+bestaudio/best --volume=50
+run_st "mpv '$VIDURL' --ytdl --ytdl-format="bestvideo+bestaudio/best" --volume=50"
+
+#--no-terminal 2&>1 1>/dev/null
+
+#mpv $VIDURL --ytdl --ytdl-format="bestvideo[height>=1080]+bestaudio/best" --volume=50
+#mpv $VIDURL --ytdl --ytdl-format="bestvideo[height=1080][fps>=?30][vcodec!=?vp9]+bestaudio/best[height=1080]" --volume=50
+
 
 ## uncomment to get 720p video dash or 480p if not available
 #mpv $1 --ytdl --ytdl-format=136+bestaudio/247+bestaudio/22/135+bestaudio/18/best --volume=50
