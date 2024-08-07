@@ -273,3 +273,11 @@ rc(){
 # }}}
 # }}}
 
+# {{{ progress on tmux for long task when piped to it
+#  usage: long-running-command | ttail 1 (or 10)
+ttail() {
+    tmux splitw -dI -l ${1:-10}
+    read -p "done with the output? " <&2
+    tmux killp -t $(tmux list-panes | tail -1 | cut -f1 -d:)
+}
+# }}}
