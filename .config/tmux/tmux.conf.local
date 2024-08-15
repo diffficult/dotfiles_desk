@@ -13,7 +13,10 @@
 
 set-option -sa terminal-overrides ",xterm*:Tc"
 
+set -g allow-passthrough on
 
+set -ga update-environment TERM
+set -ga update-environment TERM_PROGRAM
 
 # -- session creation ----------------------------------------------------------
 
@@ -398,7 +401,7 @@ tmux_conf_copy_to_os_clipboard=false
 # bind c new-window -c '#{pane_current_path}' #!important
 
 # move status line to top
-# set -g status-position top
+set -g status-position top
 
 # use navi as a tmux widget
 bind-key -T prefix C-g split-window \
