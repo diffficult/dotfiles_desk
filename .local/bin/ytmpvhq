@@ -9,7 +9,7 @@ VIDURL=$(xclip -o)
 notify-send -t 3500 'Streaming @ 1080p' --icon="/usr/share/icons/Nordzy/apps/scalable/youtube.svg"
 ## ORIGINAL 1080p res
 #mpv $VIDURL --ytdl --ytdl-format=137+bestaudio/270+bestaudio/136+bestaudio/232+bestaudio/best --volume=50
-run_st "mpv '$VIDURL' --ytdl --ytdl-format="bestvideo+bestaudio/best" --volume=50"
+run_st "mpv '$VIDURL' --ytdl --ytdl-format="bestvideo+bestaudio/best" --volume=50 --no-resume-playback"
 
 #--no-terminal 2&>1 1>/dev/null
 
