@@ -281,3 +281,17 @@ ttail() {
     tmux killp -t $(tmux list-panes | tail -1 | cut -f1 -d:)
 }
 # }}}
+
+# generate history statistics
+# {{{
+function hstat {
+    if [ -z "$1" ]; then
+        # default to length=10
+        history|awk '{print $2}'| awk 'BEGIN {FS="|"} \
+{print $1}' | sort | uniq -c | sort -rn | head -10
+    else
+        history | awk '{print $2}' | awk 'BEGIN {FS="|"} \
+{print $1}' | sort | uniq -c | sort -rn | head -$1
+    fi
+}
+# }}}
