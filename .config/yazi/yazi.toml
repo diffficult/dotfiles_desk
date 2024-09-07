@@ -106,7 +106,7 @@ preloaders = [
 ]
 previewers = [
   { name = "*/", run = "folder", sync = true },
-  { name = "*.md", run = "preview" },
+  { name = "*.md", run = "code" },
   { name = "*.csv", run = "preview" },
   # Code
   { mime = "text/*", run = "code" },
