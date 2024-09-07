@@ -201,6 +201,16 @@ export YTFZF_ENABLE_FZF_DEFUALT_OPTS=0
 export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
 export PATH="$PATH:$GEM_HOME/bin"
 #
+
+#
+# AUTOSUGGESTION COLOR TWEAK
+#
+# options, 60, 237-248
+#
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=244'
+#
+#
+
 ##
 [ ! -f "$HOME/.x-cmd.root/X" ] || . "$HOME/.x-cmd.root/X" # boot up x-cmd.
 if [ -f "/home/rx/.config/fabric/fabric-bootstrap.inc" ]; then . "/home/rx/.config/fabric/fabric-bootstrap.inc"; fi
