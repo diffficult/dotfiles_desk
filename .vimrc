@@ -9,7 +9,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'default'
 " -- let g:airline#extensions#tabline#left_sep = ' '
 " -- let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline_theme = "night_owl" " embark 
+let g:airline_theme = "embark" " embark - night_owl 
 
 set termguicolors
 
@@ -168,6 +168,7 @@ Plug 'ycm-core/YouCompleteMe'
 " --- themes
 Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 Plug 'ghifarit53/tokyonight-vim' " ---, { 'as': 'tokyonight'}
+Plug 'NLKNguyen/papercolor-theme'
 
 call plug#end()
 
