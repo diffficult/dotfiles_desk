@@ -74,12 +74,12 @@
       <property name="&lt;Primary&gt;&lt;Super&gt;l" type="string" value="xscreensaver-command -lock"/>
       <property name="&lt;Primary&gt;&lt;Super&gt;k" type="string" value="xflock4"/>
       <property name="&lt;Super&gt;d" type="string" value="rofi -show combi -eh 2"/>
-      <property name="&lt;Super&gt;o" type="string" value="/usr/local/bin/color-gpick"/>
       <property name="&lt;Super&gt;space" type="string" value="xfce4-popup-whiskermenu"/>
       <property name="&lt;Super&gt;y" type="string" value="/home/rx/.local/bin/yt-r"/>
       <property name="&lt;Super&gt;p" type="string" value="/usr/bin/rofi-pass"/>
       <property name="&lt;Shift&gt;&lt;Super&gt;p" type="string" value="xfce4-display-settings --minimal"/>
       <property name="&lt;Super&gt;k" type="string" value="rofi -show shortcut"/>
+      <property name="&lt;Super&gt;o" type="string" value="/usr/local/bin/color-gpick -o -s"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">
