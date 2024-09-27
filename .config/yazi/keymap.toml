@@ -149,6 +149,13 @@ keymap = [
 	# Help
 	{ on = "~",    run = "help", desc = "Open help" },
 	{ on = "<F1>", run = "help", desc = "Open help" },
+
+  # max-preview
+  { on = "T", run  = "plugin --sync max-preview", desc = "Maximize or restore preview" },
+
+  #Dropping to shell
+  { on = "<C-s>", run = "shell '$SHELL' --block --confirm", desc = "Open zshell here"},
+
 ]
 
 [tasks]
