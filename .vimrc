@@ -41,7 +41,7 @@ set ignorecase
 set smartcase
 set expandtab
 set smarttab
-set number
+set number relativenumber
 set noswapfile
 
 " syntax on 			     " enable color syntax
