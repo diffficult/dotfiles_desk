@@ -1,5 +1,6 @@
 configuration {
-	modes: "combi,emoji,ssh,calc";
+/*	modes: "combi,emoji,ssh,calc"; */ 
+  modi: "combi,emoji,ssh,calc";
 	font: "FantasqueSansM Nerd Font 18";
 /*	location: 0;*/
 /*	yoffset: 0;*/
