@@ -263,6 +263,10 @@ alias lt='eza --icons --tree --level=2'                                         
 
 alias f='fzf --preview "bat --color \"always\" {}"'
 
+
+### search packages with yay and fzf (* marks an installed package)
+#alias yay-fzf="yay -Sl | awk '{print $2($4=="" ? "" : " *")}' | fzf --multi --preview 'yay -Si {1}' | xargs -ro sudo yay -S"
+
 ### ytfzf alias for rofi
 # alias yt="~/.local/bin/yt-r"
 
