@@ -4,16 +4,6 @@
 ##### SYSTEM #######
 ####################
 
-#-------- Exports {{{
-#------------------------------------------------------
-# set display
-#export DISPLAY=:0
-
-# set 256color support (doesnt work with older apps like abook)
-#export TERM="screen-256color"
-# export TERM="xterm-256color"
-
-#}}}
 #-------- Set Default Programs {{{
 #------------------------------------------------------
 # DESC: check and choose the first program in the array that is installed as the default
@@ -45,6 +35,86 @@ export QUEUER=$(find_alt tsp fq ts )
 #export TERMER=$(find_alt urxvt xterm uxterm termite sakura lxterminal terminator mate-terminal pantheon-terminal konsole gnome-terminal xfce4-terminal $OPENER )
 
 # }}}
+
+#-------- Configurations {{{
+#------------------------------------------------------
+cfg-aliasrc() { $EDITORCLI ~/.aliasrc ;}
+cfg-bashrc() { $EDITORCLI ~/.bashrc ;}
+cfg-cava() { $EDITORCLI ~/.config/cava/config ;}
+cfg-picom() { $EDITORCLI ~/.config/picom.conf ;}
+cfg-fstab() { sudo $EDITORCLI /etc/fstab ;}
+cfg-group() { sudo $EDITORCLI /etc/group ;}
+cfg-hintrc() { $EDITORCLI ~/.hintrc ;}
+cfg-hosts() { sudo $EDITORCLI /etc/hosts ;}
+cfg-i3wm() { $EDITORCLI ~/.i3/config ;}
+cfg-inputrc() { $EDITORCLI ~/.inputrc ;}
+cfg-livestreamer() { $EDITORCLI ~/.livestreamerrc ;}
+cfg-megarc() { $EDITORCLI ~/.megarc ;}
+cfg-mpd() { $EDITORCLI ~/.mpd/mpd.conf ;}
+cfg-mpv() { $EDITORCLI ~/.config/mpv/mpv.conf ;}
+cfg-mpv-input() { $EDITORCLI ~/.config/mpv/input.conf ;}
+cfg-nanorc() { $EDITORCLI ~/.nanorc ;}
+cfg-ncmpcpp() { $EDITORCLI ~/.ncmpcpp/config ;}
+cfg-ncmpcpp-bindings() { $EDITORCLI ~/.ncmpcpp/bindings ;}
+cfg-newsboat() { $EDITORCLI ~/.newsboat/config ;}
+cfg-newsboat-queue() { $EDITORCLI ~/.newsboat/queue ;}
+cfg-newsboat-urls() { $EDITORCLI ~/.newsboat/urls ;}
+cfg-profile() { $EDITORCLI ~/.profile ;}
+cfg-pulseaudio() { sudo $EDITORCLI /etc/pulse/default.pa ;}
+cfg-quicktile() { $EDITORCLI ~/.config/quicktile.cfg ;}
+cfg-ranger() { $EDITORCLI ~/.config/ranger/rc.conf ;}
+cfg-ranger-rifle() { $EDITORCLI ~/.config/ranger/rifle.conf ;}
+cfg-ranger-commands() { $EDITORCLI ~/.config/ranger/commands.py ;}
+cfg-samba() { sudo $EDITORCLI /etc/samba/smb.conf ;}
+cfg-ssh-client() { sudo $EDITORCLI /etc/ssh/ssh_config ;}
+cfg-ssh-daemon() { sudo $EDITORCLI /etc/ssh/sshd_config ;}
+cfg-sudoers() { sudo $EDITORCLI /etc/sudoers ;}
+cfg-sakura() { $EDITORCLI ~/.config/sakura/sakura.conf ;}
+cfg-surfraw() { $EDITORCLI ~/.config/surfraw/conf ;}
+cfg-syncthing() { $EDITORCLI ~/.config/syncthing/config.xml ;}
+cfg-tmuxrc() { $EDITORCLI ~/.config/tmux/tmux.conf.local ;}
+cfg-tor() { sudo $EDITORCLI /etc/tor/torrc ;}
+cfg-tor-user() { $EDITORCLI ~/.torrc ;}
+cfg-torrentflix() { torrentflix --config=$EDITORCLI ;}
+cfg-updatedb() { sudo $EDITORCLI /etc/updatedb.conf ;}
+cfg-vifmrc() { $EDITORCLI ~/.config/vifm/vifmrc ;}
+cfg-vimrc() { $EDITORCLI ~/.vimrc ;}
+cfg-xbindkeysrc() { $EDITORCLI ~/.xbindkeysrc && killall xbindkeys ; xbindkeys ;}
+cfg-xmodmap() { $EDITORCLI ~/.Xmodmap ;}
+cfg-xresources() { $EDITORCLI ~/.Xresources ;}
+cfg-yaourtrc() { $EDITORCLI ~/.yaourtrc ;}
+cfg-zshrc() { $EDITORCLI ~/.zshrc ;}
+cfg-zprezto() { $EDITORCLI ~/.zpreztorc ;}
+#}}}
+
+#-------- Configurations Reload {{{
+#------------------------------------------------------
+rld-bashrc() { source ~/.bashrc ;}
+rld-font() { fc-cache -v -f ;}
+rld-grub() { sudo grub-mkconfig -o /boot/grub/grub.cfg ;}
+rld-greenclip() { killall greenclip ; nohup greenclip daemon > /dev/null 2>&1 & }
+rld-keynav() { killall keynav ; keynav daemonize ;}
+rld-updatedb() { sudo updatedb ;}
+rld-xbindkeys() { killall xbindkeys ; xbindkeys ;}
+rld-hyperkey() { xmodmap ~/.Xmodmap; killall xcape ; xcape -e 'Hyper_L=Return' ; killall xbindkeys ; xbindkeys ;}
+rld-xcape() { killall xcape ; xcape -e 'Hyper_L=Return' ;}
+rld-xdefaults() { xrdb ~/.Xdefaults ;}
+rld-xmodmap() { xmodmap ~/.Xmodmap ;}
+rld-xmodmap-uskeyboardlayout() { setxkbmap -layout us ;} # reset back to US keyboard http://unix.stackexchange.com/a/151046
+rld-xresources() { xrdb -load ~/.Xresources ;}
+rld-zshrc() { source ~/.zshrc ;}
+# }}}
+
+#-------- Exports {{{
+#------------------------------------------------------
+# set display
+#export DISPLAY=:0
+
+# set 256color support (doesnt work with older apps like abook)
+#export TERM="screen-256color"
+# export TERM="xterm-256color"
+
+#}}}
 
 #-------- Set Path {{{
 #------------------------------------------------------
@@ -120,79 +190,44 @@ fi
 # fi
 
 # }}}
-#-------- External Files {{{
-#------------------------------------------------------
-if [ -f ~/.hintrc ]; then
-    . ~/.hintrc
-fi
 
-#-------- Configurations {{{
+#-------- File and Directory Operations {{{
 #------------------------------------------------------
-cfg-aliasrc() { $EDITORCLI ~/.aliasrc ;}
-cfg-bashrc() { $EDITORCLI ~/.bashrc ;}
-cfg-cava() { $EDITORCLI ~/.config/cava/config ;}
-cfg-picom() { $EDITORCLI ~/.config/picom.conf ;}
-cfg-fstab() { sudo $EDITORCLI /etc/fstab ;}
-cfg-group() { sudo $EDITORCLI /etc/group ;}
-cfg-hintrc() { $EDITORCLI ~/.hintrc ;}
-cfg-hosts() { sudo $EDITORCLI /etc/hosts ;}
-cfg-i3wm() { $EDITORCLI ~/.i3/config ;}
-cfg-inputrc() { $EDITORCLI ~/.inputrc ;}
-cfg-livestreamer() { $EDITORCLI ~/.livestreamerrc ;}
-cfg-megarc() { $EDITORCLI ~/.megarc ;}
-cfg-mpd() { $EDITORCLI ~/.mpd/mpd.conf ;}
-cfg-mpv() { $EDITORCLI ~/.config/mpv/mpv.conf ;}
-cfg-mpv-input() { $EDITORCLI ~/.config/mpv/input.conf ;}
-cfg-nanorc() { $EDITORCLI ~/.nanorc ;}
-cfg-ncmpcpp() { $EDITORCLI ~/.ncmpcpp/config ;}
-cfg-ncmpcpp-bindings() { $EDITORCLI ~/.ncmpcpp/bindings ;}
-cfg-newsboat() { $EDITORCLI ~/.newsboat/config ;}
-cfg-newsboat-queue() { $EDITORCLI ~/.newsboat/queue ;}
-cfg-newsboat-urls() { $EDITORCLI ~/.newsboat/urls ;}
-cfg-profile() { $EDITORCLI ~/.profile ;}
-cfg-pulseaudio() { sudo $EDITORCLI /etc/pulse/default.pa ;}
-cfg-quicktile() { $EDITORCLI ~/.config/quicktile.cfg ;}
-cfg-ranger() { $EDITORCLI ~/.config/ranger/rc.conf ;}
-cfg-ranger-rifle() { $EDITORCLI ~/.config/ranger/rifle.conf ;}
-cfg-ranger-commands() { $EDITORCLI ~/.config/ranger/commands.py ;}
-cfg-samba() { sudo $EDITORCLI /etc/samba/smb.conf ;}
-cfg-ssh-client() { sudo $EDITORCLI /etc/ssh/ssh_config ;}
-cfg-ssh-daemon() { sudo $EDITORCLI /etc/ssh/sshd_config ;}
-cfg-sudoers() { sudo $EDITORCLI /etc/sudoers ;}
-cfg-sakura() { $EDITORCLI ~/.config/sakura/sakura.conf ;}
-cfg-surfraw() { $EDITORCLI ~/.config/surfraw/conf ;}
-cfg-syncthing() { $EDITORCLI ~/.config/syncthing/config.xml ;}
-cfg-tmuxrc() { $EDITORCLI ~/.config/tmux/tmux.conf.local ;}
-cfg-tor() { sudo $EDITORCLI /etc/tor/torrc ;}
-cfg-tor-user() { $EDITORCLI ~/.torrc ;}
-cfg-torrentflix() { torrentflix --config=$EDITORCLI ;}
-cfg-updatedb() { sudo $EDITORCLI /etc/updatedb.conf ;}
-cfg-vifmrc() { $EDITORCLI ~/.config/vifm/vifmrc ;}
-cfg-vimrc() { $EDITORCLI ~/.vimrc ;}
-cfg-xbindkeysrc() { $EDITORCLI ~/.xbindkeysrc && killall xbindkeys ; xbindkeys ;}
-cfg-xmodmap() { $EDITORCLI ~/.Xmodmap ;}
-cfg-xresources() { $EDITORCLI ~/.Xresources ;}
-cfg-yaourtrc() { $EDITORCLI ~/.yaourtrc ;}
-cfg-zshrc() { $EDITORCLI ~/.zshrc ;}
-cfg-zprezto() { $EDITORCLI ~/.zpreztorc ;}
-#}}}
+# DESC: Aliases and functions for file and directory operations
 
-#-------- Configurations Reload {{{
-#------------------------------------------------------
-rld-bashrc() { source ~/.bashrc ;}
-rld-font() { fc-cache -v -f ;}
-rld-grub() { sudo grub-mkconfig -o /boot/grub/grub.cfg ;}
-rld-greenclip() { killall greenclip ; nohup greenclip daemon > /dev/null 2>&1 & }
-rld-keynav() { killall keynav ; keynav daemonize ;}
-rld-updatedb() { sudo updatedb ;}
-rld-xbindkeys() { killall xbindkeys ; xbindkeys ;}
-rld-hyperkey() { xmodmap ~/.Xmodmap; killall xcape ; xcape -e 'Hyper_L=Return' ; killall xbindkeys ; xbindkeys ;}
-rld-xcape() { killall xcape ; xcape -e 'Hyper_L=Return' ;}
-rld-xdefaults() { xrdb ~/.Xdefaults ;}
-rld-xmodmap() { xmodmap ~/.Xmodmap ;}
-rld-xmodmap-uskeyboardlayout() { setxkbmap -layout us ;} # reset back to US keyboard http://unix.stackexchange.com/a/151046
-rld-xresources() { xrdb -load ~/.Xresources ;}
-rld-zshrc() { source ~/.zshrc ;}
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ......="cd ../../../../.."
+
+alias cp='cp -aiv'                    # cp prompt confirmation
+alias mv='mv -iv'                     # mv interactive & verbose
+alias mkdir='mkdir -p -v'             # create if not exist, verbose
+alias rmdir='rmdir -v'                # rm empty directory only
+alias ln='ln -iv'                     # create symlinks, interactive & verbose
+
+# Create a new directory and enter it
+mkdircd() { mkdir -p -v $1; cd $1 ;}
+
+# Backup a file
+cpbak() { cp $1{,.bak} ;}
+
+# Show file permissions in octal format
+file-permission() { stat --format '%a %n' "$@" ;}
+
+# Display file type (MIME)
+file-type() { file --mime-type -b "$@" ;}
+
+# Remove files interactively
+alias derez='rm -Iv'
+
+# Move files (alias for mv)
+alias uhaul='mv -iv --'
+
+# Tree view of directories
+alias lt='eza --icons --tree --level=2'
+
 # }}}
 
 #-------- Alias (Substitution) {{{
@@ -200,7 +235,7 @@ rld-zshrc() { source ~/.zshrc ;}
 # DESC: alias for mainly for existing commands
 
 alias bc='bc -q -l'					# dont show opening msg, use math library
-# alias cal='cal -3 | grep --color -EC6 "\b$(date +%e | sed "s/ //g")"' # show calendar for 3 months
+alias cal='cal -3 | grep --color -EC6 "\b$(date +%e | sed "s/ //g")"' # show calendar for 3 months
 # alias cal='cal | grep --before-context 6 --after-context 6 --color -e " $(date +%e)" -e "^$(date +%e)"' # show calendar for 3 months
 alias cal='cal -3m | grep -B6 -A6 --color -e " $(date +%e)" -e "^$(date +%e)"' # show calendar for 3 months
 alias cp='cp -aiv'					# cp prompt confirmation
@@ -231,9 +266,10 @@ alias visudo='sudo EDITOR="$EDITOR" visudo'
 alias derez='rm -Iv'			                # rm interactive, prompt once only
 alias uhaul='mv -iv --'					# mv prompt confirmation
 
-################################################################
-### ls replacement with eza (exa was deprecated) written in rust
-################################################################
+# }}}
+
+#-------- ls replacement with eza (exa was deprecated) written in rust {{{
+#------------------------------------------------------
 #
 #
 alias ls='eza --icons --group-directories-first -x'
@@ -257,18 +293,23 @@ alias lg='eza -l --icons --git -a'
 
 alias lt='eza --icons --tree --level=2'                                         # tree
 
-##################################################
+# }}}
 
-### fzf
+#-------- fzf {{{
+#------------------------------------------------------
 
 alias f='fzf --preview "bat --color \"always\" {}"'
 
 
 ### search packages with yay and fzf (* marks an installed package)
-#alias yay-fzf="yay -Sl | awk '{print $2($4=="" ? "" : " *")}' | fzf --multi --preview 'yay -Si {1}' | xargs -ro sudo yay -S"
+#alias yay-fzf="yay -Sl | awk '{print \$2(\$4==\"\" ? \"\" : \"  \")}' | fzf --multi --preview 'yay -Si {1}' | xargs -ro sudo yay -S"
+
+# Better alternative using fzf to search packages with pacman/yay
+#alias pacfzf="pacman -Slq | fzf --multi --preview 'pacman -Si {1}' --preview-window=:hidden --bind='ctrl-/:toggle-preview' | xargs -ro sudo pacman -S"
+#alias yayfzf="yay -Slq | fzf --multi --preview 'yay -Si {1}; echo; pacman -Qi {1} 2>/dev/null || echo Package not installed' --preview-window=:hidden --bind='ctrl-/:toggle-preview' | xargs -ro yay -S"
 
 ### ytfzf alias for rofi
-# alias yt="~/.local/bin/yt-r"
+#alias yt="~/.local/bin/yt-r"
 
 # color for common commands
 # tutorial video: http://www.youtube.com/watch?v=RbVCzxnKJL4
@@ -287,8 +328,6 @@ alias cat="bat"
 ## }}}
 
 
-
-#######################################################
 #-------- Alias (Good List) {{{
 #------------------------------------------------------
 # DESC: custom alias
@@ -325,26 +364,6 @@ alias fzfb='fzf --preview "bat --color \"always\" {}"'
 ## }}}
 
 
-######
-### Single Wallpapers
-######
-
-#alias wall-skull='feh --bg-fill ~/Pictures/just-another-skull.jpg'
-
-
-### find  -name '*fanart.jpg' -exec mogrify -resize 1920x1080\> {} \;
-
-# easy-mount() {
-#  if [ $# -lt 2 ]; then
-#    echo -e "Easy mount to /mnt/tmp"
-#    echo -e "\nUsage:   $0 //IP-Address/Share local_credentials_location"
-#    echo -e "\nExample: easy-mount //192.168.1.1/directory /etc/smbcred"
-#    return 1
-#  fi
-#  sudo mount.cifs $1 /mnt/tmp -o credentidals=$2,rw 0 0
-#}
-
-
 #-------- Clipboard and Upload {{{
 #------------------------------------------------------
 # DEMO: http://www.youtube.com/watch?v=fKP0FLp3uW0 (xclip)
@@ -369,129 +388,176 @@ alias pbuploadixio="cat "$1" | curl -F 'f:1=<-' ix.io | pbcopy && echo 'URL has 
 
 # }}}
 
+
+#-------- Network and Internet {{{
+#------------------------------------------------------
+# DESC: Network and internet-related aliases and functions
+
+# Check if a website is down
+down4me() { curl -s "http://downforeveryoneorjustme.com/$1" | sed '/just you/!d;s/<[^>]*>//g' ;}
+
+# Weather information
+alias weather='curl wttr.in/$LOCATION'
+alias wttr='curl wttr.in'
+alias wttr-help='curl wttr.in/:help'
+
+# Network tools
+alias myip='curl http://ipecho.net/plain; echo'
+alias ping='ping -c 5'
+alias speedtest='speedtest-cli'
+alias ports='netstat -tulanp'
+
+# Web browsers
+alias browser="$BROWSER"
+alias privatebrowser="$BROWSER --incognito"
+
+# Download managers
+alias wget='wget -c'
+alias curl='curl -O -L'
+
+# SSH
+alias sshconfig='$EDITOR ~/.ssh/config'
+alias sshkey='ssh-keygen -t rsa -b 4096 -C "$(whoami)@$(hostname)-$(date -I)"'
+
+# YouTube-related
+alias yt='youtube-dl --add-metadata -i'
+alias yta='yt -x -f bestaudio/best'
+#youtube-dl-stream() { youtube-dl -o - "$1" | $PLAYER - ;}
+
+# }}}
+
+
 #-------- Functions (Oneliner) {{{
 #------------------------------------------------------
+#
 
-cpbak() { cp $1{,.bak} ;}		          # create backup copy
-down4me() { curl -s "http://downforeveryoneorjustme.com/$1" | sed '/just you/!d;s/<[^>]*>//g' ;}   # check if a website is down
-killall-zombies() { kill -HUP $(ps -A -ostat,ppid | grep -e '[zZ]'| awk '{ print $2 }') ;}  # kill zombie process
-mkdircd() { mkdir -p -v $1; cd $1 ;}	          # create folder then cd into it
-nohup-command() { nohup "$@" >/dev/null 2>&1& }   # background a process w/o error msg filling screen
-open() { xdg-open "$@" > /dev/null 2>&1 ;}        # open with default GUI program
-# view markdown as manpages
-# http://blog.metamatt.com/blog/2013/01/09/previewing-markdown-files-from-the-terminal/
+# Locate files and open them in nvim
+fzfedit() { locate $1 | fzf | xargs -n 1 nvim ;}
+
+# Create a backup copy of a file
+cpbak() { cp $1{,.bak} ;}
+
+# Check if a website is down
+down4me() { curl -s "http://downforeveryoneorjustme.com/$1" | sed '/just you/!d;s/<[^>]*>//g' ;}
+
+# Kill all zombie processes
+killall-zombies() { kill -HUP $(ps -A -ostat,ppid | grep -e '[zZ]'| awk '{ print $2 }') ;}
+
+# Create a directory and change into it
+mkdircd() { mkdir -p -v $1; cd $1 ;}
+
+# Run a command in the background without output
+nohup-command() { nohup "$@" >/dev/null 2>&1& }
+
+# Open a file with the default GUI program
+open() { xdg-open "$@" > /dev/null 2>&1 ;}
+
+# View markdown files as man pages
 mdless(){ pandoc -s -f markdown -t man "$*" | groff -T utf8 -man | less ;}
-# quickly cd out of directories using numbers, example: up 2
+
+# Quickly navigate up multiple directory levels
 up() { local x='';for i in $(seq ${1:-1});do x="$x../"; done;cd $x; }
-# show file access permission
-# http://unix.stackexchange.com/a/46921
+
+# Show file access permissions in octal format
 file-permission() { stat --format '%a %n' "$@" ;}
-# display mime of file application/zip, application/x-tar
+
+# Display MIME type of a file
 file-type() { file --mime-type -b "$@" ;}
-# call vim help page from shell prompt
+
+# Open Vim help from shell prompt
 function :h { vim +":h $1" +'wincmd o' +'nnoremap q :q!<CR>' ;}
-# display one random command from commandlinefu.com
+
+# Display a random command from commandlinefu.com
 cmdfu-random() { echo -e "`curl -sL https://www.commandlinefu.com/commands/random/json|sed -re 's/.*,"command":"(.*)","summary":"([^"]+).*/\\x1b[1;32m\2\\n\\n\\x1b[1;33m\1\\x1b[0m/g'`\n" ;}
 
+# Convert WebM videos to MP4 format
 webm2mp4() {for i in *.webm; do ffmpeg -i "$i" -vf "crop=trunc(iw/2)*2:trunc(ih/2)*2" -c:v libx264 -preset slow -crf 22 -c:a copy "${i%.*}.mp4"; done ;}
 
+# Search for files in specific directories, select with fzf, and open in Code
+se() { du -a ~/bin/* ~/.scripts/* ~/.scripts/tools/* ~/.config/i3/myblocks/* ~/.config/i3/blocks/* | awk '{print $2}' | fzf | xargs -r code ;}
 
 # }}}
 
 
 
-####################
-##### CAMERAS #####
-####################
+#-------- Cameras Surveillance Work {{{
+#------------------------------------------------------
+#
 
 alias showme_cam01hd="mpv rtsp://admin:admin1234admin@192.168.2.21:554/Channels/101 --no-resume-playback &"
 alias showme_cam01sd="mpv rtsp://admin:admin1234admin@192.168.2.21:554/Channels/102 --no-resume-playback &"
 #alias showme_cam02="mpv rtsp://admin:camaritas2018@192.168.1.164:554/Channels/101 --no-resume-playback &"
 
-
 # }}}
 
 
-####################
-##### LIFX COM #####
-####################
 
+#-------- smart lights {{{
+#------------------------------------------------------
+#
+
+# LIFX Lights
 alias lifx-night="lifx -B 51 -K 1"
 alias lifx-day="lifx -B 60 -K 40"
 alias lifx-on="lifx -1"
 alias lifx-off="lifx -0"
 
-# }}}
-
-####################
-##### LIFX COM #####
-####################
-
+# Hue Lights
 alias hue-desk-on="lampe -s 8 y"
 alias hue-desk-off="lampe -s 8 n"
-# alias lifx-day="lifx -B 60 -K 40"
-# alias lifx-on="lifx -1"
-# alias lifx-off="lifx -0"
 
 # }}}
 
 
-
-####################
-#####  RANDOM  #####
-####################
-
-#alias subl='subl3'
-
-se() { du -a ~/bin/* ~/.scripts/* ~/.scripts/tools/* ~/.config/i3/myblocks/* ~/.config/i3/blocks/* | awk '{print $2}' | fzf | xargs  -r subl ;}
-
-alias long-time-no-update="sudo pacman -Sy archlinux-keyring --needed && sudo pacman -Su"
-
-# }}}
-
-
-####################
-##### INTERNET #####
-####################
-
-#-------- Youtube-dl (Stream|Download|RipAudio) {{{
+#-------- Dot File Management {{{
 #------------------------------------------------------
-# DESC: download/stream media from many online sites
-#youtube-dl-stream() { youtube-dl -o - "$1" | $PLAYER - ;}
-
-
-###############################
-##### DOT FILE MANAGEMENT #####
-###############################
-
+#
 
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME'
 #alias dotpush= '/usr/bin/git --git-dir=$HOME/.deskdots/ --work-tree=$HOME push origin master'
 
+# }}}
 
 
-###############################
-##### extra aliases       #####
-###############################
+#-------- Crypto Prices {{{
+#------------------------------------------------------
+#
 
 alias btcprice='curl -s https://rate.sx/BTC'
 alias ethprice='curl -s https://rate.sx/ETH'
 alias zrxprice='curl -s https://rate.sx/ZRX'
 
+# }}}
 
-###############################
-##### telebit aliases     #####
-###############################
+
+# -------- Telebit Aliases {{{
+#------------------------------------------------------
+#
 
 #alias telebit-pi4colegio="ssh -o ProxyCommand='openssl s_client -connect %h:443 -servername %h -quiet' raspi@chatty-skunk-9.telebit.io"
 
+# }}}
 
-##################################
-##### fzf locate and edit nvim ###
-##################################
+
+#-------- Random {{{
+#------------------------------------------------------
 #
+
+alias long-time-no-update="sudo pacman -Sy archlinux-keyring --needed && sudo pacman -Su"
+
+#alias wall-skull='feh --bg-fill ~/Pictures/just-another-skull.jpg'
+
+
+### find  -name '*fanart.jpg' -exec mogrify -resize 1920x1080\> {} \;
+
+# easy-mount() {
+#  if [ $# -lt 2 ]; then
+#    echo -e "Easy mount to /mnt/tmp"
+#    echo -e "\nUsage:   $0 //IP-Address/Share local_credentials_location"
+#    echo -e "\nExample: easy-mount //192.168.1.1/directory /etc/smbcred"
+#    return 1
+#  fi
+#  sudo mount.cifs $1 /mnt/tmp -o credentidals=$2,rw 0 0
 #
-fzfedit() { locate $1 | fzf | xargs -n 1 nvim ;}
-#
-#
-#
+
+# }}}
