@@ -303,6 +303,8 @@ alias f='fzf --preview "bat --color \"always\" {}"'
 
 ### search packages with yay and fzf (* marks an installed package)
 #alias yay-fzf="yay -Sl | awk '{print \$2(\$4==\"\" ? \"\" : \"  \")}' | fzf --multi --preview 'yay -Si {1}' | xargs -ro sudo yay -S"
+alias yayfzf="yay -Sl | awk '{print \$2(\$4==\"\" ? \"\" : \"  \")}' | fzf --multi --preview 'yay -Si {1}' | xargs -ro yay -S"
+
 
 # Better alternative using fzf to search packages with pacman/yay
 #alias pacfzf="pacman -Slq | fzf --multi --preview 'pacman -Si {1}' --preview-window=:hidden --bind='ctrl-/:toggle-preview' | xargs -ro sudo pacman -S"
@@ -331,12 +333,6 @@ alias cat="bat"
 #-------- Alias (Good List) {{{
 #------------------------------------------------------
 # DESC: custom alias
-
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias .....="cd ../../../.."
-alias ......="cd ../../../../.."
 
 alias neocrux='neofetch --ascii --ascii_distro crux_small'
 alias neowin='neofetch --ascii --ascii_distro windows'
