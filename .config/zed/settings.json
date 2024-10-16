@@ -79,14 +79,16 @@
 
   //fonts
   "ui_font_size": 16,
-  "buffer_font_family": "JetBrainsMono Nerd Font",
-  // "buffer_font_family": "FiraCode Nerd Font Mono",
-  "buffer_font_weight": 300,
+  "ui_font_weight": 500,
+  "ui_font_family": "JetBrainsMono Nerd Font",
   "buffer_font_size": 16,
+  "buffer_font_family": "JetBrainsMono Nerd Font",
+  "buffer_font_weight": 300,
+  // theme
   "theme": {
     "mode": "system",
-    "light": "Catppuccin Latte",
-    "dark": "Catppuccin Frappé"
+    "light": "Tokyo Night Storm",
+    "dark": "Tokyo Night Storm"
   },
   "centered_layout": {
     "left_padding": 0.15,
