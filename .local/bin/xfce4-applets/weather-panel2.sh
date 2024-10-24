@@ -10,14 +10,14 @@ readonly DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Icon/Emojis
 # Sunny🌣 🌞 ⛅ 🌤 🌥 ⛱
-# rainy 🌦 🌧 ⛆ 🌢 ☂ ☔ 🌂 
+# rainy 🌦 🌧 ⛆ 🌢 ☂ ☔ 🌂
 # snowy 🌨 ☃ ⛄ ⛇ ❄ ❅ ❆
 # windy 🌬 🎏 🎐
-# foggy ☁ 🌫 🌁 
+# foggy ☁ 🌫 🌁
 # stormy 🌩 ⛈ ☇ ☈
 # tornado 🌪 🌀
 # clear ☀ ☼ 🌞 🌑 🌒 🌓 🌔 🌕 🌖 🌗 🌘 🌙 ☾ 🌛 🌜 🌝 🌚 ☀️
-# 
+#
 
 # Weather Values
 
@@ -31,7 +31,7 @@ readonly WTTR_ICON="$(echo -e "${WTTR_IN_PANEL}" | sed 's/[[:alnum:][:space:]\-\
 # Get hour of the day
 DAYNIGHT=$(date +%k)
 
-# evaluate if it is below -0°C or above +0°C and add the "-" sign 
+# evaluate if it is below -0°C or above +0°C and add the "-" sign
 
 if [[ "$(echo -e "${WTTR_IN_PANEL}")" == *"-"* ]]; then
     CURRENT_TEMP="$(echo -e "${WTTR_IN_PANEL}" | sed 's/  -/ -/g' | awk '{print substr($0,13,5);exit}')"
@@ -57,15 +57,35 @@ fi
 # evaluate if wttr.in is actually up, if so display temp and icon and add additional info to Tooltip
 # if it is down, then just show  ⚠️ icon and make Tooltip to display error message ❗
 
-if [[ "$(echo -e "${WTTR_IN_PANEL}")" == *"Unknown"* ]]; then
+if [[ "$(echo -e "${WTTR_IN_PANEL}")" == *"Sorry, we are running out of queries to the weather service at the moment."* ]]; then
      # Panel
      INFO="<txt>"
      INFO+="⚠️"
      INFO+=" </txt>"
      # Tooltip
      MORE_INFO="<tool>"
-     MORE_INFO+="⚠️ unknown error, check wttr.in for more info ⚠️"
-     MORE_INFO+="</tool>"	
+     MORE_INFO+="⚠️ Weather service query limit reached. Please try again later. ⚠️"
+     MORE_INFO+="</tool>"
+
+     elif [[ "$(echo -e "${WTTR_IN_PANEL}")" == *"Unknown location"* ]]; then
+          # Panel
+          INFO="<txt>"
+          INFO+="⚠️"
+          INFO+=" </txt>"
+          # Tooltip
+          MORE_INFO="<tool>"
+          MORE_INFO+="⚠️ Unknown location. Please check the city name and try again. ⚠️"
+          MORE_INFO+="</tool>"
+
+     elif [[ -z "${WTTR_IN_PANEL}" || "${WTTR_IN_PANEL}" != *"°"* ]]; then
+     # Panel
+     INFO="<txt>"
+     INFO+="⚠️"
+     INFO+=" </txt>"
+     # Tooltip
+     MORE_INFO="<tool>"
+     MORE_INFO+="⚠️ Unexpected error. Unable to retrieve weather information. ⚠️"
+     MORE_INFO+="</tool>"
 else
 	# Panel
     INFO="<txt>"
