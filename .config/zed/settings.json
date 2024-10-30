@@ -25,13 +25,35 @@
   // "format_on_save": true,
 
   //ai thingie
+  // ai
+  //  "ai": {
+  //    "anthropic": {
+  //      "api_key": "API-KEY"
+  //    }
+  //  },
   "assistant": {
     "default_model": {
-      "provider": "zed.dev",
-      "model": "claude-3-5-sonnet-20240620"
+      "provider": "anthropic",
+      "model": "claude-3-5-sonnet-latest"
     },
     "version": "2"
   },
+
+  // groq
+  "language_models": {
+    "openai": {
+      "version": "1",
+      "api_url": "https://api.groq.com/openai/v1",
+      "available_models": [
+        {
+          "name": "llama-3.1-70b-versatile",
+          "max_tokens": 131072,
+          "max_output_tokens": null
+        }
+      ]
+    }
+  },
+
   // files
   "file_types": {
     "Dockerfile": ["Dockerfile", "Dockerfile.*"],
