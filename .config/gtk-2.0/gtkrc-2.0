@@ -2,8 +2,8 @@
 # Any customization should be done in ~/.gtkrc-2.0.mine instead.
 
 include "/home/rx/.config/gtk-2.0/gtkrc-2.0.mine"
-gtk-theme-name=Everfores-Green-Dark
-gtk-icon-theme-name=WhiteSur-Arc
+gtk-theme-name=Arc-Dark
+gtk-icon-theme-name=Nordzy-dark
 gtk-font-name=JetBrainsMono Nerd Font Regular 9
 gtk-cursor-theme-name=McMojave-cursors
 gtk-cursor-theme-size=16
