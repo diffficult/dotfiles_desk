@@ -11,7 +11,7 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-##
+##  
 # extras #
 ##
 
@@ -162,12 +162,9 @@ if [[ -f "$HOME/.zprezto/modules/command-not-found/init.zsh" ]]; then
   source "$HOME/.zprezto/modules/command-not-found/init.zsh"
 fi
 
+# source find-the-command
 if [[ -f "/usr/share/doc/find-the-command/ftc.zsh" ]]; then
   source "/usr/share/doc/find-the-command/ftc.zsh"
-fi
-
-if [[ -f "$HOME/.config/broot/launcher/bash/br" ]]; then
-  source "$HOME/.config/broot/launcher/bash/br"
 fi
 
 # autocompletion for zsh to get completion of command flags
@@ -211,6 +208,11 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=244'
 #
 #
 
-##
+## x-cmd 
+#
 [ ! -f "$HOME/.x-cmd.root/X" ] || . "$HOME/.x-cmd.root/X" # boot up x-cmd.
-if [ -f "/home/rx/.config/fabric/fabric-bootstrap.inc" ]; then . "/home/rx/.config/fabric/fabric-bootstrap.inc"; fi
+
+
+## fabric
+#
+# if [ -f "/home/rx/.config/fabric/fabric-bootstrap.inc" ]; then . "/home/rx/.config/fabric/fabric-bootstrap.inc"; fi

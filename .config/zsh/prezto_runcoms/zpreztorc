@@ -36,29 +36,30 @@ zstyle ':prezto:load' pmodule-allow-overrides 'yes'
 
 # Set the Prezto modules to load (browse modules).
 # The order matters.
-zstyle ':prezto:load' pmodule \
-  'environment' \
-  'terminal' \
-  'editor' \
-  'rsync' \
-  'history' \
-  'directory' \
-  'spectrum' \
-  'utility' \
-  'ssh' \
-  'git' \
-  'completion' \
-  'docker' \
-  'command-not-found' \
-  'syntax-highlighting' \
-  'history-substring-search' \
-  'zsh-abbr' \
-  'autosuggestions' \
-  'contrib-prompt' \
-  'fzf' \
-  'fzf-alias' \
-  'zoxide' \
-  'prompt'
+ zstyle ':prezto:load' pmodule \
+   'environment' \
+   'terminal' \
+   'editor' \
+   'rsync' \
+   'history' \
+   'directory' \
+   'spectrum' \
+   'utility' \
+   'ssh' \
+   'git' \
+   'completion' \
+   'docker' \
+   'command-not-found' \
+   'syntax-highlighting' \
+   'history-substring-search' \
+   'zsh-abbr' \
+   'autosuggestions' \
+   'contrib-prompt' \
+   'fzf' \
+   'fzf-alias' \
+   'zoxide' \
+   'fabric' \
+   'prompt'
 
 ##  'enhancd' \
 
@@ -79,7 +80,17 @@ zstyle ':prezto:module:autosuggestions' color 'yes'
 # zstyle ':prezto:module:completion:*:hosts' etc-host-ignores \
 #   '0.0.0.0' '127.0.0.1'
 
- zstyle ':completion:*:ssh:*' hosts
+# carapace.sh
+zstyle ':prezto:module:completion:*' completers _carapace _expand _complete _ignored _approximate
+
+# Original line commented because of carapace.sh
+# zstyle ':completion:*:ssh:*' hosts
+
+# New configuration for SSH completions that works with Carapace
+zstyle ':completion:*:ssh:*' hosts off
+zstyle ':completion:*:(ssh|scp|rsync):*' hosts-host
+zstyle ':completion:*:(ssh|scp|rsync):*' hosts-domain
+zstyle ':completion:*:(ssh|scp|rsync):*' users off
 
 #
 # Editor
