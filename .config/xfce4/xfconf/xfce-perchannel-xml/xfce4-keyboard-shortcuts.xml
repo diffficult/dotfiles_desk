@@ -79,6 +79,7 @@
       <property name="&lt;Shift&gt;&lt;Super&gt;p" type="string" value="xfce4-display-settings --minimal"/>
       <property name="&lt;Super&gt;o" type="string" value="/usr/local/bin/color-gpick -o -s"/>
       <property name="&lt;Super&gt;k" type="string" value="/home/rx/.local/bin/rofi-trans.sh"/>
+      <property name="&lt;Super&gt;q" type="string" value="xdotool getactivewindow windowkill"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">

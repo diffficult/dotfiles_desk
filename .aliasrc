@@ -185,6 +185,11 @@ if [ -d "$HOME/.cargo/bin" ] ; then
     export PATH="$HOME/.cargo/bin:$PATH"
 fi
 
+# .local/share/go/bin executables
+if [ -d "$HOME/.local/share/go/bin" ] ; then
+    export PATH="$PATH:$HOME/.local/share/go/bin"
+fi
+
 # if [ -d "$HOME/.scripts/command" ] ; then
 #     export PATH="$HOME/.scripts/command:$PATH"
 # fi
