@@ -1,3 +1,4 @@
+abbr "az"="ask-zsh"
 abbr "chmodx"="chmod +x"
 abbr "dk"="docker"
 abbr "dka"="docker attach"
