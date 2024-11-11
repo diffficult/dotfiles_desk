@@ -200,6 +200,10 @@ fi
 #------------------------------------------------------
 # DESC: Aliases and functions for file and directory operations
 
+alias cd='z'
+alias old-cd='nocorrect cd'
+
+
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
