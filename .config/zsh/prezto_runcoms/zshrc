@@ -14,14 +14,20 @@ fi
 ##  
 # extras #
 ##
+#
 
-if [ -f /etc/bash_completion.d/climate_completion ]; then
-  source /etc/bash_completion.d/climate_completion
-fi
+# if [ -f $HOME/.config/tealdeer/zsh_tealdeer ]; then
+#   source $HOME/.config/tealdeer/zsh_tealdeer
+# fi
 
-if [ -f "$HOME/.config/climate_completion" ]; then
-  source "$HOME/.config/climate_completion"
-fi
+
+# if [ -f /etc/bash_completion.d/climate_completion ]; then
+#   source /etc/bash_completion.d/climate_completion
+# fi
+
+# if [ -f "$HOME/.config/climate_completion" ]; then
+#   source "$HOME/.config/climate_completion"
+# fi
 
 ##
 # FZF
