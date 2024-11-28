@@ -7,73 +7,71 @@
 #        `""*UMM  "YMmMY" MMM    YMM
 #
 
+#
+# PREZTO INITIALIZATION
+#
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-##  
-# extras #
-##
+#
+# CORE CONFIGURATION
 #
 
-# if [ -f $HOME/.config/tealdeer/zsh_tealdeer ]; then
-#   source $HOME/.config/tealdeer/zsh_tealdeer
-# fi
+# Initialize completion system
+autoload -U compinit && compinit
 
+# Load shared aliases and functions between zsh/bash
+if [[ -f ~/.aliasrc ]]; then
+    source "$HOME/.aliasrc"
+fi
 
-# if [ -f /etc/bash_completion.d/climate_completion ]; then
-#   source /etc/bash_completion.d/climate_completion
-# fi
+# Source function directory
+if [ -d "$HOME/.config/functions" ]; then
+  for f in $HOME/.config/functions/*
+    do source "$f"
+  done
+fi
 
-# if [ -f "$HOME/.config/climate_completion" ]; then
-#   source "$HOME/.config/climate_completion"
-# fi
-
-##
-# FZF
-##
-
+#
+# FZF CONFIGURATION
+#
 export FZF_BASE=/usr/share/fzf
 
+# Source FZF completion
 if [ -f "/usr/share/fzf/completion.zsh" ]; then
   source "/usr/share/fzf/completion.zsh"
 fi
 
-# color options for fzf
+# Tokyo Night color theme for FZF
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
 --color=fg:#c0caf5,bg:#1a1b26,hl:#ff9e64 \
 --color=fg+:#c0caf5,bg+:#292e42,hl+:#ff9e64 \
 --color=info:#7aa2f7,prompt:#7dcfff,pointer:#7dcfff \
 --color=marker:#9ece6a,spinner:#9ece6a,header:#9ece6a"
 
-# -- Use fd instead of fzf --
-
+# FD integration for FZF
 export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
 
-# Use fd (https://github.com/sharkdp/fd) for listing path candidates.
-# - The first argument to the function ($1) is the base path to start traversal
-# - See the source code (completion.{bash,zsh}) for the details.
+# FZF completion functions
 _fzf_compgen_path() {
   fd --hidden --exclude .git . "$1"
 }
 
-# Use fd to generate the list for directory completion
 _fzf_compgen_dir() {
   fd --type=d --hidden --exclude .git . "$1"
 }
 
-## fzf-git script to better handle .git
+# FZF-git integration
 source ~/dev/gits/fzf-git.sh/fzf-git.sh
 
-## adding BAT to preview fzf files
+# BAT integration for preview
 export FZF_CTRL_T_OPTS="--preview 'bat -n --color=always --line-range :500 {}'"
 export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {} | head -200'"
 
-# Advanced customization of fzf options via _fzf_comprun function
-# - The first argument to the function is the name of the command.
-# - You should make sure to pass the rest of the arguments to fzf.
+# Advanced FZF completion customization
 _fzf_comprun() {
   local command=$1
   shift
@@ -86,23 +84,87 @@ _fzf_comprun() {
   esac
 }
 
-###
-# BAT (alias cat)
-###
-
+#
+# BAT CONFIGURATION
+#
 export BAT_THEME=tokyonight_night
 
-##
-# GPG pass prompt to cli
-##
+#
+# COMMAND-NOT-FOUND HANDLERS
+#
 
+# Source command-not-found module
+if [[ -f "$HOME/.zprezto/modules/command-not-found/init.zsh" ]]; then
+  source "$HOME/.zprezto/modules/command-not-found/init.zsh"
+fi
+
+# Source find-the-command
+if [[ -f "/usr/share/doc/find-the-command/ftc.zsh" ]]; then
+  source "/usr/share/doc/find-the-command/ftc.zsh"
+fi
+
+#
+# DEVELOPMENT TOOLS
+#
+
+# NVM configuration
+if [[ -f ~/usr/share/nvm/init-nvm.sh ]]; then
+  source /usr/share/nvm/init-nvm.sh
+fi
+
+# Ruby GEM configuration
+export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
+export PATH="$PATH:$GEM_HOME/bin"
+
+#
+# UTILITY TOOLS
+#
+
+# Navi command line cheatsheets
+source <(echo "$(navi widget zsh)")
+
+# pay-respects (rust alternative to thefuck)
+eval "$(pay-respects zsh --alias)"
+
+#
+# APPLICATION SPECIFIC
+#
+
+# YTFZF configuration for rofi
+export YTFZF_EXTMENU='rofi -dmenu -fuzzy -width 1000'
+export YTFZF_ENABLE_FZF_DEFUALT_OPTS=0
+
+# Autosuggestion color configuration
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=244'
+
+# X-cmd initialization
+[ ! -f "$HOME/.x-cmd.root/X" ] || . "$HOME/.x-cmd.root/X" # boot up x-cmd.
+
+#
+# THIS CAN BE REMOVED
+#
+
+# Redundant or deprecated configurations
+# Note: Keeping these commented for reference, but they can be safely removed
+
+# Tealdeer configuration (redundant with prezto)
+# if [ -f $HOME/.config/tealdeer/zsh_tealdeer ]; then
+#   source $HOME/.config/tealdeer/zsh_tealdeer
+# fi
+
+# Climate completion (deprecated or unused)
+# if [ -f /etc/bash_completion.d/climate_completion ]; then
+#   source /etc/bash_completion.d/climate_completion
+# fi
+# if [ -f "$HOME/.config/climate_completion" ]; then
+#   source "$HOME/.config/climate_completion"
+# fi
+
+# GPG TTY (handled by prezto)
 # GPG_TTY=$(tty)
 # export GPG_TTY
 
-##
-# SSH autocompletion fix >> solved by using "zstyle ':completion:*:ssh:*' hosts"
-##
-
+# SSH completion (handled by prezto)
 # h=()
 # if [[ -r ~/.ssh/config ]]; then
 #   h=($h ${${${(@M)${(f)"$(cat ~/.ssh/config)"}:#Host *}#Host }:#*[*?]*})
@@ -115,110 +177,27 @@ export BAT_THEME=tokyonight_night
 #   zstyle ':completion:*:slogin:*' hosts $h
 # fi
 
-# zstyle ':completion:*:ssh:*' hosts ### zstyle set in .zpreztorc
+# Redundant history settings (handled by prezto)
+# HISTFILE=~/.zsh_history
+# SAVEHIST=$HISTSIZE
+# HISTFILESIZE=1000
+# HISTSIZE=5000
+# HISTTIMEFORMAT="[%F %T] "
+# setopt EXTENDED_HISTORY
+# HISTDUP=erase
+# setopt sharehistory
+# setopt appendhistory
+# setopt hist_ignore_space
+# setopt hist_ignore_all_dups
+# setopt hist_save_no_dups
+# setopt hist_ignore_dups
+# setopt hist_find_no_dups
 
-##
-# Aliases #
-##
-
-# load alias/functions that works with both zsh/bash
-if [[ -f ~/.aliasrc ]]; then
-    source "$HOME/.aliasrc"
-fi
-
-##
-# HISTORY options
-##
-
-HISTFILE=~/.zsh_history
-SAVEHIST=$HISTSIZE
-#export HISTFILESIZE=1000
-HISTSIZE=5000
-#setopt INC_APPEND_HISTORY
-HISTTIMEFORMAT="[%F %T] "
-setopt EXTENDED_HISTORY
-HISTDUP=erase
-setopt sharehistory
-setopt appendhistory
-setopt hist_ignore_space
-setopt hist_ignore_all_dups
-setopt hist_save_no_dups
-setopt hist_ignore_dups
-setopt hist_find_no_dups
-
-
-##
-# thefuck #
-##
-
+# Thefuck (replaced by pay-respects)
 # eval $(thefuck --alias)
 
-##
-# pay-respects (rust alternative to thefuck)
-##
+# Redundant completion initialization (handled by prezto)
+# autoload -U compinit && compinit
 
-eval "$(pay-respects zsh --alias)"
-
-##
-# External Crap
-##
-
-# source command-not-found
-if [[ -f "$HOME/.zprezto/modules/command-not-found/init.zsh" ]]; then
-  source "$HOME/.zprezto/modules/command-not-found/init.zsh"
-fi
-
-# source find-the-command
-if [[ -f "/usr/share/doc/find-the-command/ftc.zsh" ]]; then
-  source "/usr/share/doc/find-the-command/ftc.zsh"
-fi
-
-# autocompletion for zsh to get completion of command flags
-autoload -U compinit && compinit
-
-# sourcing nvm to install and run different node.js versions
-if [[ -f ~/usr/share/nvm/init-nvm.sh ]]; then
-  source /usr/share/nvm/init-nvm.sh
-fi
-
-# navi command line cheatsheets
-source <(echo "$(navi widget zsh)")
-
-# source all files in function directory
-if [ -d "$HOME/.config/functions" ]; then
-  for f in $HOME/.config/functions/*
-    do source "$f"
-  done
-fi
-
-# ytfzf variables to be used with rofi
-#
-export YTFZF_EXTMENU='rofi -dmenu -fuzzy -width 1000'
-export YTFZF_ENABLE_FZF_DEFUALT_OPTS=0
-#
-##
-
-
-## RUBY GEM PATH
-#
-export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
-export PATH="$PATH:$GEM_HOME/bin"
-#
-
-#
-# AUTOSUGGESTION COLOR TWEAK
-#
-# options, 60, 237-248
-#
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=244'
-#
-#
-
-## x-cmd 
-#
-[ ! -f "$HOME/.x-cmd.root/X" ] || . "$HOME/.x-cmd.root/X" # boot up x-cmd.
-
-
-## fabric
-#
+# Fabric (commented out)
 # if [ -f "/home/rx/.config/fabric/fabric-bootstrap.inc" ]; then . "/home/rx/.config/fabric/fabric-bootstrap.inc"; fi
