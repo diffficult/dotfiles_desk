@@ -37,6 +37,9 @@ export GTK_THEME=Arc-Dark
 #
 export XDG_DATA_DIRS="$HOME/.local/share/data:$XDG_DATA_DIRS"
 
+# tex live config dir
+export TEXMFVAR=$HOME/.config/texlive/texmf-var
+
 # Editors --- defined in .aliasrc
 #
 

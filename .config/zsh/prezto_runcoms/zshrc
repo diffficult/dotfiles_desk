@@ -196,8 +196,5 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=244'
 # Thefuck (replaced by pay-respects)
 # eval $(thefuck --alias)
 
-# Redundant completion initialization (handled by prezto)
-# autoload -U compinit && compinit
-
 # Fabric (commented out)
 # if [ -f "/home/rx/.config/fabric/fabric-bootstrap.inc" ]; then . "/home/rx/.config/fabric/fabric-bootstrap.inc"; fi
