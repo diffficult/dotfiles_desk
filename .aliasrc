@@ -314,6 +314,10 @@ alias f='fzf --preview "bat --color \"always\" {}"'
 #alias yay-fzf="yay -Sl | awk '{print \$2(\$4==\"\" ? \"\" : \"  \")}' | fzf --multi --preview 'yay -Si {1}' | xargs -ro sudo yay -S"
 alias yayfzf="yay -Sl | awk '{print \$2(\$4==\"\" ? \"\" : \" \")}' | fzf --multi --preview 'yay -Si {1}' | xargs -ro yay -S"
 
+# tired of typing the fucking hyphen - 
+#
+alias ytdlp="yt-dlp"
+
 
 # Better alternative using fzf to search packages with pacman/yay
 #alias pacfzf="pacman -Slq | fzf --multi --preview 'pacman -Si {1}' --preview-window=:hidden --bind='ctrl-/:toggle-preview' | xargs -ro sudo pacman -S"
@@ -510,6 +514,10 @@ alias lifx-off="lifx -0"
 # Hue Lights
 alias hue-desk-on="lampe -s 8 y"
 alias hue-desk-off="lampe -s 8 n"
+alias hue-kitchen-on="lampe -s 9 y && lampe -s 10 y"
+alias hue-kitchen-off="lampe -s 9 n && lampe -s 10 n"
+alias hue-bed-on="lampe -s 6 y && lampe -s 7 y"
+alias hue-bed-off="lampe -s 6 n && lampe -s 7 n"
 
 # }}}
 
