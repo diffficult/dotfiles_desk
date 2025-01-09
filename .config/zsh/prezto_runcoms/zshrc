@@ -22,11 +22,16 @@ fi
 autoload -U compinit && compinit
 
 # Load shared aliases and functions between zsh/bash
-if [[ -f ~/.aliasrc ]]; then
+if [[ -f "$HOME/.aliasrc" ]]; then
     source "$HOME/.aliasrc"
 fi
 
-# Source function directory
+# Source secrets if found on functions directory
+if [[ -f "$HOME/.config/functions/.secrets" ]]; then
+    source "$HOME/.config/functions/.secrets"
+fi
+
+# Source function directory (plus .env)
 if [ -d "$HOME/.config/functions" ]; then
   for f in $HOME/.config/functions/*
     do source "$f"
