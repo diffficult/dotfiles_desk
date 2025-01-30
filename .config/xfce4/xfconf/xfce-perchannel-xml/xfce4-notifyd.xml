@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.1" encoding="UTF-8"?>
 
 <channel name="xfce4-notifyd" version="1.0">
   <property name="notify-location" type="string" value="bottom-right"/>
@@ -13,6 +13,7 @@
       <value type="string" value="blueman"/>
       <value type="string" value="Blueman"/>
       <value type="string" value="brave-browser"/>
+      <value type="string" value="calibre"/>
       <value type="string" value="calibre-gui"/>
       <value type="string" value="chromium"/>
       <value type="string" value="com.github.wwmm.pulseeffects"/>

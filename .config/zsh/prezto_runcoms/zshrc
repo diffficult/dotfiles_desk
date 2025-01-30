@@ -18,6 +18,9 @@ fi
 # CORE CONFIGURATION
 #
 
+# Set keyboard layout to US International
+setxkbmap us -variant intl
+
 # Initialize completion system
 autoload -U compinit && compinit
 

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.1" encoding="UTF-8"?>
 
 <channel name="parole" version="1.0">
   <property name="video" type="empty">
@@ -19,7 +19,7 @@
     <property name="volume" type="int" value="100"/>
   </property>
   <property name="folders" type="empty">
-    <property name="last-used-media" type="string" value="/home/rx"/>
+    <property name="last-used-media" type="string" value="/opt/ATV4"/>
   </property>
   <property name="playlist" type="empty">
     <property name="show-playlist" type="bool" value="false"/>
