@@ -53,7 +53,7 @@ cfg-megarc() { $EDITORCLI ~/.megarc ;}
 cfg-mpd() { $EDITORCLI ~/.mpd/mpd.conf ;}
 cfg-mpv() { $EDITORCLI ~/.config/mpv/mpv.conf ;}
 cfg-mpv-input() { $EDITORCLI ~/.config/mpv/input.conf ;}
-cfg-nanorc() { $EDITORCLI ~/.nanorc ;}
+cfg-nanorc() { $EDITORCLI ~/.config/nanorc ;}
 cfg-ncmpcpp() { $EDITORCLI ~/.ncmpcpp/config ;}
 cfg-ncmpcpp-bindings() { $EDITORCLI ~/.ncmpcpp/bindings ;}
 cfg-newsboat() { $EDITORCLI ~/.newsboat/config ;}
@@ -259,7 +259,7 @@ alias lsblk='lsblk -o "KNAME,HOTPLUG,SIZE,FSTYPE,TYPE,LABEL,MOUNTPOINT,UUID,MODE
 alias mkdir='mkdir -p -v'				# create if not exist, verbose
 alias mocp='padsp mocp'                                 # moc player working with pulseaudio
 alias mount='mount | column -t'				# align in column
-alias nano='nano -c -$'					# word wrapping
+#alias nano='nano -c -$'					# word wrapping
 #alias periscope='periscope -l en'			# get english subtitles
 alias pdfgrep='pdfgrep -in'				# ignorecase, page number
 alias qcp='qcp -f do'                                   # renameutils bulk copy (destination column only)
@@ -308,16 +308,13 @@ alias lt='eza --icons --tree --level=2'                                         
 #------------------------------------------------------
 
 # alias f='fzf --preview "bat --color \"always\" {}"'
-
+#
+alias fzfb='fzf --preview "bat --color \"always\" {}"'
 
 ### search packages with yay and fzf (* marks an installed package)
+#
 #alias yay-fzf="yay -Sl | awk '{print \$2(\$4==\"\" ? \"\" : \"  \")}' | fzf --multi --preview 'yay -Si {1}' | xargs -ro sudo yay -S"
 alias yayfzf="yay -Sl | awk '{print \$2(\$4==\"\" ? \"\" : \" \")}' | fzf --multi --preview 'yay -Si {1}' | xargs -ro yay -S"
-
-# tired of typing the fucking hyphen - 
-#
-alias ytdlp="yt-dlp"
-
 
 # Better alternative using fzf to search packages with pacman/yay
 #alias pacfzf="pacman -Slq | fzf --multi --preview 'pacman -Si {1}' --preview-window=:hidden --bind='ctrl-/:toggle-preview' | xargs -ro sudo pacman -S"
@@ -338,10 +335,10 @@ alias ytdlp="yt-dlp"
 #    alias egrep='egrep --color=auto'
 #fi
 
-alias cat="bat"
-
+# search and delete items from zsh history
+#
+alias historyfzf='LINE_NUM=$(cat ~/.zsh_history | grep -n "." | sed -E "s/^([0-9]+):.*\;(.*)$/\1 \2/" | fzf --height=50% | awk "{print \$1}") && if [[ -n "$LINE_NUM" ]]; then BACKUP=$(mktemp) && cp ~/.zsh_history "$BACKUP" && sed -i "${LINE_NUM}d" ~/.zsh_history && fc -R && echo "History entry deleted"; else echo "No selection made"; fi'
 ## }}}
-
 
 #-------- Alias (Good List) {{{
 #------------------------------------------------------
@@ -355,8 +352,6 @@ alias disks='echo "╓───── m o u n t . p o i n t s"; echo "╙──�
 # alias runalison='~/.local/bin/alison.sh'
 # alias killalison='~/.local/bin/salison.sh'
 
-alias fzfb='fzf --preview "bat --color \"always\" {}"'
-
 #alias weatherm='curl wttr.in/mendoza'
 #alias weather='curl http://wttr.in/$LOCATION'
 
@@ -369,6 +364,11 @@ alias fzfb='fzf --preview "bat --color \"always\" {}"'
 
 # wttr() { curl -H "Accept-Language: ${LANG%_*}" wttr.in/"${1:-Orange}" ;}
 
+alias cat="bat"
+
+# yt-dlp {{{ tired of typing the fucking hyphen - 
+#
+alias ytdlp="yt-dlp"
 
 ## }}}
 
@@ -493,8 +493,8 @@ se() { du -a ~/bin/* ~/.scripts/* ~/.scripts/tools/* ~/.config/i3/myblocks/* ~/.
 #------------------------------------------------------
 #
 
-alias showme_cam01hd="mpv rtsp://admin:admin1234admin@192.168.2.21:554/Channels/101 --no-resume-playback &"
-alias showme_cam01sd="mpv rtsp://admin:admin1234admin@192.168.2.21:554/Channels/102 --no-resume-playback &"
+alias showme_cam01hd="mpv rtsp://admin:admin1234admin@10.0.10.81:554/Channels/101 --no-resume-playback &"
+alias showme_cam01sd="mpv rtsp://admin:admin1234admin@10.0.10.81:554/Channels/102 --no-resume-playback &"
 #alias showme_cam02="mpv rtsp://admin:camaritas2018@192.168.1.164:554/Channels/101 --no-resume-playback &"
 
 # }}}
@@ -512,12 +512,16 @@ alias lifx-on="lifx -1"
 alias lifx-off="lifx -0"
 
 # Hue Lights
-alias hue-desk-on="lampe -s 8 y"
-alias hue-desk-off="lampe -s 8 n"
-alias hue-kitchen-on="lampe -s 9 y && lampe -s 10 y"
-alias hue-kitchen-off="lampe -s 9 n && lampe -s 10 n"
-alias hue-bed-on="lampe -s 6 y && lampe -s 7 y"
-alias hue-bed-off="lampe -s 6 n && lampe -s 7 n"
+alias hue-p-on="lampe -s 1 y"
+alias hue-p-off="lampe -s 1 n"
+alias hue-room-on="lampe -s 1 y && lampe -s 5 y"
+alias hue-room-off="lampe -s 1 n && lampe -s 5 n"
+alias hue-all-on="lampe -s 1 y && lampe -s 4 y && lampe -s 5 y"
+alias hue-all-off="lampe -s 1 n && lampe -s 4 n && lampe -s 5 n"
+alias hue-bed-on="lampe -s 5 y"
+alias hue-bed-off="lampe -s 5 n"
+alias hue-in-on="lampe -s 4 y"
+alias hue-in-off="lampe -s 4 n"
 
 # }}}
 
