@@ -116,7 +116,7 @@ prepend_previewers = [
 
 previewers = [
   { name = "*/", run = "folder", sync = true },
-  { name = "*.md", run = "code" },
+  { name = "*.md", run = "glow" },
 #  { name = "*.csv", run = "preview" },
   # Code
   { mime = "text/*", run = "code" },
