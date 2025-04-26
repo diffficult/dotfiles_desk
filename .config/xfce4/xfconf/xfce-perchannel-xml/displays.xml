@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.1" encoding="UTF-8"?>
 
 <channel name="displays" version="1.0">
   <property name="Default" type="empty">
@@ -92,7 +92,7 @@
       </property>
     </property>
   </property>
-  <property name="ActiveProfile" type="string" value="a94a8fe5ccb19ba61c4c0873d391e987982fbbd3"/>
+  <property name="ActiveProfile" type="string" value="Default"/>
   <property name="Fallback" type="empty">
     <property name="DP-2" type="string" value="Dell 27&quot;">
       <property name="Active" type="bool" value="true"/>
