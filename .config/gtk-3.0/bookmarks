@@ -5,8 +5,8 @@ file:///home/rx/Dropbox Dropbox
 file:///home/rx/Mega Mega
 file:///home/rx/Pictures Pictures
 smb://10.0.10.6/pi4nas/ nas@home
-smb://10.0.10.7/pi4bnas/ broken@home
+smb://10.0.9.7/pi4bnas/ broken@apt
 smb://10.0.10.6/pi4book/ library@home
-smb://192.168.2.5/media/ media@bd
-smb://192.168.2.5/media2/ anime@bd
-smb://192.168.2.5/download/ downloads@bd
+smb://10.0.10.11/media/ media@blackdisk
+smb://10.0.10.11/download/ download@blackdisk
+smb://10.0.10.11/media2/ anime@blackdisk
