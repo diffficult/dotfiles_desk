@@ -295,3 +295,12 @@ function hstat {
     fi
 }
 # }}}
+
+# search command history using fzf and delete selected entry
+#  {{{
+fzf_history() {
+  history -d $(history | fzf | awk '{print $1}')
+}
+#
+#  }}}
+
