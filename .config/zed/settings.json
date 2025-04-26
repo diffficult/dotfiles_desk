@@ -18,7 +18,7 @@
   },
   //autocomplete
   "features": {
-    "inline_completion_provider": "supermaven"
+    "edit_prediction_provider": "zed"
   },
   //more
   "relative_line_numbers": true,
@@ -40,7 +40,7 @@
     "enable_experimental_live_diffs_in_markdown_in_terminal": true,
     "default_model": {
       "provider": "zed.dev",
-      "model": "claude-3-5-sonnet-latest"
+      "model": "claude-3-7-sonnet-latest"
     },
     "version": "2"
   },
