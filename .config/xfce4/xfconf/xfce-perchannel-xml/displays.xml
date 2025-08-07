@@ -1,7 +1,7 @@
 <?xml version="1.1" encoding="UTF-8"?>
 
 <channel name="displays" version="1.0">
-  <property name="ActiveProfile" type="string" value="a94a8fe5ccb19ba61c4c0873d391e987982fbbd3"/>
+  <property name="ActiveProfile" type="string" value="Default"/>
   <property name="Fallback" type="empty">
     <property name="DP-2" type="string" value="Dell 27&quot;">
       <property name="Active" type="bool" value="true"/>
@@ -84,7 +84,7 @@
   <property name="Notify" type="int" value="1"/>
   <property name="AutoEnableProfiles" type="int" value="3"/>
   <property name="IdentityPopups" type="bool" value="true"/>
-  <property name="Default" type="empty">
+  <property name="a94a8fe5ccb19ba61c4c0873d391e987982fbbd3" type="empty">
     <property name="DisplayPort-1" type="string" value="Dell Inc. 27&quot;">
       <property name="Active" type="bool" value="true"/>
       <property name="EDID" type="string" value="3bc8a54b82650e5a42a16abdca95c7cfa05f995f"/>
@@ -114,8 +114,8 @@
       </property>
     </property>
   </property>
-  <property name="a94a8fe5ccb19ba61c4c0873d391e987982fbbd3" type="empty">
-    <property name="DisplayPort-1" type="string" value="Dell Inc. 27&quot;">
+  <property name="Default" type="empty">
+    <property name="DP-0" type="string" value="Dell Inc. 27&quot;">
       <property name="Active" type="bool" value="true"/>
       <property name="EDID" type="string" value="3bc8a54b82650e5a42a16abdca95c7cfa05f995f"/>
       <property name="Resolution" type="string" value="2560x1440"/>
@@ -129,7 +129,7 @@
         <property name="Y" type="int" value="0"/>
       </property>
     </property>
-    <property name="DisplayPort-2" type="string" value="Dell Inc. 27&quot;">
+    <property name="DP-2" type="string" value="Dell Inc. 27&quot;">
       <property name="Active" type="bool" value="true"/>
       <property name="EDID" type="string" value="6b39c742198bb45abc7fdc98151192806d4c7923"/>
       <property name="Resolution" type="string" value="2560x1440"/>
