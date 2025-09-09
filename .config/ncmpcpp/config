@@ -3,6 +3,11 @@ mpd_host = "localhost"
 mpd_port = "6600"
 mpd_music_dir = "~/Music/"
 
+##### keyboard shortcuts ####
+#
+def_key "space"
+    select_item
+
 ##### timeouts and delays #####
 mpd_crossfade_time = "2"
 playlist_disable_highlight_delay = "3"
