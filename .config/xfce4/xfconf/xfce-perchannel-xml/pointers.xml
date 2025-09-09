@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.1" encoding="UTF-8"?>
 
 <channel name="pointers" version="1.0">
   <property name="SynPS2_Synaptics_TouchPad" type="empty">
@@ -42,8 +42,8 @@
   </property>
   <property name="liliums_Lily58_Consumer_Control" type="empty">
     <property name="RightHanded" type="bool" value="true"/>
-    <property name="Threshold" type="int" value="6"/>
-    <property name="Acceleration" type="double" value="1"/>
+    <property name="Threshold" type="int" value="10"/>
+    <property name="Acceleration" type="double" value="1.2"/>
   </property>
   <property name="Razer_Razer_Viper_Ultimate_Dongle" type="empty">
     <property name="RightHanded" type="bool" value="true"/>
