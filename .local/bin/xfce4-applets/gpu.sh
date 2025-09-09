@@ -13,7 +13,7 @@ readonly CUDA_VERSION="$(nvidia-smi -q -d performance | grep "CUDA Version" | cu
 readonly DRIVER_VERSION="$(nvidia-smi -q -d performance | grep "Driver Version" | cut -c45-)"
 readonly GPU_UTIL="$(nvidia-smi -q -d utilization | grep "Gpu" | cut -c38-42)"
 readonly GPU_MEMORY="$(nvidia-smi -q -d utilization | grep "Memory" | cut -c45-46)"
-readonly GPU_POWER="$(nvidia-smi -i 0 -q | grep " Power Draw" | cut -c45-)"
+readonly GPU_POWER="$(nvidia-smi -i 0 -q | grep "Power Draw" | cut -c45-)"
 readonly GPU_FAN_SPEED="$(nvidia-smi -i 0 -q | grep "Fan Speed" | cut -c45-47)"
 
 # Panel
