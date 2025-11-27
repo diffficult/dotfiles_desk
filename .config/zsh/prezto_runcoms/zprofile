@@ -31,7 +31,8 @@ export QT_QPA_PLATFORMTHEME="qt5ct"
 export QT_AUTO_SCREEN_SCALE_FACTOR=0
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
 
-export GTK_THEME=Arc-Dark
+#export GTK_THEME=Arc-Dark
+# gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark' &>/dev/null & disown
 
 ## rofi-emoji stored /usr/share/rofi-emoji/all_emojis.txt
 #

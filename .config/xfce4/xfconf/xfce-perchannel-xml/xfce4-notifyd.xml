@@ -6,6 +6,7 @@
   <property name="theme" type="string" value="Default"/>
   <property name="applications" type="empty">
     <property name="known_applications" type="array">
+      <value type="string" value=""/>
       <value type="string" value="/tmp/sayonara/com.sayonara-player.Sayonara.desktop"/>
       <value type="string" value="balenaEtcher"/>
       <value type="string" value="blueman"/>
@@ -38,6 +39,7 @@
       <value type="string" value="org.gnome.baobab"/>
       <value type="string" value="org.gnome.Nautilus"/>
       <value type="string" value="org.gnome.Software"/>
+      <value type="string" value="org.gnome.Zenity"/>
       <value type="string" value="org.manjaro.pamac.manager"/>
       <value type="string" value="org.manjaro.pamac.tray"/>
       <value type="string" value="org.Nemo"/>

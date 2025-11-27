@@ -7,15 +7,16 @@
 // custom settings, run `zed: open default settings` from the
 // command palette
 {
+  "icon_theme": "Colored Zed Icons Theme Dark",
   "project_panel": {
     "dock": "left"
   },
   "vim_mode": false,
   "base_keymap": "VSCode",
-  "telemetry": {
-    "diagnostics": false,
-    "metrics": false
-  },
+  //  "telemetry": {
+  //    "diagnostics": false,
+  //    "metrics": false
+  //  },
   //autocomplete
   "features": {
     "edit_prediction_provider": "zed"
@@ -31,7 +32,7 @@
   //      "api_key": "API-KEY"
   //    }
   //  },
-  "assistant": {
+  "agent": {
     "enable_experimental_live_diffs": true,
     "enable_experimental_live_diffs_in_editor": true,
     "enable_experimental_live_diffs_in_terminal": true,
@@ -41,14 +42,12 @@
     "default_model": {
       "provider": "zed.dev",
       "model": "claude-3-7-sonnet-latest"
-    },
-    "version": "2"
+    }
   },
 
   // groq
   "language_models": {
     "openai": {
-      "version": "1",
       "api_url": "https://api.groq.com/openai/v1",
       "available_models": [
         {
