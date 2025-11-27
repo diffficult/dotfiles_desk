@@ -5,11 +5,13 @@ VIDURL=$(xclip -o)
 # Function to run a command in a new st instance
 run_st() {
     st -T "720p stream" -e zsh -c "$* ; read -p 'Press Enter to close...'" &
+    sleep 0.1
+    xdotool search --sync --name "720p stream" windowminimize %@
 }
 
 notify-send -t 3500 'Streaming @ 720p' --icon="/usr/share/icons/Nordzy/apps/scalable/youtube.svg"
 
-run_st "mpv '$VIDURL' --ytdl --ytdl-format=298+bestaudio/612+bestaudio/135+bestaudio/231/best --volume=50 --no-resume-playback"
+run_st "mpv '$VIDURL' --ytdl --ytdl-format='bestvideo[height=720]+bestaudio/bestvideo[height<=720]+bestaudio/best' --volume=50 --no-resume-playback"
 
 ## uncomment to get 480p video dash
 #mpv $1 --ytdl --ytdl-format=135+bestaudio/244+bestaudio/18/134+bestaudio/242/best --volume=50

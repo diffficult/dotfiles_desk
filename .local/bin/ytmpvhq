@@ -3,13 +3,15 @@
 # Function to run a command in a new st instance
 run_st() {
     st -T "1080p stream" -e zsh -c "$* ; read -p 'Press Enter to close...'" &
+    sleep 0.1
+    xdotool search --sync --name "1080p stream" windowminimize %@
 }
 
 VIDURL=$(xclip -o)
 notify-send -t 3500 'Streaming @ 1080p' --icon="/usr/share/icons/Nordzy/apps/scalable/youtube.svg"
 ## ORIGINAL 1080p res
 #mpv $VIDURL --ytdl --ytdl-format=137+bestaudio/270+bestaudio/136+bestaudio/232+bestaudio/best --volume=50
-run_st "mpv '$VIDURL' --ytdl --ytdl-format="bestvideo+bestaudio/best" --volume=50 --no-resume-playback"
+run_st "mpv '$VIDURL' --ytdl --ytdl-format='bestvideo[height=1080]+bestaudio/bestvideo[height<=1080]+bestaudio/best' --volume=50 --no-resume-playback"
 
 #--no-terminal 2&>1 1>/dev/null
 
