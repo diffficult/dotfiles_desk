@@ -11,7 +11,7 @@ run_st() {
 
 notify-send -t 3500 'Streaming @ 720p' --icon="/usr/share/icons/Nordzy/apps/scalable/youtube.svg"
 
-run_st "mpv '$VIDURL' --ytdl --ytdl-format='bestvideo[height=720]+bestaudio/bestvideo[height<=720]+bestaudio/best' --volume=50 --no-resume-playback"
+run_st "mpv '$VIDURL' --ytdl --ytdl-format='bestvideo[height=720]+bestaudio/bestvideo[height<=720]+bestaudio/best' --ytdl-raw-options=cookies-from-browser=chrome --volume=50 --no-resume-playback"
 
 ## uncomment to get 480p video dash
 #mpv $1 --ytdl --ytdl-format=135+bestaudio/244+bestaudio/18/134+bestaudio/242/best --volume=50
