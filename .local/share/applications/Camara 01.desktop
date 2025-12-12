@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Camara 01
+Comment=Camara Calle
+#Exec=mpv --vo=xv rtsp://admin:admin1234admin@10.0.10.81:554/Channels/101 --no-resume-playback
+#Exec=mpv rtsp://admin:admin1234admin@10.0.10.81:554/Channels/101 --no-resume-playback
+Exec=/home/rx/.local/bin/cam01.sh
+Icon=media-record
+Path=
+Terminal=false
+StartupNotify=false
