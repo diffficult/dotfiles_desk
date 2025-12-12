@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Cam Picker Colegio
+Comment=Camaras Colegio
+Exec=/home/rx/.local/bin/select_cams.sh
+Icon=/home/rx/.local/share/icons/own/Flurry/Teneo/Icons/Camera.png
+Path=
+Terminal=false
+StartupNotify=false
