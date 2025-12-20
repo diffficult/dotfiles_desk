@@ -86,6 +86,13 @@ zstyle ':prezto:module:history' histsize 10000
 zstyle ':prezto:module:history' savehist 10000
 
 #
+# HISTORY-SUBSTRING-SEARCH SETTINGS
+#
+
+zstyle ':prezto:module:history-substring-search:color' found 'bg=14,fg=black,bold'
+zstyle ':prezto:module:history-substring-search:color' not-found 'bg=red,fg=black'
+
+#
 # AUTOSUGGESTIONS SETTINGS
 #
 
