@@ -7,9 +7,14 @@
 // custom settings, run `zed: open default settings` from the
 // command palette
 {
+  "agent_servers": {
+    "claude": {
+      "default_mode": "acceptEdits",
+    },
+  },
   "icon_theme": "Colored Zed Icons Theme Dark",
   "project_panel": {
-    "dock": "left"
+    "dock": "left",
   },
   "vim_mode": false,
   "base_keymap": "VSCode",
@@ -19,10 +24,10 @@
   //  },
   //autocomplete
   "features": {
-    "edit_prediction_provider": "zed"
+    "edit_prediction_provider": "zed",
   },
   //more
-  "relative_line_numbers": true,
+  "relative_line_numbers": "enabled",
   // "format_on_save": true,
 
   //ai thingie
@@ -41,8 +46,8 @@
     "enable_experimental_live_diffs_in_markdown_in_terminal": true,
     "default_model": {
       "provider": "zed.dev",
-      "model": "claude-3-7-sonnet-latest"
-    }
+      "model": "claude-3-7-sonnet-latest",
+    },
   },
 
   // groq
@@ -53,28 +58,28 @@
         {
           "name": "llama-3.1-70b-versatile",
           "max_tokens": 131072,
-          "max_output_tokens": null
-        }
-      ]
-    }
+          "max_output_tokens": null,
+        },
+      ],
+    },
   },
 
   // files
   "file_types": {
     "Dockerfile": ["Dockerfile", "Dockerfile.*"],
-    "JSON": ["json", "jsonc", "*.code-snippets"]
+    "JSON": ["json", "jsonc", "*.code-snippets"],
   },
   // Turn off telemetry
   "telemetry": {
     "diagnostics": false,
-    "metrics": false
+    "metrics": false,
   },
   "languages": {
     "Ruby": {
       "language_servers": [
         "tailwindcss-language-server",
         "ruby-lsp",
-        "!solargraph"
+        "!solargraph",
       ],
       "formatter": {
         "external": {
@@ -88,19 +93,19 @@
             "error",
             "--stdin",
             "corrected.rb",
-            "--stderr"
-          ]
-        }
-      }
+            "--stderr",
+          ],
+        },
+      },
     },
     "Markdown": {
       "soft_wrap": "preferred_line_length",
       "preferred_line_length": 80,
-      "hard_tabs": false
+      "hard_tabs": false,
     },
     "YAML": {
-      "hard_tabs": false
-    }
+      "hard_tabs": false,
+    },
   },
   "file_scan_exclusions": ["*.git", "*.DS_Store"],
 
@@ -113,12 +118,12 @@
   "buffer_font_weight": 300,
   // theme
   "theme": {
-    "mode": "system",
+    "mode": "dark",
     "light": "Tokyo Night Storm",
-    "dark": "Tokyo Night Storm"
+    "dark": "Tokyo Night",
   },
   "centered_layout": {
     "left_padding": 0.15,
-    "right_padding": 0.15
-  }
+    "right_padding": 0.15,
+  },
 }
