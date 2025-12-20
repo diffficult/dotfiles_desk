@@ -25,6 +25,8 @@ export BUNDLE_USER_CACHE="$XDG_CACHE_HOME/bundle"
 export BUNDLE_USER_PLUGIN="$XDG_DATA_HOME/bundle"
 export W3M_DIR="$XDG_DATA_HOME/w3m"
 
+#GREP color-scheme
+export GREP_COLORS='mt=1;38;5;14:cx=38;5;8:fn=38;5;13:ln=38;5;10:bn=32:se=38;5;12:ne'
 
 #export EDITOR=/usr/bin/nano
 export QT_QPA_PLATFORMTHEME="qt5ct"
