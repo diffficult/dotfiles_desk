@@ -1,0 +1,21 @@
+# Global settings - this is the key fix for your readability issue
+set boldtext                  # Uses bold light text on your dark background instead of reverse video
+
+# Optional: If you want a subtle accent background (matches your active tab blue #7aa2f7)
+# Comment out the line above and uncomment these two instead:
+set titlecolor bold,brightwhite,black
+set statuscolor bold,black,green
+
+set constantshow
+set linenumbers
+set brackets ""')>]}"
+set historylog
+set regexp
+set smarthome
+set tabsize 4
+set tabstospaces
+set mouse
+set indicator
+
+# Include your custom syntax highlighting files (all in ~/.config/nano/)
+include "~/.config/nano/*.nanorc"
