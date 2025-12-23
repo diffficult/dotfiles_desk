@@ -10,7 +10,7 @@ readonly DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # Configuration
 readonly LOCATION="Mendoza"  # Can also use coordinates: "-32.8833,-68.8167" for Guaymallén
 readonly CACHE_FILE="${DIR}/.weather_cache.json"
-readonly CACHE_DURATION=1800  # 30 minutes in seconds
+readonly CACHE_DURATION=21600  # 6 hours in seconds
 readonly API_TIMEOUT=10
 
 # Weather emoji mapping based on wttr.in weather codes
