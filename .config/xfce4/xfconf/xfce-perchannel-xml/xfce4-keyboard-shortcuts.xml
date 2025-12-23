@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.1" encoding="UTF-8"?>
 
 <channel name="xfce4-keyboard-shortcuts" version="1.0">
   <property name="commands" type="empty">
@@ -80,6 +80,7 @@
       <property name="&lt;Super&gt;o" type="string" value="/usr/local/bin/color-gpick -o -s"/>
       <property name="&lt;Super&gt;k" type="string" value="/home/rx/.local/bin/rofi-trans.sh"/>
       <property name="&lt;Super&gt;q" type="string" value="xdotool getactivewindow windowkill"/>
+      <property name="&lt;Super&gt;b" type="string" value="/home/rx/.config/rofi/bin/rofi-bluetooth"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">
