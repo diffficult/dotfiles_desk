@@ -24,6 +24,7 @@ export BUNDLE_USER_CONFIG="$XDG_CONFIG_HOME/bundle"
 export BUNDLE_USER_CACHE="$XDG_CACHE_HOME/bundle"
 export BUNDLE_USER_PLUGIN="$XDG_DATA_HOME/bundle"
 export W3M_DIR="$XDG_DATA_HOME/w3m"
+export NPM_GLOBAL="$HOME/.local/npm-global"
 
 #GREP color-scheme
 export GREP_COLORS='mt=1;38;5;14:cx=38;5;8:fn=38;5;13:ln=38;5;10:bn=32:se=38;5;12:ne'
@@ -93,12 +94,17 @@ path=(
 )
 # add user local bin path 
 if [ -d "$HOME/.local/bin" ] && (! echo $PATH | grep -q "$HOME/.local/bin"); then
-    export PATH="$HOME/.local/bin:$PATH"
+  export PATH="$HOME/.local/bin:$PATH"
 fi
 # add cargo bin path
-if [ -d "$HOME/.local/share/cargo/bin" ] && (! echo $PATH | grep -q "$HOME/.local/share/carg/bin"); then
-    export PATH="$HOME/.local/share/cargo/bin:$PATH"
+if [ -d "$HOME/.local/share/cargo/bin" ] && (! echo $PATH | grep -q "$HOME/.local/share/cargo/bin"); then
+  export PATH="$HOME/.local/share/cargo/bin:$PATH"
 fi
+# add npm-global bin
+if [ -d "$NPM_GLOBAL/bin" ] && (! echo $PATH | grep -q "$NPM_GLOBAL/bin"); then
+  export PATH="$NPM_GLOBAL/bin:$PATH"
+fi
+
 
 #
 # Less
