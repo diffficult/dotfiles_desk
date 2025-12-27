@@ -70,8 +70,7 @@ fi
 #
 
 # Ensure path arrays do not contain duplicates.
-typeset -g cdpath fpath mailpath path
-#typeset -gU original
+typeset -gU cdpath fpath mailpath path
 
 # Set the list of directories that cd searches.
 # cdpath=(
@@ -88,7 +87,6 @@ typeset -g cdpath fpath mailpath path
 
 path=(
   $HOME/{bin,sbin}
-  /opt/{homebrew,local}/{bin,sbin}
   /usr/local/{bin,sbin}
   $path
 )

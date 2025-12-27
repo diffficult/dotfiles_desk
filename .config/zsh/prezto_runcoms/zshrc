@@ -214,3 +214,9 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+# opencode
+case ":$PATH:" in
+  *":/home/rx/.opencode/bin:"*) ;;
+  *) export PATH="/home/rx/.opencode/bin:$PATH" ;;
+esac
