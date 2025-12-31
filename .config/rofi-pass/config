@@ -16,34 +16,10 @@ _pwgen () {
 # qrencode is needed to generate the image and a viewer
 # that can read from pipes. Known viewers to work are feh and display
 _image_viewer () {
-    nxsiv
+    nxsiv -
+#    feh -
 #    display
 }
-
-# It is possible to use wl-copy and wl-paste from wl-clipboard
-# Just uncomment the lines with wl-copy and wl-paste
-# and comment the xclip lines
-#
-_clip_in_primary() {
-	xclip
-  # wl-copy-p
-}
-
-_clip_in_clipboard() {
-	xclip -selection clipboard
-  # wl-copy
-}
-
-_clip_out_primary() {
-	xclip -o
-  # wl-paste -p
-}
-
-_clip_out_clipboard() {
-	xclip --selection clipboard -o
-  # wl-paste
-}
-
 
 # xdotool needs the keyboard layout to be set using setxkbmap
 # You can do this in your autostart scripts (e.g. xinitrc)
@@ -126,9 +102,31 @@ insert_pass="Alt+n"
 # Change the clipboard backend for rofi-pass, valid backends are:
 # xclip
 # wl-clipboard
-#clibpoard_backend=xclip
+# If unset, rofi-pass will autodetect based on session type.
+#clipboard_backend=wl-clipboard
 
 # Change the backend for rofi-pass, valid backends are:
 # xdotool
 # wtype
-#backend=xdotool
+# If unset, rofi-pass will autodetect based on session type.
+#backend=wtype
+
+# Icon mappings for password paths
+# Add icons (emojis or fontawesome) that will be prepended to matching path segments
+# Format: searchterm=icon
+# Example usage:
+# - If you have "colegio/network/info" and search for "colegio", it shows as "🏫 colegio/network/info"
+# - If you search for "network", paths like "colegio/network/info" show as "colegio/🖥️ network/info"
+# You can use emojis or fontawesome icons
+declare -A path_icons=(
+    ["network"]="󰱔 "
+    ["colegio"]="󱆀 "
+    ["bank"]=" "
+    ["email"]=" "
+    ["work"]=" "
+    ["personal"]=" "
+    ["social"]=" "
+    ["router"]="󰑩 "
+    ["server"]="󰒋 "
+    ["vpn"]="󰖂 "
+)
