@@ -17,5 +17,10 @@
     "bindings": {
       // "j k": ["workspace::SendKeystrokes", "escape"]
     }
+  },
+  {
+    "bindings": {
+      "ctrl-#": "vim::ToggleComments"
+    }
   }
 ]
