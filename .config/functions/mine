@@ -304,3 +304,19 @@ fzf_history() {
 #
 #  }}}
 
+
+#-------- zle functions {{{
+#------------------------------------------------------
+# DESC: small QoL functions using zle
+
+clear-keep-buffer() {
+  zle clear-screen
+}
+
+copy-command() {
+  echo -n $BUFFER | wl-copy 
+  zle -M " copied to clipboard"
+}
+
+#  }}}
+

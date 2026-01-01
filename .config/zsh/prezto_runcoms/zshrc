@@ -19,10 +19,20 @@ fi
 #
 
 # Set keyboard layout to US International
-setxkbmap us -variant intl
+if [[ -n "${DISPLAY:-}" && "${XDG_SESSION_TYPE:-}" != "wayland" ]]; then
+  setxkbmap us -variant intl
+fi
 
-# Initialize completion system
-autoload -U compinit && compinit
+# Initialize completion system and zsh move (zmv)
+autoload -Uz compinit zmv
+compinit
+
+# Initialize zle functions (.config/functions) 
+autoload -Uz clear-keep-buffer copy-command
+zle -N clear-keep-buffer
+zle -N copy-command
+bindkey '^Xl' clear-keep-buffer
+bindkey '^Xc' copy-command
 
 # Load shared aliases and functions between zsh/bash
 if [[ -f "$HOME/.aliasrc" ]]; then
