@@ -1,0 +1,1 @@
+/home/rx/dev/gits/mpv-thumbfast/thumbfast.lua

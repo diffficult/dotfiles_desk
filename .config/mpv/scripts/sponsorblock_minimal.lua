@@ -1,0 +1,1 @@
+/home/rx/dev/gits/mpv_sponsorblock_minimal/sponsorblock_minimal.lua
