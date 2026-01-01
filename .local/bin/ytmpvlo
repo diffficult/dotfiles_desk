@@ -1,12 +1,30 @@
 #!/bin/bash
+SESSION_TYPE="${XDG_SESSION_TYPE:-}"
+if [[ -z "$SESSION_TYPE" && -n "$WAYLAND_DISPLAY" ]]; then
+    SESSION_TYPE="wayland"
+fi
+if [[ -z "$SESSION_TYPE" ]]; then
+    SESSION_TYPE="x11"
+fi
+
+if [[ "$SESSION_TYPE" == "wayland" ]]; then
+    VIDURL=$(wl-paste)
+else
+    VIDURL=$(xclip -o)
+fi
+
 ## uncomment to get 720p video dash or 480p if not available
 run_st() {
     st -T "480p stream" -e zsh -c "$* ; read -p 'Press Enter to close...'" &
     sleep 0.1
-    xdotool search --sync --name "480p stream" windowminimize %@
+    if [[ "$SESSION_TYPE" == "wayland" ]]; then
+        if command -v swaymsg >/dev/null 2>&1; then
+            swaymsg '[title="480p stream"] move scratchpad' >/dev/null 2>&1
+        fi
+    else
+        xdotool search --sync --name "480p stream" windowminimize %@
+    fi
 }
-
-VIDURL=$(xclip -o)
 notify-send -t 3500 'Streaming @ 480p' --icon="/usr/share/icons/Nordzy/apps/scalable/youtube.svg"
 run_st "mpv '$VIDURL' --ytdl --ytdl-format='bestvideo[height=480]+bestaudio/bestvideo[height=720]+bestaudio/bestvideo[height<=720]+bestaudio/best' --ytdl-raw-options=cookies-from-browser=chrome --volume=50 --no-resume-playback"
 
