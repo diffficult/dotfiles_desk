@@ -372,6 +372,24 @@ alias cat="bat"
 #
 alias ytdlp="yt-dlp"
 
+# Suffix aliases
+alias -s md="bat"
+alias -s mov="open"
+alias -s png="swayimg"
+alias -s mp4="open"
+alias -s js="$EDITOR"
+alias -s conf="$EDITOR"
+alias -s yaml="bat -l yaml"
+alias -s json="jless"
+
+# Global aliases
+#
+alias -g NE='2>/dev/null'
+alias -g DN='> /dev/null'
+alias -g NUL='>/dev/null 2>&1'
+
+#
+
 ## }}}
 
 
