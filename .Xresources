@@ -87,7 +87,7 @@ st.alphaOffset: 0.3
 !! Set a default font and font size for st below:
 
 !! *.font: JetBrainsMono NF-10;
-*.font: JetBrainsMono NF:pixelsize=14:antialias=true:autohint=true;
+*.font: JetBrainsMono NF:style=Regular:pixelsize=14:antialias=true:autohint=true;
 
 !! colorscheme ----
 ! TokyoNight colors for Xresources
