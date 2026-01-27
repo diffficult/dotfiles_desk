@@ -25,8 +25,10 @@ run_st() {
         xdotool search --sync --name "480p stream" windowminimize %@
     fi
 }
-notify-send -t 3500 'Streaming @ 480p' --icon="/usr/share/icons/Nordzy/apps/scalable/youtube.svg"
-run_st "mpv '$VIDURL' --ytdl --ytdl-format='bestvideo[height=480]+bestaudio/bestvideo[height=720]+bestaudio/bestvideo[height<=720]+bestaudio/best' --ytdl-raw-options=cookies=cookies.txt --volume=75 --no-resume-playback"
+
+notify-send --app-name="Youtube (mpv)" -t 3500 'Streaming @ 480p' --icon="/usr/share/icons/Nordzy/apps/scalable/youtube.svg" && paplay ~/.local/bin/hypr_scripts/nothing_sounds/ui/KeypressSpacebar.ogg
+
+run_st "mpv '$VIDURL' --ytdl --ytdl-format='bestvideo[height=480]+bestaudio/bestvideo[height=720]+bestaudio/bestvideo[height<=720]+bestaudio/best' --ytdl-raw-options=cookies=~/.local/bin/cookies.txt --volume=75 --no-resume-playback"
 
 ## uncomment to get 480p video dash
 #mpv $1 --ytdl --ytdl-format=135+bestaudio/244+bestaudio/18/134+bestaudio/242/best --volume=50

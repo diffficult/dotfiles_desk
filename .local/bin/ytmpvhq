@@ -26,10 +26,12 @@ run_st() {
         xdotool search --sync --name "1080p stream" windowminimize %@
     fi
 }
-notify-send -t 3500 'Streaming @ 1080p' --icon="/usr/share/icons/Nordzy/apps/scalable/youtube.svg"
+
+notify-send --app-name="Youtube (mpv)" -t 3500 'Streaming @ 1080p' --icon="/usr/share/icons/Nordzy/apps/scalable/youtube.svg" && paplay ~/.local/bin/hypr_scripts/nothing_sounds/ui/KeypressSpacebar.ogg
+
 ## ORIGINAL 1080p res
 #mpv $VIDURL --ytdl --ytdl-format=137+bestaudio/270+bestaudio/136+bestaudio/232+bestaudio/best --volume=50
-run_st "mpv '$VIDURL' --ytdl --ytdl-format='bestvideo[height=1080]+bestaudio/bestvideo[height<=1080]+bestaudio/best' --ytdl-raw-options=cookies=cookies.txt --volume=75 --no-resume-playback"
+run_st "mpv '$VIDURL' --ytdl --ytdl-format='bestvideo[height=1080]+bestaudio/bestvideo[height<=1080]+bestaudio/best' --ytdl-raw-options=cookies=~/.local/bin/cookies.txt --volume=75 --no-resume-playback"
 
 #--no-terminal 2&>1 1>/dev/null
 
