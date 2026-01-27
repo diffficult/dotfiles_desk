@@ -110,9 +110,12 @@ fi
 
 # Set the default Less options.
 # Mouse-wheel scrolling has been disabled by -X (disable screen clearing).
-# Remove -X to enable it.
-if [[ -z "$LESS" ]]; then
-  export LESS='-g -i -M -R -S -w -X -z-4'
+# Remove -X to enable it. 
+# Removed from export line this > '-z-4' << this does not work on ver 691
+# Removed from if line the -z flag > [[ -z "$LESS" ]] << this does not work on ver 691
+
+if [[ "$LESS" ]]; then
+  export LESS='-g -i -M -R -S -w -X' 
 fi
 
 # Set the Less input preprocessor.
