@@ -1,5 +1,5 @@
 # style name or JSON path (default "auto")
-style: "~/.config/glow/new.json"
+style: "/home/rx/.config/glow/new.json"
 # mouse support (TUI-mode only)
 mouse: false
 # use pager to display markdown
