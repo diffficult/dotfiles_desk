@@ -123,3 +123,14 @@ fi
 if [[ -z "$LESSOPEN" ]] && (( $#commands[(i)lesspipe(|.sh)] )); then
   export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
 fi
+
+#
+# Environment Variables
+#
+
+# Source environment variables (GitHub MCP PAT, API keys, etc.)
+if [[ -f "$XDG_CONFIG_HOME/zsh/.env" ]]; then
+  set -a  # automatically export all variables
+  source "$XDG_CONFIG_HOME/zsh/.env"
+  set +a  # disable auto-export
+fi
