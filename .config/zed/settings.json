@@ -1,5 +1,7 @@
 // Zed settings
 {
+  "agent_buffer_font_size": 16.0,
+  "agent_ui_font_size": 18.0,
   "context_servers": {
     "mcp-server-github": {
       "enabled": true,
