@@ -46,7 +46,6 @@ zstyle ':prezto:load' pmodule-allow-overrides 'yes'
    'history-substring-search' \
    'zsh-abbr' \
    'autosuggestions' \
-   'contrib-prompt' \
    'fzf' \
    'fzf-alias' \
    'zoxide' \
