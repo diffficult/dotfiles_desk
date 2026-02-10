@@ -24,25 +24,25 @@ case "$style" in
     if [ $is_active -eq 1 ]; then
       symbols="${TMUX_WINDOW_ID_HSQUARE_ACTIVE:-󰎦 󰎩 󰎬 󰎮 󰎰 󰎵 󰎸 󰎻 󰎾 󰎣}"
     else
-      symbols="${TMUX_WINDOW_ID_HSQUARE_INACTIVE:-󰎤 󰎧 󰎪 󰎭 󰎱 󰎳 󰎶 󰎹 󰎼 󰎡}"
+      symbols="${TMUX_WINDOW_ID_HSQUARE_INACTIVE:-󰬺 󰬻 󰬼 󰬽 󰬾 󰬿 󰭀 󰭁 󰭂 󰿩}"
     fi
     ;;
   digital)
     if [ $is_active -eq 1 ]; then
-      symbols="${TMUX_WINDOW_ID_DIGITAL_ACTIVE:-󰲡 󰲣 󰲥 󰲧 󰲩 󰲫 󰲭 󰲯 󰲱 󰿩}"
+      symbols="${TMUX_WINDOW_ID_DIGITAL_ACTIVE:-󰲠 󰲢 󰲤 󰲦 󰲨 󰲪 󰲬 󰲮 󰲰 󰿬}"
     else
       symbols="${TMUX_WINDOW_ID_DIGITAL_INACTIVE:-󰲡 󰲣 󰲥 󰲧 󰲩 󰲫 󰲭 󰲯 󰲱 󰿩}"
     fi
     ;;
   roman)
     if [ $is_active -eq 1 ]; then
-      symbols="${TMUX_WINDOW_ID_ROMAN_ACTIVE:-Ⅰ Ⅱ Ⅲ Ⅳ Ⅴ Ⅵ Ⅶ Ⅷ Ⅸ Ⅹ}"
+      symbols="${TMUX_WINDOW_ID_ROMAN_ACTIVE:-󰼏 󰼐 󰼑 󰼒 󰼓 󰼔 󰼕 󰼖 󰼗 󰼎}"
     else
-      symbols="${TMUX_WINDOW_ID_ROMAN_INACTIVE:-ⅰ ⅱ ⅲ ⅳ ⅴ ⅵ ⅶ ⅷ ⅸ ⅹ}"
+      symbols="${TMUX_WINDOW_ID_ROMAN_INACTIVE:-󰎦 󰎩 󰎬 󰎮 󰎰 󰎵 󰎸 󰎻 󰎾 󰎣}"
     fi
     ;;
   super)
-    symbols="${TMUX_WINDOW_ID_SUPER:-¹ ² ³ ⁴ ⁵ ⁶ ⁷ ⁸ ⁹ ¹⁰}"
+    symbols="${TMUX_WINDOW_ID_SUPER:-1 2 3 4 5 6 7 8 9 0}"
     ;;
   sub)
     symbols="${TMUX_WINDOW_ID_SUB:-₁ ₂ ₃ ₄ ₅ ₆ ₇ ₈ ₉ ₁₀}"

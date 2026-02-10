@@ -14,7 +14,7 @@
 #set-option -ga terminal-overrides ",xterm*:Tc"
 set-option -ga terminal-overrides ",xterm-kitty:Tc"
 
-set-option -g update-environment "DISPLAY SSH_ASKPASS SSH_AUTH_SOCK SSH_AGENT_PID SSH_CONNECTION WINDOWID XAUTHORITY"
+set-option -g update-environment "DISPLAY SSH_ASKPASS SSH_AUTH_SOCK SSH_AGENT_PID WINDOWID XAUTHORITY"
 
 set -g allow-passthrough on
 
@@ -106,17 +106,17 @@ tmux_conf_theme_colour_17="#c0caf5"   # fg (bright text)
 # -- Window ID Style Configuration ---------------------------------------------
 
 # Window ID style: fsquare, hsquare, digital, roman, super, sub, default
-tmux_conf_window_id_style="fsquare"
+tmux_conf_window_id_style="super"
 
 # Symbol sets for each style (space-separated, 10 symbols for windows 1-10)
-tmux_conf_window_id_fsquare_active="󰎤 󰎧 󰎪 󰎭 󰎱 󰎳 󰎶 󰎹 󰎼 󰎡"
-tmux_conf_window_id_fsquare_inactive="󰎤 󰎧 󰎪 󰎭 󰎱 󰎳 󰎶 󰎹 󰎼 󰎡"
+tmux_conf_window_id_fsquare_active="󰎤 󰎧 󰎪 󰎭 󰎱 󰎳 󰎶 󰎹 󰎼 󰽽"
+tmux_conf_window_id_fsquare_inactive="󰎦 󰎩 󰎬 󰎮 󰎰 󰎵 󰎸 󰎻 󰎾 󰽾"
 
-tmux_conf_window_id_hsquare_active="󰎦 󰎩 󰎬 󰎮 󰎰 󰎵 󰎸 󰎻 󰎾 󰎣"
-tmux_conf_window_id_hsquare_inactive="󰎦 󰎩 󰎬 󰎮 󰎰 󰎵 󰎸 󰎻 󰎾 󰎣"
+tmux_conf_window_id_hsquare_active="󰼏 󰼐 󰼑 󰼒 󰼓 󰼔 󰼕 󰼖 󰼗 󰿪"
+tmux_conf_window_id_hsquare_inactive="󰎦 󰎩 󰎬 󰎮 󰎰 󰎵 󰎸 󰎻 󰎾 󰽾"
 
-tmux_conf_window_id_digital_active="󰲡 󰲣 󰲥 󰲧 󰲩 󰲫 󰲭 󰲯 󰲱 󰿩"
-tmux_conf_window_id_digital_inactive="󰲡 󰲣 󰲥 󰲧 󰲩 󰲫 󰲭 󰲯 󰲱 󰿩"
+tmux_conf_window_id_digital_active="󰲠 󰲢 󰲤 󰲦 󰲨 󰲪 󰲬 󰲮 󰲰 󰿬"
+tmux_conf_window_id_digital_inactive="󰲡 󰲣 󰲥 󰲧 󰲩 󰲫 󰲭 󰲯 󰲱 󰿭"
 
 tmux_conf_window_id_roman_active="Ⅰ Ⅱ Ⅲ Ⅳ Ⅴ Ⅵ Ⅶ Ⅷ Ⅸ Ⅹ"
 tmux_conf_window_id_roman_inactive="ⅰ ⅱ ⅲ ⅳ ⅴ ⅵ ⅶ ⅷ ⅸ ⅹ"
@@ -128,8 +128,8 @@ tmux_conf_window_id_sub_active="₁ ₂ ₃ ₄ ₅ ₆ ₇ ₈ ₉ ₁₀"
 tmux_conf_window_id_sub_inactive="₁ ₂ ₃ ₄ ₅ ₆ ₇ ₈ ₉ ₁₀"
 
 # Bell and zoom indicators (tokyo-night style)
-tmux_conf_window_bell_symbol="󰂚"
-tmux_conf_window_zoom_symbol="󰁌"
+tmux_conf_window_bell_symbol="󰂚 "
+tmux_conf_window_zoom_symbol="󱡴 " # "󰁌 "
 
 # default theme (ansi)
 #tmux_conf_theme_colour_1="colour0"
