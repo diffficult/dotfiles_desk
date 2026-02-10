@@ -1,0 +1,88 @@
+#!/bin/bash
+
+# Rofi Power Menu
+# A standalone power menu using rofi
+
+# Power menu options with icons
+OPTIONS=" Lock\n󰹑 Screensaver\n󰍃 Logout\n󰜉 Reboot\n󰐥 Shutdown"
+
+# Show rofi menu and capture selection
+SELECTED=$(echo -e "$OPTIONS" | rofi -dmenu -i -p "Power menu" -theme-str 'window {width: 300px;}')
+
+# Handle the selection
+case "$SELECTED" in
+    *Lock*)
+        # Lock the screen
+        exec ~/.local/bin/hypr_scripts/aerial-hyprlock.sh
+        ;;
+    
+    *Screensaver*)
+        # Launch screensaver with time-based video selection
+        VIDEO_DIR="/opt/ATV4"
+        SCRIPT_DIR="$HOME/.local/bin/hypr_scripts"
+        NIGHT_FILE="$SCRIPT_DIR/night.txt"
+        DAY_FILE="$SCRIPT_DIR/day.txt"
+        
+        HOUR=$(date +%H)
+        
+        # Select video list based on time of day
+        if [ "$HOUR" -ge 21 ] || [ "$HOUR" -lt 6 ]; then
+            SOURCE_FILE="$NIGHT_FILE"
+        else
+            SOURCE_FILE="$DAY_FILE"
+        fi
+        
+        # Build array of available videos from the selected list
+        AVAILABLE_VIDEOS=()
+        while IFS= read -r video; do
+            if [ -f "$VIDEO_DIR/$video" ]; then
+                AVAILABLE_VIDEOS+=("$VIDEO_DIR/$video")
+            fi
+        done < "$SOURCE_FILE"
+        
+        # Select random video from available pool
+        VIDEO=$(printf "%s\n" "${AVAILABLE_VIDEOS[@]}" | shuf -n 1)
+        
+        # Launch mpvpaper with selected video
+        mpvpaper -l overlay -f -o "no-audio loop no-osd-bar" '*' "$VIDEO" &
+        MPV_PID=$!
+        
+        cleanup() {
+            kill $MPV_PID 2>/dev/null
+            pkill mpvpaper 2>/dev/null
+        }
+        trap cleanup EXIT INT TERM
+        
+        read -s -n 1 -p "Press any key to exit..."
+        cleanup
+        ;;
+    
+    *Logout*)
+        # Logout from Hyprland
+        CONFIRM=$(echo -e "Yes\nNo" | rofi -dmenu -i -p "Confirm Logout?")
+        if [[ "$CONFIRM" == "Yes" ]]; then
+            hyprctl dispatch exit
+        fi
+        ;;
+    
+    *Reboot*)
+        # Reboot the system
+        CONFIRM=$(echo -e "Yes\nNo" | rofi -dmenu -i -p "Confirm Reboot?")
+        if [[ "$CONFIRM" == "Yes" ]]; then
+            exec "$HOME/.local/bin/hypr_scripts/hypr-cmd-reboot"
+        fi
+        ;;
+    
+    *Shutdown*)
+        # Shutdown the system
+        CONFIRM=$(echo -e "Yes\nNo" | rofi -dmenu -i -p "Confirm Shutdown?")
+        if [[ "$CONFIRM" == "Yes" ]]; then
+            exec "$HOME/.local/bin/hypr_scripts/hypr-cmd-shutdown"
+        fi
+        ;;
+    
+    *)
+        # User cancelled or pressed ESC
+        exit 0
+        ;;
+esac

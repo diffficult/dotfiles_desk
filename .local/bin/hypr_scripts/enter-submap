@@ -1,0 +1,13 @@
+#!/bin/bash
+# Helper script to enter Hyprland submap with notification
+# Usage: enter-submap <submap_name> <icon> <display_name>
+
+SUBMAP="$1"
+ICON="$2"
+NAME="${3:-$SUBMAP}"
+
+# Send notification
+dunstify -t 2000 "Mode: $ICON $NAME" "Press ESC or Enter to exit" -h string:x-dunst-stack-tag:hypr-mode
+
+# Enter the submap
+hyprctl dispatch submap "$SUBMAP"
