@@ -1,0 +1,7 @@
+{
+  "tray": {
+    "icon-size": 22,
+    "spacing": 10,
+    "show-passive-items": false
+  }
+}

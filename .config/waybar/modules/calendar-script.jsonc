@@ -1,0 +1,8 @@
+{
+  "custom/calendar-script": {
+    "exec": "~/.config/waybar/scripts/waybar_khal.py",
+    "return-type": "json",
+    "interval": 60,
+    "on-click": "footclient -a footclient-float -T 'Calendar' -e ikhal"
+  }
+}

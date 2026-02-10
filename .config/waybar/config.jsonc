@@ -1,0 +1,71 @@
+[
+  {
+    "height": 34,
+    "include": [
+      "modules/window.jsonc",
+      "modules/workspaces.jsonc",
+      "modules/swaync.jsonc",
+      "modules/calendar-script.jsonc",
+      "modules/submap.jsonc"
+    ],
+    "layer": "top",
+    "margin-left": 10,
+    "margin-right": 10,
+    "margin-top": 5,
+    "modules-center": [
+      "hyprland/workspaces",
+      "hyprland/window"
+    ],
+    "modules-left": [
+      "hyprland/submap"
+    ],
+    "modules-right": [
+      "custom/notification",
+      "custom/calendar-script"
+    ],
+    "output": "DP-1",
+    "position": "top",
+    "reload_style_on_change": true
+  },
+  {
+    "height": 34,
+    "include": [
+      "modules/workspaces.jsonc",
+      "modules/window.jsonc",
+      "modules/tray.jsonc",
+      "modules/gpu-script.jsonc",
+      "modules/disk-script.jsonc",
+      "modules/weather-script.jsonc",
+      "modules/updates-script.jsonc",
+      "modules/pulseaudio.jsonc",
+      "modules/cpu-script.jsonc",
+      "modules/network-script.jsonc",
+      "modules/clock.jsonc"
+    ],
+    "layer": "top",
+    "margin-left": 10,
+    "margin-right": 10,
+    "margin-top": 5,
+    "modules-center": [
+      "custom/cpu-script",
+      "custom/gpu-script",
+      "custom/disk-script",
+      "custom/weather-script",
+      "custom/calendar-script"
+    ],
+    "modules-left": [
+      "hyprland/workspaces",
+      "hyprland/window"
+    ],
+    "modules-right": [
+      "custom/updates-script",
+      "pulseaudio",
+      "tray",
+      "clock",
+      "custom/network-script"
+    ],
+    "output": "DP-2",
+    "position": "top",
+    "reload_style_on_change": true
+  }
+]

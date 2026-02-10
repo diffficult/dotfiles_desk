@@ -1,0 +1,93 @@
+@import "./colors.css";
+
+* {
+  /* font-family: "Maple Mono NF", "Font Awesome 6 Free", "JetBrainsMono Nerd Font"; */
+  font-family:  "JetBrainsMono Nerd Font", "Font Awesome 6 Free";
+  font-size: 16px;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+window#waybar {
+  background: transparent;
+}
+
+#custom-weather,
+#custom-updates,
+#cpu,
+#memory,
+#temperature,
+#disk,
+#network,
+#bluetooth,
+#pulseaudio,
+#tray,
+#workspaces button,
+#window {
+  padding: 0 10px;
+  color: @foreground;
+}
+
+#workspaces button.active {
+  color: @green;
+}
+
+#cpu { color: @red; }
+#memory { color: @peach; }
+#temperature { color: @maroon; }
+#disk { color: @teal; }
+
+#custom-weather { color: @blue; }
+#custom-updates { color: @yellow; }
+
+#network.wifi { color: @green; }
+#network.ethernet { color: @blue; }
+#network.disconnected { color: @red; }
+
+#bluetooth.connected { color: @blue; }
+#bluetooth.disabled { color: @red; }
+
+#pulseaudio.muted { color: @red; }
+#pulseaudio { color: @pink; }
+
+#battery.charging { color: @green; }
+#battery.warning { color: @yellow; }
+#battery.critical { color: @red; }
+
+#custom-cpu-script,
+#custom-gpu-script,
+#custom-disk-script,
+#custom-weather-script {
+  margin: 0 10px;
+}
+
+#custom-updates-script {
+    padding: 0 10px;
+}
+
+#clock {
+    margin-right: 15px;
+    color: @foreground;
+}
+
+tooltip {
+  background: @background;
+  border: 1px solid @foreground;
+}
+
+/* Pill-shaped section backgrounds */
+.modules-left,
+.modules-center,
+.modules-right {
+  background: @background;
+  border-radius: 9999px;
+  margin: 0 5px;
+  padding: 0 15px;
+}
+
+/* Submap mode indicator - highly visible when active */
+#submap {
+  padding: 0 15px;
+  color: @yellow;
+  font-weight: bold;
+}
