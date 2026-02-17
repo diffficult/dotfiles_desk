@@ -40,12 +40,12 @@ ueberzug_offset = [ 0, 0, 0, 0 ]
 # ============================================================================
 # MANAGER SECTION - BASIC FILE MANAGER BEHAVIOR
 # ============================================================================
-[manager]
+[mgr]
 ratio          = [ 1, 2, 4 ]
-# Sort files by name, options: "alphabetical", "natural", "modified", "created", "size"
-sort_by = "modified"
+# Sort files by method, options: "alphabetical", "natural", "mtime", "btime", "extension", "size", "random"
+sort_by = "mtime"
 sort_sensitive = false
-sort_reverse   = false
+sort_reverse   = true
 sort_dir_first = true
 sort_translit  = false
 linemode       = "none"
