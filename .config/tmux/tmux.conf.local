@@ -18,6 +18,8 @@ set-option -g update-environment "DISPLAY SSH_ASKPASS SSH_AUTH_SOCK SSH_AGENT_PI
 
 set -g allow-passthrough on
 
+set -s set-clipboard on
+
 set -ga update-environment TERM
 set -ga update-environment TERM_PROGRAM
 
