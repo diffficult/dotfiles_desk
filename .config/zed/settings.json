@@ -1,5 +1,8 @@
 // Zed settings
 {
+  "edit_predictions": {
+    "provider": "zed"
+  },
   "agent_buffer_font_size": 16.0,
   "agent_ui_font_size": 18.0,
   "context_servers": {
@@ -65,10 +68,6 @@
     },
   },
 
-  "features": {
-    "edit_prediction_provider": "zed",
-  },
-
   // --- old config
   "file_types": {
     "Dockerfile": ["Dockerfile", "Dockerfile.*"],
@@ -121,7 +120,7 @@
   "theme": {
     "mode": "dark",
     "light": "Tokyo Night Storm",
-    "dark": "Tokyo Night Storm",
+    "dark": "Catppuccin Espresso (Blur) [Heavy]",
   },
   "centered_layout": {
     "left_padding": 0.15,
