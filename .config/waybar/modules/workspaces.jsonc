@@ -49,6 +49,7 @@
       "class<subl>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<jetbrains-idea>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<jetbrains-studio>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
+      "class<antigravity>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰲇 </span>",
       "class<dev.zed.Zed>": "<span font_desc='JetBrainsMono Nerd Font 16'>🧠</span>",
       "class<nvim>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<nemo>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
