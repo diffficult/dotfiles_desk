@@ -33,7 +33,6 @@ zstyle ':prezto:load' pmodule-allow-overrides 'yes'
    'environment' \
    'terminal' \
    'editor' \
-   'rsync' \
    'history' \
    'directory' \
    'spectrum' \
@@ -54,6 +53,11 @@ zstyle ':prezto:load' pmodule-allow-overrides 'yes'
    'aichat' \
    'prompt'
 
+# removed because the aliases are dupped by zsh-abbr
+#   'rsync' \
+#   'docker' \
+
+
 #
 # COMPLETION SETTINGS
 #
@@ -68,6 +72,12 @@ zstyle ':completion:*:ssh:*' hosts
 zstyle ':completion:*:(ssh|scp|rsync):*' hosts-host
 zstyle ':completion:*:(ssh|scp|rsync):*' hosts-domain
 zstyle ':completion:*:(ssh|scp|rsync):*' users
+
+#
+# GIT MODULE SETTINGS (disabled aliases because zsh-abbr is already doing the heavy lifting)
+#
+
+zstyle ':prezto:module:git:alias' skip 'yes'
 
 #
 # EDITOR SETTINGS
