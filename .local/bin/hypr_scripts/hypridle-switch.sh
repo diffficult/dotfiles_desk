@@ -25,15 +25,16 @@ if [ "$CURRENT_TARGET" != "$NEW_TARGET" ]; then
     echo "Switching to $MODE mode config"
     ln -sf "$TARGET_CONFIG" "$ACTIVE_CONFIG"
 
-    # Reload hypridle if it's running
-    if pgrep -x hypridle > /dev/null; then
-        pkill -SIGUSR1 hypridle 2>/dev/null || {
-            # If SIGUSR1 doesn't work, restart hypridle
-            pkill hypridle
-            sleep 0.5
-            hypridle &
-        }
-    fi
+    # Restart via systemd — hypridle is managed as a proper user service.
+    # Do NOT use pkill + uwsm/hypridle & here: backgrounded processes get killed
+    # when systemd cleans up this service's cgroup after ExecStart exits.
+    systemctl --user restart hypridle.service
+
+    # Always wake monitors after a config switch. If monitors were in DPMS-off
+    # when hypridle restarted, the new instance has no prior state and on-resume
+    # will never fire. key_press_enables_dpms also won't fire when hyprlock has
+    # the session locked (input goes to lock surface, not compositor pipeline).
+    wlopm --on '*'
 else
     echo "Already using $MODE mode config"
 fi

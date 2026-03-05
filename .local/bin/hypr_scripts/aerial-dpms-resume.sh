@@ -5,9 +5,8 @@
 
 PID_FILE="/tmp/aerial-mpvpaper.pid"
 PLAYLIST_FILE="/tmp/aerial-playlist.m3u"
-
-# Turn monitors back on
-hyprctl dispatch dpms on
+# Turn monitors back on (wlopm uses proper Wayland protocol, more reliable with NVIDIA)
+wlopm --on '*'
 
 # If hyprlock is running and we have a playlist, restart mpvpaper
 if pgrep -x hyprlock > /dev/null && [ -f "$PLAYLIST_FILE" ] && [ -s "$PLAYLIST_FILE" ]; then
