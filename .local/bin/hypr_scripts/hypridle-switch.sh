@@ -25,16 +25,24 @@ if [ "$CURRENT_TARGET" != "$NEW_TARGET" ]; then
     echo "Switching to $MODE mode config"
     ln -sf "$TARGET_CONFIG" "$ACTIVE_CONFIG"
 
-    # Restart via systemd — hypridle is managed as a proper user service.
-    # Do NOT use pkill + uwsm/hypridle & here: backgrounded processes get killed
-    # when systemd cleans up this service's cgroup after ExecStart exits.
-    systemctl --user restart hypridle.service
-
-    # Always wake monitors after a config switch. If monitors were in DPMS-off
-    # when hypridle restarted, the new instance has no prior state and on-resume
-    # will never fire. key_press_enables_dpms also won't fire when hyprlock has
-    # the session locked (input goes to lock surface, not compositor pipeline).
-    wlopm --on '*'
+    if pgrep -x hyprlock > /dev/null; then
+        # Session is locked (user away). Don't restart hypridle — it must keep its
+        # current DPMS state so on-resume fires when the user presses a key.
+        # key_press_enables_dpms does NOT work with wlopm-managed outputs; only
+        # hypridle's on-resume can wake the monitors. Restarting here would lose
+        # the on-timeout state and leave monitors stuck off.
+        # aerial-hyprlock.sh will restart hypridle after unlock so the new config
+        # takes effect immediately when the user logs back in.
+        echo "Session locked: symlink updated, hypridle restart deferred to unlock"
+    else
+        # No lock screen: wake monitors (in case they were off) and restart hypridle
+        # with the new config. Monitors were off without a lock → safe to wake.
+        wlopm --on '*'
+        # Restart via systemd — hypridle is managed as a proper user service.
+        # Do NOT use pkill + uwsm/hypridle & here: backgrounded processes get killed
+        # when systemd cleans up this service's cgroup after ExecStart exits.
+        systemctl --user restart hypridle.service
+    fi
 else
     echo "Already using $MODE mode config"
 fi

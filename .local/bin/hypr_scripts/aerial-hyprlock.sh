@@ -138,3 +138,8 @@ if [ -f "$SWWW_STATE_FILE" ]; then
 
     rm -f "$SWWW_STATE_FILE"
 fi
+
+# Restart hypridle so it picks up any config changes made while the session was
+# locked (the switch timer only updates the symlink when locked, deferring restart).
+# This also resets idle timers cleanly after unlock.
+systemctl --user restart hypridle.service
