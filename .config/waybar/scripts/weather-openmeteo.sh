@@ -45,7 +45,24 @@ readonly ICON_LIGHTNING_RAINY="󰙾 " # nf-md-weather_lightning_rainy (f067e)
 # Using Material Design Weather icons (nf-md-weather_*)
 get_weather_icon_and_color() {
     local code="$1"
-    local hour=$(date +%H)
+    local time_value="$2"
+    local hour=""
+
+    if [[ -n "$time_value" ]]; then
+        if [[ "$time_value" == *T* ]]; then
+            hour="${time_value##*T}"
+        else
+            hour="$time_value"
+        fi
+        hour="${hour%%:*}"
+    else
+        hour=$(date +%H)
+    fi
+
+    if [[ ! "$hour" =~ ^[0-9]{1,2}$ ]]; then
+        hour=12
+    fi
+    hour=$((10#$hour))
 
     # Determine if it's night time (20:00 - 06:00)
     local is_night=0
@@ -392,7 +409,7 @@ show_detailed_view() {
         local orig_idx=${original_indices[$i]}
         if (( orig_idx % 6 == 0 )); then
             # Show weather icon at 6-hour intervals
-            local icon_data=$(get_weather_icon_and_color "${codes[$i]}")
+            local icon_data=$(get_weather_icon_and_color "${codes[$i]}" "${times[$i]}")
             local icon=$(echo "$icon_data" | cut -d'|' -f1)
             chart["$y,$i"]="$icon"
             chart_colors["$y,$i"]="$color"
@@ -466,7 +483,7 @@ show_detailed_view() {
         if [[ "$t" != "null" ]]; then
             local time_str=$(echo "$weather_data" | jq -r ".hourly.time[$hour]" | sed 's/T/ /')
             local code=$(echo "$weather_data" | jq -r ".hourly.weather_code[$hour] // \"0\"")
-            local icon_data=$(get_weather_icon_and_color "$code")
+            local icon_data=$(get_weather_icon_and_color "$code" "$time_str")
             local icon=$(echo "$icon_data" | cut -d'|' -f1)
             local desc=$(get_weather_description "$code")
             local humid=$(echo "$weather_data" | jq -r ".hourly.relative_humidity_2m[$hour] // \"N/A\"")
