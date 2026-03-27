@@ -1,0 +1,177 @@
+;; Calendar popup widget for Waybar
+;; Polls ~/.cache/waybar/gcal/state.json every 500ms
+
+(defpoll calendar-state
+  :interval "500ms"
+  `cat ~/.cache/waybar/gcal/state.json 2>/dev/null || echo '{"month_label":"","selected_day":"","selected_day_label":"","selected_events":[],"loading":false,"stale":false,"error":null,"weeks":[]}'`)
+
+(defpoll cal-month-label
+  :interval "500ms"
+  `python3 -c "import json; print(json.load(open('/home/rx/.cache/waybar/gcal/state.json')).get('month_label',''))" 2>/dev/null`)
+
+(defwindow calendar-window
+  :monitor 0
+  :geometry (geometry
+    :x "-15px"
+    :y "40px"
+    :width "780px"
+    :height "540px"
+    :anchor "top right")
+  :stacking "overlay"
+  :exclusive false
+  :focusable true
+  (calendar-root))
+
+;; ── Root container ───────────────────────────────────────────────────────────
+
+(defwidget calendar-root []
+  (box
+    :class "cal-root"
+    :orientation "horizontal"
+    :space-evenly false
+    (box
+      :class "cal-left"
+      :orientation "vertical"
+      :space-evenly false
+      :hexpand false
+      (calendar-header)
+      (calendar-weekday-labels)
+      (calendar-grid))
+    (day-detail-panel)))
+
+;; ── Header ────────────────────────────────────────────────────────────────────
+
+(defwidget calendar-header []
+  (box
+    :class "cal-header"
+    :orientation "horizontal"
+    :space-evenly false
+    (label
+      :class "cal-month-label"
+      :hexpand true
+      :halign "start"
+      :text {cal-month-label})
+    (button
+      :class "cal-today-btn"
+      :onclick "~/.config/waybar/scripts/calendar_daemon.py --init &"
+      "Today")
+    (button
+      :class "cal-nav-btn"
+      :onclick "~/.config/waybar/scripts/calendar_daemon.py --prev &"
+      "◀")
+    (button
+      :class "cal-nav-btn"
+      :onclick "~/.config/waybar/scripts/calendar_daemon.py --next &"
+      "▶")
+    (button
+      :class "cal-close-btn"
+      :onclick "eww -c ~/.config/eww/calendar close calendar-window"
+      "✕")))
+
+;; ── Weekday header row ────────────────────────────────────────────────────────
+
+(defwidget calendar-weekday-labels []
+  (box
+    :class "cal-weekdays"
+    :space-evenly true
+    (label :class "cal-weekday" :text "MON")
+    (label :class "cal-weekday" :text "TUE")
+    (label :class "cal-weekday" :text "WED")
+    (label :class "cal-weekday" :text "THU")
+    (label :class "cal-weekday" :text "FRI")
+    (label :class "cal-weekday" :text "SAT")
+    (label :class "cal-weekday" :text "SUN")))
+
+;; ── Month grid (row-based) ────────────────────────────────────────────────────
+
+(defwidget calendar-grid []
+  (box
+    :class "cal-grid"
+    :orientation "vertical"
+    :space-evenly false
+    (for week in {calendar-state.weeks}
+      (calendar-week-row :week week))))
+
+(defwidget calendar-week-row [week]
+  (box
+    :class "cal-week"
+    :orientation "horizontal"
+    :space-evenly true
+    (for day in {week}
+      (calendar-day-cell :day day))))
+
+(defwidget calendar-day-cell [day]
+  (button
+    :class "cal-day ${day.in_month ? '' : 'out-of-month'} ${day.date == calendar-state.selected_day ? 'selected' : ''} ${day.is_today ? 'today' : ''}"
+    :onclick "~/.config/waybar/scripts/calendar_daemon.py --select ${day.date} &"
+    (box
+      :orientation "vertical"
+      :space-evenly false
+      :class "cal-day-inner"
+      (label
+        :class "cal-day-num"
+        :halign "start"
+        :text {day.date_num})
+      (box
+        :class "cal-icons"
+        :halign "center"
+        :space-evenly false
+        (for icon-entry in {day.icons}
+          (label
+            :class "cal-icon"
+            :style "color: ${icon-entry.color};"
+            :text {icon-entry.icon}))
+        (label
+          :class "cal-overflow"
+          :visible {day.overflow > 0}
+          :text "+${day.overflow}")))))
+
+;; ── Day detail panel ──────────────────────────────────────────────────────────
+
+(defwidget day-detail-panel []
+  (box
+    :class "cal-detail"
+    :orientation "vertical"
+    :space-evenly false
+    :hexpand true
+    (label
+      :class "cal-detail-header"
+      :halign "start"
+      :text {calendar-state.selected_day_label})
+    (box :class "cal-detail-divider")
+    (box
+      :class "cal-detail-events"
+      :orientation "vertical"
+      :space-evenly false
+      (label
+        :class "cal-detail-empty"
+        :halign "start"
+        :visible {arraylength(calendar-state.selected_events) == 0}
+        :text "No events")
+      (box
+        :orientation "vertical"
+        :visible {arraylength(calendar-state.selected_events) > 0}
+        (for event in {calendar-state.selected_events}
+          (detail-event-row :event event))))))
+
+(defwidget detail-event-row [event]
+  (box
+    :class "cal-event-row"
+    :orientation "horizontal"
+    :space-evenly false
+    (label
+      :class "cal-event-icon"
+      :style "color: ${event.color};"
+      :text {event.icon})
+    (box
+      :orientation "vertical"
+      :space-evenly false
+      :hexpand true
+      (label
+        :class "cal-event-title"
+        :halign "start"
+        :text {event.title})
+      (label
+        :class "cal-event-time"
+        :halign "start"
+        :text "${event.start_time}${event.end_time != '' ? ' – ' + event.end_time : ''}"))))
