@@ -31,9 +31,9 @@ if [ "$CURRENT_TARGET" != "$NEW_TARGET" ]; then
         # key_press_enables_dpms does NOT work with wlopm-managed outputs; only
         # hypridle's on-resume can wake the monitors. Restarting here would lose
         # the on-timeout state and leave monitors stuck off.
-        # aerial-hyprlock.sh will restart hypridle after unlock so the new config
-        # takes effect immediately when the user logs back in.
-        echo "Session locked: symlink updated, hypridle restart deferred to unlock"
+        # The new config will be picked up on the next explicit hypridle restart
+        # or new session, which is safer than racing the unlock path.
+        echo "Session locked: symlink updated, hypridle restart deferred"
     else
         # No lock screen: wake monitors (in case they were off) and restart hypridle
         # with the new config. Monitors were off without a lock → safe to wake.
