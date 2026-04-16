@@ -4,7 +4,7 @@
 # A standalone power menu using rofi
 
 # Power menu options with icons
-OPTIONS=" Lock\n󰹑 Screensaver\n󰍃 Logout\n󰜉 Reboot\n󰐥 Shutdown"
+OPTIONS="  Lock\n󰹑  Screensaver\n󰍃  Logout\n󰜉  Reboot\n󰐥  Shutdown"
 
 # Show rofi menu and capture selection
 SELECTED=$(echo -e "$OPTIONS" | rofi -dmenu -i -p "Power menu" -theme-str 'window {width: 300px;}')
@@ -59,7 +59,7 @@ case "$SELECTED" in
     
     *Logout*)
         # Logout from Hyprland
-        CONFIRM=$(echo -e "Yes\nNo" | rofi -dmenu -i -p "Confirm Logout?")
+        CONFIRM=$(echo -e "  Yes\n  No" | rofi -dmenu -i -p "Confirm Logout?" -theme-str 'window {width: 220px; height: 168px;}')
         if [[ "$CONFIRM" == "Yes" ]]; then
             hyprctl dispatch exit
         fi
@@ -67,7 +67,7 @@ case "$SELECTED" in
     
     *Reboot*)
         # Reboot the system
-        CONFIRM=$(echo -e "Yes\nNo" | rofi -dmenu -i -p "Confirm Reboot?")
+        CONFIRM=$(echo -e "  Yes\n  No" | rofi -dmenu -i -p "Confirm Reboot?" -theme-str 'window {width: 220px; height: 168px;}')
         if [[ "$CONFIRM" == "Yes" ]]; then
             exec "$HOME/.local/bin/hypr_scripts/hypr-cmd-reboot"
         fi
@@ -75,7 +75,7 @@ case "$SELECTED" in
     
     *Shutdown*)
         # Shutdown the system
-        CONFIRM=$(echo -e "Yes\nNo" | rofi -dmenu -i -p "Confirm Shutdown?")
+        CONFIRM=$(echo -e "  Yes\n  No" | rofi -dmenu -i -p "Confirm Shutdown?" -theme-str 'window {width: 240px; height: 168px;}')
         if [[ "$CONFIRM" == "Yes" ]]; then
             exec "$HOME/.local/bin/hypr_scripts/hypr-cmd-shutdown"
         fi
