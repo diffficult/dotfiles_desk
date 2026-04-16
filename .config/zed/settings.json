@@ -25,10 +25,7 @@
 
   // --- CLI LLMs ---
   "agent_servers": {
-    "gemini": {
-      "command": "/home/rx/.local/npm-global/bin/gemini",
-      // "args": ["--acp"]
-    },
+    
   },
 
   // --- AI Config & models ---
@@ -37,8 +34,8 @@
     "enable_experimental_live_diffs_in_editor": true,
     "enable_experimental_live_diffs_in_terminal": true,
     "default_model": {
-      "provider": "google",
-      "model": "gemini-2.5-pro",
+      "provider": "openai",
+      "model": "gpt-5.4",
     },
   },
 
@@ -120,7 +117,7 @@
   "theme": {
     "mode": "dark",
     "light": "Tokyo Night Storm",
-    "dark": "Catppuccin Espresso (Blur) [Heavy]",
+    "dark": "Catppuccin Macchiato (Blur) [Heavy]",
   },
   "centered_layout": {
     "left_padding": 0.15,
