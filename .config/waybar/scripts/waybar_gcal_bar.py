@@ -55,7 +55,7 @@ def build_bar_output(events: list, stale: bool) -> dict:
         }
 
     return {
-        "text": "<span size='14pt'>󰃮 </span>",
+        "text": "<span size='14pt'>\uf274 </span>",
         "tooltip": "No events today",
         "class": "calendar-empty",
         "alt": "0",

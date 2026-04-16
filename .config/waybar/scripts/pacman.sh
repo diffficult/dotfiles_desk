@@ -177,12 +177,12 @@ CACHE_AGE=$(get_cache_age)
 # Build output based on update count
 if [[ $ALL_COUNT -eq 0 ]]; then
     # No updates available
-    TOOLTIP="✅ System Up to Date\n\n"
+    TOOLTIP="  System Up to Date\n\n"
     TOOLTIP+="Last Check: ${CACHE_AGE}\n\n"
     TOOLTIP+="Actions:\n"
     TOOLTIP+="• Click to force refresh"
 
-    echo "{\"text\":\"<span font='JetBrainsMono Nerd Font 14'>✅</span>\",\"tooltip\":\"${TOOLTIP}\",\"class\":\"up-to-date\"}"
+    echo "{\"text\":\"<span font='JetBrainsMono Nerd Font 14'> </span>\",\"tooltip\":\"${TOOLTIP}\",\"class\":\"up-to-date\"}"
 else
     # Updates available
     TOOLTIP="📦 Updates Available: ${ALL_COUNT}\n\n"

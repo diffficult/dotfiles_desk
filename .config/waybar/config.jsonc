@@ -6,7 +6,8 @@
       "modules/workspaces.jsonc",
       "modules/swaync.jsonc",
       "modules/calendar-script.jsonc",
-      "modules/submap.jsonc"
+      "modules/submap.jsonc",
+      "modules/screen-recording.jsonc"
     ],
     "layer": "top",
     "margin-left": 10,
@@ -17,7 +18,8 @@
       "hyprland/window"
     ],
     "modules-left": [
-      "hyprland/submap"
+      "hyprland/submap",
+      "custom/screen-recording"
     ],
     "modules-right": [
       "custom/notification",

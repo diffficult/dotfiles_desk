@@ -32,7 +32,7 @@ CREDS_PATH = Path(
         str(Path.home() / ".config" / "waybar" / "calendar_cred.json"),
     )
 )
-CACHE_TTL_HOURS = 4
+CACHE_TTL_HOURS = 24
 
 CALENDAR_COLORS = {
     "Personal": "#dd7878",
@@ -303,6 +303,34 @@ def action_next() -> None:
 
 def action_select(date_str: str) -> None:
     year, month = int(date_str[:4]), int(date_str[5:7])
+    current_month = f"{year:04d}-{month:02d}"
+    state = load_state()
+
+    # Fast path: same month, grid already in state — just swap selected day
+    if state.get("current_month") == current_month and state.get("weeks"):
+        selected_events = []
+        for week in state["weeks"]:
+            for day in week:
+                if day["date"] == date_str:
+                    selected_events = list(day.get("events", []))
+                    break
+        # Backfill icon in case cache predates the icon field
+        for ev in selected_events:
+            if "icon" not in ev:
+                ev["icon"] = CALENDAR_ICONS.get(ev.get("calendar", ""), DEFAULT_ICON)
+        state["selected_day"] = date_str
+        state["selected_day_label"] = _day_label(date_str)
+        state["selected_events"] = selected_events
+        CACHE_DIR.mkdir(parents=True, exist_ok=True)
+        with tempfile.NamedTemporaryFile(
+            mode="w", dir=CACHE_DIR, delete=False, suffix=".tmp"
+        ) as f:
+            f.write(json.dumps(state))
+            tmp = f.name
+        os.replace(tmp, STATE_PATH)
+        return
+
+    # Slow path: different month, need full load/fetch
     write_state(year, month, date_str)
 
 

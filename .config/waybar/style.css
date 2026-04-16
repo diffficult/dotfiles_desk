@@ -65,6 +65,18 @@ window#waybar {
     padding: 0 10px;
 }
 
+#custom-screen-recording {
+  min-width: 12px;
+  margin-left: 5px;
+  margin-right: 0;
+  font-size: 10px;
+  padding-bottom: 1px;
+}
+
+#custom-screen-recording.active {
+  color: @red;
+}
+
 #clock {
     margin-right: 15px;
     color: @foreground;
