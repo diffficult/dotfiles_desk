@@ -407,13 +407,13 @@ alias pbnoformatting='xclip -selection clipboard -o | xclip -selection clipboard
 
 # dump text from clipboard to pastebin server and copy link
 alias pbclipboard2slexy='pbpaste | pastebinit -b "slexy.org" | pbcopy && echo "URL has been copied to clipboard" && pbpaste'
-alias pbclipboard2sprungeus="pbpaste | curl -F 'sprunge=<-' http://sprunge.us | pbcopy && echo 'URL has been copied to clipboard' && pbpaste"
-alias pbclipboard2ixio="pbpaste | curl -F 'f:1=<-' ix.io | pbcopy && echo 'URL has been copied to clipboard' && pbpaste"
+alias pbclipboard2sprungeus="pbpaste | command curl -F 'sprunge=<-' http://sprunge.us | pbcopy && echo 'URL has been copied to clipboard' && pbpaste"
+alias pbclipboard2ixio="pbpaste | command curl -F 'f:1=<-' ix.io | pbcopy && echo 'URL has been copied to clipboard' && pbpaste"
 alias pbclipboard2pastebindotcom='pbpaste | pastebinit -b "pastebin.com" | pbcopy && echo "URL has been copied to clipboard" && pbpaste'
 
 alias pbuploadslexy='pbpaste | pastebinit -b "slexy.org" | pbcopy && echo "URL has been copied to clipboard" && pbpaste'
-alias pbuploadsprungeus="cat "$@" | curl -F 'sprunge=<-' http://sprunge.us | pbcopy && echo 'URL has been copied to clipboard' && pbpaste"
-alias pbuploadixio="cat "$1" | curl -F 'f:1=<-' ix.io | pbcopy && echo 'URL has been copied to clipboard' && pbpaste"
+alias pbuploadsprungeus="cat "$@" | command curl -F 'sprunge=<-' http://sprunge.us | pbcopy && echo 'URL has been copied to clipboard' && pbpaste"
+alias pbuploadixio="cat "$1" | command curl -F 'f:1=<-' ix.io | pbcopy && echo 'URL has been copied to clipboard' && pbpaste"
 
 # }}}
 
@@ -423,15 +423,15 @@ alias pbuploadixio="cat "$1" | curl -F 'f:1=<-' ix.io | pbcopy && echo 'URL has 
 # DESC: Network and internet-related aliases and functions
 
 # Check if a website is down
-down4me() { curl -s "http://downforeveryoneorjustme.com/$1" | sed '/just you/!d;s/<[^>]*>//g' ;}
+down4me() { command curl -s "http://downforeveryoneorjustme.com/$1" | sed '/just you/!d;s/<[^>]*>//g' ;}
 
 # Weather information
-alias weather='curl wttr.in/$LOCATION'
-alias wttr='curl wttr.in'
-alias wttr-help='curl wttr.in/:help'
+alias weather='command curl wttr.in/$LOCATION'
+alias wttr='command curl wttr.in'
+alias wttr-help='command curl wttr.in/:help'
 
 # Network tools
-alias myip='curl http://ipecho.net/plain; echo'
+alias myip='command curl -s http://ipecho.net/plain; echo'
 alias ping='ping -c 5'
 alias speedtest='speedtest-cli'
 alias ports='netstat -tulanp'
@@ -467,7 +467,7 @@ fzfedit() { locate $1 | fzf | xargs -n 1 nvim ;}
 cpbak() { cp $1{,.bak} ;}
 
 # Check if a website is down
-down4me() { curl -s "http://downforeveryoneorjustme.com/$1" | sed '/just you/!d;s/<[^>]*>//g' ;}
+down4me() { command curl -s "http://downforeveryoneorjustme.com/$1" | sed '/just you/!d;s/<[^>]*>//g' ;}
 
 # Kill all zombie processes
 killall-zombies() { kill -HUP $(ps -A -ostat,ppid | grep -e '[zZ]'| awk '{ print $2 }') ;}
@@ -497,10 +497,13 @@ file-type() { file --mime-type -b "$@" ;}
 function :h { vim +":h $1" +'wincmd o' +'nnoremap q :q!<CR>' ;}
 
 # Display a random command from commandlinefu.com
-cmdfu-random() { echo -e "`curl -sL https://www.commandlinefu.com/commands/random/json|sed -re 's/.*,"command":"(.*)","summary":"([^"]+).*/\\x1b[1;32m\2\\n\\n\\x1b[1;33m\1\\x1b[0m/g'`\n" ;}
+cmdfu-random() { echo -e "`command curl -sL https://www.commandlinefu.com/commands/random/json|sed -re 's/.*,"command":"(.*)","summary":"([^"]+).*/\\x1b[1;32m\2\\n\\n\\x1b[1;33m\1\\x1b[0m/g'`\n" ;}
 
 # Convert WebM videos to MP4 format
 webm2mp4() {for i in *.webm; do ffmpeg -i "$i" -vf "crop=trunc(iw/2)*2:trunc(ih/2)*2" -c:v libx264 -preset slow -crf 22 -c:a copy "${i%.*}.mp4"; done ;}
+
+# Convert WebM videos to MP4 format that are X Twitter safe
+webm2mp4x() { ffmpeg -i "$1" -c:v libx264 -pix_fmt yuv420p -preset fast -crf 23 -c:a aac -b:a 128k -movflags +faststart "${1%.webm}.mp4"; }
 
 # Search for files in specific directories, select with fzf, and open in Code
 se() { du -a ~/bin/* ~/.scripts/* ~/.scripts/tools/* ~/.config/i3/myblocks/* ~/.config/i3/blocks/* | awk '{print $2}' | fzf | xargs -r code ;}
@@ -560,9 +563,9 @@ alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME'
 #------------------------------------------------------
 #
 
-alias btcprice='curl -s https://rate.sx/BTC'
-alias ethprice='curl -s https://rate.sx/ETH'
-alias zrxprice='curl -s https://rate.sx/ZRX'
+alias btcprice='command curl -s https://rate.sx/BTC'
+alias ethprice='command curl -s https://rate.sx/ETH'
+alias zrxprice='command curl -s https://rate.sx/ZRX'
 
 # }}}
 
