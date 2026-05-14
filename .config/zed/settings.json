@@ -1,5 +1,14 @@
 // Zed settings
 {
+  "outline_panel": {
+    "dock": "left"
+  },
+  "collaboration_panel": {
+    "dock": "left"
+  },
+  "git_panel": {
+    "dock": "left"
+  },
   "edit_predictions": {
     "provider": "zed"
   },
@@ -25,11 +34,17 @@
 
   // --- CLI LLMs ---
   "agent_servers": {
-    
+    "pi-acp": {
+      "type": "registry"
+    },
+    "opencode": {
+      "type": "registry"
+    }
   },
 
   // --- AI Config & models ---
   "agent": {
+    "dock": "right",
     "enable_experimental_live_diffs": true,
     "enable_experimental_live_diffs_in_editor": true,
     "enable_experimental_live_diffs_in_terminal": true,
