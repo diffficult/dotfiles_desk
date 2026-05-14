@@ -1,2 +1,15 @@
 [flavor]
 dark = "catppuccin-macchiato"
+
+[icon]
+prepend_globs = [
+  { url = "/home/rx/Projects/", text = "" },
+]
+
+prepend_dirs = [
+  { name = "Dropbox", text = "" },
+  { name = "Mega", text = "" },
+  { name = "Misc", text = "󰈙" },
+  { name = "Syncthing", text = "󱍸" },
+  { name = "VMs", text = "󰢹" },
+]
