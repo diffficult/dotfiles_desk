@@ -7,7 +7,8 @@
       "modules/swaync.jsonc",
       "modules/calendar-script.jsonc",
       "modules/submap.jsonc",
-      "modules/screen-recording.jsonc"
+      "modules/screen-recording.jsonc",
+      "modules/cams-colegio.jsonc"
     ],
     "layer": "top",
     "margin-left": 10,
@@ -19,7 +20,8 @@
     ],
     "modules-left": [
       "hyprland/submap",
-      "custom/screen-recording"
+      "custom/screen-recording",
+      "custom/cams-colegio"
     ],
     "modules-right": [
       "custom/notification",
@@ -52,8 +54,7 @@
       "custom/cpu-script",
       "custom/gpu-script",
       "custom/disk-script",
-      "custom/weather-script",
-      "custom/calendar-script"
+      "custom/weather-script"
     ],
     "modules-left": [
       "hyprland/workspaces",
