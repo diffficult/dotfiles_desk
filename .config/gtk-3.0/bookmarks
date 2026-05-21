@@ -10,3 +10,4 @@ smb://10.0.10.6/pi4book/ library@home
 smb://10.0.10.11/media/ media@blackdisk
 smb://10.0.10.11/download/ download@blackdisk
 smb://10.0.10.11/media2/ anime@blackdisk
+smb://10.0.10.100/store/ store@disavowed
