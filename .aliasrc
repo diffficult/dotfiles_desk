@@ -587,7 +587,7 @@ alias long-time-no-update="sudo pacman -Sy archlinux-keyring --needed && sudo pa
 
 #alias wall-skull='feh --bg-fill ~/Pictures/just-another-skull.jpg'
 
-
+alias opencode-webui="opencode serve --hostname 127.0.0.1 --port 4096"
 ### find  -name '*fanart.jpg' -exec mogrify -resize 1920x1080\> {} \;
 
 # easy-mount() {
