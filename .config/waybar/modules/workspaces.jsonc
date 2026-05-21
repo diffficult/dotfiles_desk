@@ -8,6 +8,11 @@
     "format-window-separator": " ",
     "window-rewrite-default": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
     "window-rewrite": {
+      // warmind-webapps:start
+      // warmind-webapp:gmail:start
+      "class<brave-www.gmail.com__-Default>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰊫</span>",
+      // warmind-webapp:gmail:end
+      // warmind-webapps:end
 //      "class<dev.zed.Zed>": "󰰸",
       "class<sublime_text>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<swayimg>": "<span font_desc='JetBrainsMono Nerd Font 16'>󱢉</span>",
@@ -27,8 +32,16 @@
       "class<firefox> title<.*github.*>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<google-chrome>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<google-chrome-unstable>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
+      "class<brave-word\\.cloud\\.microsoft__-Default>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
+      "class<brave-excel\\.cloud\\.microsoft__-Default>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<brave-browser>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
-      "class<chrome-grok.com__-Default>": "<span font_desc='JetBrainsMono Nerd Font 16'>󱜻</span>",
+      "class<chrome-grok.com__-Default>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰯿</span>",
+      "class<brave-grok.com__-Default>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰯿</span>",
+      "class<brave-www.chatgpt.com__-Default>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰧑</span>",
+      "class<brave-stitch.withgoogle.com__-Default>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
+      "class<brave-labs.google__fx_tools_flow-Default>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰍫</span>",
+      "class<chrome-gemini.google.com__-Default>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰫢</span>",
+      "class<brave-gemini.google.com__-Default>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰫢</span>",
       "class<zen-beta>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰰸</span>",
       "class<zen-browser>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰰸</span>",
       "class<TelegramDesktop>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
