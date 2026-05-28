@@ -12,6 +12,12 @@
       // warmind-webapp:gmail:start
       "class<brave-www.gmail.com__-Default>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰊫</span>",
       // warmind-webapp:gmail:end
+      // warmind-webapp:claude:start
+      "class<brave-claude.ai__-Default>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
+      // warmind-webapp:claude:end
+      // warmind-webapp:proton-mail:start
+      "class<brave-mail.proton.me__-Default>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰗰</span>",
+      // warmind-webapp:proton-mail:end
       // warmind-webapps:end
 //      "class<dev.zed.Zed>": "󰰸",
       "class<sublime_text>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
@@ -96,6 +102,7 @@
       "class<thunderbird>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<rustdesk>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<anydesk>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
+      "class<winboat>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<virt-manager>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<blueman-manager>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<pavucontrol>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
