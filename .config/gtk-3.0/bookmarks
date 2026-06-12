@@ -11,3 +11,4 @@ smb://10.0.10.11/media/ media@blackdisk
 smb://10.0.10.11/download/ download@blackdisk
 smb://10.0.10.11/media2/ anime@blackdisk
 smb://10.0.10.100/store/ store@disavowed
+smb://10.0.10.100/downloads/ downloads@disavowed
