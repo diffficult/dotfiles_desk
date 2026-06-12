@@ -7,8 +7,7 @@
       "modules/swaync.jsonc",
       "modules/calendar-script.jsonc",
       "modules/submap.jsonc",
-      "modules/screen-recording.jsonc",
-      "modules/cams-colegio.jsonc"
+      "modules/screen-recording.jsonc"
     ],
     "layer": "top",
     "margin-left": 10,
@@ -20,8 +19,7 @@
     ],
     "modules-left": [
       "hyprland/submap",
-      "custom/screen-recording",
-      "custom/cams-colegio"
+      "custom/screen-recording"
     ],
     "modules-right": [
       "custom/notification",
