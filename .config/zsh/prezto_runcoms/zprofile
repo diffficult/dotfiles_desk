@@ -98,6 +98,10 @@ fi
 if [ -d "$HOME/.local/share/cargo/bin" ] && (! echo $PATH | grep -q "$HOME/.local/share/cargo/bin"); then
   export PATH="$HOME/.local/share/cargo/bin:$PATH"
 fi
+# ensure standalone opencode wins over any older npm-global install
+if [ -d "$HOME/.opencode/bin" ] && (! echo $PATH | grep -q "$HOME/.opencode/bin"); then
+  export PATH="$HOME/.opencode/bin:$PATH"
+fi
 # add npm-global bin
 if [ -d "$NPM_GLOBAL/bin" ] && (! echo $PATH | grep -q "$NPM_GLOBAL/bin"); then
   export PATH="$NPM_GLOBAL/bin:$PATH"
