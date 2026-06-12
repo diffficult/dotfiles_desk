@@ -14,22 +14,10 @@ else
     VIDURL=$(xclip -o)
 fi
 
-# Function to run a command in a new st instance
-run_st() {
-    st -T "720p stream" -e zsh -c "$* ; read -p 'Press Enter to close...'" &
-    sleep 0.1
-    if [[ "$SESSION_TYPE" == "wayland" ]]; then
-        if command -v swaymsg >/dev/null 2>&1; then
-            swaymsg '[title="720p stream"] move scratchpad' >/dev/null 2>&1
-        fi
-    else
-        xdotool search --sync --name "720p stream" windowminimize %@
-    fi
-}
-
 notify-send --app-name="Youtube (mpv)" -t 3500 'Streaming @ 720p' --icon="/usr/share/icons/Nordzy/apps/scalable/youtube.svg" && paplay ~/.local/bin/hypr_scripts/nothing_sounds/ui/KeypressSpacebar.ogg
 
-run_st "mpv '$VIDURL' --ytdl --ytdl-format='bestvideo[height=720]+bestaudio/bestvideo[height<=720]+bestaudio/best' --ytdl-raw-options=cookies=~/.local/bin/cookies.txt --volume=75 --no-resume-playback"
+VIDURL_PATH="${VIDURL#https://www.youtube.com}"
+mpv --title="720p - $VIDURL_PATH" --ytdl --ytdl-format='bestvideo[height=720]+bestaudio/bestvideo[height<=720]+bestaudio/best' --ytdl-raw-options=cookies=~/.local/bin/cookies.txt --volume=75 --no-resume-playback "$VIDURL"
 
 
 # cookies=cookies.txt
