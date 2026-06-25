@@ -5,9 +5,9 @@
       "modules/window.jsonc",
       "modules/workspaces.jsonc",
       "modules/swaync.jsonc",
-      "modules/calendar-script.jsonc",
       "modules/submap.jsonc",
-      "modules/screen-recording.jsonc"
+      "modules/screen-recording.jsonc",
+      "modules/warmind-calendar.jsonc"
     ],
     "layer": "top",
     "margin-left": 10,
@@ -23,7 +23,7 @@
     ],
     "modules-right": [
       "custom/notification",
-      "custom/calendar-script"
+      "custom/warmind-calendar"
     ],
     "output": "DP-1",
     "position": "top",
