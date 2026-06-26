@@ -66,13 +66,13 @@ keymap = [
 	{ on = "_",         run = "link --relative",             desc = "Symlink the relative path of yanked files" },
 	{ on = "<C-->",     run = "hardlink",                    desc = "Hardlink yanked files" },
 	{ on = "Y",         run = "unyank",                      desc = "Cancel the yank status" },
-	{ on = "<C-y>",     run = "shell --confirm '{ cat \"$1\"; } | xclip -selection clipboard'", desc = "Copy file contents" },
+	{ on = "<C-y>",     run = "shell --confirm '{ cat \"$1\"; } | wl-copy'", desc = "Copy file contents" },
   { on = "X",         run = "unyank",                      desc = "Cancel the yank status" },
 	{ on = "d",         run = "remove",                      desc = "Trash selected files" },
 	{ on = "D",         run = "remove --permanently",        desc = "Permanently delete selected files" },
 	{ on = "a",         run = "create",                      desc = "Create a file (ends with / for directories)" },
 	{ on = "r",         run = "rename --cursor=before_ext",  desc = "Rename selected file(s)" },
-	{ on = "C",         run = "plugin ouch --args=compress", desc = "Compress selected files with ouch" },
+	{ on = "C",         run = "plugin ouch compress",         desc = "Compress selected files with ouch" },
 	{ on = ";",         run = "shell --interactive",         desc = "Run a shell command" },
 	{ on = ":",         run = "shell --block --interactive", desc = "Run a shell command (block until finishes)" },
 	{ on = ".",         run = "hidden toggle",               desc = "Toggle the visibility of hidden files" },
@@ -81,9 +81,9 @@ keymap = [
 	{ on = "<C-s>",     run = "escape --search",             desc = "Cancel the ongoing search" },
 	{ on = "z",         run = "plugin zoxide",               desc = "Jump to a directory using zoxide" },
 	{ on = "Z",         run = "plugin fzf",                  desc = "Jump to a directory or reveal a file using fzf" },
-	{ on = "'",         run = "plugin yamb --args=jump",     desc = "Jump to a bookmark" },
-	{ on = [ "g", "b" ], run = "plugin yamb --args=save",    desc = "Save current directory as bookmark" },
-	{ on = [ "g", "d" ], run = "shell --block 'target=\"${1:-$PWD}\"; [ -d \"$target\" ] || target=\"$PWD\"; clear; dust -- \"$target\"; printf \"\\nPress Enter to return...\"; read _'", desc = "Show directory breakdown with dust" },
+	{ on = "'",         run = "plugin yamb jump",            desc = "Jump to a bookmark" },
+	{ on = [ "g", "b" ], run = "plugin yamb save",            desc = "Save current directory as bookmark" },
+	{ on = [ "g", "D" ], run = "shell --block 'target=\"${1:-$PWD}\"; [ -d \"$target\" ] || target=\"$PWD\"; clear; dust -- \"$target\"; printf \"\\nPress Enter to return...\"; read _'", desc = "Show directory breakdown with dust" },
 	{ on = [ "g", "s" ], run = "shell --block 'target=\"${1:-$PWD}\"; [ -d \"$target\" ] || target=\"$PWD\"; clear; du -sh -- \"$target\"; printf \"\\nPress Enter to return...\"; read _'", desc = "Show directory size with du -sh" },
 
 	# Linemode
@@ -165,9 +165,6 @@ keymap = [
   { on = [ "g", "p" ], run = "plugin toggle-pane min-parent", desc = "Toggle parent pane visibility" },
   { on = [ "g", "P" ], run = "plugin toggle-pane min-preview", desc = "Toggle preview pane visibility" },
   { on = [ "g", "m" ], run = "plugin toggle-pane max-preview", desc = "Maximize preview pane" },
-
-  #Dropping to shell
-  { on = "<C-s>", run = "shell '$SHELL' --block --confirm", desc = "Open zshell here"},
 
 ]
 
