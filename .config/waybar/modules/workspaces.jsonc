@@ -18,12 +18,6 @@
       // warmind-webapp:proton-mail:start
       "class<brave-mail.proton.me__-Default>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰗰</span>",
       // warmind-webapp:proton-mail:end
-      // warmind-webapp:santander-empresas:start
-      "class<brave-empresas.santander.com.ar__-Default>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
-      // warmind-webapp:santander-empresas:end
-      // warmind-webapp:paramount-plus:start
-      "class<brave-www.paramountplus.com__-Default>": "<span font_desc='JetBrainsMono Nerd Font 16'> </span>",
-      // warmind-webapp:paramount-plus:end
       // warmind-webapps:end
 //      "class<dev.zed.Zed>": "󰰸",
       "class<sublime_text>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",

@@ -5,12 +5,13 @@ dark = "catppuccin-macchiato"
 # NOTE: Hardcoded to /home/rx — yazi url globs do NOT expand $HOME.
 # Adapt the path below if your home directory differs.
 prepend_globs = [
-  { url = "/home/rx/Projects/", text = "" },
+  { url = "/home/rx/Projects/", text = "" },
 ]
 
 prepend_dirs = [
-  { name = "Dropbox", text = "" },
+  { name = "/home/rx/Projects/", text = "" },
   { name = "Mega", text = "" },
+  { name = "Dropbox", text = "" },
   { name = "Misc", text = "󰈙" },
   { name = "Syncthing", text = "󱍸" },
   { name = "VMs", text = "󰢹" },
