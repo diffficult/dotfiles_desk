@@ -230,3 +230,10 @@ case ":$PATH:" in
   *":/home/rx/.opencode/bin:"*) ;;
   *) export PATH="/home/rx/.opencode/bin:$PATH" ;;
 esac
+
+
+
+# Warmind CLI completions — auto-installed by warmind installer
+if [[ -f "/home/rx/.config/warmind/cli/completion.zsh" ]]; then
+  source "/home/rx/.config/warmind/cli/completion.zsh"
+fi

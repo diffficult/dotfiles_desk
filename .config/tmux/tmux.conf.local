@@ -506,6 +506,8 @@ set -g @plugin 'sainnhe/tmux-fzf'
 set -g @plugin 'omerxx/tmux-sessionx'
 set -g @plugin 'fcsonline/tmux-thumbs'
 set -g @plugin 'roosta/tmux-fuzzback'
+set -g @plugin 'schasse/tmux-jump'
+set -g @jump-key 'g'
 
 set -g @plugin 'omerxx/tmux-floax'
 
