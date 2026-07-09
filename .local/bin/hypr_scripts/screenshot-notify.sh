@@ -48,4 +48,15 @@ if [[ "$target" == "clipboard" ]]; then
   exit 0
 fi
 
+if [[ "$target" == "satty-clipboard" ]]; then
+  if [[ "$mode" != "region" ]]; then
+    exit 1
+  fi
+
+  grim -g "$(slurp)" - | satty --filename - --copy-command wl-copy --actions-on-enter save-to-clipboard,exit --early-exit copy
+  paplay --volume=42598 "$sound_file" || true
+  notify-send --app-name="$app_name" --icon="$icon_name" -t "$timeout_ms" "Screenshot (${mode})" "Annotated image copied to clipboard"
+  exit 0
+fi
+
 exit 1
