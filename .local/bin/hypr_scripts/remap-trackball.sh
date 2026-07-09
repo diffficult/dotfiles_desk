@@ -25,7 +25,7 @@ VIRTUAL_DEVICE_NAME="ELECOM-Huge-Remapped"
 
 # Logging
 LOG_FILE="/tmp/trackball-remap.log"
-DEBUG=true  # Set to true to see all events
+DEBUG=false  # Enable only while actively debugging input events
 
 # ============================================================================
 # Find Device
