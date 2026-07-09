@@ -18,6 +18,9 @@
       // warmind-webapp:proton-mail:start
       "class<brave-mail.proton.me__-Default>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰗰</span>",
       // warmind-webapp:proton-mail:end
+      // warmind-webapp:youtube:start
+      "class<brave-origin-beta-www.youtube.com__-Default>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
+      // warmind-webapp:youtube:end
       // warmind-webapps:end
 //      "class<dev.zed.Zed>": "󰰸",
       "class<sublime_text>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
@@ -30,6 +33,7 @@
       "class<mpv> title<^101$>": "󰖠",  // outside cam
       "class<mpv> title<^watch\\?v=.*>": " ",  // Use your desired symbol (e.g.,  for YouTube; escape ? as \\?)
       "class<zen> title<.*youtube.*>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
+      "class<brave-www\\.youtube\\.com__-Default>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰑈</span>",
       "class<firefox>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<zen>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰰸</span>",
       "class<zen> title<.*WhatsApp.*>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
@@ -89,6 +93,7 @@
       "class<mate-calc>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰃬</span>",
       "class<gimp>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<gimp-.*>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
+      "class<com.gabm.satty>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰔮</span>",
       "class<inkscape>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<blender>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰂫</span>",
       "class<feh>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
@@ -117,6 +122,7 @@
       "class<gpick>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰴱</span>",
       "class<lxappearance>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<qt5ct>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
+      "class<MEGAsync>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰰑</span>",
       "class<keepassxc>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<dunst>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<xfce4-notifyd>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
