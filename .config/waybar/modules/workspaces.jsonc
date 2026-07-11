@@ -65,6 +65,7 @@
       "class<code-oss>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰨞</span>",
       "class<code>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰨞</span>",
       "class<vscode>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰨞</span>",
+      "class<ai\\.opencode\\.desktop>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰰕</span>",
       "class<Marker>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<t3code>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰬁󰎬</span>",
       "class<sublime_text>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
@@ -74,6 +75,7 @@
       "class<dev.zed.Zed>": "<span font_desc='JetBrainsMono Nerd Font 16'>🧠</span>",
       "class<nvim>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<antigravity>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰲇 </span>",
+      "class<antigravity-ide>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰲇 </span>",
 
       // files-and-docs
       "class<nemo>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
