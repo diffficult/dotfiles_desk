@@ -8,25 +8,38 @@
     "format-window-separator": " ",
     "window-rewrite-default": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
     "window-rewrite": {
-      // warmind-webapps
+      // warmind-webapps:start
+      // warmind-webapp:gmail:start
       "class<brave-www.gmail.com__-Default>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰊫</span>",
+      // warmind-webapp:gmail:end
+      // warmind-webapp:claude:start
       "class<brave-claude.ai__-Default>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
+      // warmind-webapp:claude:end
+      // warmind-webapp:proton-mail:start
       "class<brave-mail.proton.me__-Default>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰗰</span>",
-      "class<brave-origin-beta-www.youtube.com__-Default>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
-
-      // browser-title-overrides
-      "class<mpv> title<^101$>": "󰖠",
-      "class<mpv> title<^watch\\?v=.*>": " ",
+      // warmind-webapp:proton-mail:end
+      // warmind-webapps:end
+//      "class<dev.zed.Zed>": "󰰸",
+      "class<sublime_text>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
+      "class<swayimg>": "<span font_desc='JetBrainsMono Nerd Font 16'>󱢉</span>",
+      "class<org.gnome.FileRoller>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
+      "class<nvidia-settings>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
+      "class<org.gnome.Software>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰚰</span>",
+      "class<syncthing-gtk>": "<span font_desc='JetBrainsMono Nerd Font 16'>󱍸</span>",
+      "class<polychromatic>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰰠</span>",
+      "class<mpv> title<^101$>": "󰖠",  // outside cam
+      "class<mpv> title<^watch\\?v=.*>": " ",  // Use your desired symbol (e.g.,  for YouTube; escape ? as \\?)
       "class<zen> title<.*youtube.*>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
+      "class<firefox>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
+      "class<zen>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰰸</span>",
       "class<zen> title<.*WhatsApp.*>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<zen> title<Home / X.*>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰰰</span>",
       "class<zen> title<.*Gmail.*>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰊫</span>",
       "class<firefox> title<.*github.*>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
-
-      // browsers
-      "class<firefox>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<google-chrome>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<google-chrome-unstable>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
+      "class<brave-word\\.cloud\\.microsoft__-Default>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
+      "class<brave-excel\\.cloud\\.microsoft__-Default>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<brave-browser>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<brave-origin-beta>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<chrome-grok.com__-Default>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰯿</span>",
@@ -36,22 +49,13 @@
       "class<brave-labs.google__fx_tools_flow-Default>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰍫</span>",
       "class<chrome-gemini.google.com__-Default>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰫢</span>",
       "class<brave-gemini.google.com__-Default>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰫢</span>",
-      "class<brave-www\\.youtube\\.com__-Default>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰑈</span>",
-      "class<brave-word\\.cloud\\.microsoft__-Default>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
-      "class<brave-excel\\.cloud\\.microsoft__-Default>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
-      "class<zen>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰰸</span>",
       "class<zen-beta>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰰸</span>",
       "class<zen-browser>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰰸</span>",
-
-      // communication
       "class<TelegramDesktop>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<org.telegram.desktop>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<discord>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰙯</span>",
       "class<vesktop>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰙯</span>",
       "class<WebCord>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰙯</span>",
-      "class<Keybase>": "<span font_desc='JetBrainsMono Nerd Font 16'>󱕵</span>",
-
-      // terminals
       "class<Alacritty>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<kitty>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰄛</span>",
       "class<st>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
@@ -59,25 +63,16 @@
       "class<st-256color>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<Xfce4-terminal>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<org.wezfurlong.wezterm>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
-      "class<BNATXTGen>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰶱</span>",
-
-      // development
       "class<code-oss>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰨞</span>",
       "class<code>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰨞</span>",
       "class<vscode>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰨞</span>",
-      "class<ai\\.opencode\\.desktop>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰰕</span>",
       "class<Marker>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
-      "class<t3code>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰬁󰎬</span>",
-      "class<sublime_text>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<subl>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<jetbrains-idea>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<jetbrains-studio>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
+      "class<antigravity>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰲇 </span>",
       "class<dev.zed.Zed>": "<span font_desc='JetBrainsMono Nerd Font 16'>🧠</span>",
       "class<nvim>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
-      "class<antigravity>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰲇 </span>",
-      "class<antigravity-ide>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰲇 </span>",
-
-      // files-and-docs
       "class<nemo>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<thunar>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<org.gnome.Nautilus>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
@@ -91,32 +86,21 @@
       "class<libreoffice-draw>": "<span font_desc='JetBrainsMono Nerd Font 16'>󱦹</span>",
       "class<libreoffice-impress>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<libreoffice-startcenter>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
-
-      // creative-and-media
-      "class<swayimg>": "<span font_desc='JetBrainsMono Nerd Font 16'>󱢉</span>",
       "class<mate-calc>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰃬</span>",
       "class<gimp>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<gimp-.*>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
-      "class<com.gabm.satty>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰔮</span>",
       "class<inkscape>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<blender>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰂫</span>",
       "class<feh>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<nsxiv>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<imager>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
+      "class<font-manager>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<mpv>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<vlc>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰕼</span>",
       "class<obs>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<spotify>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<steam>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<lutris>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
-
-      // system-and-utilities
-      "class<org.gnome.FileRoller>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
-      "class<nvidia-settings>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
-      "class<org.gnome.Software>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰚰</span>",
-      "class<syncthing-gtk>": "<span font_desc='JetBrainsMono Nerd Font 16'>󱍸</span>",
-      "class<polychromatic>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰰠</span>",
-      "class<font-manager>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<thunderbird>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<rustdesk>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<anydesk>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
@@ -133,13 +117,10 @@
       "class<gpick>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰴱</span>",
       "class<lxappearance>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<qt5ct>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
-      "class<MEGAsync>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰰑</span>",
       "class<keepassxc>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<dunst>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<xfce4-notifyd>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<zenity>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
-
-      // misc
       "class<Waybar Manager>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>"
     },
     "on-scroll-up": "hyprctl dispatch workspace r-1",
