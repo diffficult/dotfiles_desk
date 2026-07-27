@@ -1,170 +1,93 @@
-# Prezto — Instantly Awesome Zsh
+# Local Prezto Runcoms
 
-Prezto is the configuration framework for [Zsh][1]; it enriches the command line
-interface environment with sane defaults, aliases, functions, auto completion,
-and prompt themes.
+This directory contains the active Zsh runcoms for this system. The files are managed by the `dotfiles` bare repository and are symlinked from `$HOME`.
 
-## Installation
+## Structure
 
-### Manual
+| File | Role |
+|------|------|
+| `zshenv` | Minimal environment bootstrap for every Zsh invocation. |
+| `zprofile` | Login-shell environment, XDG paths, structural `PATH`, language/tool locations. |
+| `zshrc` | Interactive shell integrations, aliases, functions, widgets, FZF, AI helpers, app completions. |
+| `zpreztorc` | Prezto module list and module configuration. |
+| `zlogin` | Login-shell post-start hooks and optional TTY output. |
+| `zlogout` | Logout hooks. |
+| `README.md` | Local map of the runcom layout and keybindings. |
+| `MODULES.md` | Custom module inventory and source locations. |
 
-Prezto will work with any recent release of Zsh, but the minimum required
-version is **4.3.11**.
+## Load Order
 
-01. Launch Zsh:
+Zsh reads these files in this order for the common shell types:
 
-    ```console
-    zsh
-    ```
+| Shell type | Files read |
+|------------|------------|
+| Every Zsh process | `zshenv` |
+| Login shell | `zshenv`, `zprofile`, `zshrc`, `zlogin` |
+| Interactive non-login shell | `zshenv`, `zshrc` |
+| Logout from login shell | `zlogout` |
 
-02. Clone the repository:
+Prezto itself is loaded from `zshrc` through `${ZDOTDIR:-$HOME}/.zprezto/init.zsh`. Module selection comes from `zpreztorc`.
 
-    ```console
-    git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
-    ```
+## Ownership Rules
 
-    <details>
-      <summary><em>Optional: Installing in <code>$XDG_CONFIG_HOME</code></em></summary>
+| Area | Owner |
+|------|-------|
+| Structural `PATH` | `zprofile` |
+| Completion initialization | Prezto `completion` module |
+| FZF base setup | Custom `fzf` module |
+| Command-not-found handler | `find-the-command` from `zshrc` |
+| Shared aliases/functions | `~/.aliasrc` and `~/.config/functions/*` |
+| Interactive widgets | `zshrc` and custom modules |
 
-      Optionally, if you already have `$XDG_CONFIG_HOME` configured (usually as
-      _`$HOME/.config`_ by default) and intend to install Prezto under
-      _`$XDG_CONFIG_HOME/zsh`_ instead, you can clone the repository there and
-      configure `$ZDOTDIR` separately if not already configured.
+`zshrc` ends with `typeset -gU path` so late interactive initializers cannot reintroduce duplicate `PATH` entries.
 
-      - Clone the repository:
+## Keybindings
 
-        ```console
-        git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}/.zprezto"
-        ```
+These are the effective bindings loaded in the default interactive keymap.
 
-      - Configure `$XDG_CONFIG_HOME` and `$ZDOTDIR` in _`$HOME/.zshenv`_:
+| Binding | Widget | Function |
+|---------|--------|----------|
+| `Ctrl-X l` | `clear-keep-buffer` | Clear the screen while preserving the current command buffer. |
+| `Ctrl-X c` | `copy-command` | Copy the current command buffer. |
+| `Ctrl-X Ctrl-X` | `__pr_inline` | Inline `pay-respects` correction helper. |
+| `Alt-e` | `_aichat_zsh` | Rewrite the current command buffer through `aichat -e`. |
+| `Ctrl-G` | `_navi_widget` | Open Navi cheatsheets and insert the selected command. |
+| `Alt-a` | `fzf_alias` | Search shell aliases with FZF. |
+| `Ctrl-T` | `fzf-file-widget` | Insert files selected with FZF. |
+| `Alt-c` | `fzf-cd-widget` | Change directory using FZF. |
+| `Ctrl-R` | `fzf-history-widget` | Search shell history with FZF. |
+| `Ctrl-P` | `history-substring-search-up` | Search backward through matching history. |
+| `Ctrl-N` | `history-substring-search-down` | Search forward through matching history. |
+| `Up` | `history-substring-search-up` | Search backward through matching history. |
+| `Down` | `history-substring-search-down` | Search forward through matching history. |
+| `Space` | `abbr-expand-and-insert` | Expand a `zsh-abbr` abbreviation before inserting a space. |
 
-        ```sh
-        export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:=$HOME/.config}"
-        export ZDOTDIR="${ZDOTDIR:=$XDG_CONFIG_HOME/zsh}"
-        source "$ZDOTDIR/.zshenv"
-        ```
+## FZF Git Keybindings
 
-    </details>
+`fzf-git.sh` adds Git-specific widgets under the `Ctrl-G` prefix.
 
-## Important!!!
+| Binding | Widget | Function |
+|---------|--------|----------|
+| `Ctrl-G f` / `Ctrl-G Ctrl-F` | `fzf-git-files-widget` | Select Git-tracked files. |
+| `Ctrl-G b` / `Ctrl-G Ctrl-B` | `fzf-git-branches-widget` | Select Git branches. |
+| `Ctrl-G t` / `Ctrl-G Ctrl-T` | `fzf-git-tags-widget` | Select Git tags. |
+| `Ctrl-G r` / `Ctrl-G Ctrl-R` | `fzf-git-remotes-widget` | Select Git remotes. |
+| `Ctrl-G h` / `Ctrl-G Ctrl-H` | `fzf-git-hashes-widget` | Select commit hashes. |
+| `Ctrl-G s` / `Ctrl-G Ctrl-S` | `fzf-git-stashes-widget` | Select stashes. |
+| `Ctrl-G l` / `Ctrl-G Ctrl-L` | `fzf-git-lreflogs-widget` | Select reflog entries. |
+| `Ctrl-G w` / `Ctrl-G Ctrl-W` | `fzf-git-worktrees-widget` | Select worktrees. |
+| `Ctrl-G e` / `Ctrl-G Ctrl-E` | `fzf-git-each_ref-widget` | Select refs. |
+| `Ctrl-G ?` / `Ctrl-G Ctrl-?` | `fzf-git-?list_bindings-widget` | Show the FZF Git binding list. |
 
-03. Create a new Zsh configuration by copying/linking the Zsh configuration
-    files provided:
+## Verification
 
-    ```console
-    setopt EXTENDED_GLOB
-    for rcfile in "${ZDOTDIR:-$HOME}"/.config/zsh/prezto_runcoms/^README.md(.N); do
-      ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
-    done
-    ```
+Use these after changing the runcoms:
 
-    **Note:** If you already have any of the given configuration files, `ln` in
-    the above operation will cause an error. In simple cases, you can load
-    Prezto by adding the line `source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"` to
-    the bottom of your _`${ZDOTDIR:-$HOME}/.zshrc`_ and keep the rest of your
-    Zsh configuration intact. For more complicated setups, we recommend that you
-    back up your original configs and replace them with the provided Prezto
-    [_`runcoms`_][10].
-
-04. Set Zsh as your default shell:
-
-    ```console
-    chsh -s /bin/zsh
-    ```
-
-05. Open a new Zsh terminal window or tab.
-
-### [Fig](https://fig.io)
-
-Fig adds apps, shortcuts, and autocomplete to your existing terminal.
-
-Install `prezto` in just one click.
-
-<a href="https://fig.io/plugins/other/prezto" target="_blank"><img src="https://fig.io/badges/install-with-fig.svg" /></a>
-
-### Troubleshooting
-
-If you are not able to find certain commands after switching to Prezto, modify
-the `PATH` variable in _`${ZDOTDIR:-$HOME}/.zprofile`_ then open a new Zsh
-terminal window or tab.
-
-## Updating
-
-Run `zprezto-update` to automatically check if there is an update to Prezto.
-If there are no file conflicts, Prezto and its submodules will be automatically
-updated. If there are conflicts you will be instructed to go into the
-`$ZPREZTODIR` directory and resolve them yourself.
-
-To pull the latest changes and update submodules manually:
-
-```console
-cd $ZPREZTODIR
-git pull
-git submodule sync --recursive
-git submodule update --init --recursive
+```sh
+zsh -ic exit
+zsh -lic exit
+zsh -ic 'typeset -A seen; typeset -a dupes; for d in $path; do if [[ -n ${seen[$d]:-} ]]; then dupes+=("$d"); else seen[$d]=1; fi; done; print -rl -- $dupes'
+zsh -ic 'bindkey | rg "clear-keep-buffer|copy-command|fzf-|_navi_widget|__pr_inline|_aichat_zsh|history-substring|abbr"'
 ```
 
-## Usage
-
-Prezto has many features disabled by default. Read the source code and the
-accompanying README files to learn about what is available.
-
-### Modules
-
-01. Browse [_`modules`_][9] to see what is available.
-02. Load the modules you need in _`${ZDOTDIR:-$HOME}/.zpreztorc`_ and then open
-    a new Zsh terminal window or tab.
-
-### Themes
-
-01. For a list of themes, type `prompt -l`.
-02. To preview a theme, type `prompt -p name`.
-03. Load the theme you like in _`${ZDOTDIR:-$HOME}/.zpreztorc`_ and then
-    open a new Zsh terminal window or tab.
-
-    ![sorin theme][2]
-    Note that the [_`git`_][11] module may be required for special symbols to
-    appear, such as those on the right of the above image. Add `'git'` to the
-    `pmodule` list (under `zstyle ':prezto:load' pmodule \` in your
-    _`${ZDOTDIR:-$HOME}/.zpreztorc`_) to enable this module.
-
-### External Modules
-
-01. By default modules will be loaded from [_`/modules`_][9] and _`/contrib`_.
-02. Additional module directories can be added to the
-    `:prezto:load:pmodule-dirs` setting in _`${ZDOTDIR:-$HOME}/.zpreztorc`_.
-
-    Note that module names need to be unique or they will cause an error when
-    loading.
-
-    ```sh
-    zstyle ':prezto:load' pmodule-dirs $HOME/.zprezto-contrib
-    ```
-
-## Customization
-
-The project is managed via [Git][3]. We highly recommend that you fork this
-project so that you can commit your changes and push them to your fork on
-[GitHub][4] to preserve them. If you do not know how to use Git, follow this
-[tutorial][5] and bookmark this [reference][6].
-
-## Resources
-
-The [Zsh Reference Card][7] and the [zsh-lovers][8] man page are indispensable.
-
-## License
-
-This project is licensed under the MIT License.
-
-[1]: https://www.zsh.org
-[2]: https://i.imgur.com/nrGV6pg.png "sorin theme"
-[3]: https://git-scm.com
-[4]: https://github.com
-[5]: https://gitimmersion.com
-[6]: https://git.github.io/git-reference/
-[7]: http://www.bash2zsh.com/zsh_refcard/refcard.pdf
-[8]: https://grml.org/zsh/zsh-lovers.html
-[9]: modules#readme
-[10]: runcoms#readme
-[11]: modules/git#readme
+Expected result: no startup warnings and no duplicate `PATH` output.

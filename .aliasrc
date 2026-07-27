@@ -129,66 +129,7 @@ rld-zshrc() { source ~/.zshrc ;}
 #export GOPATH=~/.go
 #export PATH="$PATH:$GOPATH/bin"
 
-# NPM NodeJS Packages
-if [ -d "$HOME/node_modules/bin" ] ; then
-    export PATH="$HOME/node_modules/bin:$PATH"
-fi
-
-#NPM config
-if [ -d "$HOME/.config/npm" ] ; then
-    export PATH="$HOME/.config/npm:$PATH"
-fi
-
-# User Scripts
-if [ -d "$HOME/.scripts" ] ; then
-    export PATH="$HOME/.scripts:$PATH"
-fi
-
-# Alison Desktop
-# if [ -d "$HOME/.local/bin/Alison_Desktop" ] ; then
-#     export PATH="$HOME/.local/bin/Alison_Desktop:$PATH"
-# fi
-
-# .local/bin directory
-if [ -d "$HOME/.local/bin" ] ; then
-    export PATH="$HOME/.local/bin:$PATH"
-fi
-
-
-# User Scripts on local/bin user
-if [ -d "$HOME/.local/bin/scripts" ] ; then
-    export PATH="$HOME/.local/bin/scripts:$PATH"
-fi
-
-# tools directory inside local/bin
-if [ -d "$HOME/.local/bin/scripts/tools" ] ; then
-    export PATH="$HOME/.local/bin/scripts/tools:$PATH"
-fi
-
-# cron directory inside local/bin
-if [ -d "$HOME/.local/bin/scripts/cron" ] ; then
-    export PATH="$HOME/.local/bin/scripts/cron:$PATH"
-fi
-
-# i3cmds directory
-if [ -d "$HOME/.local/bin/scripts/i3cmds" ] ; then
-    export PATH="$HOME/.local/bin/scripts/i3cmds:$PATH"
-fi
-
-# rofi menues applets commands
-if [ -d "$HOME/.config/rofi/bin" ] ; then
-    export PATH="$HOME/.config/rofi/bin:$PATH"
-fi
-
-# cargo/bin executables
-if [ -d "$HOME/.cargo/bin" ] ; then
-    export PATH="$HOME/.cargo/bin:$PATH"
-fi
-
-# .local/share/go/bin executables
-if [ -d "$HOME/.local/share/go/bin" ] ; then
-    export PATH="$PATH:$HOME/.local/share/go/bin"
-fi
+# PATH setup lives in zprofile.
 
 # if [ -d "$HOME/.scripts/command" ] ; then
 #     export PATH="$HOME/.scripts/command:$PATH"

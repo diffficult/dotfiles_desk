@@ -25,6 +25,11 @@ export BUNDLE_USER_CACHE="$XDG_CACHE_HOME/bundle"
 export BUNDLE_USER_PLUGIN="$XDG_DATA_HOME/bundle"
 export W3M_DIR="$XDG_DATA_HOME/w3m"
 export NPM_GLOBAL="$HOME/.local/npm-global"
+export PNPM_HOME="$XDG_DATA_HOME/pnpm"
+
+if [[ -z "$GEM_HOME" ]]; then
+  export GEM_HOME="$XDG_DATA_HOME/gem/ruby/3.4.0"
+fi
 
 #GREP color-scheme
 export GREP_COLORS='mt=1;38;5;14:cx=38;5;8:fn=38;5;13:ln=38;5;10:bn=32:se=38;5;12:ne'
@@ -86,26 +91,25 @@ typeset -gU cdpath fpath mailpath path
 ### )
 
 path=(
-  $HOME/{bin,sbin}
-  /usr/local/{bin,sbin}
+  $HOME/.opencode/bin(N)
+  $NPM_GLOBAL/bin(N)
+  $PNPM_HOME(N)
+  $CARGO_HOME/bin(N)
+  $GOPATH/bin(N)
+  $GEM_HOME/bin(N)
+  $HOME/node_modules/bin(N)
+  $HOME/.config/npm(N)
+  $HOME/.scripts(N)
+  $HOME/.config/rofi/bin(N)
+  $HOME/.local/bin/scripts/i3cmds(N)
+  $HOME/.local/bin/scripts/cron(N)
+  $HOME/.local/bin/scripts/tools(N)
+  $HOME/.local/bin/scripts(N)
+  $HOME/.local/bin(N)
+  $HOME/{bin,sbin}(N)
+  /usr/local/{bin,sbin}(N)
   $path
 )
-# add user local bin path 
-if [ -d "$HOME/.local/bin" ] && (! echo $PATH | grep -q "$HOME/.local/bin"); then
-  export PATH="$HOME/.local/bin:$PATH"
-fi
-# add cargo bin path
-if [ -d "$HOME/.local/share/cargo/bin" ] && (! echo $PATH | grep -q "$HOME/.local/share/cargo/bin"); then
-  export PATH="$HOME/.local/share/cargo/bin:$PATH"
-fi
-# ensure standalone opencode wins over any older npm-global install
-if [ -d "$HOME/.opencode/bin" ] && (! echo $PATH | grep -q "$HOME/.opencode/bin"); then
-  export PATH="$HOME/.opencode/bin:$PATH"
-fi
-# add npm-global bin
-if [ -d "$NPM_GLOBAL/bin" ] && (! echo $PATH | grep -q "$NPM_GLOBAL/bin"); then
-  export PATH="$NPM_GLOBAL/bin:$PATH"
-fi
 
 
 #
@@ -118,7 +122,7 @@ fi
 # Removed from export line this > '-z-4' << this does not work on ver 691
 # Removed from if line the -z flag > [[ -z "$LESS" ]] << this does not work on ver 691
 
-if [[ "$LESS" ]]; then
+if [[ -z "$LESS" ]]; then
   export LESS='-g -i -M -R -S -w -X' 
 fi
 

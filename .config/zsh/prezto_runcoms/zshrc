@@ -23,16 +23,17 @@ if [[ -n "${DISPLAY:-}" && "${XDG_SESSION_TYPE:-}" != "wayland" ]]; then
   setxkbmap us -variant intl
 fi
 
-# Initialize completion system and zsh move (zmv)
-autoload -Uz compinit zmv
-compinit
+# Initialize zsh move (completion is handled by Prezto's completion module).
+autoload -Uz zmv
 
-# Initialize zle functions (.config/functions) 
-autoload -Uz clear-keep-buffer copy-command
-zle -N clear-keep-buffer
-zle -N copy-command
-bindkey '^Xl' clear-keep-buffer
-bindkey '^Xc' copy-command
+# Initialize zle functions (.config/functions)
+if [[ -o interactive ]]; then
+  autoload -Uz clear-keep-buffer copy-command
+  zle -N clear-keep-buffer
+  zle -N copy-command
+  bindkey '^Xl' clear-keep-buffer
+  bindkey '^Xc' copy-command
+fi
 
 # Load shared aliases and functions between zsh/bash
 if [[ -f "$HOME/.aliasrc" ]]; then
@@ -44,10 +45,10 @@ if [[ -f "$HOME/.config/functions/.secrets" ]]; then
     source "$HOME/.config/functions/.secrets"
 fi
 
-# Source function directory (plus .env)
-if [ -d "$HOME/.config/functions" ]; then
-  for f in $HOME/.config/functions/*
-    do source "$f"
+# Source function directory.
+if [[ -d "$HOME/.config/functions" ]]; then
+  for f in "$HOME"/.config/functions/*(.N); do
+    [[ -s "$f" ]] && source "$f"
   done
 fi
 
@@ -55,11 +56,6 @@ fi
 # FZF CONFIGURATION
 #
 export FZF_BASE=/usr/share/fzf
-
-# Source FZF completion
-if [ -f "/usr/share/fzf/completion.zsh" ]; then
-  source "/usr/share/fzf/completion.zsh"
-fi
 
 # Tokyo Night color theme for FZF
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
@@ -83,7 +79,9 @@ _fzf_compgen_dir() {
 }
 
 # FZF-git integration
-source ~/dev/gits/fzf-git.sh/fzf-git.sh
+if [[ -o interactive && -f "$HOME/dev/gits/fzf-git.sh/fzf-git.sh" ]]; then
+  source "$HOME/dev/gits/fzf-git.sh/fzf-git.sh"
+fi
 
 # BAT integration for preview
 export FZF_CTRL_T_OPTS="--preview 'bat -n --color=always --line-range :500 {}'"
@@ -111,11 +109,6 @@ export BAT_THEME=tokyonight_night
 # COMMAND-NOT-FOUND HANDLERS
 #
 
-# Source command-not-found module
-if [[ -f "$HOME/.zprezto/modules/command-not-found/init.zsh" ]]; then
-  source "$HOME/.zprezto/modules/command-not-found/init.zsh"
-fi
-
 # Source find-the-command
 if [[ -f "/usr/share/doc/find-the-command/ftc.zsh" ]]; then
   source "/usr/share/doc/find-the-command/ftc.zsh"
@@ -130,19 +123,21 @@ if [[ -f ~/usr/share/nvm/init-nvm.sh ]]; then
   source /usr/share/nvm/init-nvm.sh
 fi
 
-# Ruby GEM configuration
-export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
-export PATH="$PATH:$GEM_HOME/bin"
+# Ruby GEM configuration is set in zprofile.
 
 #
 # UTILITY TOOLS
 #
 
 # Navi command line cheatsheets
-source <(echo "$(navi widget zsh)")
+if [[ -o interactive && $+commands[navi] -eq 1 ]]; then
+  source <(navi widget zsh)
+fi
 
 # pay-respects (rust alternative to thefuck)
-eval "$(pay-respects zsh --alias)"
+if [[ -o interactive && $+commands[pay-respects] -eq 1 ]]; then
+  eval "$(pay-respects zsh --alias)"
+fi
 
 #
 # APPLICATION SPECIFIC
@@ -217,23 +212,10 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=244'
 # Fabric (commented out)
 # if [ -f "/home/rx/.config/fabric/fabric-bootstrap.inc" ]; then . "/home/rx/.config/fabric/fabric-bootstrap.inc"; fi
 
-# pnpm
-export PNPM_HOME="/home/rx/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
-
-# opencode
-case ":$PATH:" in
-  *":/home/rx/.opencode/bin:"*) ;;
-  *) export PATH="/home/rx/.opencode/bin:$PATH" ;;
-esac
-
-
-
 # Warmind CLI completions — auto-installed by warmind installer
 if [[ -f "/home/rx/.config/warmind/cli/completion.zsh" ]]; then
   source "/home/rx/.config/warmind/cli/completion.zsh"
 fi
+
+# Keep late interactive initializers from reintroducing duplicate PATH entries.
+typeset -gU path
