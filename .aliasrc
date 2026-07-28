@@ -35,9 +35,6 @@ set_default_app() {
 # set the default program
 # the first program in the array that is detected on your system will be chosen as the default
 set_default_app OPENER xdg-open exo-open gnome-open
-#export BROWSER=$(find_alt chromium-browser chromium qutebrowser google-chrome firefox $OPENER )
-#export BROWSER=/usr/bin/chromium
-# export BROWSER=/usr/bin/google-chrome-stable
 set_default_app BROWSER google-chrome-stable google-chrome-unstale chromium chromium-browser firefox "$OPENER"
 set_default_app BROWSERCLI w3m links2 links lynx elinks "$OPENER"
 set_default_app BROWSERTOR tor-browser-en
@@ -50,10 +47,8 @@ set_default_app FILEMANAGERCLI ranger vifm mc "$OPENER"
 set_default_app PAGER less more most
 set_default_app PLAYER mpv mplayer ffplay cvlc "$OPENER"
 set_default_app READER mupdf zathura evince "$OPENER"
-#export ROOTER=$(find_alt gksudo kdesudo )
 set_default_app IMAGEVIEWER sxiv feh ristretto display eog "$OPENER"
 set_default_app QUEUER tsp fq ts
-#export TERMER=$(find_alt urxvt xterm uxterm termite sakura lxterminal terminator mate-terminal pantheon-terminal konsole gnome-terminal xfce4-terminal $OPENER )
 
 # }}}
 
@@ -126,38 +121,6 @@ rld-xresources() { xrdb -load ~/.Xresources ;}
 rld-zshrc() { source ~/.zshrc ;}
 # }}}
 
-#-------- Exports {{{
-#------------------------------------------------------
-# set display
-#export DISPLAY=:0
-
-# set 256color support (doesnt work with older apps like abook)
-#export TERM="screen-256color"
-# export TERM="xterm-256color"
-
-#}}}
-
-#-------- Set Path {{{
-#------------------------------------------------------
-# http://askubuntu.com/questions/49784/how-is-bin-added-to-my-path
-# Local installed package
-
-# if [ -d "$HOME/.config/vifm/scripts" ] ; then
-# 	PATH="$HOME/.config/vifm/scripts:$PATH"
-# fi
-
-# Go Packages (Golang)
-#export GOPATH=~/.go
-#export PATH="$PATH:$GOPATH/bin"
-
-# PATH setup lives in zprofile.
-
-# if [ -d "$HOME/.scripts/command" ] ; then
-#     export PATH="$HOME/.scripts/command:$PATH"
-# fi
-
-# }}}
-
 #-------- File and Directory Operations {{{
 #------------------------------------------------------
 # DESC: Aliases and functions for file and directory operations
@@ -213,42 +176,22 @@ alias info='info --vi-keys'				# GNU info act like man command
 alias lsblk='lsblk -o "KNAME,HOTPLUG,SIZE,FSTYPE,TYPE,LABEL,MOUNTPOINT,UUID,MODEL,SERIAL"'
 alias mocp='padsp mocp'                                 # moc player working with pulseaudio
 alias mount='mount | column -t'				# align in column
-#alias nano='nano -c -$'					# word wrapping
-#alias periscope='periscope -l en'			# get english subtitles
 alias pdfgrep='pdfgrep -in'				# ignorecase, page number
 alias qcp='qcp -f do'                                   # renameutils bulk copy (destination column only)
 alias qmv='qmv -f do'                                   # renameutils bulk rename (destination column only)
-#alias sr='sr -browser=$BROWSERCLI'			# open in cli browser
-#alias surfraw='surfraw -browser=$BROWSER'		# open in gui browser
 alias w3m='w3m -num'					# w3m web browser with line number
 alias wget='wget -N -c --hsts-file ~/.config/wget/wget-hsts'					# continues/resumes
-#alias youtube-viewer='youtube-viewer -C -f -4 --results=6'  # color, fullscreen, 480p, number of results
 alias visudo='sudo EDITOR="$EDITOR" visudo'
 
 # }}}
 
-#-------- ls replacement with eza (exa was deprecated) written in rust {{{
+#-------- ls replacement with eza {{{
 #------------------------------------------------------
-#
-#
 alias ls='eza --icons --group-directories-first -x'
 alias l='eza -x -a -s changed --icons --group-directories-first'
 alias ll='eza -l --icons --group-directories-first'
 alias la='eza -l -a -s changed --icons --group-directories-first'
 alias lg='eza -l --icons --git -a'
-#
-# general use ######################
-
-## alias ls='exa'                                                          # ls
-## alias l='exa -lbF --git'                                                # list, size, type, git
-## alias ll='exa -lbGF --git'                                             # long list
-## alias llm='exa -lbGd --git --sort=modified'                            # long list, modified date sort
-## alias la='exa -lbhHigUmuSa --time-style=long-iso --git --color-scale'  # all list
-## alias lx='exa -lbhHigUmuSa@ --time-style=long-iso --git --color-scale' # all + extended list
-
-# specialty views ##################
-
-##alias lS='exa -1'                                                              # one column, just names
 
 alias lt='eza --icons --tree --level=2'                                         # tree
 
@@ -257,35 +200,7 @@ alias lt='eza --icons --tree --level=2'                                         
 #-------- fzf {{{
 #------------------------------------------------------
 
-# alias f='fzf --preview "bat --color \"always\" {}"'
-#
 alias fzfb='fzf --preview "bat --color \"always\" {}"'
-
-### search packages with yay and fzf (* marks an installed package)
-#
-#alias yay-fzf="yay -Sl | awk '{print \$2(\$4==\"\" ? \"\" : \"  \")}' | fzf --multi --preview 'yay -Si {1}' | xargs -ro sudo yay -S"
-
-# DEPRECATED by https://www.github.com/diffficult/work-tools/scripts/own/yayfzf-offline.sh (linked from repo to .local/bin/yayfzf)
-#alias yayfzf="yay -Sl | awk '{print \$2(\$4==\"\" ? \"\" : \" \")}' | fzf --multi --preview 'yay -Si {1}' | xargs -ro yay -S"
-
-# Better alternative using fzf to search packages with pacman/yay
-#alias pacfzf="pacman -Slq | fzf --multi --preview 'pacman -Si {1}' --preview-window=:hidden --bind='ctrl-/:toggle-preview' | xargs -ro sudo pacman -S"
-#alias yayfzf="yay -Slq | fzf --multi --preview 'yay -Si {1}; echo; pacman -Qi {1} 2>/dev/null || echo Package not installed' --preview-window=:hidden --bind='ctrl-/:toggle-preview' | xargs -ro yay -S"
-
-### ytfzf alias for rofi
-#alias yt="~/.local/bin/yt-r"
-
-# color for common commands
-# tutorial video: http://www.youtube.com/watch?v=RbVCzxnKJL4
-#if [ -x /usr/bin/dircolors ]; then
-#    eval "`dircolors -b`"
-#    alias ls='ls --color=auto'
-#    alias dir='dir --color=auto'
-#    alias vdir='vdir --color=auto'
-#    alias grep='grep --color=auto'
-#    alias fgrep='fgrep --color=auto'
-#    alias egrep='egrep --color=auto'
-#fi
 
 # search and delete items from zsh history
 #
@@ -303,25 +218,7 @@ alias neocrux='neofetch --ascii --ascii_distro crux_small'
 alias neowin='neofetch --ascii --ascii_distro windows'
 alias disks='echo "╓───── m o u n t . p o i n t s"; echo "╙────────────────────────────────────── ─ ─ "; lsblk -a; echo ""; echo "╓───── d i s k . u s a g e"; echo "╙────────────────────────────────────── ─ ─ "; df -h;'
 
-# Alison_Desktop aliases to start/stop service
-# alias runalison='~/.local/bin/alison.sh'
-# alias killalison='~/.local/bin/salison.sh'
-
-#alias weatherm='curl wttr.in/mendoza'
-#alias weather='curl http://wttr.in/$LOCATION'
-
-#alias t="todo.sh"                                       # todotxt.sh program
-#alias trash='trash-put -v'
-# alias vless="/usr/share/vim/vim74/macros/less.sh"       # vim as a pager
-#alias vradio="vim ~/.pyradio.csv && killall mpg123"     # vim as radio player using pyradio.csv
-#alias wttr='curl wttr.in'                               # wego weather forcast using only curl
-#alias wttr-help='curl wttr.in/:help'
-
-# wttr() { curl -H "Accept-Language: ${LANG%_*}" wttr.in/"${1:-Orange}" ;}
-
 alias cat="bat"
-
-#
 
 ## }}}
 
@@ -408,7 +305,6 @@ alias sshkey='ssh-keygen -t rsa -b 4096 -C "$(whoami)@$(hostname)-$(date -I)"'
 alias ytdlp='yt-dlp'
 alias yt='yt-dlp --add-metadata -i'
 alias yta='yt -x -f bestaudio/best'
-#youtube-dl-stream() { youtube-dl -o - "$1" | $PLAYER - ;}
 
 # }}}
 
@@ -493,7 +389,6 @@ alias hue-in-off="lampe -s 4 n"
 #
 
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME'
-#alias dotpush= '/usr/bin/git --git-dir=$HOME/.deskdots/ --work-tree=$HOME push origin master'
 
 # }}}
 
@@ -508,35 +403,12 @@ alias zrxprice='command curl -s https://rate.sx/ZRX'
 
 # }}}
 
-
-# -------- Telebit Aliases {{{
-#------------------------------------------------------
-#
-
-#alias telebit-pi4colegio="ssh -o ProxyCommand='openssl s_client -connect %h:443 -servername %h -quiet' raspi@chatty-skunk-9.telebit.io"
-
-# }}}
-
-
 #-------- Random {{{
 #------------------------------------------------------
 #
 
 alias long-time-no-update="sudo pacman -Sy archlinux-keyring --needed && sudo pacman -Su"
 
-#alias wall-skull='feh --bg-fill ~/Pictures/just-another-skull.jpg'
-
 alias opencode-webui="opencode serve --hostname 127.0.0.1 --port 4096"
-### find  -name '*fanart.jpg' -exec mogrify -resize 1920x1080\> {} \;
-
-# easy-mount() {
-#  if [ $# -lt 2 ]; then
-#    echo -e "Easy mount to /mnt/tmp"
-#    echo -e "\nUsage:   $0 //IP-Address/Share local_credentials_location"
-#    echo -e "\nExample: easy-mount //192.168.1.1/directory /etc/smbcred"
-#    return 1
-#  fi
-#  sudo mount.cifs $1 /mnt/tmp -o credentidals=$2,rw 0 0
-#
 
 # }}}

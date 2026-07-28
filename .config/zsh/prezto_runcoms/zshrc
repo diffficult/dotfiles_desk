@@ -153,65 +153,6 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=244'
 # X-cmd initialization
 [ ! -f "$HOME/.x-cmd.root/X" ] || . "$HOME/.x-cmd.root/X" # boot up x-cmd.
 
-#
-# THIS CAN BE REMOVED
-#
-
-# Redundant or deprecated configurations
-# Note: Keeping these commented for reference, but they can be safely removed
-
-# Tealdeer configuration (redundant with prezto)
-# if [ -f $HOME/.config/tealdeer/zsh_tealdeer ]; then
-#   source $HOME/.config/tealdeer/zsh_tealdeer
-# fi
-
-# Climate completion (deprecated or unused)
-# if [ -f /etc/bash_completion.d/climate_completion ]; then
-#   source /etc/bash_completion.d/climate_completion
-# fi
-# if [ -f "$HOME/.config/climate_completion" ]; then
-#   source "$HOME/.config/climate_completion"
-# fi
-
-# GPG TTY (handled by prezto)
-# GPG_TTY=$(tty)
-# export GPG_TTY
-
-# SSH completion (handled by prezto)
-# h=()
-# if [[ -r ~/.ssh/config ]]; then
-#   h=($h ${${${(@M)${(f)"$(cat ~/.ssh/config)"}:#Host *}#Host }:#*[*?]*})
-# fi
-# if [[ -r ~/.ssh/known_hosts ]]; then
-#   h=($h ${${${(f)"$(cat ~/.ssh/known_hosts{,2} || true)"}%%\ *}%%,*}) 2>/dev/null
-# fi
-# if [[ $#h -gt 0 ]]; then
-#   zstyle ':completion:*:ssh:*' hosts $h
-#   zstyle ':completion:*:slogin:*' hosts $h
-# fi
-
-# Redundant history settings (handled by prezto)
-# HISTFILE=~/.zsh_history
-# SAVEHIST=$HISTSIZE
-# HISTFILESIZE=1000
-# HISTSIZE=5000
-# HISTTIMEFORMAT="[%F %T] "
-# setopt EXTENDED_HISTORY
-# HISTDUP=erase
-# setopt sharehistory
-# setopt appendhistory
-# setopt hist_ignore_space
-# setopt hist_ignore_all_dups
-# setopt hist_save_no_dups
-# setopt hist_ignore_dups
-# setopt hist_find_no_dups
-
-# Thefuck (replaced by pay-respects)
-# eval $(thefuck --alias)
-
-# Fabric (commented out)
-# if [ -f "/home/rx/.config/fabric/fabric-bootstrap.inc" ]; then . "/home/rx/.config/fabric/fabric-bootstrap.inc"; fi
-
 # Warmind CLI completions — auto-installed by warmind installer
 if [[ -f "/home/rx/.config/warmind/cli/completion.zsh" ]]; then
   source "/home/rx/.config/warmind/cli/completion.zsh"
