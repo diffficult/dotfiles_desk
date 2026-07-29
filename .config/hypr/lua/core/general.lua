@@ -88,25 +88,6 @@ hl.config({
       clickfinger_behavior = false,
     },
   },
-  device = {
-    {
-      name = "elecom-trackball-mouse-huge-trackball-1",
-      sensitivity = 0.2,
-      scroll_method = "on_button_down",
-      scroll_button = 279,
-      accel_profile = "flat",
-    },
-    {
-      name = "elecom-huge-remapped-1",
-      sensitivity = 0.2,
-      scroll_method = "on_button_down",
-      scroll_button = 279,
-      accel_profile = "flat",
-    },
-  },
-  gesture = {
-    "3, horizontal, workspace",
-  },
   misc = {
     disable_hyprland_logo = false,
     force_default_wallpaper = 0,
@@ -116,4 +97,26 @@ hl.config({
     mouse_move_enables_dpms = true,
     allow_session_lock_restore = true,
   },
+})
+
+hl.device({
+  name = "elecom-trackball-mouse-huge-trackball-1",
+  sensitivity = 0.2,
+  scroll_method = "on_button_down",
+  scroll_button = 279,
+  accel_profile = "flat",
+})
+
+hl.device({
+  name = "elecom-huge-remapped-1",
+  sensitivity = 0.2,
+  scroll_method = "on_button_down",
+  scroll_button = 279,
+  accel_profile = "flat",
+})
+
+hl.gesture({
+  fingers = 3,
+  direction = "horizontal",
+  action = "workspace",
 })
