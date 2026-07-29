@@ -33,7 +33,7 @@
       "class<firefox>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<zen>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰰸</span>",
       "class<zen> title<.*WhatsApp.*>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
-      "class<zen> title<Home / X.*>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰰰</span>",
+      "class<zen> title<.* / X.*>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰰰</span>",
       "class<zen> title<.*Gmail.*>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰊫</span>",
       "class<firefox> title<.*github.*>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<google-chrome>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
