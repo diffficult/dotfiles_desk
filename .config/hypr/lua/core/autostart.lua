@@ -7,7 +7,7 @@ local exec_once = {
   "/usr/libexec/xdg-desktop-portal &",
   "pactl load-module module-switch-on-connect &",
   "uwsm app -- clipse -listen",
-  "uwsm app -- waybar",
+  "uwsm app -- /home/rx/.config/hypr/scripts/waybar-with-lua-shim.sh",
   "uwsm app -- qs",
   "uwsm app -- qs -n -d -c /home/rx/.config/warmind/launcher",
   "systemctl --user start skwd-daemon.service",

@@ -21,7 +21,8 @@ The current live Hyprland process may still be running under the legacy config m
 | Autostart | `lua/core/autostart.lua` | Uses `hl.on("hyprland.start", ...)` plus `hl.dsp.exec_cmd`. |
 | Rules | `lua/core/rules.lua`, `lua/rules/**` | Native `hl.window_rule` modules generated from the previous rule files. |
 | Base binds | `lua/core/keybindings.lua`, `lua/lib/binds.lua` | Native Lua bind/submap declarations generated from `keybindings.conf`. |
-| Warmind Launcher | `lua/integrations/warmind_launcher.lua` | Placeholder for the new launcher-owned Lua module. |
+| Warmind Launcher | `lua/integrations/warmind_launcher.lua` | Generated Lua integration loaded last. |
+| Waybar launch | `scripts/waybar-with-lua-shim.sh` | Builds/loads IPC shim so workspace clicks work under Lua manager. |
 
 ## Rollback
 
@@ -73,11 +74,38 @@ hyprctl reload
 - Preserve load order. Warmind Launcher should load after base keybindings when its Lua module is integrated, because it intentionally overrides base binds.
 - Use escaped Lua strings or Lua long strings for regex-heavy rules.
 - Keep shell-heavy commands as complete strings. Do not split commands by spaces or commas.
-- For keybind dispatchers, use Lua `hl.bind`/`hl.define_submap` first. Route unclear dispatcher helpers through `hyprctl dispatch` to preserve behavior.
+- For keybind dispatchers, use Lua `hl.bind`/`hl.define_submap` and native `hl.dsp.*` first.
+- Do not rely on bare `hyprctl dispatch workspace N` under Lua manager; it is parsed as invalid Lua.
+- Prefer `hyprctl dispatch 'hl.dsp.focus({ workspace = N })'` or `hyprctl eval 'hl.dispatch(hl.dsp.focus({ workspace = N }))'`.
 - `hl.monitor` uses Monitor v2-style keys: `output`, `mode`, `position`, and `scale`.
-- Simple colors use numeric `0xRRGGBBAA` values in Lua.
-- Gradients use `{ colors = { 0xRRGGBBAA, 0xRRGGBBAA }, angle = NUMBER }`.
+- Per-device input uses top-level `hl.device({...})`; gestures use `hl.gesture({...})`. Nested `device`/`gesture` inside `hl.config` is ignored.
+- Border colors: nest under `general.col` and use rgba strings for gradients, e.g. `{ colors = { "rgba(33ccffee)", "rgba(00ff99ee)" }, angle = 45 }`. Numeric colors are `0xAARRGGBB`.
 - Hyprlang keys containing `-` may become underscore keys in Lua tables, e.g. `tap-to-click` -> `tap_to_click`.
+- Bind repeat flag in Lua is `repeating = true` (`repeatable` is normalized in `lua/lib/binds.lua`).
+
+## Waybar + Legacy IPC Shim
+
+Waybar's `hyprland/workspaces` module hardcodes IPC:
+
+```text
+dispatch workspace N
+```
+
+Under Lua config manager that becomes invalid Lua (`hl.dispatch(workspace N)`), so bar clicks stop switching workspaces even though keybinds still work.
+
+This config launches waybar through:
+
+```bash
+~/.config/hypr/scripts/waybar-with-lua-shim.sh
+```
+
+That launcher:
+
+1. Builds `lib/libhypr_dispatch_shim.so` from `lib/hypr_dispatch_shim.c` if missing/outdated (`gcc` required once).
+2. `LD_PRELOAD`s the shim into waybar only.
+3. Rewrites `dispatch workspace N` / `focusworkspaceoncurrentmonitor N` into `dispatch hl.dsp.focus({ workspace = N })`.
+
+The compiled `.so` is local runtime output and is not versioned in dotfiles. Scroll uses `scripts/hypr-workspace.sh` directly.
 
 ## Reusable Checklist
 
