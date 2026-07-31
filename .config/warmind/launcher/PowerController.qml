@@ -12,7 +12,7 @@ Item {
         { glyph: "󰌾", label: "LOCK",      cmd: "hyprlock" },
         { glyph: "󰤄", label: "SUSPEND",   cmd: "systemctl suspend" },
         { glyph: "󰋊", label: "HIBERNATE", cmd: "systemctl hibernate" },
-        { glyph: "󰗽", label: "LOGOUT",    cmd: "hyprctl dispatch exit" },
+        { glyph: "󰗽", label: "LOGOUT",    cmd: "~/.config/warmind/launcher/bin/warmind-hypr exit" },
         { glyph: "󰜉", label: "REBOOT",    cmd: "systemctl reboot" },
         { glyph: "󰐥", label: "SHUTDOWN",  cmd: "systemctl poweroff" }
     ]

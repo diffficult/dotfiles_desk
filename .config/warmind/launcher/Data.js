@@ -108,6 +108,7 @@ const omarchyItems = [
     { title: "Bluetooth",         icon: "󰂯", category: "Action", keywords: "bluetooth bt pair device headset speaker keyboard mouse scan connect",                      exec: "qs -c /home/rx/.config/warmind/launcher ipc call bluetooth open" },
     { title: "Network",           icon: "󰖩", category: "Action", keywords: "network wifi wireless ethernet internet ssid signal scan connect",                          exec: "qs -c /home/rx/.config/warmind/launcher ipc call network open" },
     { title: "Dropbox",           icon: "󰇣", category: "Action", keywords: "dropbox cloud sync files folder storage",                                                   exec: "qs -c /home/rx/.config/warmind/launcher ipc call dropbox open" },
+    { title: "OpenCode Usage",    icon: "󰚩", category: "Action", keywords: "opencode usage tokens models ai llm sessions stats anthropic openai codex claude",          exec: "qs -c /home/rx/.config/warmind/launcher ipc call opencode-usage open" },
     { title: "System Monitor",    icon: "󰍛", category: "Quick", keywords: "cpu memory process monitor btop top htop performance load activity",                  exec: "~/.config/warmind/launcher/bin/setup-terminal-launcher.sh 'Quick: System Monitor' btop" },
 
     // ----- Style -----

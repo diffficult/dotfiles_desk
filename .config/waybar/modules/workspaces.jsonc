@@ -123,8 +123,8 @@
       "class<zenity>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<Waybar Manager>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>"
     },
-    "on-scroll-up": "~/.config/hypr/scripts/hypr-workspace.sh r-1",
-    "on-scroll-down": "~/.config/hypr/scripts/hypr-workspace.sh r+1",
+    "on-scroll-up": "hyprctl dispatch workspace r-1",
+    "on-scroll-down": "hyprctl dispatch workspace r+1",
     "on-click": "activate",
     "sort-by-number": true
   }

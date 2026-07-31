@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-live_expose="$HOME/.config/quickshell/expose"
+live_expose="$HOME/.config/warmind/modules/expose"
 repo_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../../../.." && pwd)"
-repo_expose="$repo_root/config/quickshell/expose"
+repo_expose="$repo_root/config/warmind/modules/expose"
 
 pick_expose_path() {
   if [[ -d "$live_expose" ]]; then

@@ -258,6 +258,11 @@ Item {
     }
     property var dropbox: dropboxController
 
+    OpencodeUsageController {
+        id: opencodeUsageController
+    }
+    property var opencodeUsage: opencodeUsageController
+
     TactileController {
         id: tactile
     }
@@ -496,6 +501,7 @@ Item {
     OsdOverlay       { root: root; controller: osd }
     ReminderPopup    { root: root; controller: reminder }
     DropboxPopup     { root: root; controller: dropbox }
+    OpencodeUsagePopup { root: root; controller: opencodeUsage }
     WeatherPopup     { root: root; controller: weather }
     CamsPopup        { root: root; controller: cams }
 
@@ -592,6 +598,14 @@ Item {
         function open(): void { dropbox.open(); }
         function close(): void { dropbox.close(); }
         function refresh(): void { dropbox.refresh(); }
+    }
+
+    IpcHandler {
+        target: "opencode-usage"
+        function toggle(): void { opencodeUsage.toggle(); }
+        function open(): void { opencodeUsage.open(); }
+        function close(): void { opencodeUsage.close(); }
+        function refresh(): void { opencodeUsage.refresh(); }
     }
 
     IpcHandler {

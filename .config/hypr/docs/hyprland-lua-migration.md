@@ -107,6 +107,27 @@ That launcher:
 
 The compiled `.so` is local runtime output and is not versioned in dotfiles. Scroll uses `scripts/hypr-workspace.sh` directly.
 
+## Deprecated scripts (post-migration)
+
+Moved out of the live path:
+
+- `~/.local/bin/hypr_scripts/deprecated/rofi-power-menu` — replaced by Warmind power menu
+- `~/.local/bin/hypr_scripts/deprecated/enter-submap` — submaps enter via native Lua callbacks
+- `~/.config/waybar/scripts/deprecated/select_cams_hypr.sh` — superseded by Warmind cams; not wired in active waybar config
+
+## Warmind QML / external clients (Lua IPC)
+
+Anything still emitting bare `hyprctl dispatch <legacy>` will fail under Lua manager until updated. Known live paths under `~/.config/warmind`:
+
+| Location | Legacy call | Lua-safe direction |
+|----------|-------------|--------------------|
+| `WindowSearch.qml` | `dispatch workspace` / `focuswindow address:` | `hl.dsp.focus({ workspace = ... })`, `hl.dsp.focus({ window = "address:..." })` |
+| `CamsController.qml` | workspace / setfloating / resizewindowpixel / movewindowpixel / closewindow | native `hl.dsp.window.*` + focus forms |
+| `PowerController.qml` | `dispatch exit` | `hl.dsp.exit()` (do not probe live) |
+| `modules/expose/shell.qml` | workspace + focuswindow | same as WindowSearch |
+| `DisplayController.qml` | `dispatch dpms off` | keep `wlopm` (already preferred on this system) |
+| `KeybindSearch.qml` | only label matching for old `hyprctl keyword` / `enter-submap` strings | update labels when bind text changes |
+
 ## Reusable Checklist
 
 - [ ] Inventory sourced `.conf` files and preserve their load order.

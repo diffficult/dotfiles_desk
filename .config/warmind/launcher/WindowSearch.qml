@@ -1,4 +1,5 @@
 import QtQuick
+import Quickshell
 import Quickshell.Io
 
 Item {
@@ -27,12 +28,13 @@ Item {
 
     function activate(item) {
         if (!item) return
+        var helper = (Quickshell.env("HOME") || "") + "/.config/warmind/launcher/bin/warmind-hypr"
         var workspaceName = item.workspaceName || ""
         var cmd = workspaceName
-            ? "hyprctl dispatch workspace " + JSON.stringify(workspaceName)
-                + " >/dev/null 2>&1; hyprctl dispatch focuswindow address:"
-                + item.address
-            : "hyprctl dispatch focuswindow address:" + item.address
+            ? helper + " workspace " + JSON.stringify(workspaceName)
+                + " >/dev/null 2>&1; " + helper + " focus-address "
+                + JSON.stringify(item.address)
+            : helper + " focus-address " + JSON.stringify(item.address)
         switchProc.command = ["zsh", "-c", cmd]
         switchProc.running = false
         switchProc.running = true

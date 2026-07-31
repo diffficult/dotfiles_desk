@@ -137,7 +137,7 @@ Item {
     }
 
     function blankScreen() {
-        controller.host.run("sleep 0.25 && hyprctl dispatch dpms off");
+        controller.host.run("sleep 0.25 && ~/.config/warmind/launcher/bin/warmind-hypr dpms-off");
         controller.close();
     }
 

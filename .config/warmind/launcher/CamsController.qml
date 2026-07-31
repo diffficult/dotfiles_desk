@@ -86,8 +86,11 @@ Item {
         // 1. Optional workspace switch
         if (ws.length > 0) {
             s += "# Switch to workspace " + ws + "\n";
-            s += "hyprctl dispatch workspace " + ws + "\n";
+            s += "HYPR=\"$HOME/.config/warmind/launcher/bin/warmind-hypr\"\n";
+            s += "\"$HYPR\" workspace " + ws + "\n";
             s += "sleep 0.5\n\n";
+        } else {
+            s += "HYPR=\"$HOME/.config/warmind/launcher/bin/warmind-hypr\"\n";
         }
 
         // 2. Read focused monitor geometry
@@ -183,11 +186,8 @@ Item {
             s += "  sleep 0.2\n";
             s += "done\n";
 
-            s += "hyprctl dispatch setfloating \"title:^(" + esc(title) + ")$\"\n";
-            s += "sleep 0.05\n";
-            s += "hyprctl dispatch resizewindowpixel \"exact \$W" + i + " \$H" + i + ",title:^(" + esc(title) + ")$\"\n";
-            s += "sleep 0.05\n";
-            s += "hyprctl dispatch movewindowpixel \"exact \$X" + i + " \$Y" + i + ",title:^(" + esc(title) + ")$\"\n";
+            s += "\"$HYPR\" place \"\$W" + i + "\" \"\$H" + i + "\" \"\$X" + i + "\" \"\$Y" + i
+                + "\" " + shQuote("title:^(" + title + ")$") + "\n";
         }
 
         s += "\nexit 0\n";
@@ -230,8 +230,9 @@ Item {
         id: closeProc
         running: false
         command: ["bash", "-lc",
-            "while hyprctl clients -j | jq -r '.[].title' | grep -q '^" + controller.camPrefix + "'; do"
-            + " hyprctl dispatch closewindow 'title:^" + controller.camPrefix + "' 2>/dev/null;"
+            "HYPR=\"$HOME/.config/warmind/launcher/bin/warmind-hypr\";"
+            + " while hyprctl clients -j | jq -r '.[].title' | grep -q '^" + controller.camPrefix + "'; do"
+            + " \"$HYPR\" close 'title:^" + controller.camPrefix + "' 2>/dev/null;"
             + " sleep 0.1;"
             + " done"]
         onRunningChanged: {
