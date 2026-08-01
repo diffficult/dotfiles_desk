@@ -91,6 +91,7 @@ typeset -gU cdpath fpath mailpath path
 ### )
 
 path=(
+  $HOME/.grok/bin(N)
   $HOME/.opencode/bin(N)
   $NPM_GLOBAL/bin(N)
   $PNPM_HOME(N)

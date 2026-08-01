@@ -10,6 +10,12 @@
 #
 # PREZTO INITIALIZATION
 #
+
+# Grok CLI completions (fpath only — Prezto runs compinit).
+# Do not keep the installer's "# >>> grok installer >>>" markers:
+# install.sh rewrites that block on every run and re-adds a duplicate compinit.
+fpath=($HOME/.grok/completions/zsh(N) $fpath)
+
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
