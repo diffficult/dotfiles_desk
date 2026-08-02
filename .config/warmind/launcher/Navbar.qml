@@ -263,6 +263,16 @@ Item {
     }
     property var opencodeUsage: opencodeUsageController
 
+    GrokUsageController {
+        id: grokUsageController
+    }
+    property var grokUsage: grokUsageController
+
+    CodexUsageController {
+        id: codexUsageController
+    }
+    property var codexUsage: codexUsageController
+
     TactileController {
         id: tactile
     }
@@ -502,6 +512,8 @@ Item {
     ReminderPopup    { root: root; controller: reminder }
     DropboxPopup     { root: root; controller: dropbox }
     OpencodeUsagePopup { root: root; controller: opencodeUsage }
+    GrokUsagePopup   { root: root; controller: grokUsage }
+    CodexUsagePopup  { root: root; controller: codexUsage }
     WeatherPopup     { root: root; controller: weather }
     CamsPopup        { root: root; controller: cams }
 
@@ -606,6 +618,22 @@ Item {
         function open(): void { opencodeUsage.open(); }
         function close(): void { opencodeUsage.close(); }
         function refresh(): void { opencodeUsage.refresh(); }
+    }
+
+    IpcHandler {
+        target: "grok-usage"
+        function toggle(): void { grokUsage.toggle(); }
+        function open(): void { grokUsage.open(); }
+        function close(): void { grokUsage.close(); }
+        function refresh(): void { grokUsage.refresh(); }
+    }
+
+    IpcHandler {
+        target: "codex-usage"
+        function toggle(): void { codexUsage.toggle(); }
+        function open(): void { codexUsage.open(); }
+        function close(): void { codexUsage.close(); }
+        function refresh(): void { codexUsage.refresh(); }
     }
 
     IpcHandler {

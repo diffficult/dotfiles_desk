@@ -81,6 +81,7 @@ const categoryNav = [
     { title: "Capture", icon: "󰄀", category: "Browse", isCategory: true, target: "Capture",     keywords: "capture screenshot screenrecord ocr text extraction color picker" },
         { title: "Cams",    icon: "󰄄", category: "Browse", isCategory: true, target: "Cams",      keywords: "cameras cams nvr security monitor feeds rtsp surveillance video" },
     { title: "Learn",   icon: "󰂺", category: "Browse", isCategory: true, target: "Learn",       keywords: "learn docs manual help keybindings wiki cheatsheet" },
+    { title: "Usage",   icon: "󰥔", category: "Browse", isCategory: true, target: "Usage",       keywords: "usage tokens credits billing ai llm models opencode grok openai chatgpt codex anthropic claude quota cost stats" },
     { title: "Processes", icon: "󰍛", category: "Browse", isCategory: true, target: procCategory,  keywords: "processes process kill task manager ps top htop activity cpu memory" },
     // { title: "Themes",    icon: "󰸌", category: "Browse", isCategory: true, target: themeCategory, keywords: "themes theme palette color swatch switcher dark light apply" },
     // Stage 2 — new search modes
@@ -108,8 +109,13 @@ const omarchyItems = [
     { title: "Bluetooth",         icon: "󰂯", category: "Action", keywords: "bluetooth bt pair device headset speaker keyboard mouse scan connect",                      exec: "qs -c /home/rx/.config/warmind/launcher ipc call bluetooth open" },
     { title: "Network",           icon: "󰖩", category: "Action", keywords: "network wifi wireless ethernet internet ssid signal scan connect",                          exec: "qs -c /home/rx/.config/warmind/launcher ipc call network open" },
     { title: "Dropbox",           icon: "󰇣", category: "Action", keywords: "dropbox cloud sync files folder storage",                                                   exec: "qs -c /home/rx/.config/warmind/launcher ipc call dropbox open" },
-    { title: "OpenCode Usage",    icon: "󰚩", category: "Action", keywords: "opencode usage tokens models ai llm sessions stats anthropic openai codex claude",          exec: "qs -c /home/rx/.config/warmind/launcher ipc call opencode-usage open" },
     { title: "System Monitor",    icon: "󰍛", category: "Quick", keywords: "cpu memory process monitor btop top htop performance load activity",                  exec: "~/.config/warmind/launcher/bin/setup-terminal-launcher.sh 'Quick: System Monitor' btop" },
+
+    // ----- Usage -----
+    // AI/account usage panels. Future: Claude, etc.
+    { title: "OpenCode Usage",    icon: "󰚩", category: "Usage", keywords: "opencode usage tokens models ai llm sessions stats anthropic openai claude",              exec: "qs -c /home/rx/.config/warmind/launcher ipc call opencode-usage open" },
+    { title: "Grok Usage",        icon: "󰚩", category: "Usage", keywords: "grok usage credits billing xai build account period weekly quota cost",                   exec: "qs -c /home/rx/.config/warmind/launcher ipc call grok-usage open" },
+    { title: "Codex Usage",       icon: "󰚩", category: "Usage", keywords: "codex usage openai chatgpt tokens rate limit daily weekly plan plus pro quota credits",   exec: "qs -c /home/rx/.config/warmind/launcher ipc call codex-usage open" },
 
     // ----- Style -----
     { title: "Round Corners",    icon: "󰘇", category: "Style", keywords: "corners radius round soft rounded border edge shape popup",        exec: "qs -c /home/rx/.config/warmind/launcher ipc call corners round" },

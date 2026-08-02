@@ -101,7 +101,8 @@ SUPER+minus|Toggle scratchpad workspace
 SUPER+SHIFT+minus|Send window to scratchpad
 SUPER+Tab|Jump to previous workspace
 SUPER+SHIFT+Tab|Jump to next workspace
-SUPER+O|Hyprspace overview grid
+SUPER+O|ScrollOverview toggle
+SUPER+E|ScrollOverview toggle
 EOF
 
   render_section "Focus & Layout" <<'EOF'
