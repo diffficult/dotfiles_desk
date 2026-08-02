@@ -820,7 +820,9 @@ Item {
         if (!stats) return 0;
         const count = Math.max(0, stats.count || 0);
         const lastUsed = Math.max(0, stats.lastUsed || 0);
-        const freqBonus = Math.min(12, Math.floor((Math.log(count + 1) / Math.log(2)) * 4));
+        // Log scale so heavy use wins ties without drowning title quality
+        // (prefix=100). Cap ~20 freq + ~10 recency ≈ rofi-like frecency.
+        const freqBonus = Math.min(20, Math.floor((Math.log(count + 1) / Math.log(2)) * 5));
         const ageMs = Math.max(0, Date.now() - lastUsed);
         const hour = 60 * 60 * 1000;
         const day = 24 * hour;
@@ -966,28 +968,23 @@ Item {
             }
         }
         scored.sort((a, b) => {
-            // Primary axis: how well the TITLE matched. Items with a
-            // title hit always rank above items that only matched via
-            // keyword/category, regardless of bonus stacking.
+            // 1) Title match quality first (prefix > substring). Keyword-only
+            // hits never outrank a real title hit, even with heavy use.
             if (b.p !== a.p) return b.p - a.p;
-            // Drill-ins above leaves on the same title score, so a
-            // typed "setup" surfaces the Setup drill-in row above any
-            // Setup-category leaf.
+            // 2) Rofi-like frecency: among equal title quality, prefer items
+            // used more often / more recently — including over category
+            // drill-ins (so "ca" surfaces Camara 01 above Capture/Cams).
+            if (b.u !== a.u) return b.u - a.u;
+            // 3) Unused drill-ins still beat unused leaves on the same title
+            // score (typed "setup" → Setup category before Setup leaves).
             const aCat = a.item.isCategory ? 0 : 1;
             const bCat = b.item.isCategory ? 0 : 1;
             if (aCat !== bCat) return aCat - bCat;
-            // Kind: App > omarchy/navbar > TUI > Theme. This is where
-            // Apps win against omarchy/theme rows that share a title
-            // prefix (e.g. typing "aether" surfaces the Aether app
-            // ahead of "Aether Themes" and the aether theme entry).
+            // 4) Kind tie-break: App > omarchy/navbar > TUI > Theme.
             const ka = root.kindRank(a.item);
             const kb = root.kindRank(b.item);
             if (ka !== kb) return ka - kb;
-            // Rofi-like frecency: within the same textual/kind bucket,
-            // prefer items used more often and more recently.
-            if (b.u !== a.u) return b.u - a.u;
-            // Within the same kind, fall back to total score (keyword
-            // and category bonuses) and finally alpha.
+            // 5) Full textual score (keywords/category), then alpha.
             if (b.s !== a.s) return b.s - a.s;
             return a.item.title.localeCompare(b.item.title);
         });
