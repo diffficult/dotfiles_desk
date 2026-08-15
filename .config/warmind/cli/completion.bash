@@ -2244,6 +2244,26 @@ _warmind_system_shutdown()
     noun_aliases=()
 }
 
+_warmind_system_stats()
+{
+    last_command="warmind_system_stats"
+
+    command_aliases=()
+
+    commands=()
+
+    flags=()
+    two_word_flags=()
+    local_nonpersistent_flags=()
+    flags_with_completion=()
+    flags_completion=()
+
+
+    must_have_one_flag=()
+    must_have_one_noun=()
+    noun_aliases=()
+}
+
 _warmind_system_wake()
 {
     last_command="warmind_system_wake"
@@ -2275,6 +2295,7 @@ _warmind_system()
     commands+=("logout")
     commands+=("reboot")
     commands+=("shutdown")
+    commands+=("stats")
     commands+=("wake")
 
     flags=()
@@ -2843,6 +2864,26 @@ _warmind_update()
     noun_aliases=()
 }
 
+_warmind_version()
+{
+    last_command="warmind_version"
+
+    command_aliases=()
+
+    commands=()
+
+    flags=()
+    two_word_flags=()
+    local_nonpersistent_flags=()
+    flags_with_completion=()
+    flags_completion=()
+
+
+    must_have_one_flag=()
+    must_have_one_noun=()
+    noun_aliases=()
+}
+
 _warmind_weather_icon()
 {
     last_command="warmind_weather_icon"
@@ -2935,6 +2976,7 @@ _warmind_root_command()
     commands+=("tui")
     commands+=("tz")
     commands+=("update")
+    commands+=("version")
     commands+=("weather")
 
     flags=()
