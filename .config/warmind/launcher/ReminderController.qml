@@ -64,8 +64,8 @@ Item {
             controller.errorText = "ENTER A POSITIVE NUMBER OF MINUTES";
             return false;
         }
-        const body = controller.message.trim() || "Your " + valid + " minute reminder is due.";
-        const unit = "warmind-reminder-" + Date.now();
+        const body = controller.message.trim() || "Your " + valid + " minutes are up";
+        const unit = "warmind-reminder-" + valid + "m-" + Math.floor(Date.now() / 1000);
         // Keep the reminder message as an argv entry rather than interpolating it into a shell command.
         Quickshell.execDetached({
             "command": ["systemd-run", "--user", "--quiet", "--collect", "--on-active=" + valid + "m", "--unit=" + unit, "--description=Warmind Reminder: " + body, "notify-send", "-a", "Warmind Reminder", "-i", "alarm-symbolic", "-u", "normal", "Reminder", body]
