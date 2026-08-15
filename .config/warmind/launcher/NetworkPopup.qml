@@ -7,13 +7,14 @@ CardWindow {
 
     theme: root
     revealed: controller.active
-    cardWidth: 520
+    cardWidth: 700
     layerNamespace: "warmind-network"
     title: "NETWORK"
-    subtitle: controller.supported
-        ? controller.radioOn ? controller.networks.length + " NETWORKS" : "WI-FI RADIO OFF"
-        : root.netKind === "eth" ? "ETHERNET" : "NO WI-FI ADAPTER"
-    footer: "↑↓ ROW · ENTER ACTIVATE · R REFRESH · ESC CLOSE"
+    subtitle: controller.kind === "wifi"
+        ? (controller.label || "WI-FI")
+        : controller.kind === "ethernet" ? "ETHERNET"
+        : controller.nmAvailable ? "DISCONNECTED" : "NETWORKMANAGER UNAVAILABLE"
+    footer: "↑↓ ROW · ENTER ACTIVATE · R REFRESH · Q QR · S SPEED · ESC CLOSE"
 
     anchorEdge: networkPopup.root.barEdge
     anchorBarX: networkPopup.root.popupAnchorX > 0
@@ -46,7 +47,7 @@ CardWindow {
     Flickable {
         id: networkScroller
         width: parent.width
-        height: Math.min(500, Math.max(140, popupBody.implicitHeight))
+        height: Math.min(660, Math.max(180, popupBody.implicitHeight))
         contentWidth: width
         contentHeight: popupBody.implicitHeight
         clip: true
