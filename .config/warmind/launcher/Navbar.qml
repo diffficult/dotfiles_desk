@@ -225,6 +225,11 @@ Item {
     }
     property var screenshots: screenshotsController
 
+    ClipboardController {
+        id: clipboardController
+    }
+    property var clipboard: clipboardController
+
     VideosController {
         id: videosController
     }
@@ -503,10 +508,12 @@ Item {
     TactilePopup     { root: root; controller: tactile }
     CalendarPopup    { root: root; controller: calendar }
     ScreenshotsPopup { root: root; controller: screenshots }
+    ClipboardPopup   { root: root; controller: clipboard }
     VideosPopup      { root: root; controller: videos }
     AudioPopup       { root: root; controller: audio }
     BluetoothPopup   { root: root; controller: bluetooth }
     NetworkPopup     { root: root; controller: wifi }
+    PowerPopup       { root: root; controller: power }
     DisplayPopup     { root: root; controller: display }
     OsdOverlay       { root: root; controller: osd }
     ReminderPopup    { root: root; controller: reminder }
@@ -533,6 +540,14 @@ Item {
         function toggle(): void { screenshots.toggle(); }
         function open(): void { screenshots.open(); }
         function close(): void { screenshots.close(); }
+    }
+
+    IpcHandler {
+        target: "clipboard"
+        function toggle(): void { clipboard.toggle(); }
+        function open(): void { clipboard.open(); }
+        function close(): void { clipboard.close(); }
+        function refresh(): void { clipboard.refresh(); }
     }
 
     // bind = SUPER, V, exec, qs ipc call videos toggle
@@ -602,6 +617,14 @@ Item {
         function open(): void { wifi.open(); }
         function close(): void { wifi.close(); }
         function refresh(): void { wifi.refresh(); }
+    }
+
+    IpcHandler {
+        target: "power"
+        function toggle(): void { power.toggle(); }
+        function open(): void { power.open(); }
+        function close(): void { power.close(); }
+        function refresh(): void { power.refresh(); }
     }
 
     IpcHandler {

@@ -1,4 +1,5 @@
 import QtQuick
+import Quickshell
 import Quickshell.Io
 
 Item {
@@ -8,6 +9,9 @@ Item {
 
     property string powerProfile: ""
     property var powerProfiles: []
+    property var batteryDetail: ({})
+    property string batteryDetailSerialised: ""
+    property bool active: false
     readonly property var actions: [
         { glyph: "󰌾", label: "LOCK",      cmd: "hyprlock" },
         { glyph: "󰤄", label: "SUSPEND",   cmd: "systemctl suspend" },
@@ -22,6 +26,28 @@ Item {
         controller.powerProfile = name;
         controller.host.run("powerprofilesctl set " + name);
         powerProfileRefreshTimer.restart();
+    }
+
+    function open() {
+        controller.active = true;
+        controller.refresh();
+    }
+
+    function close() {
+        controller.active = false;
+    }
+
+    function toggle() {
+        if (controller.active) controller.close();
+        else controller.open();
+    }
+
+    function refresh() {
+        refreshPowerProfile();
+        if (controller.active && !batteryDetailProc.running) {
+            batteryDetailProc.running = false;
+            batteryDetailProc.running = true;
+        }
     }
 
     function refreshPowerProfile() {
@@ -59,6 +85,42 @@ Item {
                 if (controller.powerProfile !== cur) controller.powerProfile = cur;
                 if (JSON.stringify(controller.powerProfiles) !== JSON.stringify(list))
                     controller.powerProfiles = list;
+            }
+        }
+    }
+
+    Process {
+        id: batteryDetailProc
+        running: false
+        command: [Quickshell.env("HOME") + "/.config/warmind/launcher/bin/warmind-power-status"]
+        stdout: StdioCollector {
+            onStreamFinished: {
+                const next = {};
+                const lines = this.text.split("\n");
+                for (const line of lines) {
+                    if (!line) continue;
+                    const idx = line.indexOf("\t");
+                    if (idx < 0) continue;
+                    next[line.slice(0, idx)] = line.slice(idx + 1).trim();
+                }
+                const ser = JSON.stringify(next);
+                if (ser !== controller.batteryDetailSerialised) {
+                    controller.batteryDetailSerialised = ser;
+                    controller.batteryDetail = next;
+                }
+            }
+        }
+    }
+
+    Timer {
+        id: batteryDetailPoll
+        interval: 3000
+        repeat: true
+        running: controller.active
+        onTriggered: {
+            if (!batteryDetailProc.running) {
+                batteryDetailProc.running = false;
+                batteryDetailProc.running = true;
             }
         }
     }
