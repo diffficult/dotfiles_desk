@@ -107,7 +107,7 @@ hl.window_rule({
   match = {
     title = "^(CPU.*)$",
   },
-  size = "900 720",
+  size = "1700 1100",
 })
 
 hl.window_rule({
