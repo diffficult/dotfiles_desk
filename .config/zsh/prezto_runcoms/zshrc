@@ -153,16 +153,30 @@ fi
 export YTFZF_EXTMENU='rofi -dmenu -fuzzy -width 1000'
 export YTFZF_ENABLE_FZF_DEFUALT_OPTS=0
 
+# FFF (pi search plugin): never index the home directory, even when pi is
+# launched from $HOME. Env var survives plugin updates (flag default may flip).
+export FFF_ENABLE_HOME_SCAN=0
+
 # Autosuggestion color configuration
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=244'
-
-# X-cmd initialization
-[ ! -f "$HOME/.x-cmd.root/X" ] || . "$HOME/.x-cmd.root/X" # boot up x-cmd.
 
 # Warmind CLI completions — auto-installed by warmind installer
 if [[ -f "/home/rx/.config/warmind/cli/completion.zsh" ]]; then
   source "/home/rx/.config/warmind/cli/completion.zsh"
 fi
 
-# Keep late interactive initializers from reintroducing duplicate PATH entries.
+# Path-affecting initializers — order matters: the last one prepending to PATH
+# wins lookup precedence, so these stay grouped before the final dedup.
+
+# X-cmd — boot up x-cmd (adds its portable tool bins to PATH).
+[ ! -f "$HOME/.x-cmd.root/X" ] || . "$HOME/.x-cmd.root/X"
+
+# mise-en-place — manages global tool versions; its shims must stay at the
+# front of PATH so they shadow any other installs.
+eval "$(mise activate zsh)"
+
+# Drop duplicate PATH entries introduced by the initializers above.
 typeset -gU path
+
+# Magic Context: re-despinear opencode tras cada auto-update (vuelve a @latest)
+alias mc-unpin='sed -i "s|@cortexkit/opencode-magic-context@[0-9][0-9.]*|@cortexkit/opencode-magic-context@latest|" ~/.config/opencode/opencode.json ~/.config/opencode/tui.json'
