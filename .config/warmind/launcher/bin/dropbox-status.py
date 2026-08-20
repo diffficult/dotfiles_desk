@@ -92,7 +92,13 @@ def main():
         running_exit, _ = command_output([cli, "running"])
         running = running_exit == 0 or daemon_running()
         status_exit, status_output = command_output([cli, "status"])
-        if running and status_exit == 0 and status_output:
+        lowered_status = status_output.lower()
+        status_is_stopped = (
+            "isn't running" in lowered_status
+            or "not running" in lowered_status
+            or lowered_status == "stopped"
+        )
+        if running and status_exit == 0 and status_output and not status_is_stopped:
             status_text = status_output
         elif running:
             status_text = "Running"

@@ -97,31 +97,31 @@ const omarchyItems = [
     // Quick popups currently kept visible in launcher rows.
     // Display is extracted/protected again but remains hidden by default
     // until a laptop-oriented exposure strategy is chosen.
-    // { title: "Display",           icon: "󰍹", category: "Quick", keywords: "display monitor warmth gamma night light temperature dim screen",                    exec: "qs -c /home/rx/.config/warmind/launcher ipc call display toggle" },
-    { title: "Weather",           icon: "󰖐", category: "Quick", keywords: "weather forecast temperature wttr rain sun wind humidity uv sunrise sunset outdoor",  exec: "qs -c /home/rx/.config/warmind/launcher ipc call weather toggle" },
-    { title: "Calendar",          icon: "󰃭", category: "Quick", keywords: "calendar date month day today schedule planner agenda holidays google events",        exec: "qs -c /home/rx/.config/warmind/launcher ipc call calendar toggle" },
-    { title: "Screenshots",       icon: "󰄀", category: "Quick", keywords: "screenshots shots browse pictures captures images recent gallery",                     exec: "qs -c /home/rx/.config/warmind/launcher ipc call screenshots toggle" },
-    { title: "Videos",            icon: "󰟞", category: "Quick", keywords: "videos films clips recordings recent browse gallery library",                         exec: "qs -c /home/rx/.config/warmind/launcher ipc call videos toggle" },
-    { title: "Clipboard History", icon: "󰅌", category: "Action", keywords: "clipboard clipse history copy paste text image file recent",                       exec: "qs -c /home/rx/.config/warmind/launcher ipc call clipboard open" },
-    { title: "Reminder",          icon: "󰚥", category: "Action", keywords: "reminder alarm timer notify notification later minutes",                           exec: "qs -c /home/rx/.config/warmind/launcher ipc call reminder open" },
+    // { title: "Display",           icon: "󰍹", category: "Quick", keywords: "display monitor warmth gamma night light temperature dim screen",                    exec: "qs -c $HOME/.config/warmind/launcher ipc call display toggle" },
+    { title: "Weather",           icon: "󰖐", category: "Quick", keywords: "weather forecast temperature wttr rain sun wind humidity uv sunrise sunset outdoor",  exec: "qs -c $HOME/.config/warmind/launcher ipc call weather toggle" },
+    { title: "Calendar",          icon: "󰃭", category: "Quick", keywords: "calendar date month day today schedule planner agenda holidays google events",        exec: "qs -c $HOME/.config/warmind/launcher ipc call calendar toggle" },
+    { title: "Screenshots",       icon: "󰄀", category: "Quick", keywords: "screenshots shots browse pictures captures images recent gallery",                     exec: "qs -c $HOME/.config/warmind/launcher ipc call screenshots toggle" },
+    { title: "Videos",            icon: "󰟞", category: "Quick", keywords: "videos films clips recordings recent browse gallery library",                         exec: "qs -c $HOME/.config/warmind/launcher ipc call videos toggle" },
+    { title: "Clipboard History", icon: "󰅌", category: "Action", keywords: "clipboard clipse history copy paste text image file recent",                       exec: "qs -c $HOME/.config/warmind/launcher ipc call clipboard open" },
+    { title: "Reminder",          icon: "󰚥", category: "Action", keywords: "reminder alarm timer notify notification later minutes",                           exec: "qs -c $HOME/.config/warmind/launcher ipc call reminder open" },
     { title: "Mute Audio",        icon: "󰝟", category: "Quick", keywords: "mute audio unmute silence toggle volume sound speaker quick",                         exec: "wpctl set-mute @DEFAULT_SINK@ toggle" },
-    { title: "Refresh Weather",   icon: "󰜉", category: "Quick", keywords: "weather refresh reload update wttr fetch",                                             exec: "qs -c /home/rx/.config/warmind/launcher ipc call weather refresh" },
-    { title: "Audio",             icon: "󰕾", category: "Action", keywords: "audio mixer pipewire pulse volume sink source microphone input device level",          exec: "qs -c /home/rx/.config/warmind/launcher ipc call audio open" },
-    { title: "Bluetooth",         icon: "󰂯", category: "Action", keywords: "bluetooth bt pair device headset speaker keyboard mouse scan connect",                      exec: "qs -c /home/rx/.config/warmind/launcher ipc call bluetooth open" },
-    { title: "Network",           icon: "󰖩", category: "Action", keywords: "network wifi wireless ethernet internet ssid signal scan connect",                          exec: "qs -c /home/rx/.config/warmind/launcher ipc call network open" },
-    { title: "Power",             icon: "󰁹", category: "Action", keywords: "power battery charge profile saver performance balanced laptop watts",                     exec: "qs -c /home/rx/.config/warmind/launcher ipc call power open" },
-    { title: "Dropbox",           icon: "󰇣", category: "Action", keywords: "dropbox cloud sync files folder storage",                                                   exec: "qs -c /home/rx/.config/warmind/launcher ipc call dropbox open" },
+    { title: "Refresh Weather",   icon: "󰜉", category: "Quick", keywords: "weather refresh reload update wttr fetch",                                             exec: "qs -c $HOME/.config/warmind/launcher ipc call weather refresh" },
+    { title: "Audio",             icon: "󰕾", category: "Action", keywords: "audio mixer pipewire pulse volume sink source microphone input device level",          exec: "qs -c $HOME/.config/warmind/launcher ipc call audio open" },
+    { title: "Bluetooth",         icon: "󰂯", category: "Action", keywords: "bluetooth bt pair device headset speaker keyboard mouse scan connect",                      exec: "qs -c $HOME/.config/warmind/launcher ipc call bluetooth open" },
+    { title: "Network",           icon: "󰖩", category: "Action", keywords: "network wifi wireless ethernet internet ssid signal scan connect",                          exec: "qs -c $HOME/.config/warmind/launcher ipc call network open" },
+    { title: "Power",             icon: "󰁹", category: "Action", keywords: "power battery charge profile saver performance balanced laptop watts",                     exec: "qs -c $HOME/.config/warmind/launcher ipc call power open" },
+    { title: "Dropbox",           icon: "󰇣", category: "Action", keywords: "dropbox cloud sync files folder storage",                                                   exec: "qs -c $HOME/.config/warmind/launcher ipc call dropbox open" },
     { title: "System Monitor",    icon: "󰍛", category: "Quick", keywords: "cpu memory process monitor btop top htop performance load activity",                  exec: "~/.config/warmind/launcher/bin/setup-terminal-launcher.sh 'Quick: System Monitor' btop" },
 
     // ----- Usage -----
     // AI/account usage panels. Future: Claude, etc.
-    { title: "OpenCode Usage",    icon: "󰚩", category: "Usage", keywords: "opencode usage tokens models ai llm sessions stats anthropic openai claude",              exec: "qs -c /home/rx/.config/warmind/launcher ipc call opencode-usage open" },
-    { title: "Grok Usage",        icon: "󰚩", category: "Usage", keywords: "grok usage credits billing xai build account period weekly quota cost",                   exec: "qs -c /home/rx/.config/warmind/launcher ipc call grok-usage open" },
-    { title: "Codex Usage",       icon: "󰚩", category: "Usage", keywords: "codex usage openai chatgpt tokens rate limit daily weekly plan plus pro quota credits",   exec: "qs -c /home/rx/.config/warmind/launcher ipc call codex-usage open" },
+    { title: "OpenCode Usage",    icon: "󰚩", category: "Usage", keywords: "opencode usage tokens models ai llm sessions stats anthropic openai claude",              exec: "qs -c $HOME/.config/warmind/launcher ipc call opencode-usage open" },
+    { title: "Grok Usage",        icon: "󰚩", category: "Usage", keywords: "grok usage credits billing xai build account period weekly quota cost",                   exec: "qs -c $HOME/.config/warmind/launcher ipc call grok-usage open" },
+    { title: "Codex Usage",       icon: "󰚩", category: "Usage", keywords: "codex usage openai chatgpt tokens rate limit daily weekly plan plus pro quota credits",   exec: "qs -c $HOME/.config/warmind/launcher ipc call codex-usage open" },
 
     // ----- Style -----
-    { title: "Round Corners",    icon: "󰘇", category: "Style", keywords: "corners radius round soft rounded border edge shape popup",        exec: "qs -c /home/rx/.config/warmind/launcher ipc call corners round" },
-    { title: "Sharp Corners",    icon: "󰝣", category: "Style", keywords: "corners radius sharp square hard flat border edge shape popup",       exec: "qs -c /home/rx/.config/warmind/launcher ipc call corners sharp" },
+    { title: "Round Corners",    icon: "󰘇", category: "Style", keywords: "corners radius round soft rounded border edge shape popup",        exec: "qs -c $HOME/.config/warmind/launcher ipc call corners round" },
+    { title: "Sharp Corners",    icon: "󰝣", category: "Style", keywords: "corners radius sharp square hard flat border edge shape popup",       exec: "qs -c $HOME/.config/warmind/launcher ipc call corners sharp" },
     { title: "Edit Waybar",      icon: "󰍜", category: "Style", keywords: "waybar config edit style modules bar",                                exec: "~/.config/warmind/launcher/bin/setup-editor-launcher.sh 'Style: Waybar Config' ~/.config/waybar/config.jsonc" },
     { title: "Edit Hyprland",    icon: "󰕮", category: "Style", keywords: "hyprland config edit window manager compositor border gaps lua",      exec: "~/.config/warmind/launcher/bin/setup-editor-launcher.sh 'Style: Hyprland Config' ~/.config/hypr/hyprland.lua" },
 
@@ -157,7 +157,7 @@ const omarchyItems = [
 
     // ----- Toggle -----
     { title: "Toggle Waybar",        icon: "󰍜", category: "Toggle", keywords: "toggle waybar top bar show hide visibility",                        exec: "pkill -SIGUSR1 waybar || uwsm app -- waybar" },
-    { title: "Waybar Manager",       icon: "󰙨", category: "Toggle", keywords: "waybar manager tui config modules positions bar settings footclient",   exec: "footclient -a waybar-manager -T \"Waybar Manager\" /home/rx/.local/bin/waybar_manager" },
+    { title: "Waybar Manager",       icon: "󰙨", category: "Toggle", keywords: "waybar manager tui config modules positions bar settings footclient",   exec: "footclient -a waybar-manager -T \"Waybar Manager\" $HOME/.local/bin/waybar_manager" },
     { title: "Toggle Notifications", icon: "󰂛", category: "Toggle", keywords: "toggle notifications silence mute dnd swaync",                       exec: "swaync-client -t" },
 
     // ----- Capture -----
@@ -168,9 +168,9 @@ const omarchyItems = [
     { title: "Color Picker",             icon: "󰃉", category: "Capture", keywords: "color picker hex rgb hyprpicker dropper sample eyedropper",         exec: "zsh -c 'pkill hyprpicker || hyprpicker -a'" },
 
     // ----- Learn -----
-    { title: "Hyprland Wiki",  icon: "󱁉", category: "Learn", keywords: "hyprland wiki docs documentation help webapp brave",        exec: "/home/rx/dev/mygits/warmind_helpers/bin/warmind-launch-webapp --browser=brave 'https://wiki.hypr.land/'" },
-    { title: "Arch Wiki",      icon: "󰣇", category: "Learn", keywords: "arch wiki docs documentation help linux webapp brave",       exec: "/home/rx/dev/mygits/warmind_helpers/bin/warmind-launch-webapp --browser=brave 'https://wiki.archlinux.org/'" },
-    { title: "Quickshell Docs",icon: "󰢫", category: "Learn", keywords: "quickshell qml docs documentation api webapp brave",         exec: "/home/rx/dev/mygits/warmind_helpers/bin/warmind-launch-webapp --browser=brave 'https://quickshell.outfoxxed.me/docs/'" }
+    { title: "Hyprland Wiki",  icon: "󱁉", category: "Learn", keywords: "hyprland wiki docs documentation help webapp brave",        exec: "$HOME/dev/mygits/warmind_helpers/bin/warmind-launch-webapp --browser=brave 'https://wiki.hypr.land/'" },
+    { title: "Arch Wiki",      icon: "󰣇", category: "Learn", keywords: "arch wiki docs documentation help linux webapp brave",       exec: "$HOME/dev/mygits/warmind_helpers/bin/warmind-launch-webapp --browser=brave 'https://wiki.archlinux.org/'" },
+    { title: "Quickshell Docs",icon: "󰢫", category: "Learn", keywords: "quickshell qml docs documentation api webapp brave",         exec: "$HOME/dev/mygits/warmind_helpers/bin/warmind-launch-webapp --browser=brave 'https://quickshell.outfoxxed.me/docs/'" }
 ];
 
 // Pre-lowercases `title`/`keywords`/`category` onto `_t`/`_k`/`_c` so the

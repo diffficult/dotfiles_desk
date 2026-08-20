@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-SCRIPT_PATH="/home/rx/dev/mygits/work-tools/scripts/own/yayfzf-offline.sh"
+SCRIPT_PATH="$HOME/dev/mygits/work-tools/scripts/own/yayfzf-offline.sh"
 WINDOW_TITLE="Warmind Install Package"
 APP_ID="footclient-float"
 

@@ -668,7 +668,7 @@ Item {
             // Cams opens its popup directly instead of drilling in.
             if (item.target === "Cams") {
                 runner.command = ["sh", "-c",
-                    "setsid -f uwsm-app -- qs -c /home/rx/.config/warmind/launcher ipc call cams toggle >/dev/null 2>&1"];
+                    "setsid -f uwsm-app -- qs -c $HOME/.config/warmind/launcher ipc call cams toggle >/dev/null 2>&1"];
                 runner.running = false;
                 runner.running = true;
                 root.close();

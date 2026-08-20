@@ -7,32 +7,32 @@
 // the QuickContainer builds from navbar telemetry on every tick.
 var base = [
     { key: "audio",       keywords: "audio sound speaker volume mute pulse pipewire",
-      action: "qs -c /home/rx/.config/warmind/launcher ipc call audio toggle",
+      action: "qs -c $HOME/.config/warmind/launcher ipc call audio toggle",
       longAction: "wpctl set-mute @DEFAULT_SINK@ toggle" },
     { key: "network",     keywords: "wifi wireless network internet ssid signal ethernet eth",
-      action: "qs -c /home/rx/.config/warmind/launcher ipc call network toggle" },
+      action: "qs -c $HOME/.config/warmind/launcher ipc call network toggle" },
     { key: "bluetooth",   keywords: "bluetooth bt pair device headset speaker keyboard",
-      action: "qs -c /home/rx/.config/warmind/launcher ipc call bluetooth toggle" },
+      action: "qs -c $HOME/.config/warmind/launcher ipc call bluetooth toggle" },
     { key: "weather",     keywords: "weather forecast temperature wttr rain sun wind",
-      action: "qs -c /home/rx/.config/warmind/launcher ipc call weather toggle",
-      longAction: "qs -c /home/rx/.config/warmind/launcher ipc call weather refresh" },
+      action: "qs -c $HOME/.config/warmind/launcher ipc call weather toggle",
+      longAction: "qs -c $HOME/.config/warmind/launcher ipc call weather refresh" },
     { key: "cpu",         keywords: "cpu processor memory monitor btop top htop performance load",
       action: "foot -e btop" },
     // Quick tiles currently hidden from the panel.
     // Display is extracted/protected again but remains hidden by default
     // until a laptop-oriented exposure strategy is chosen.
     // { key: "display",     keywords: "display monitor warmth gamma night light temperature dim screen",
-    //   action: "qs -c /home/rx/.config/warmind/launcher ipc call display toggle" },
+    //   action: "qs -c $HOME/.config/warmind/launcher ipc call display toggle" },
     { key: "calendar",    keywords: "calendar date month day today schedule planner google events agenda",
-      action: "qs -c /home/rx/.config/warmind/launcher ipc call calendar toggle" },
+      action: "qs -c $HOME/.config/warmind/launcher ipc call calendar toggle" },
     { key: "screenshots", keywords: "screenshots shots browse pictures captures images gallery",
-      action: "qs -c /home/rx/.config/warmind/launcher ipc call screenshots toggle",
+      action: "qs -c $HOME/.config/warmind/launcher ipc call screenshots toggle",
       longAction: "zsh -c 'grim -g \"$(slurp)\" ~/Pictures/screenshot-$(date +%Y%m%d-%H%M%S).png'" },
     { key: "videos",      keywords: "videos films clips recordings browse gallery library",
-      action: "qs -c /home/rx/.config/warmind/launcher ipc call videos toggle",
+      action: "qs -c $HOME/.config/warmind/launcher ipc call videos toggle",
       longAction: "nemo ~/Videos" },
     { key: "power",       keywords: "power menu suspend hibernate logout restart shutdown lock",
-      action: "qs -c /home/rx/.config/warmind/launcher ipc call palette openCategory Quick" }
+      action: "qs -c $HOME/.config/warmind/launcher ipc call palette openCategory Quick" }
 ];
 
 // Build the per-tile dynamic map (glyph/label/sub/tone) from live

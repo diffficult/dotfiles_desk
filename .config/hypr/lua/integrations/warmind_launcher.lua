@@ -23,6 +23,8 @@ hl.unbind("XF86AudioMicMute")
 hl.unbind("XF86AudioPlay")
 hl.unbind("XF86AudioPrev")
 hl.unbind("XF86AudioNext")
+hl.unbind("XF86MonBrightnessUp")
+hl.unbind("XF86MonBrightnessDown")
 
 b.bind("SUPER + D", "exec", "uwsm app -- qs -c /home/rx/.config/warmind/launcher ipc call palette toggle", {})
 b.bind("SUPER + bracketright", "exec", "uwsm app -- qs -c /home/rx/.config/warmind/launcher ipc call palette openCategory Windows", {})
@@ -41,6 +43,13 @@ b.bind("XF86AudioMicMute", "exec", "/home/rx/.config/warmind/launcher/bin/warmin
 b.bind("XF86AudioPlay", "exec", "/home/rx/.config/warmind/launcher/bin/warmind-media-key.sh play-pause", locked)
 b.bind("XF86AudioPrev", "exec", "/home/rx/.config/warmind/launcher/bin/warmind-media-key.sh previous", locked)
 b.bind("XF86AudioNext", "exec", "/home/rx/.config/warmind/launcher/bin/warmind-media-key.sh next", locked)
+
+b.bind("XF86MonBrightnessUp", "exec", "/home/rx/.config/warmind/launcher/bin/warmind-brightness-key.sh up", repeat_locked)
+b.bind("XF86MonBrightnessDown", "exec", "/home/rx/.config/warmind/launcher/bin/warmind-brightness-key.sh down", repeat_locked)
+
+hl.on("hyprland.start", function()
+  hl.dispatch(hl.dsp.exec_cmd("/home/rx/.config/warmind/launcher/bin/warmind-kbd-backlight-watch.sh &"))
+end)
 
 hl.window_rule({ name = "warmind-system-update", match = { title = [[^(Warmind System Update)$]] }, float = true, center = true, size = "1100 820" })
 hl.window_rule({ name = "warmind-user-password", match = { title = [[^(Warmind User Password)$]] }, float = true, center = true, size = "900 520" })
