@@ -4,8 +4,8 @@
     "return-type": "json",
     "interval": 3600,
     "format": "{}",
-    "on-click-right": "gnome-software %U || pamac-manager &",
-    "on-click": "footclient -a footclient-float -T 'yay' -e sh -c 'yay; echo; echo Update complete. Press Enter to close; read; rm -f ~/.cache/waybar/pacman_updates.cache'",
+    "on-click": "gnome-software %U || pamac-manager &",
+    "on-click-right": "footclient -a footclient-float -T 'yay' -e sh -c 'yay; echo; echo Update complete. Press Enter to close; read; rm -f ~/.cache/waybar/pacman_updates.cache'",
     "on-click-middle": "rm -f ~/.cache/waybar/pacman_updates.cache && pkill -RTMIN+8 waybar"
   }
 }
