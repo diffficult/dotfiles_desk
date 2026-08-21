@@ -14,7 +14,7 @@ local exec_once = {
   "awww-daemon &",
   "uwsm app -- /usr/lib/geoclue-2.0/demos/agent",
   "(sleep 10 && uwsm app -- openrgb --startminimized --profile default) &",
-  "uwsm app -- dropbox &",
+  "uwsm app -- env -u DISPLAY -u WAYLAND_DISPLAY dropbox-cli start",
   "(for _ in $(seq 1 20); do busctl --user get-property org.kde.StatusNotifierWatcher /StatusNotifierWatcher org.kde.StatusNotifierWatcher IsStatusNotifierHostRegistered >/dev/null 2>&1 && break; sleep 1; done; uwsm app -- env QT_QPA_PLATFORM=xcb megasync) &",
   "uwsm app -- syncthing-gtk &",
   "~/.local/bin/hypr_scripts/remap-trackball.sh &",
