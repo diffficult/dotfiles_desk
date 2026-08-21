@@ -103,3 +103,17 @@ tooltip {
   color: @yellow;
   font-weight: bold;
 }
+
+/* Dropbox sync states */
+#custom-warmind-dropbox {
+  color: @foreground;
+}
+#custom-warmind-dropbox.dropbox-stopped {
+  color: @peach;
+}
+#custom-warmind-dropbox.dropbox-login {
+  color: @yellow;
+}
+#custom-warmind-dropbox.dropbox-unavailable {
+  color: @red;
+}
