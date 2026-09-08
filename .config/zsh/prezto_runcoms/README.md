@@ -50,7 +50,7 @@ These are the effective bindings loaded in the default interactive keymap.
 | `Ctrl-X l` | `clear-keep-buffer` | Clear the screen while preserving the current command buffer. |
 | `Ctrl-X c` | `copy-command` | Copy the current command buffer. |
 | `Ctrl-X Ctrl-X` | `__pr_inline` | Inline `pay-respects` correction helper. |
-| `Alt-e` | `_aichat_zsh` | Rewrite the current command buffer through `aichat -e`. |
+| `Alt-e` | `_pi_cmd_zsh` | Rewrite the current command buffer through `pi -p`. |
 | `Ctrl-G` | `_navi_widget` | Open Navi cheatsheets and insert the selected command. |
 | `Alt-a` | `fzf_alias` | Search shell aliases with FZF. |
 | `Ctrl-T` | `fzf-file-widget` | Insert files selected with FZF. |

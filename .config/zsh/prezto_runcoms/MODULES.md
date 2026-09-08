@@ -21,7 +21,7 @@ This file documents the non-upstream modules active in `zpreztorc`. Standard Pre
 | `zoxide` | `~/.zprezto/contrib/zoxide` | <https://github.com/belak/prezto-contrib> | Integrates `zoxide` directory jumping into Prezto. |
 | `fabric` | `~/.config/zsh/modules/fabric` -> `~/dev/mygits/fabric-zsh` | <https://github.com/diffficult/fabric-zsh> | Adds Fabric completions, helper functions, pattern/model/session discovery, and cache helpers. |
 | `ask-zsh` | `~/.config/zsh/modules/ask-zsh` -> `~/dev/mygits/ask-zsh` | <https://github.com/diffficult/ask-zsh> | Adds an AI-assisted command generator for Zsh/Prezto. |
-| `aichat-ng` | `~/.config/zsh/modules/aichat-ng` | Local module | Adds `Alt-e` to rewrite the current command buffer through `aichat -e`. |
+| `pi-cmd` | `~/.config/zsh/modules/pi-cmd` | Local module | Adds `Alt-e` to rewrite the current command buffer through `pi -p` (`opencode-go/qwen3.8-flash`, no tools/extensions). |
 
 ## Active Module Order
 
@@ -44,6 +44,7 @@ fzf-alias
 zoxide
 fabric
 ask-zsh
+pi-cmd
 prompt
 ```
 
@@ -55,7 +56,7 @@ prompt
 | `command-not-found` | Intentionally not loaded. The system currently uses `find-the-command` from `/usr/share/doc/find-the-command/ftc.zsh`. |
 | `fabric` | The active path is a symlink into `~/dev/mygits/fabric-zsh`. |
 | `ask-zsh` | The active path is a symlink into `~/dev/mygits/ask-zsh`. |
-| `aichat-ng` | Local-only module. It requires the `aichat` command to be available at runtime. |
+| `pi-cmd` | Local-only module. It requires the `pi` command to be available at runtime. |
 
 ## Update Checks
 
