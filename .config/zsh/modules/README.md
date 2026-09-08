@@ -6,35 +6,19 @@ Up to date third party modules I'm using in `zsh` with `prezto` ✨
 
 | 📝 Module Name | 🔗 Repository URL |
 |------------|----------------|
-| aichat | https://github.com/sigoden/aichat |
 | ask-zsh | https://github.com/diffficult/ask-zsh |
 | fabric | https://github.com/diffficult/fabric-zsh |
-| fzf | https://github.com/junegunn/fzf |
-| fzf-alias | https://github.com/junegunn/fzf-alias |
+| fzf | https://github.com/lildude/fzf-prezto (local copy) |
+| fzf-alias | https://github.com/thirteen37/fzf-alias |
+| pi-cmd | local module (no upstream) |
 | zsh-abbr | https://github.com/olets/zsh-abbr |
 
 ## ⚙️ Module Configurations
 
-### 🤖 aichat
-> AI-powered command-line chat tool.
-
-#### Load module on `zpreztorc`
-
-```zsh
-
-# prezto modules
- zstyle ':prezto:load' pmodule \
-   'environment' \
-   'terminal' \
-   'editor' \
-   ...
-   'aichat' \
-   'prompt'
-
-```
-
 ### 🔍 ask-zsh
 > Interactive command-line tool for searching shell commands.
+
+Symlinked in from `~/dev/mygits/ask-zsh` (not stored in `dotfiles`).
 
 #### Load module on `zpreztorc`
 
@@ -55,6 +39,8 @@ Up to date third party modules I'm using in `zsh` with `prezto` ✨
 ### 🧰 fabric
 > fabric is an open-source framework for augmenting humans using AI.
 
+Symlinked in from `~/dev/mygits/fabric-zsh` (not stored in `dotfiles`).
+
 #### Load module on `zpreztorc`
 
 ```zsh
@@ -72,7 +58,9 @@ Up to date third party modules I'm using in `zsh` with `prezto` ✨
 ```
 
 ### 🎯 fzf
-> Command-line fuzzy finder.
+> Prezto wrapper around [junegunn's fzf](https://github.com/junegunn/fzf) (MIT, Colin Seymour): detects the install, wires completion/keybindings, and applies `zstyle` defaults.
+
+Local copy tracked in `dotfiles` at `~/.config/zsh/modules/fzf`. The stale `.git` indirection inside it is intentionally untracked.
 
 #### Load module on `zpreztorc`
 
@@ -84,46 +72,20 @@ Up to date third party modules I'm using in `zsh` with `prezto` ✨
    'terminal' \
    'editor' \
    ...
-   'contrib-prompt' \
    'fzf' \
+   'fzf-alias' \
    ...
    'prompt'
 
 ```
 
-#### Settings for `zpreztorc`
+#### How it splits with `zshrc`
+
+The module owns shell integration (`fzf.plugin.zsh` finds `FZF_BASE`, sources completion/keybindings unless disabled via `zstyle`). `zshrc` owns the look and data sources:
 
 ```zsh
 
-#
-# FZF SETTINGS
-#
-
-# Since we're using fd in zshrc, we can remove or comment the ag setting
-# zstyle ':prezto:module:fzf' fzf-default-command 'ag -l --hidden -g "" --ignore .git'
-zstyle ':prezto:module:fzf' disable-key-bindings 'no'
-zstyle ':prezto:module:fzf' disable-completion 'yes'
-zstyle ':prezto:module:fzf' height '40%'
-zstyle ':prezto:module:fzf' preview 'yes'
-zstyle ':prezto:module:fzf' tmux 'yes'
-zstyle ':prezto:module:fzf' reverse 'yes'
-zstyle ':prezto:module:fzf' color-scheme 'JellyX'
-
-```
-
-#### Settings for `zshrc`
-
-```zsh
-
-#
-# FZF CONFIGURATION
-#
 export FZF_BASE=/usr/share/fzf
-
-# Source FZF completion
-if [ -f "/usr/share/fzf/completion.zsh" ]; then
-  source "/usr/share/fzf/completion.zsh"
-fi
 
 # Tokyo Night color theme for FZF
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
@@ -137,41 +99,16 @@ export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
 
-# FZF completion functions
-_fzf_compgen_path() {
-  fd --hidden --exclude .git . "$1"
-}
-
-_fzf_compgen_dir() {
-  fd --type=d --hidden --exclude .git . "$1"
-}
-
-# FZF-git integration
-source ~/dev/gits/fzf-git.sh/fzf-git.sh
-
-# BAT integration for preview
+# BAT/eza previews + fzf-git.sh + _fzf_comprun live in zshrc too
 export FZF_CTRL_T_OPTS="--preview 'bat -n --color=always --line-range :500 {}'"
 export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {} | head -200'"
 
-# Advanced FZF completion customization
-_fzf_comprun() {
-  local command=$1
-  shift
-
-  case "$command" in
-    cd)           fzf --preview 'eza --tree --color=always {} | head -200' "$@" ;;
-    export|unset) fzf --preview "eval 'echo \$'{}"         "$@" ;;
-    ssh)          fzf --preview 'dig {}'                   "$@" ;;
-    *)            fzf --preview "bat -n --color=always --line-range :500 {}" "$@" ;;
-  esac
-}
-
-
 ```
 
-
 ### ⚡ fzf-alias
-> Fuzzy command alias finder and executor.
+> Fuzzy alias finder and executor. Press `Alt-a` to search aliases through FZF.
+
+Tracked in `dotfiles` at `~/.config/zsh/modules/fzf-alias` (upstream: https://github.com/thirteen37/fzf-alias, `.git` itself untracked). Requires `fzf`.
 
 #### Load module on `zpreztorc`
 
@@ -183,12 +120,40 @@ _fzf_comprun() {
    'terminal' \
    'editor' \
    ...
-   'contrib-prompt' \
    'fzf' \
    'fzf-alias' \
    ...
    'prompt'
 
+```
+
+### ✨ pi-cmd
+> Local module: type a request in plain words, press `Alt-e`, and the buffer is rewritten with the `pi -p` result (`opencode-go/qwen3.8-flash` by default, no tools/extensions).
+
+Tracked in `dotfiles` at `~/.config/zsh/modules/pi-cmd`. Replaces the retired `aichat-ng` module (still on disk, untracked, not loaded). Requires the `pi` command at runtime.
+
+#### Load module on `zpreztorc`
+
+```zsh
+
+# prezto modules
+ zstyle ':prezto:load' pmodule \
+   'environment' \
+   'terminal' \
+   'editor' \
+   ...
+   'ask-zsh' \
+   'pi-cmd' \
+   'prompt'
+
+```
+
+#### Optional `zstyle` knobs
+
+```zsh
+zstyle ':prezto:module:pi-cmd' model 'opencode-go/qwen3.8-flash'
+zstyle ':prezto:module:pi-cmd' system-prompt '...'
+zstyle ':prezto:module:pi-cmd' extra-args '--thinking minimal'
 ```
 
 ### ✨ zsh-abbr
@@ -210,11 +175,54 @@ zstyle ':prezto:load' pmodule \
 
 ## 📥 Installation
 
-Currently all cloned in `~/.config/zsh/modules`
+Local modules live in `~/.config/zsh/modules` and are tracked in the `dotfiles` bare repo (`dotfiles` alias). Exceptions: `ask-zsh` and `fabric` are symlinks into `~/dev/mygits/*` and stay out of `dotfiles`.
+
+Current `zpreztorc` order:
+
+```zsh
+environment
+terminal
+editor
+history
+directory
+spectrum
+utility
+ssh
+git
+completion
+syntax-highlighting
+history-substring-search
+zsh-abbr
+autosuggestions
+fzf
+fzf-alias
+zoxide
+fabric
+ask-zsh
+pi-cmd
+prompt
+```
 
 ## 🔄 Maintenance
 
-To update all modules, use your package manager's update command. Keep an eye on the official repositories for updates and breaking changes.
+`fzf` / `fzf-alias` / `pi-cmd` update through `dotfiles` like any other tracked file:
+
+```sh
+dotfiles status
+dotfiles add .config/zsh/modules/fzf-alias/fzf-alias.plugin.zsh
+dotfiles commit -m "✨ feat(zsh): ..."
+dotfiles push
+```
+
+Upstream checks for the non-dotfiles sources:
+
+```sh
+git -C ~/.zprezto/contrib remote -v
+git -C ~/.config/zsh/modules/zsh-abbr remote -v
+git -C ~/.config/zsh/modules/fzf-alias remote -v
+git -C ~/dev/mygits/fabric-zsh remote -v
+git -C ~/dev/mygits/ask-zsh remote -v
+```
 
 ---
 *Made with 💝 for the mentally unstable terminal user*
