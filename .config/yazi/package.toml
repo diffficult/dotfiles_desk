@@ -60,8 +60,8 @@ hash = "9c7987da2d2a2120dac33abb64132004"
 
 [[plugin.deps]]
 use = "llanosrocas/yaziline"
-rev = "25161c1"
-hash = "5c7802a9ac249be88729978e3b9525bc"
+rev = "029b27d"
+hash = "ceeb45e796faf0d9eed10831ffec7701"
 
 [flavor]
 deps = []
