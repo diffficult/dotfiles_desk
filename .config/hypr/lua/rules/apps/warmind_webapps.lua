@@ -131,3 +131,16 @@ hl.window_rule({
   size = "912 670",
   tag = "+chrome-webapp",
 })
+
+-- warmind-webapp:netflix:start
+hl.window_rule({
+  name = "warmind-webapp-netflix",
+  match = {
+    class = "^brave-www\\.netflix\\.com__-Default$",
+  },
+  float = true,
+  center = true,
+  size = "2317 968",
+  opacity = "1 override 1 override",
+})
+-- warmind-webapp:netflix:end

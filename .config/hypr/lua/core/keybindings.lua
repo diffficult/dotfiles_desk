@@ -96,6 +96,9 @@ b.bind("XF86AudioMicMute", "exec", "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
 b.bind("XF86AudioPlay", "exec", "playerctl play-pause", { locked = true })
 b.bind("XF86AudioPrev", "exec", "playerctl previous", { locked = true })
 b.bind("XF86AudioNext", "exec", "playerctl next", { locked = true })
+-- nemo-preview: space closes the preview window if open (non-consuming,
+-- so space still reaches the focused app)
+b.bind("space", "exec", "/home/rx/.local/bin/nemo-preview-space-kill.sh", { non_consuming = true })
 b.bind("SUPER + mouse:272", "movewindow", "", { mouse = true })
 b.bind("SUPER + mouse:273", "resizewindow", "", { mouse = true })
 local function enter_submap(name, label)
