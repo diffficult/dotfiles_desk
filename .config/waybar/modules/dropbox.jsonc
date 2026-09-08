@@ -3,11 +3,7 @@
     "exec": "~/.config/warmind/waybar/bin/dropbox-bar-output.py",
     "return-type": "json",
     "interval": 60,
-    "signal": 8,
-    "escape": false,
     "tooltip": true,
-    "on-click": "~/.config/waybar/scripts/dropbox-control.sh toggle",
-    "on-click-middle": "~/.config/waybar/scripts/dropbox-control.sh login",
     "on-click-right": "qs -c ~/.config/warmind/launcher ipc call dropbox toggle"
   }
 }

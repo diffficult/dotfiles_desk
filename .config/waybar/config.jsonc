@@ -42,8 +42,7 @@
       "modules/pulseaudio.jsonc",
       "modules/cpu-script.jsonc",
       "modules/network-script.jsonc",
-      "modules/clock.jsonc",
-      "modules/dropbox.jsonc"
+      "modules/clock.jsonc"
     ],
     "layer": "top",
     "margin-left": 10,
@@ -62,7 +61,6 @@
     "modules-right": [
       "custom/updates-script",
       "pulseaudio",
-      "custom/warmind-dropbox",
       "tray",
       "clock",
       "custom/network-script"
