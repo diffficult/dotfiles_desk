@@ -142,3 +142,6 @@ if [[ -f "$XDG_CONFIG_HOME/zsh/.env" ]]; then
   source "$XDG_CONFIG_HOME/zsh/.env"
   set +a  # disable auto-export
 fi
+
+# warmind_mise: shims fallback for login and non-interactive shells.
+[ -f "$HOME/Projects/warmind_mise/shell/mise-path.sh" ] && . "$HOME/Projects/warmind_mise/shell/mise-path.sh"

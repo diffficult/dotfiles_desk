@@ -47,9 +47,9 @@ if [[ -f "$HOME/.aliasrc" ]]; then
 fi
 
 # Source secrets if found on functions directory
-if [[ -f "$HOME/.config/functions/.secrets" ]]; then
-    source "$HOME/.config/functions/.secrets"
-fi
+#if [[ -f "$HOME/.config/functions/.secrets" ]]; then
+#    source "$HOME/.config/functions/.secrets"
+#fi
 
 # Source function directory.
 if [[ -d "$HOME/.config/functions" ]]; then
@@ -171,8 +171,11 @@ fi
 # X-cmd — boot up x-cmd (adds its portable tool bins to PATH).
 [ ! -f "$HOME/.x-cmd.root/X" ] || . "$HOME/.x-cmd.root/X"
 
-# mise-en-place — manages global tool versions; its shims must stay at the
-# front of PATH so they shadow any other installs.
+# opencode — standalone install; precedes mise activation so mise stays first.
+export PATH=/home/rx/.opencode/bin:$PATH
+
+# mise-en-place — manages global tool versions; activated LAST so its paths
+# stay at the front of PATH and shadow any other installs.
 eval "$(mise activate zsh)"
 
 # Drop duplicate PATH entries introduced by the initializers above.
