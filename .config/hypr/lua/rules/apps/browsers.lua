@@ -3,7 +3,7 @@
 hl.window_rule({
   name = "browser-tag-chromium",
   match = {
-    class = "((google-)?[cC]hrom(e|ium)|[bB]rave-browser|[bB]rave-origin(-beta)?|[mM]icrosoft-edge|Vivaldi-stable|helium)",
+    class = "((google-)?[cC]hrom(e|ium)|[bB]rave-browser|[bB]rave-origin|[mM]icrosoft-edge|Vivaldi-stable|helium)",
   },
   tag = "+browser +no-border",
 })
@@ -43,7 +43,7 @@ hl.window_rule({
 hl.window_rule({
   name = "browser-brave-origin-workspace",
   match = {
-    class = "^(brave-origin-beta|Brave-origin-beta)$",
+    class = "^(brave-origin|Brave-origin)$",
   },
   workspace = 5,
 })
@@ -59,7 +59,7 @@ hl.window_rule({
 hl.window_rule({
   name = "browser-chromium-tiled-opaque",
   match = {
-    class = "^((google-)?[cC]hrom(e|ium)|[bB]rave-browser|[bB]rave-origin-beta)$",
+    class = "^((google-)?[cC]hrom(e|ium)|[bB]rave-browser|[bB]rave-origin)$",
     float = false,
   },
   opacity = "1 override 1 override",

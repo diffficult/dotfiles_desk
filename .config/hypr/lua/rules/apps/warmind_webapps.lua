@@ -69,7 +69,7 @@ hl.window_rule({
 hl.window_rule({
   name = "warmind-webapp-claude",
   match = {
-    class = "^brave-claude\\.ai-Default$",
+    class = "^brave-claude\\.ai__-Default$",
   },
   float = true,
   center = true,
@@ -80,7 +80,7 @@ hl.window_rule({
 hl.window_rule({
   name = "warmind-webapp-proton-mail",
   match = {
-    class = "^brave-mail\\.proton\\.me-Default$",
+    class = "^brave-mail\\.proton\\.me__-Default$",
   },
   float = true,
   center = true,
@@ -102,7 +102,7 @@ hl.window_rule({
 hl.window_rule({
   name = "warmind-webapp-word-web",
   match = {
-    class = "^brave-origin-beta-word\\.cloud\\.microsoft__-Default$",
+    class = "^brave-word\\.cloud\\.microsoft__-Default$",
   },
   float = true,
   center = true,
@@ -113,7 +113,7 @@ hl.window_rule({
 hl.window_rule({
   name = "warmind-webapp-excel-web",
   match = {
-    class = "^brave-origin-beta-excel\\.cloud\\.microsoft__-Default$",
+    class = "^brave-excel\\.cloud\\.microsoft__-Default$",
   },
   float = true,
   center = true,
@@ -124,7 +124,7 @@ hl.window_rule({
 hl.window_rule({
   name = "warmind-webapp-youtube",
   match = {
-    class = "^brave-origin-beta-www\\.youtube\\.com__-Default$",
+    class = "^brave-www\\.youtube\\.com__-Default$",
   },
   float = true,
   center = true,

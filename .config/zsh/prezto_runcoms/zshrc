@@ -183,3 +183,7 @@ typeset -gU path
 
 # Magic Context: re-despinear opencode tras cada auto-update (vuelve a @latest)
 alias mc-unpin='sed -i "s|@cortexkit/opencode-magic-context@[0-9][0-9.]*|@cortexkit/opencode-magic-context@latest|" ~/.config/opencode/opencode.json ~/.config/opencode/tui.json'
+
+# omp — silence built-in desktop notifications (kitty-badged OSC 99); the
+# omp-notify-snd extension sends icon-bearing copies instead.
+export PI_NOTIFICATIONS=off
