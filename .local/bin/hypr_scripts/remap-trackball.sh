@@ -1,149 +1,122 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # ============================================================================
-# ELECOM Huge TrackBall Button Remapping for Wayland using evsieve
+# ELECOM Huge TrackBall button remapping for Wayland using evsieve
 # ============================================================================
-# Based on X11 config: ButtonMapping "1 2 3 4 5 6 7 8 3 1 2 12"
 #
-# X11 Button Mapping Translation:
-# Position 1 (Left)     → 1 (Left)      - Pass through
-# Position 2 (Middle)   → 2 (Middle)    - Pass through
-# Position 3 (Right)    → 3 (Right)     - Pass through
-# Position 4-7          → Scroll/Tilt   - Pass through (wheel events)
-# Position 8 (Back)     → 3 (Middle)    - REMAP btn:275 → btn:274
-# Position 9 (Forward)  → 1 (Left)      - REMAP btn:276 → btn:272
-# Position 10 (Fn1)     → 2 (Middle)    - REMAP btn:277 → btn:274
-# Position 11 (Fn2)     → 12            - REMAP btn:278 → btn:279
-# Position 12 (Fn3)     → Scroll button - Handled by Hyprland config
+# The script remains in the foreground and supervises evsieve. If the
+# trackball is unplugged, reset, or re-enumerated, evsieve exits and this
+# script waits for the stable by-id link to return before starting it again.
 
-# ============================================================================
-# Configuration
-# ============================================================================
-
-# Device search patterns (adjust if needed)
-DEVICE_NAME_PATTERN="HUGE TrackBall"
+DEVICE_LINK_GLOB="/dev/input/by-id/*ELECOM*TrackBall*event-mouse"
 VIRTUAL_DEVICE_NAME="ELECOM-Huge-Remapped"
-
-# Logging
 LOG_FILE="/tmp/trackball-remap.log"
-DEBUG=false  # Enable only while actively debugging input events
+RETRY_DELAY=2
+DEBUG=false
 
-# ============================================================================
-# Find Device
-# ============================================================================
+EVSIEVE_PID=""
+STOP_REQUESTED=false
 
-echo "[$(date '+%Y-%m-%d %H:%M:%S')] Starting trackball remapping..." | tee -a "$LOG_FILE"
+log() {
+    printf '[%s] %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$*" | tee -a "$LOG_FILE"
+}
 
-# Try to find device using libinput
-DEVICE=$(libinput list-devices 2>/dev/null | grep -A 5 "$DEVICE_NAME_PATTERN" | grep "Kernel:" | awk '{print $2}' | head -n 1)
+find_device() {
+    local link
+    local device
+    local candidates=()
 
-# Fallback: search /dev/input/by-id/
-if [ -z "$DEVICE" ]; then
-    DEVICE=$(ls -1 /dev/input/by-id/*ELECOM*TrackBall* 2>/dev/null | head -n 1)
-    if [ -n "$DEVICE" ]; then
-        DEVICE=$(readlink -f "$DEVICE")
+    shopt -s nullglob
+    candidates=( $DEVICE_LINK_GLOB )
+    shopt -u nullglob
+
+    for link in "${candidates[@]}"; do
+        [[ -e "$link" ]] || continue
+        device="$(readlink -f -- "$link")" || continue
+        [[ -e "$device" ]] || continue
+        printf '%s\n' "$device"
+        return 0
+    done
+
+    return 1
+}
+
+request_stop() {
+    STOP_REQUESTED=true
+    if [[ -n "$EVSIEVE_PID" ]]; then
+        kill "$EVSIEVE_PID" 2>/dev/null || true
     fi
-fi
+}
 
-# Error if not found
-if [ -z "$DEVICE" ] || [ ! -e "$DEVICE" ]; then
-    echo "ERROR: ELECOM HUGE TrackBall not found!" | tee -a "$LOG_FILE"
-    echo "" | tee -a "$LOG_FILE"
-    echo "Available input devices:" | tee -a "$LOG_FILE"
-    libinput list-devices 2>/dev/null | grep "Device:" | tee -a "$LOG_FILE"
-    echo "" | tee -a "$LOG_FILE"
-    echo "Tip: Run 'libinput list-devices' to see all devices" | tee -a "$LOG_FILE"
-    echo "     Run 'sudo evtest' to test button codes" | tee -a "$LOG_FILE"
+trap request_stop INT TERM
+
+EVSIEVE_BIN="$(command -v evsieve || true)"
+if [[ -z "$EVSIEVE_BIN" ]]; then
+    log "ERROR: evsieve not found; install it before starting this service"
     exit 1
 fi
 
-echo "Found trackball: $DEVICE" | tee -a "$LOG_FILE"
+log "Starting ELECOM trackball remapping supervisor..."
+LAST_DEVICE="waiting"
 
-# ============================================================================
-# Check if evsieve is installed
-# ============================================================================
+while true; do
+    DEVICE="$(find_device || true)"
 
-if ! command -v evsieve &> /dev/null; then
-    echo "ERROR: evsieve not found!" | tee -a "$LOG_FILE"
-    echo "Install with: yay -S evsieve" | tee -a "$LOG_FILE"
-    exit 1
-fi
+    if [[ -z "$DEVICE" ]]; then
+        if [[ "$LAST_DEVICE" != "waiting" ]]; then
+            log "ELECOM trackball not present; waiting for hotplug..."
+            LAST_DEVICE="waiting"
+        fi
+        sleep "$RETRY_DELAY"
+        continue
+    fi
 
-# ============================================================================
-# Build evsieve command
-# ============================================================================
+    if [[ "$LAST_DEVICE" != "$DEVICE" ]]; then
+        log "Found trackball: $DEVICE"
+        LAST_DEVICE="$DEVICE"
+    fi
 
-EVSIEVE_CMD=(
-    evsieve
-    --input "$DEVICE" domain=trackball grab
+    # Confirmed physical mappings:
+    # - Back 275    -> Right click 273
+    # - Forward 276 -> Left click 272
+    # - Fn1 277     -> Left click 272
+    # - Fn2 278     -> Middle click 274
+    # - Fn3 279     -> unchanged; Hyprland handles native scrolling
+    EVSIEVE_CMD=(
+        "$EVSIEVE_BIN"
+        --input "$DEVICE" domain=trackball grab
+        --map btn:left btn:left
+        --map btn:right btn:right
+        --map btn:middle btn:middle
+        --map btn:%275 btn:%273
+        --map btn:%276 btn:%272
+        --map btn:%277 btn:%272
+        --map btn:%278 btn:%274
+        --output "name=$VIRTUAL_DEVICE_NAME"
+    )
 
-    # Pass through standard buttons (no remapping needed)
-    --map btn:left btn:left
-    --map btn:right btn:right
-    --map btn:middle btn:middle
+    if [[ "$DEBUG" == true ]]; then
+        EVSIEVE_CMD+=(--print)
+    fi
 
-    # Remap special buttons - CONFIRMED MAPPINGS
-    # Based on evtest results:
-    # - Back = BTN_SIDE (275) → Right Click (273)
-    # - Forward = BTN_EXTRA (276) → Left Click (272)
-    # - Fn1 = BTN_FORWARD (277) → Left Click (272)
-    # - Fn2 = BTN_BACK (278) → Middle Click (274)
-    # - Fn3 = BTN_TASK (279) → Toggle scroll mode
-
-    --map btn:%275 btn:%273  # Back (BTN_SIDE) → Right Click (BTN_RIGHT)
-    --map btn:%276 btn:%272  # Forward (BTN_EXTRA) → Left Click (BTN_LEFT)
-    --map btn:%277 btn:%272  # Fn1 (BTN_FORWARD) → Left Click (BTN_LEFT)
-    --map btn:%278 btn:%274  # Fn2 (BTN_BACK) → Middle Click (BTN_MIDDLE)
-
-    # Scroll mode is now handled by Hyprland's native scroll_method = on_button_down
-    # Fn3 button (BTN_TASK 279) is used as scroll_button in Hyprland config
-
-    # Output to virtual device
-    --output "name=$VIRTUAL_DEVICE_NAME"
-)
-
-# Add debug/print flag if enabled
-if [ "$DEBUG" = true ]; then
-    EVSIEVE_CMD+=(--print)
-fi
-
-# ============================================================================
-# Run evsieve
-# ============================================================================
-
-echo "Starting evsieve with button remapping..." | tee -a "$LOG_FILE"
-echo "Command: ${EVSIEVE_CMD[*]}" >> "$LOG_FILE"
-
-# Check if we need sudo
-if groups | grep -q '\binput\b'; then
-    # User is in input group, try without sudo
+    log "Starting evsieve with button remapping..."
+    log "Command: ${EVSIEVE_CMD[*]}"
     "${EVSIEVE_CMD[@]}" >> "$LOG_FILE" 2>&1 &
     EVSIEVE_PID=$!
-else
-    # Need sudo
-    sudo "${EVSIEVE_CMD[@]}" >> "$LOG_FILE" 2>&1 &
-    EVSIEVE_PID=$!
-fi
 
-# Wait a moment and check if process started
-sleep 1
+    log "Trackball remapping active (PID: $EVSIEVE_PID)"
+    log "Virtual device: $VIRTUAL_DEVICE_NAME"
+    log "Mappings: Back->Right, Forward->Left, Fn1->Left, Fn2->Middle"
+    log "Scroll: hold Fn3 while moving the trackball"
 
-if ps -p $EVSIEVE_PID > /dev/null 2>&1; then
-    echo "✓ Trackball remapping active (PID: $EVSIEVE_PID)" | tee -a "$LOG_FILE"
-    echo "  Virtual device: $VIRTUAL_DEVICE_NAME" | tee -a "$LOG_FILE"
-    echo "" | tee -a "$LOG_FILE"
-    echo "Button mappings:" | tee -a "$LOG_FILE"
-    echo "  - Back button    → Right Click" | tee -a "$LOG_FILE"
-    echo "  - Forward button → Left Click" | tee -a "$LOG_FILE"
-    echo "  - Fn1 button     → Left Click" | tee -a "$LOG_FILE"
-    echo "  - Fn2 button     → Middle Click" | tee -a "$LOG_FILE"
-    echo "" | tee -a "$LOG_FILE"
-    echo "Scroll mode:" | tee -a "$LOG_FILE"
-    echo "  - Hold Fn3 button to scroll (handled by Hyprland)" | tee -a "$LOG_FILE"
-    echo "  - Move trackball while holding Fn3 to scroll" | tee -a "$LOG_FILE"
-    echo "" | tee -a "$LOG_FILE"
-    echo "To stop: killall evsieve" | tee -a "$LOG_FILE"
-else
-    echo "✗ ERROR: evsieve failed to start" | tee -a "$LOG_FILE"
-    echo "Check permissions or run with sudo" | tee -a "$LOG_FILE"
-    exit 1
-fi
+    wait "$EVSIEVE_PID"
+    STATUS=$?
+    EVSIEVE_PID=""
+    LAST_DEVICE=""
+
+    if [[ "$STOP_REQUESTED" == true ]]; then
+        exit 0
+    fi
+
+    log "evsieve exited with status $STATUS; retrying in ${RETRY_DELAY}s"
+    sleep "$RETRY_DELAY"
+done
