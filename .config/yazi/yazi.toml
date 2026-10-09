@@ -59,7 +59,7 @@ edit = [
   { run = 'xdg-open %s1', orphan = true, desc = "xdg-open", for = "linux" },
 ]
 open = [
-	{ run = 'xdg-open %s1', orphan = true, desc = "Open", for = "linux" },
+	{ run = 'swayimg --viewer %s1', orphan = true, desc = "Swayimg", for = "linux" },
 ]
 reveal = [
 	{ run = 'xdg-open %d1', orphan = true, desc = "Reveal", for = "linux" },

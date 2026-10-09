@@ -411,4 +411,8 @@ alias long-time-no-update="sudo pacman -Sy archlinux-keyring --needed && sudo pa
 
 alias opencode-webui="opencode serve --hostname 127.0.0.1 --port 4096"
 
+alias list-opencode-models="curl -s https://opencode.ai/zen/v1/models | jq -r '.data[].id'"
+
+alias list-opencode-go-models="curl -s https://opencode.ai/zen/go/v1/models | jq -r '.data[].id'"
+
 # }}}

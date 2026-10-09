@@ -187,3 +187,10 @@ alias mc-unpin='sed -i "s|@cortexkit/opencode-magic-context@[0-9][0-9.]*|@cortex
 # omp — silence built-in desktop notifications (kitty-badged OSC 99); the
 # omp-notify-snd extension sends icon-bearing copies instead.
 export PI_NOTIFICATIONS=off
+
+# gentle-shell — skip the per-launch auto-provision attempt: the pinned
+# gentle-ai 3.7.0 fails its Pi CodeGraph capture step (it scans ~/.pi/agent/agents
+# even when PI_CODING_AGENT_DIR points at the isolated home), so auto-setup never
+# records ~/.gentle-shell/config.json and re-runs every full install on each start.
+# Remove once an upstream release fixes the CodeGraph allowed-roots check.
+export GENTLE_SHELL_NO_AUTO_SETUP=1
