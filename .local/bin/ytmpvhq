@@ -8,7 +8,17 @@ if [[ -z "$SESSION_TYPE" ]]; then
     SESSION_TYPE="x11"
 fi
 
-if [[ "$SESSION_TYPE" == "wayland" ]]; then
+# An explicit argument wins; otherwise fall back to the clipboard, which is
+# what the .desktop entries and any keybinds rely on. The argument exists
+# because a clipboard-triggered menu takes time to answer, and the clipboard
+# can change in between - without this the script acts on whatever happens to
+# be there when it runs, not on the link the menu was about.
+if [[ $# -gt 0 ]]; then
+    # An argument, once given, is honoured even if empty: an explicit empty
+    # argument means the caller had no URL, and quietly falling back to the
+    # clipboard would act on something the caller never asked about.
+    VIDURL="$1"
+elif [[ "$SESSION_TYPE" == "wayland" ]]; then
     VIDURL=$(wl-paste)
 else
     VIDURL=$(xclip -o)
