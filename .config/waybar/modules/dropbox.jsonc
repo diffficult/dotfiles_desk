@@ -1,9 +1,0 @@
-{
-  "custom/warmind-dropbox": {
-    "exec": "~/.config/warmind/waybar/bin/dropbox-bar-output.py",
-    "return-type": "json",
-    "interval": 60,
-    "tooltip": true,
-    "on-click-right": "qs -c ~/.config/warmind/launcher ipc call dropbox toggle"
-  }
-}

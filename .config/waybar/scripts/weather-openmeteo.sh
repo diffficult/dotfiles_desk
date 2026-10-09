@@ -1,13 +1,44 @@
 #!/usr/bin/env bash
+
+set -eo pipefail
+# NOT `set -u` here, and the omission is deliberate. The chart renderer addresses
+# `chart` and `chart_colors` with computed ("$y,$x") keys and only ever tests them
+# for emptiness -- `if [[ -n "${chart[$y,$x]}" ]]` is the code's way of asking
+# whether a cell was filled in. Under `set -u` that test aborts the whole render on
+# the first empty cell, which is most of them. Making this pass would mean
+# rewriting the sparse-cell access with ${arr[key]:-} at every site, in a script
+# that is wired and currently correct, for no behavioural gain. Errexit and
+# pipefail are on; nounset is not.
 # Waybar Weather Module - OpenMeteo API
 # Location: Mendoza, Argentina
+
+# One JSON escaper for every bar script (T7.2), sourced from this script's own
+# directory so two scripts can never end up with two escapers. The fallback is
+# the whole point of sourcing rather than inlining: Waybar renders nothing at
+# all for a module that prints malformed JSON, so a missing escaper must be a
+# visible error module, never an exit that leaves the bar blank.
+json_lib="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)/json.sh"
+if [[ -r "$json_lib" ]]; then
+    # shellcheck source=/dev/null  # runtime-resolved sibling; see json.sh
+    source "$json_lib"
+else
+    echo '{"text":"⚠️","tooltip":"json.sh not found next to the script","class":"error"}'
+    exit 1
+fi
 
 # Configuration
 readonly LAT="-32.8895"
 readonly LON="-68.8458"
 readonly LOCATION_NAME="Mendoza, Argentina"
 readonly CACHE_DIR="${HOME}/.cache/waybar"
-readonly CACHE_FILE="${CACHE_DIR}/weather_cache.json"
+# Cache file is named for the provider. This script speaks the Open-Meteo schema
+# (current.temperature_2m); weather.sh speaks the wttr.in j1 schema
+# (current_condition[0].temp_C). They used to share one weather_cache.json under the
+# same CACHE_DIR with the same 6h TTL, so running the variant wrote a payload this
+# script could not read -- poisoning the live bar for up to 6 hours. Provider-named
+# files make the two unable to read each other's data.
+readonly CACHE_FILE="${CACHE_DIR}/weather_cache_openmeteo.json"
+
 readonly CACHE_DURATION=21600  # 6 hours in seconds
 readonly API_TIMEOUT=10
 
@@ -45,7 +76,9 @@ readonly ICON_LIGHTNING_RAINY="󰙾 " # nf-md-weather_lightning_rainy (f067e)
 # Using Material Design Weather icons (nf-md-weather_*)
 get_weather_icon_and_color() {
     local code="$1"
-    local time_value="$2"
+    # `${2:-}` rather than `$2`: the bar render calls this with one argument and
+    # the detailed render with two, so a bare `$2` is unbound on the bar path.
+    local time_value="${2:-}"
     local hour=""
 
     if [[ -n "$time_value" ]]; then
@@ -214,7 +247,7 @@ fetch_weather() {
     api_url+="&forecast_days=3"
 
     local weather_data
-    weather_data=$(curl --silent --max-time "$API_TIMEOUT" "$api_url" 2>/dev/null)
+    weather_data=$(curl --silent --max-time "$API_TIMEOUT" "$api_url" 2>/dev/null || true)
 
     if [[ -z "$weather_data" ]]; then
         echo '{"text":"⚠️","tooltip":"No response from weather service","class":"error"}'
@@ -320,6 +353,17 @@ show_detailed_view() {
             fi
         fi
     done
+
+    # Guard the zero-width case: if jq returned nothing usable, temps[] is empty,
+    # chart_width becomes 0 and the chart renders from the -999/999 sentinels
+    # instead of from real temperatures. Return before the chart is built.
+    if [[ ${#temps[@]} -eq 0 ]]; then
+        echo "Error: No hourly forecast data available"
+        echo ""
+        echo "Press any key to close..."
+        read -r -n 1 -s
+        return
+    fi
 
     # Chart dimensions
     local chart_height=12
@@ -503,8 +547,10 @@ show_detailed_view() {
 
 # Main execution
 main() {
-    # Check for --detailed flag
-    if [[ "$1" == "--detailed" ]]; then
+    # Check for --detailed flag. `${1:-}` rather than `$1`: Waybar runs this with no
+    # arguments at all, and under `set -u` a bare `$1` is a fatal unbound-variable
+    # error, i.e. the module would print nothing on every refresh.
+    if [[ "${1:-}" == "--detailed" ]]; then
         weather_data=$(get_weather_data)
         show_detailed_view "$weather_data"
         exit 0
@@ -540,16 +586,16 @@ main() {
         DISPLAY_TEXT="<span font_desc='JetBrainsMono Nerd Font Bold 14' color='${WEATHER_COLOR}'>${WEATHER_ICON}${TEMP_C}°C</span>"
 
         # Build simplified tooltip
-        TOOLTIP="📍 ${LOCATION_NAME}\\n"
-        TOOLTIP+="${WEATHER_ICON}${WEATHER_DESC}\\n\\n"
+        TOOLTIP="📍 ${LOCATION_NAME}"$'\n'
+        TOOLTIP+="${WEATHER_ICON}${WEATHER_DESC}"$'\n\n'
 
-        TOOLTIP+="🌡️ Current Conditions\\n"
-        TOOLTIP+="├─ Temperature: ${TEMP_C}°C (feels like ${FEELS_LIKE_C}°C)\\n"
-        TOOLTIP+="├─ Humidity: ${HUMIDITY}%\\n"
-        TOOLTIP+="└─ Wind: ${WIND_SPEED} km/h at ${WIND_DIR}°\\n\\n"
+        TOOLTIP+="🌡️ Current Conditions"$'\n'
+        TOOLTIP+="├─ Temperature: ${TEMP_C}°C (feels like ${FEELS_LIKE_C}°C)"$'\n'
+        TOOLTIP+="├─ Humidity: ${HUMIDITY}%"$'\n'
+        TOOLTIP+="└─ Wind: ${WIND_SPEED} km/h at ${WIND_DIR}°"$'\n\n'
 
         # Add 3-day forecast
-        TOOLTIP+="📅 3-Day Forecast\\n"
+        TOOLTIP+="📅 3-Day Forecast"$'\n'
         for i in 0 1 2; do
             DAY_DATE=$(echo "$weather_data" | jq -r ".daily.time[$i] // \"N/A\"")
             DAY_MAX=$(echo "$weather_data" | jq -r ".daily.temperature_2m_max[$i] // \"N/A\"")
@@ -570,15 +616,15 @@ main() {
             if (( i == 2 )); then
                 TOOLTIP+="└─ ${DAY_NAME}: ${DAY_ICON} ${DAY_MIN}°C - ${DAY_MAX}°C  ${DAY_DESC}"
             else
-                TOOLTIP+="├─ ${DAY_NAME}: ${DAY_ICON} ${DAY_MIN}°C - ${DAY_MAX}°C  ${DAY_DESC}\\n"
+                TOOLTIP+="├─ ${DAY_NAME}: ${DAY_ICON} ${DAY_MIN}°C - ${DAY_MAX}°C  ${DAY_DESC}"$'\n'
             fi
         done
 
-        TOOLTIP+="\\n\\n🖱️ Actions\\n"
+        TOOLTIP+=$'\n\n'"🖱️ Actions"$'\n'
         TOOLTIP+="└─ Click to view detailed weather"
 
         # Output JSON for waybar
-        echo "{\"text\":\"${DISPLAY_TEXT}\",\"tooltip\":\"${TOOLTIP}\",\"class\":\"normal\"}"
+        echo "{\"text\":$(wb_json_escape "${DISPLAY_TEXT}"),\"tooltip\":$(wb_json_escape "${TOOLTIP}"),\"class\":$(wb_json_escape "normal")}"
     else
         # Fallback if jq is not available or data is invalid
         echo '{"text":"⚠️","tooltip":"Unable to parse weather data. Install jq for full functionality.","class":"error"}'
