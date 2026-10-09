@@ -27,6 +27,17 @@ hl.window_rule({
 })
 
 hl.window_rule({
+  name = "strata-file-manager",
+  match = {
+    class = "^io\\.github\\.lgse\\.Strata$",
+  },
+  workspace = 3,
+  float = true,
+  center = true,
+  size = "1267 688",
+})
+
+hl.window_rule({
   name = "file-manager-archive-float",
   match = {
     class = "^(file-roller|File-roller|org\\.gnome\\.FileRoller)$",

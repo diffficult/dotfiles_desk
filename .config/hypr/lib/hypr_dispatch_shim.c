@@ -11,12 +11,20 @@ static ssize_t (*real_send)(int, const void *, size_t, int) = NULL;
 static ssize_t (*real_sendmsg)(int, const struct msghdr *, int) = NULL;
 
 static int rewrite_dispatch(const char *buf, size_t count, char *out, size_t outsz, size_t *outlen) {
-    if (!buf || count < 18 || count >= outsz - 96)
+    const char *cmd = buf;
+    size_t len = count;
+    // Hyprland >= 0.56 frames requests as "<flags>/<command>";
+    // hyprctl with no flags sends "/dispatch ...", so skip one leading '/'.
+    if (len > 0 && cmd[0] == '/') {
+        cmd++;
+        len--;
+    }
+    if (!cmd || len < 18 || len >= outsz - 96)
         return 0;
-    if (strncmp(buf, "dispatch ", 9) != 0)
+    if (strncmp(cmd, "dispatch ", 9) != 0)
         return 0;
 
-    const char *p = buf + 9;
+    const char *p = cmd + 9;
     if (strncmp(p, "workspace ", 10) == 0) {
         p += 10;
     } else if (strncmp(p, "focusworkspaceoncurrentmonitor ", 31) == 0) {
@@ -29,7 +37,7 @@ static int rewrite_dispatch(const char *buf, size_t count, char *out, size_t out
         p += 5;
 
     const char *start = p;
-    while ((size_t)(p - buf) < count && *p && *p != ' ' && *p != '\n' && *p != '\r')
+    while ((size_t)(p - cmd) < len && *p && *p != ' ' && *p != '\n' && *p != '\r')
         p++;
     size_t toklen = (size_t)(p - start);
     if (toklen == 0 || toklen > 64)
@@ -46,12 +54,13 @@ static int rewrite_dispatch(const char *buf, size_t count, char *out, size_t out
             break;
         }
     }
-
     int n;
+    // Wire form is "/dispatch <lua>": the server runs hl.dispatch(<lua>).
+    // A bare "/<lua>" without legacy shape is rejected as unknown request.
     if (numeric)
-        n = snprintf(out, outsz, "dispatch hl.dsp.focus({ workspace = %s })", token);
+        n = snprintf(out, outsz, "/dispatch hl.dsp.focus({ workspace = %s })", token);
     else
-        n = snprintf(out, outsz, "dispatch hl.dsp.focus({ workspace = \"%s\" })", token);
+        n = snprintf(out, outsz, "/dispatch hl.dsp.focus({ workspace = \"%s\" })", token);
 
     if (n < 0 || (size_t)n >= outsz)
         return 0;

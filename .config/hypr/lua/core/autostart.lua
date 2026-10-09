@@ -9,15 +9,20 @@ local exec_once = {
   "uwsm app -- clipse -listen",
   "uwsm app -- /home/rx/.config/hypr/scripts/waybar-with-lua-shim.sh",
   "uwsm app -- qs",
-  "uwsm app -- qs -n -d -c /home/rx/.config/warmind/launcher",
-  "systemctl --user start skwd-daemon.service",
+  "systemctl --user start skwd-walld.service",
   "awww-daemon &",
   "uwsm app -- /usr/lib/geoclue-2.0/demos/agent",
   "(sleep 10 && uwsm app -- openrgb --startminimized --profile default) &",
   "uwsm app -- env -u DISPLAY -u WAYLAND_DISPLAY dropbox-cli start",
   "(for _ in $(seq 1 20); do busctl --user get-property org.kde.StatusNotifierWatcher /StatusNotifierWatcher org.kde.StatusNotifierWatcher IsStatusNotifierHostRegistered >/dev/null 2>&1 && break; sleep 1; done; uwsm app -- env QT_QPA_PLATFORM=xcb megasync) &",
   "uwsm app -- syncthing-gtk &",
-  "~/.local/bin/hypr_scripts/remap-trackball.sh &",
+
+  -- >>> warmind-launcher >>>
+  -- Managed block: warmind-deploy owns every line between these markers and
+  -- rewrites them on each deploy. $HOME is resolved by Lua at runtime.
+  "uwsm app -- qs -n -d -c " .. os.getenv("HOME") .. "/.config/warmind/launcher",
+  "uwsm app -- qs -n -d -c " .. os.getenv("HOME") .. "/.config/warmind/modules/ytactions",
+  -- <<< warmind-launcher <<<
 }
 
 for _, cmd in ipairs(exec_once) do
