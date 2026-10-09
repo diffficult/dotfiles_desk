@@ -4,11 +4,10 @@ import Quickshell.Wayland
 import Quickshell.Io
 import Quickshell.Services.Mpris
 
-// Omarchy top bar. Owns the per-bar state, probes, and IPC; per-feature
-// surfaces (Bar, *Popup, TooltipOverlay) and widgets (Module, Workspace,
-// Bloom, …) read from `root` via `root: root` injection. Palette comes
-// from the shared Theme; colours are re-exposed on root so sibling files
-// keep their `root.paper` bindings.
+// Warmind top bar state host. Owns the per-bar state, probes, and IPC;
+// per-feature surfaces (Bar, *Popup, TooltipOverlay) read from `root` via
+// `root: root` injection. Palette comes from the shared Theme; colours are
+// re-exposed on root so sibling files keep their `root.paper` bindings.
 Item {
     id: root
 
@@ -278,6 +277,11 @@ Item {
     }
     property var codexUsage: codexUsageController
 
+    LocalAiController {
+        id: localAiController
+    }
+    property var localAi: localAiController
+
     TactileController {
         id: tactile
     }
@@ -521,6 +525,7 @@ Item {
     OpencodeUsagePopup { root: root; controller: opencodeUsage }
     GrokUsagePopup   { root: root; controller: grokUsage }
     CodexUsagePopup  { root: root; controller: codexUsage }
+    LocalAiPopup     { root: root; controller: localAi }
     WeatherPopup     { root: root; controller: weather }
     CamsPopup        { root: root; controller: cams }
 
@@ -657,6 +662,16 @@ Item {
         function open(): void { codexUsage.open(); }
         function close(): void { codexUsage.close(); }
         function refresh(): void { codexUsage.refresh(); }
+    }
+
+    IpcHandler {
+        target: "local-ai"
+        function toggle(): void { localAi.toggle(); }
+        function open(): void { localAi.open(); }
+        function close(): void { localAi.close(); }
+        function refresh(): string { localAi.refresh(); return "ok"; }
+        function load(): string { localAi.act(["load"]); return "ok"; }
+        function unload(): string { localAi.act(["unload"]); return "ok"; }
     }
 
     IpcHandler {

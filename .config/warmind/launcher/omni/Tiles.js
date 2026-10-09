@@ -90,12 +90,10 @@ function buildDyn(n) {
                     : (n.weather.loaded ? Math.round(n.weather.tempC) + "°C" : "…")),
             tone: n.weather && n.weather.unavailable ? n.inkDeep : n.ink
         },
-        display: {
-            glyph: n.icoDisplay,
-            label: "DISPLAY",
-            sub: "DISABLED",
-            tone: n.inkDeep
-        },
+        // No `display` entry here: the base tile is commented out above, so a
+        // dynamic value for it would never be read. Re-enabling that tile needs
+        // all three together - this entry, the base tile, and Navbar's
+        // icoDisplay, which is retained for exactly that reason.
         cpu: {
             glyph: "󰍛",
             label: "CPU",

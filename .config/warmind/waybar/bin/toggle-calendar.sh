@@ -2,4 +2,4 @@
 # Toggle the Warmind Launcher calendar popup from Waybar.
 set -euo pipefail
 
-exec qs -c /home/rx/.config/warmind/launcher ipc call calendar toggle
+exec qs -c "$HOME/.config/warmind/launcher" ipc call calendar toggle

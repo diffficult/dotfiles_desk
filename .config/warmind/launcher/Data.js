@@ -118,6 +118,7 @@ const omarchyItems = [
     { title: "OpenCode Usage",    icon: "󰚩", category: "Usage", keywords: "opencode usage tokens models ai llm sessions stats anthropic openai claude",              exec: "qs -c $HOME/.config/warmind/launcher ipc call opencode-usage open" },
     { title: "Grok Usage",        icon: "󰚩", category: "Usage", keywords: "grok usage credits billing xai build account period weekly quota cost",                   exec: "qs -c $HOME/.config/warmind/launcher ipc call grok-usage open" },
     { title: "Codex Usage",       icon: "󰚩", category: "Usage", keywords: "codex usage openai chatgpt tokens rate limit daily weekly plan plus pro quota credits",   exec: "qs -c $HOME/.config/warmind/launcher ipc call codex-usage open" },
+    { title: "Local AI",          icon: "󰚩", category: "Usage", keywords: "local ai llm gpu model recipe inference sglang vllm llama",                             exec: "qs -c $HOME/.config/warmind/launcher ipc call local-ai open" },
 
     // ----- Style -----
     { title: "Round Corners",    icon: "󰘇", category: "Style", keywords: "corners radius round soft rounded border edge shape popup",        exec: "qs -c $HOME/.config/warmind/launcher ipc call corners round" },
@@ -166,6 +167,10 @@ const omarchyItems = [
     { title: "Screenshot Fullscreen",    icon: "󰹑", category: "Capture", keywords: "screenshot fullscreen full screen file clipboard capture image png", exec: "~/.local/bin/hypr_scripts/screenshot-notify.sh fullscreen file-clipboard" },
     { title: "Screenshot Fullscreen Copy", icon: "󰅍", category: "Capture", keywords: "screenshot fullscreen full screen clipboard copy capture",         exec: "~/.local/bin/hypr_scripts/screenshot-notify.sh fullscreen clipboard" },
     { title: "Color Picker",             icon: "󰃉", category: "Capture", keywords: "color picker hex rgb hyprpicker dropper sample eyedropper",         exec: "zsh -c 'pkill hyprpicker || hyprpicker -a'" },
+    { title: "Record Screen Area",        icon: "󰄀", category: "Capture", keywords: "screenrecord record screen area region with system sound audio stop",   exec: "~/.config/warmind/launcher/bin/warmind-capture-screenrecording --with-desktop-audio" },
+    { title: "Record Screen Area + Mic",  icon: "󰩉", category: "Capture", keywords: "screenrecord record screen area region microphone mic voice sound",    exec: "~/.config/warmind/launcher/bin/warmind-capture-screenrecording --with-desktop-audio --with-microphone-audio" },
+    { title: "Record Fullscreen + Sound", icon: "󰹑", category: "Capture", keywords: "screenrecord record fullscreen full monitor sound desktop audio stop",   exec: "~/.config/warmind/launcher/bin/warmind-capture-screenrecording --fullscreen --with-desktop-audio" },
+    { title: "Stop Recording",           icon: "󱐃", category: "Capture", keywords: "screenrecord stop recording save end",                                 exec: "~/.config/warmind/launcher/bin/warmind-capture-screenrecording --stop-recording" },
 
     // ----- Learn -----
     { title: "Hyprland Wiki",  icon: "󱁉", category: "Learn", keywords: "hyprland wiki docs documentation help webapp brave",        exec: "$HOME/dev/mygits/warmind_helpers/bin/warmind-launch-webapp --browser=brave 'https://wiki.hypr.land/'" },
