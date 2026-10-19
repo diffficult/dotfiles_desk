@@ -13,6 +13,7 @@ Changing style means regenerating these two fragments and pasting them in:
 """
 
 import os
+import re
 import sys
 
 STYLES = ("fsquare", "hsquare", "digital", "roman", "super", "sub")
@@ -35,8 +36,18 @@ def fragment(glyphs):
     return out
 
 
+def configured_style(default="fsquare"):
+    """tmux_conf_window_id_style from tmux.conf.local, so a bare run matches it."""
+    try:
+        text = open(os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "tmux.conf.local")).read()
+    except OSError:
+        return default
+    found = re.search(r'^tmux_conf_window_id_style="?([a-z]+)"?', text, re.M)
+    return found.group(1) if found else default
+
+
 def main():
-    style = sys.argv[1] if len(sys.argv) > 1 else "fsquare"
+    style = sys.argv[1] if len(sys.argv) > 1 else configured_style()
     if style not in STYLES:
         raise SystemExit(f"usage: {sys.argv[0]} [{'|'.join(STYLES)}]")
     try:

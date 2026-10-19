@@ -40,7 +40,7 @@ Wiring:
 | daemon | `scripts/opencode_spin.sh` | 176 | maps panes to directories, reads the signs, drives `@oc_*` / `@pi_*` and the frame |
 | opencode signer | `~/.config/opencode/plugins/agent-spin.ts` | 156 | turns `session.execution.*` into a sign file |
 | pi signer | `~/.pi/agent/extensions/agent-spin.ts` | 48 | turns `agent_start` / `agent_settled` into a sign file |
-| tag generator | `scripts/gen_window_tags.py` | 56 | prints the native window-index tag chain to paste into the formats |
+| tag generator | `scripts/gen_window_tags.py` | 63 | prints the native window-index tag chain to paste into the formats, in the style `tmux_conf_window_id_style` names |
 | autosave timer | `scripts/continuum_timer.sh` | 24 | replaces the `#()` continuum used as its clock |
 | config | `tmux.conf.local` | +7/−4 | formats read `@`-options; daemon and timer launched at line 31 |
 | plugin patch | `plugins/tmux-continuum/continuum.tmux` | +8/−1 | commented-out autosave interpolation (nested git checkout, not tracked here) |
@@ -192,12 +192,22 @@ Behaviour changes from those edits: inside a pane with an ssh session the user
 and host now show the local client's (`#{user}` / `#{host_short}` are native),
 and the `☢` root marker is gone; it had no native equivalent and cost two forks.
 
-Regenerating the tags after changing `tmux_conf_window_id_style`:
+The tags are **independent of the spinner**: the daemon never reads or writes
+them, and nothing about them is animated. They only share a cause — both were
+`#()` in the same two format lines.
+
+The glyphs are baked into the format, so which one a window shows is decided at
+generation time, not at render time. A bare run reads the style the config
+declares; pass one to preview another:
 
 ```sh
-scripts/gen_window_tags.py            # fsquare
-scripts/gen_window_tags.py roman      # hsquare, digital, roman, super, sub
+scripts/gen_window_tags.py            # whatever tmux_conf_window_id_style says
+scripts/gen_window_tags.py super      # 1..9,0 — hsquare, digital, roman, sub also work
 ```
+
+`scripts/window_id_tag.sh` stays as the symbol source and is only read by the
+generator now, never executed at render time. Editing `tmux_conf_window_id_style`
+therefore does nothing until the chain is regenerated.
 
 Paste the "active window" fragment into `…_current_format` and the "other
 windows" one into `…_format`, replacing the existing chain.
