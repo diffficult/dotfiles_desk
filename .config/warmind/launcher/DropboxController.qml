@@ -145,6 +145,11 @@ Item {
             : controller.formatBytes(controller.usedBytes);
     }
 
+    function usageFraction() {
+        if (!controller.quotaKnown) return 0;
+        return Math.max(0, Math.min(1, controller.usedBytes / controller.quotaBytes));
+    }
+
     function relativeTime(timestamp) {
         const seconds = Math.max(0, Math.floor(Date.now() / 1000) - Number(timestamp || 0));
         if (seconds < 60) return "JUST NOW";

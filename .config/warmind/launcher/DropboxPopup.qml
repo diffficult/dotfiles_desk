@@ -132,18 +132,62 @@ CardWindow {
                     anchors.right: parent.right
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.margins: 11
-                    spacing: 4
+                    spacing: 5
 
                     Text {
-                        text: "STORED  " + dropboxPopup.controller.usageText()
+                        text: dropboxPopup.controller.plan.length > 0
+                            ? "DROPBOX " + dropboxPopup.controller.plan.toUpperCase()
+                            : "DROPBOX"
                         color: dropboxPopup.root.ink
                         font.family: dropboxPopup.root.mono
                         font.pixelSize: 11
+                        font.letterSpacing: 1.2
                     }
                     Text {
-                        text: dropboxPopup.controller.plan.length > 0
-                            ? "PLAN  " + dropboxPopup.controller.plan.toUpperCase()
-                            : "FOLDER  " + dropboxPopup.controller.directory
+                        text: dropboxPopup.controller.usageText()
+                        color: dropboxPopup.root.inkDeep
+                        font.family: dropboxPopup.root.mono
+                        font.pixelSize: 11
+                    }
+                    Item {
+                        visible: dropboxPopup.controller.quotaKnown
+                        width: parent.width
+                        height: visible ? storageMeter.thickness : 0
+
+                        Rectangle {
+                            id: storageMeter
+                            readonly property real thickness: 6
+
+                            anchors.fill: parent
+                            radius: height / 2
+                            color: dropboxPopup.root.sep
+                        }
+                        Rectangle {
+                            anchors.left: parent.left
+                            anchors.verticalCenter: parent.verticalCenter
+                            height: storageMeter.thickness
+                            radius: height / 2
+                            width: parent.width * dropboxPopup.controller.usageFraction()
+                            color: dropboxPopup.controller.usageFraction() > 0.9
+                                ? dropboxPopup.root.warn : dropboxPopup.root.accent
+
+                            Behavior on width {
+                                NumberAnimation { duration: 160; easing.type: Easing.OutCubic }
+                            }
+                        }
+                    }
+                    Text {
+                        visible: !dropboxPopup.controller.quotaKnown
+                        width: parent.width
+                        text: "CAPACITY NOT SET · ~/.config/warmind/dropbox-quota"
+                        color: dropboxPopup.root.inkDeep
+                        font.family: dropboxPopup.root.mono
+                        font.pixelSize: 9
+                        wrapMode: Text.WordWrap
+                    }
+                    Text {
+                        width: parent.width
+                        text: "FOLDER  " + dropboxPopup.controller.directory
                         color: dropboxPopup.root.inkDeep
                         font.family: dropboxPopup.root.mono
                         font.pixelSize: 10

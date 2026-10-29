@@ -3,18 +3,42 @@
 import heapq
 import json
 import os
+import re
 import shutil
 import subprocess
 from pathlib import Path
 
 
-PLAN_QUOTAS = {
-    "basic": 2_000_000_000,
-    "plus": 2_000_000_000_000,
-    "pro": 3_000_000_000_000,
-    "professional": 3_000_000_000_000,
-    "essentials": 3_000_000_000_000,
-}
+# The Dropbox client exposes no quota: info.json carries only the folder and the
+# subscription name, dropbox-cli has no size command, and the daemon's own
+# databases are opaque. Account capacity lives in the web UI / API only, so the
+# user keeps it in one live file next to the launcher tree (deploy never purges
+# it). Units are decimal, matching how Dropbox reports storage.
+QUOTA_UNITS = {"B": 1, "KB": 1e3, "MB": 1e6, "GB": 1e9, "TB": 1e12}
+QUOTA_RE = re.compile(r"([0-9]+(?:\.[0-9]+)?)\s*(B|KB|MB|GB|TB)?", re.IGNORECASE)
+
+
+def quota_path():
+    return Path.home() / ".config" / "warmind" / "dropbox-quota"
+
+
+def read_quota():
+    try:
+        text = quota_path().read_text(encoding="utf-8")
+    except OSError:
+        return 0
+
+    for raw_line in text.splitlines():
+        line = raw_line.split("#", 1)[0].strip()
+        if not line:
+            continue
+        match = QUOTA_RE.fullmatch(line)
+        if not match:
+            continue
+        value = float(match.group(1))
+        unit = (match.group(2) or "GB").upper()
+        return int(value * QUOTA_UNITS[unit])
+    return 0
 
 
 def account_info():
@@ -106,7 +130,7 @@ def main():
             status_text = "Stopped"
 
     used_bytes, files = scan_recent(directory) if directory_available else (0, [])
-    quota_bytes = PLAN_QUOTAS.get(plan.lower(), 0)
+    quota_bytes = read_quota()
     print(json.dumps({
         "installed": cli is not None,
         "running": running,
