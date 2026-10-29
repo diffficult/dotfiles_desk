@@ -115,7 +115,8 @@ Item {
     // root.
     //   `tldr <name>` -> inline tldr preview
     //   `# <q>`       -> remote Ollama Linux/CLI help (llama3.2:3b)
-    //   `? <q>`       -> remote Ollama general Q&A
+    //   `?`           -> pick a loaded local model, or a short Pi list,
+    //                    then ask once. Text after `?` filters the list.
     //   `$ <task>`    -> same model, but constrained to emit a shell
     //                    command for the described task
     readonly property bool tldrMode:
@@ -125,9 +126,13 @@ Item {
     readonly property bool linuxMode:   root.query.charAt(0) === "#"
     readonly property bool generalMode: root.query.charAt(0) === "?"
     readonly property bool cmdMode:     root.query.charAt(0) === "$"
-    // LLM-backed modes share the single OllamaChat instance below,
-    // differing only by system prompt + trigger prefix.
+    // `#` and `$` share OllamaChat. `?` uses AskChat so the picker
+    // cannot change the Linux or command path.
     readonly property bool llmMode:  root.linuxMode || root.generalMode || root.cmdMode
+    readonly property bool askPicking: root.generalMode && askChat.phase === "pick"
+    readonly property string askPhase: root.generalMode ? askChat.phase : ""
+    readonly property string askProvider: root.generalMode && askChat.selectedModel
+                                          ? (askChat.selectedModel.provider || "") : ""
     // Live font multiplier — every `font.pixelSize` binding in this
     // file multiplies its base by this value. Ctrl++ / Ctrl+- nudge
     // it in 0.1 steps; Ctrl+= resets to 1.0. Clamped to keep the
@@ -446,25 +451,28 @@ Item {
     readonly property alias keybindPreview:  keybindSearch.previewText
     readonly property alias keybindFilter:   keybindSearch.filterText
 
-    // Remote-LLM preview. Triggered by `# <question>` (Linux),
-    // `? <question>` (general), or `$ <task>` (command). The mode
-    // property steers the system prompt and the placeholder copy;
-    // everything else (probe, streaming, unload-on-leave) is shared.
+    // `#` and `$` only. `?` must not activate this, or Enter would
+    // submit the old hardcoded model instead of the picked one.
     OllamaChat {
         id: ollamaChat
         query: root.query
-        active: root.llmMode
-        mode: root.cmdMode ? "command" : (root.generalMode ? "general" : "linux")
+        active: root.llmMode && !root.generalMode
+        mode: root.cmdMode ? "command" : "linux"
     }
-    readonly property alias chatItems:          ollamaChat.items
-    readonly property alias chatRunning:        ollamaChat.running
-    readonly property alias chatPreview:        ollamaChat.previewText
-    readonly property alias chatStatus:         ollamaChat.status
-    readonly property alias chatPrompt:         ollamaChat.prompt
-    readonly property alias chatSubmitted:      ollamaChat.submitted
-    readonly property alias chatRequestError:   ollamaChat.requestError
-    readonly property alias chatInvalidCommand: ollamaChat.invalidCommandResponse
-    readonly property alias chatModel:          ollamaChat.model_
+    AskChat {
+        id: askChat
+        query: root.query
+        active: root.generalMode
+    }
+    readonly property var chatItems:            root.generalMode ? askChat.items : ollamaChat.items
+    readonly property bool chatRunning:         root.generalMode ? askChat.running : ollamaChat.running
+    readonly property string chatPreview:       root.generalMode ? askChat.previewText : ollamaChat.previewText
+    readonly property string chatStatus:        root.generalMode ? askChat.status : ollamaChat.status
+    readonly property string chatPrompt:        root.generalMode ? askChat.prompt : ollamaChat.prompt
+    readonly property bool chatSubmitted:       root.generalMode ? askChat.submitted : ollamaChat.submitted
+    readonly property string chatRequestError:  root.generalMode ? askChat.requestError : ollamaChat.requestError
+    readonly property bool chatInvalidCommand:  root.generalMode ? false : ollamaChat.invalidCommandResponse
+    readonly property string chatModel:         root.generalMode ? askChat.model_ : ollamaChat.model_
 
     readonly property bool previewActive: root.tldrMode || root.keybindMode || root.llmMode || root.fileMode || root.ghMode || root.procMode || root.themeMode || root.clipboardMode
     readonly property bool previewHasContent: {
@@ -568,6 +576,7 @@ Item {
         // session starts fresh. The ollama daemon itself is left
         // running — we don't manage its lifecycle, only our use of it.
         ollamaChat.clear();
+        askChat.clear();
     }
     function toggle() { if (root.visible_) close(); else open(); }
     function goUp() {
@@ -591,6 +600,7 @@ Item {
         ghSearch.clear();
         tldrSearch.clear();
         ollamaChat.clear();
+        askChat.clear();
         if (!root.passMode) passSearch.reset();
         // Processes/Themes own their own clear()-on-deactivate via their
         // `active` binding, so the shell doesn't have to nudge them when
@@ -707,6 +717,19 @@ Item {
         //              panel stays open
         //   ok+sub     in `$` mode with a finished answer, copy the
         //              generated command to clipboard; otherwise no-op
+        if (root.generalMode) {
+            if (askChat.phase === "pick") {
+                if (item.isAskModel) {
+                    askChat.select(item);
+                    root.setQuery("?", 1);
+                }
+                return;
+            }
+            if (askChat.status === "ok" && (!askChat.submitted || askChat.requestError !== "")) {
+                askChat.submit();
+            }
+            return;
+        }
         if (item.isLlm) {
             const status = ollamaChat.status;
             if (status === "no-daemon") {
@@ -888,8 +911,8 @@ Item {
         if (root.tldrMode) return root.tldrItems;
         // keybind mode — same one-row pivot, preview owns the UX.
         if (root.keybindMode) return root.keybindItems;
-        // LLM modes are the other query-shape modes; same one-row
-        // pivot for both chat (`?`) and command (`$`).
+        // `?` owns a searchable model list. `#` and `$` stay one row.
+        if (root.generalMode) return askChat.items;
         if (root.llmMode) return root.chatItems;
         // File and GitHub modes are their own worlds: fd and gh already
         // did the filtering, so we just pass their results through.
@@ -1184,6 +1207,10 @@ Item {
                     return;
                 }
                 if (e2.key === Qt.Key_Escape) {
+                    if (root.generalMode && askChat.cancelRequest()) {
+                        event.accepted = true;
+                        return;
+                    }
                     if (root.llmMode && ollamaChat.cancelRequest()) {
                         event.accepted = true;
                         return;
@@ -1339,6 +1366,13 @@ Item {
                     root.moveCursorWord(1);
                     event.accepted = true;
                 } else if (e2.key === Qt.Key_Backspace) {
+                    // An empty `?` question returns to the model list.
+                    // A further backspace cannot delete the `?` prefix.
+                    if (root.generalMode && askChat.phase === "ask" && askChat.prompt.length === 0) {
+                        askChat.returnToPicker();
+                        event.accepted = true;
+                        return;
+                    }
                     // Backspace deletes before the logical cursor; once the
                     // query is empty it walks back up one level so the same
                     // key unwinds both the typed query and the breadcrumb.
@@ -1558,11 +1592,11 @@ Item {
                     clip: true
 
                     // Most preview-bearing modes keep the list + preview split.
-                    // LLM modes (`?` / `$`) are better as a single-column stack:
-                    // search bar, model header, then full-width output.
-                    readonly property bool singleColumnPreview: root.llmMode
+                    // `#` and `$` are a single-column stack. `?` shows the
+                    // model list until one is picked, then the same stack.
+                    readonly property bool singleColumnPreview: root.llmMode && !root.askPicking
                     readonly property real listFraction:
-                        singleColumnPreview ? 0.0 : (root.previewActive ? 0.44 : 1.0)
+                        root.askPicking ? 1.0 : (singleColumnPreview ? 0.0 : (root.previewActive ? 0.44 : 1.0))
 
                     Omni.ResultList {
                         id: resultListInstance
@@ -1582,7 +1616,7 @@ Item {
                     }
 
                     Rectangle {
-                        visible: root.previewActive && !listArea.singleColumnPreview
+                        visible: root.previewActive && !listArea.singleColumnPreview && !root.askPicking
                         anchors.top: parent.top
                         anchors.bottom: parent.bottom
                         anchors.left: resultListInstance.right
@@ -1592,7 +1626,7 @@ Item {
 
                     Omni.PreviewPane {
                         id: previewPaneInstance
-                        visible: root.previewActive
+                        visible: root.previewActive && !root.askPicking
                         anchors.top: parent.top
                         anchors.bottom: parent.bottom
                         anchors.left: listArea.singleColumnPreview ? parent.left : resultListInstance.right
@@ -1600,6 +1634,7 @@ Item {
                         anchors.right: parent.right
                         omni: root
                         ollamaChat: ollamaChat
+                        askChat: askChat
                     }
                 }
 

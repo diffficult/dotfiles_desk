@@ -199,6 +199,11 @@ Item {
                     if (o.tldrRunning) return "FETCHING TLDR…";
                     return "NO TLDR PAGE";
                 }
+                if (o.generalMode && o.askPicking) {
+                    if (o.chatStatus === "") return "LOADING MODELS…";
+                    if (o.chatStatus !== "ok") return "MODEL LIST FAILED";
+                    return "NO MODELS MATCH";
+                }
                 if (o.llmMode) {
                     const cmd = o.cmdMode;
                     if (o.chatPrompt.length === 0)

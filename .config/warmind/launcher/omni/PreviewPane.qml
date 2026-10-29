@@ -15,6 +15,7 @@ Item {
 
     required property var omni
     required property var ollamaChat
+    property var askChat: null
 
     property alias tldrFlickable: tldrPreviewScroll
     property alias chatFlickable: chatPreviewScroll
@@ -71,6 +72,9 @@ Item {
             if (o.llmMode) {
                 const cmd = o.cmdMode;
                 const general = o.generalMode;
+                const notice = general && pp.askChat ? pp.askChat.transientNotice : pp.ollamaChat.transientNotice;
+                if (general && o.askPhase === "ask" && o.chatPrompt.length === 0)
+                    return "type the question  ·  " + (o.askProvider || "model");
                 if (o.chatPrompt.length === 0)
                     return cmd ? "describe a shell task after $"
                                : (general ? "type a question after ?"
@@ -80,12 +84,12 @@ Item {
                 if (o.chatStatus === "no-model")  return "remote llm missing " + o.chatModel;
                 if (!o.chatSubmitted)
                     return cmd ? "↵ to generate  ·  remote llm"
-                               : (general ? "↵ to ask  ·  remote llm"
+                               : (general ? ("↵ to ask  ·  " + (o.askProvider || "model"))
                                           : "↵ to ask Linux/CLI  ·  remote llm");
                 if (o.chatRunning)
                     return "generating  ·  Esc cancels";
-                if (pp.ollamaChat.transientNotice !== "")
-                    return pp.ollamaChat.transientNotice;
+                if (notice !== "")
+                    return notice;
                 if (o.chatRequestError === "timeout")
                     return "request timed out  ·  edit and ↵ to retry";
                 if (o.chatRequestError === "failed")
@@ -158,6 +162,9 @@ Item {
                             : (o.query.length === 0 ? "NO TEXT ENTRIES" : "NO CLIPBOARD MATCH");
                     }
                 if (o.llmMode) {
+                    const notice = o.generalMode && pp.askChat ? pp.askChat.transientNotice : pp.ollamaChat.transientNotice;
+                    if (o.generalMode && o.askPhase === "ask" && o.chatPrompt.length === 0)
+                        return "TYPE THE QUESTION";
                     if (o.chatPrompt.length === 0)
                         return o.cmdMode ? "DESCRIBE A SHELL TASK"
                              : (o.generalMode ? "TYPE A QUESTION"
@@ -170,7 +177,7 @@ Item {
                         return o.cmdMode ? "PRESS ENTER TO GENERATE"
                                          : "PRESS ENTER TO ASK";
                     if (o.cmdMode && o.chatInvalidCommand) return "INVALID COMMAND SHAPE";
-                    if (pp.ollamaChat.transientNotice !== "") return pp.ollamaChat.transientNotice.toUpperCase();
+                    if (notice !== "") return notice.toUpperCase();
                     return o.chatRunning ? "GENERATING…" : "DONE";
                 }
                 if (o.ghMode)    return "SELECT A REPO";
@@ -487,6 +494,12 @@ Item {
                     chatPreviewScroll.contentY = 0;
                 }
             }
+            Connections {
+                target: pp.askChat
+                function onPromptSubmitted() {
+                    chatPreviewScroll.contentY = 0;
+                }
+            }
 
             WheelHandler {
                 onWheel: (event) => {
@@ -513,7 +526,7 @@ Item {
             }
             TextEdit {
                 id: chatPreviewEdit
-                width: chatPreviewScroll.width
+                width: chatPreviewScroll.width - (chatScrollBar.visible ? 10 : 0)
                 // Status messages get dimmed via the baseColor arg;
                 // live response uses the default ink. formatChatHtml
                 // escapes HTML and converts newlines to <br> so plain
@@ -545,6 +558,32 @@ Item {
                 activeFocusOnPress: false
                 selectionColor: pp.omni.indigo
                 selectedTextColor: pp.omni.paper
+            }
+
+            Rectangle {
+                id: chatScrollBar
+                visible: chatPreviewScroll.contentHeight > chatPreviewScroll.height + 1
+                anchors.top: parent.top
+                anchors.right: parent.right
+                anchors.bottom: parent.bottom
+                width: 6
+                radius: 3
+                color: Qt.rgba(1, 1, 1, 0.08)
+
+                Rectangle {
+                    readonly property real maxContentY: Math.max(1, chatPreviewScroll.contentHeight - chatPreviewScroll.height)
+                    readonly property real ratio: Math.min(1, chatPreviewScroll.height / Math.max(chatPreviewScroll.contentHeight, 1))
+                    readonly property real thumbHeight: Math.max(36, chatScrollBar.height * ratio)
+                    readonly property real travel: Math.max(0, chatScrollBar.height - thumbHeight)
+                    readonly property real progress: chatPreviewScroll.contentY / maxContentY
+                    x: 0
+                    y: travel * progress
+                    width: parent.width
+                    height: thumbHeight
+                    radius: 3
+                    color: pp.omni.indigo
+                    opacity: 0.85
+                }
             }
         }
 
