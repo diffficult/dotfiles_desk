@@ -126,6 +126,9 @@ prepend_preloaders = [
 
 # Archive preview with ouch
 prepend_previewers = [
+	# Autoplay audio files while the cursor is on them (audio-hover.yazi).
+	{ mime = "audio/*", run = "audio-hover" },
+	{ url = "*.{mp3,wav,wave,flac,ogg,oga,opus,m4a,aac,wma,aiff,aif,alac,ape,mka,mid,midi,mod,ac3,dts}", run = "audio-hover" },
 	{ mime = "application/msword", run = "office" },
 	{ mime = "application/vnd.ms-excel", run = "office" },
 	{ mime = "application/vnd.openxmlformats-officedocument.wordprocessingml.*", run = "office" },
