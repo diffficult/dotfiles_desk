@@ -267,6 +267,14 @@ Item {
     }
     property var opencodeUsage: opencodeUsageController
 
+    // Cross-device merge of the machine-local usage numbers. Inert until
+    // ~/.local/state/quickshell/warmind/launcher/usage-sync.json names a
+    // synced directory -- see UsageSync.qml.
+    UsageSync {
+        id: usageSync
+        sources: [opencodeUsageController]
+    }
+
     GrokUsageController {
         id: grokUsageController
     }
