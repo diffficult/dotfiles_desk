@@ -12,7 +12,8 @@ local exec_once = {
   "systemctl --user start skwd-walld.service",
   "awww-daemon &",
   "uwsm app -- /usr/lib/geoclue-2.0/demos/agent",
-  "(sleep 10 && uwsm app -- openrgb --startminimized --profile default) &",
+  -- Enforce motherboard Off after loading the legacy profile, whose mode/LED counts no longer match.
+  "(sleep 10 && uwsm app -- openrgb --startminimized --profile default --device 'ASUS ROG STRIX X570-I GAMING' --mode Off) &",
   "uwsm app -- env -u DISPLAY -u WAYLAND_DISPLAY dropbox-cli start",
   "(for _ in $(seq 1 20); do busctl --user get-property org.kde.StatusNotifierWatcher /StatusNotifierWatcher org.kde.StatusNotifierWatcher IsStatusNotifierHostRegistered >/dev/null 2>&1 && break; sleep 1; done; uwsm app -- env QT_QPA_PLATFORM=xcb megasync) &",
   "uwsm app -- syncthing-gtk &",
