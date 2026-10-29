@@ -61,6 +61,9 @@ edit = [
 open = [
 	{ run = 'swayimg --viewer %s1', orphan = true, desc = "Swayimg", for = "linux" },
 ]
+open-pdf = [
+	{ run = 'zathura %s1', orphan = true, desc = "Zathura", for = "linux" },
+]
 reveal = [
 	{ run = 'xdg-open %d1', orphan = true, desc = "Reveal", for = "linux" },
 	{ run = '''clear; exiftool %s1; echo "Press enter to exit"; read _''', block = true, desc = "Show EXIF" },
@@ -89,7 +92,7 @@ rules = [
 	# Media
 	{ mime = "{audio,video}/*", use = [ "play", "reveal" ] },
 	# PDF
-	{ mime = "application/pdf", use = [ "open", "reveal" ] },
+	{ mime = "application/pdf", use = [ "open-pdf", "reveal" ] },
 	# Archive
 	{ mime = "application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", use = [ "extract", "reveal" ] },
 	# Code
