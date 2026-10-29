@@ -91,6 +91,7 @@ hl.config({
     },
   },
   misc = {
+    bell_sound = "bell.ogg",
     disable_hyprland_logo = false,
     force_default_wallpaper = 0,
     vrr = 0,
