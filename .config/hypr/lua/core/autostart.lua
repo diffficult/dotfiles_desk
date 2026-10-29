@@ -1,5 +1,5 @@
 local exec_once = {
-  "hyprpm reload -n &",
+  "/home/rx/.config/hypr/scripts/hyprpm-reload.sh &",
   "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &",
   "eval $(gnome-keyring-daemon --start) &",
   "uwsm app -- swaync",
