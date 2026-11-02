@@ -145,3 +145,6 @@ fi
 
 # warmind_mise: shims fallback for login and non-interactive shells.
 [ -f "$HOME/Projects/warmind_mise/shell/mise-path.sh" ] && . "$HOME/Projects/warmind_mise/shell/mise-path.sh"
+
+# Hermes Agent command
+case ":$PATH:" in *":$HOME/.local/bin:"*) ;; *) export PATH="$HOME/.local/bin:$PATH" ;; esac

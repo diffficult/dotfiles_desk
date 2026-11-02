@@ -194,3 +194,6 @@ export PI_NOTIFICATIONS=off
 # records ~/.gentle-shell/config.json and re-runs every full install on each start.
 # Remove once an upstream release fixes the CodeGraph allowed-roots check.
 export GENTLE_SHELL_NO_AUTO_SETUP=1
+
+# Hermes Agent command
+case ":$PATH:" in *":$HOME/.local/bin:"*) ;; *) export PATH="$HOME/.local/bin:$PATH" ;; esac
