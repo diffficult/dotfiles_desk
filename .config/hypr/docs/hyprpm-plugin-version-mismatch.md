@@ -80,19 +80,18 @@ hyprctl reload && hyprctl configerrors  # expect: empty
 2. If you see `[ERR] removePluginRepo` / permission errors, re-check
    ownership: everything under `/var/cache/hyprpm/rx` must be `rx:rx`.
 
-## 2026-10-28 — Hyprland 0.57.0 API break (scrolloverview)
+## 2026-10-28 — Hyprland 0.57.0 API break (scrolloverview) — resolved 2026-11-09
 
-`hyprpm update` cannot build scroll-overview `main` against 0.57.0
-(`0aa6745`); it leaves `failed = true` and no `.so`, so all
-`plugin.scrolloverview.*` keys are unknown. `new-release` fixes the render
-API but still needs PR #83 for `workspace.createdLate` / `CBind::invoke()`.
+`hyprpm update` could not build scroll-overview `main` against 0.57.0
+(`0aa6745`); it left `failed = true` and no `.so`, so all
+`plugin.scrolloverview.*` keys were unknown. `new-release` had the render
+fixes, PR #83 (merged 2026-11-01) added the `workspace.createdLate` /
+`CBind::invoke()` fixes, and both are in `main` now.
 
-The full diagnosis, local build procedure, and the steps to migrate back to
-`hyprpm add <url> origin/new-release` are in
-[`scrolloverview-recovery.md`](scrolloverview-recovery.md). That file is
-written to be executed by an agent; follow it top to bottom.
-
-Short version of the current workaround: local build at
-`~/.local/lib/hypr/scrolloverview.so`, loaded by
-`scripts/hyprpm-reload.sh`, with the plugin config guarded in
-`lua/integrations/scrolloverview.lua`.
+Resolved: `hyprpm update -f` refreshed the cached headers to 0.57.1 /
+aquamarine 0.16.0, `main` builds again, and the plugin is loaded from
+`/var/cache/hyprpm/rx/hyprland-scroll-overview/scrolloverview.so`. The local
+fallback `~/.local/lib/hypr/scrolloverview.so` and its block in
+`scripts/hyprpm-reload.sh` were deleted; there is nothing custom left in the
+login path. See [`scrolloverview-recovery.md`](scrolloverview-recovery.md) for
+the procedure if an ABI break recurs.
