@@ -30,4 +30,6 @@ if ensure_shim; then
   export LD_PRELOAD="$SHIM${LD_PRELOAD:+:$LD_PRELOAD}"
 fi
 
-exec waybar "$@"
+# Absolute path on purpose: ~/.local/bin/waybar routes here, so a bare
+# `waybar` lookup would recurse.
+exec /usr/bin/waybar "$@"
