@@ -83,7 +83,7 @@
       "class<org.gnome.Nautilus>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<File-roller>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<file-roller>": "<span font_desc='JetBrainsMono Nerd Font 16'>🗜</span>",
-      "class<obsidian>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
+      "class<md\\.obsidian\\.Obsidian>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<zathura>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<org.pwmt.zathura>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<libreoffice-writer>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
