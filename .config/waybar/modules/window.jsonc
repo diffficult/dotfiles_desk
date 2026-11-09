@@ -1,6 +1,9 @@
 {
   "hyprland/window": {
     "format": "<span font_desc='SF Compact Rounded Bold 14'>{}</span>",
+    // Without tooltip-format Waybar feeds the formatted (markup) label to
+    // set_tooltip_text, so hovering shows the literal <span ...> code.
+    "tooltip-format": "{title}",
     "max-length": 65,
     "rewrite": {
       "(.*) — Zen Browser": "$1 󰇧",
