@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Hyprland 0.55+ parses IPC dispatches as Lua, but Waybar 0.15 still emits the
+# legacy "dispatch workspace N" on workspace clicks -> Lua parse error, click
+# does nothing. The shim (LD_PRELOAD) rewrites it to hl.dsp.focus({...}).
+#
+# This wrapper makes every PATH-based start (`waybar`, `uwsm app -- waybar`,
+# `pkill waybar; uwsm app -- waybar`, the Go warmind CLI, ...) use the shim.
+# The shim script execs /usr/bin/waybar explicitly, so there is no recursion.
+exec "$HOME/.config/hypr/scripts/waybar-with-lua-shim.sh" "$@"

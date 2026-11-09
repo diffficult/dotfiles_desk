@@ -1,0 +1,67 @@
+#!/bin/bash
+# Refresh ~/.local/bin/cookies.txt from the logged-in Zen Browser profile.
+#
+# yt-dlp does not know Zen: plain --cookies-from-browser firefox only looks
+# in ~/.mozilla/firefox. The active Zen profile must be passed explicitly,
+# and yt-dlp copies the (locked, while Zen runs) cookies.sqlite, so Zen
+# can stay open idling.
+#
+# Atomic replace: write to a temp file in the same directory, then mv, so
+# a ytmpv/ytdl-download process starting at the same moment never reads a
+# half-written cookies.txt.
+set -u
+
+OUT="$HOME/.local/bin/cookies.txt"
+LOG_DIR="$HOME/.local/state"
+LOG="$LOG_DIR/yt-refresh-cookies.log"
+mkdir -p "$LOG_DIR" "$HOME/.local/bin"
+
+log() { printf '%s %s\n' "$(date '+%F %T %z')" "$*" >>"$LOG"; }
+
+notify_fail() {
+    command -v notify-send >/dev/null 2>&1 || return 0
+    notify-send --app-name="yt-refresh-cookies" -t 4000 \
+        "Cookie refresh failed — check $LOG" 2>/dev/null || true
+}
+
+# Active Zen profile = newest cookies.sqlite under ~/.zen/*/ .
+# Falls back to profiles.ini Default if mtimes are tied/odd.
+PROFILE=""
+if [ -d "$HOME/.zen" ]; then
+    PROFILE="$(find "$HOME/.zen" -maxdepth 2 -name cookies.sqlite -printf '%T@ %h\n' 2>/dev/null \
+        | sort -nr | head -n1 | cut -d' ' -f2-)"
+fi
+if [ -z "$PROFILE" ] || [ ! -f "$PROFILE/cookies.sqlite" ]; then
+    log "ERROR: no Zen cookies.sqlite found under ~/.zen"
+    notify_fail
+    exit 1
+fi
+
+TMP="$(mktemp "$HOME/.local/bin/.cookies.tmp.XXXXXXXX.txt")" || exit 1
+trap 'rm -f "$TMP"' EXIT
+# yt-dlp --cookies loads-then-saves: an empty file is not valid Netscape.
+printf '# Netscape HTTP Cookie File\n' >"$TMP"
+
+# Dummy video URL: yt-dlp only needs a request to trigger the export; no
+# clipboard is read and no video is downloaded. The homepage URL is NOT
+# usable: it resolves to a recommended-feed playlist that exits 120.
+if ! yt-dlp --cookies-from-browser "firefox:$PROFILE" \
+        --cookies "$TMP" \
+        --skip-download --no-warnings \
+        "https://www.youtube.com/watch?v=dQw4w9WgXcQ" >>"$LOG" 2>&1; then
+    log "ERROR: yt-dlp failed for profile $PROFILE"
+    notify_fail
+    exit 1
+fi
+
+if [ ! -s "$TMP" ] || ! grep -q "youtube" "$TMP"; then
+    log "ERROR: export produced no youtube cookies for profile $PROFILE"
+    notify_fail
+    exit 1
+fi
+
+chmod 600 "$TMP"
+mv -f "$TMP" "$OUT"
+trap - EXIT
+log "OK: refreshed $OUT from $PROFILE ($(wc -l <"$OUT") lines)"
+exit 0
