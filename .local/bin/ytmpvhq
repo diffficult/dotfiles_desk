@@ -29,7 +29,28 @@ notify-send --app-name="Youtube (mpv)" -t 3500 'Streaming @ 1080p' --icon="/usr/
 ## ORIGINAL 1080p res
 #mpv $VIDURL --ytdl --ytdl-format=137+bestaudio/270+bestaudio/136+bestaudio/232+bestaudio/best --volume=50
 VIDURL_PATH="${VIDURL#https://www.youtube.com}"
-mpv --title="1080p - $VIDURL_PATH" --ytdl --ytdl-format='bestvideo[height=1080]+bestaudio/bestvideo[height<=1080]+bestaudio/best' --ytdl-raw-options=cookies=~/.local/bin/cookies.txt --volume=75 --no-resume-playback "$VIDURL"
+# Run mpv once; on an auth-looking failure, refresh cookies from Zen and
+# retry once with the same URL. Any other failure (private/deleted video,
+# no network) is left alone — a refresh cannot fix it.
+run_mpv() {
+    logf="$(mktemp)"
+    mpv --title="1080p - $VIDURL_PATH" --ytdl --ytdl-format='bestvideo[height=1080]+bestaudio/bestvideo[height<=1080]+bestaudio/best' --ytdl-raw-options=cookies=~/.local/bin/cookies.txt --volume=75 --no-resume-playback "$VIDURL" 2>&1 | tee "$logf"
+    rc=${PIPESTATUS[0]}
+    if [[ $rc -ne 0 ]] && grep -Eqi 'Sign in to confirm|cookies.*expired|403 Forbidden|Private video|does not exist|HTTP Error 4[013]' "$logf"; then
+        rm -f "$logf"
+        notify-send --app-name="Youtube (mpv)" -t 4000 'Cookies expired, refreshing and retrying' --icon="/usr/share/icons/Nordzy/apps/scalable/youtube.svg"
+        if ~/.local/bin/yt-refresh-cookies; then
+            logf="$(mktemp)"
+            mpv --title="1080p - $VIDURL_PATH" --ytdl --ytdl-format='bestvideo[height=1080]+bestaudio/bestvideo[height<=1080]+bestaudio/best' --ytdl-raw-options=cookies=~/.local/bin/cookies.txt --volume=75 --no-resume-playback "$VIDURL" 2>&1 | tee "$logf"
+            rc=${PIPESTATUS[0]}
+        else
+            rc=1
+        fi
+    fi
+    rm -f "$logf"
+    return $rc
+}
+run_mpv
 
 #--no-terminal 2&>1 1>/dev/null
 
