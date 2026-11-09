@@ -1,0 +1,11 @@
+[Unit]
+Description=Magic-context release watcher (updates opencode + pi on new cortexkit release)
+
+[Timer]
+OnBootSec=5min
+OnCalendar=*-*-* 0/6:00:00
+Persistent=true
+AccuracySec=15min
+
+[Install]
+WantedBy=timers.target

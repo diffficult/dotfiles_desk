@@ -1,0 +1,10 @@
+[Unit]
+Description=Watch npm for new magic-context releases and update opencode + pi in lockstep
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h
+Environment=PATH=%h/.local/bin:%h/.local/share/mise/installs/opencode/latest:%h/.local/share/mise/installs/pi/latest/pi:/usr/local/bin:/usr/bin:/bin
+ExecStart=%h/.local/bin/magic-context-release-watch.sh
