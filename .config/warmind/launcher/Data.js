@@ -148,7 +148,7 @@ const omarchyItems = [
     // { title: "Update Firmware",  icon: "󰍛", category: "Update",  keywords: "firmware bios uefi fwupd update flash",                               exec: "foot -e sudo fwupdmgr update" },
     { title: "User Password",    icon: "󰷛", category: "Update",  keywords: "user password passwd security login change",                            exec: "~/.config/warmind/launcher/bin/user-password-launcher.sh" },
     { title: "Restart Audio",    icon: "󰜉", category: "Update",  keywords: "restart audio pipewire pipewire-pulse wireplumber pulse sound reload service", exec: "systemctl --user restart pipewire pipewire-pulse wireplumber" },
-    { title: "Restart Waybar",   icon: "󰍜", category: "Update",  keywords: "restart waybar bar service reload",                                   exec: "pkill waybar; uwsm app -- waybar" },
+    { title: "Restart Waybar",   icon: "󰍜", category: "Update",  keywords: "restart waybar bar service reload",                                   exec: "pkill waybar; uwsm app -- $HOME/.config/hypr/scripts/waybar-with-lua-shim.sh" },
 
     // ----- System -----
     { title: "Lock Screen",      icon: "󰌾", category: "System", keywords: "lock screen security hyprlock aerial video screensaver password", exec: "~/.local/bin/hypr_scripts/aerial-hyprlock.sh" },
@@ -157,7 +157,7 @@ const omarchyItems = [
     { title: "Shutdown",         icon: "󰐥", category: "System", keywords: "shutdown poweroff off halt turn off",                               exec: "systemctl poweroff", flushBookmarks: true },
 
     // ----- Toggle -----
-    { title: "Toggle Waybar",        icon: "󰍜", category: "Toggle", keywords: "toggle waybar top bar show hide visibility",                        exec: "pkill -SIGUSR1 waybar || uwsm app -- waybar" },
+    { title: "Toggle Waybar",        icon: "󰍜", category: "Toggle", keywords: "toggle waybar top bar show hide visibility",                        exec: "pkill -SIGUSR1 waybar || uwsm app -- $HOME/.config/hypr/scripts/waybar-with-lua-shim.sh" },
     { title: "Waybar Manager",       icon: "󰙨", category: "Toggle", keywords: "waybar manager tui config modules positions bar settings footclient",   exec: "footclient -a waybar-manager -T \"Waybar Manager\" $HOME/.local/bin/waybar_manager" },
     { title: "Toggle Notifications", icon: "󰂛", category: "Toggle", keywords: "toggle notifications silence mute dnd swaync",                       exec: "swaync-client -t" },
 
