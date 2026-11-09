@@ -1,0 +1,14 @@
+[Unit]
+Description=Switch hypridle config at 9am and 10pm
+
+[Timer]
+# Run at 9:00 AM daily
+OnCalendar=*-*-* 09:00:00
+# Run at 10:00 PM daily
+OnCalendar=*-*-* 22:00:00
+# Also run on system boot in case we missed a switch
+OnBootSec=30sec
+Persistent=true
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,10 @@
+[Unit]
+Description=Switch hypridle config based on time of day
+After=graphical-session.target hypridle.service
+Requires=graphical-session.target
+
+[Service]
+Type=oneshot
+ExecStart=/home/rx/.local/bin/hypr_scripts/hypridle-switch.sh
+Environment=WAYLAND_DISPLAY=wayland-1
+Environment=XDG_RUNTIME_DIR=/run/user/1000

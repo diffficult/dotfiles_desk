@@ -1,0 +1,15 @@
+[Unit]
+Description=ELECOM Huge TrackBall remapping
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/hypr_scripts/remap-trackball.sh
+Restart=on-failure
+RestartSec=2
+KillMode=control-group
+TimeoutStopSec=5
+
+[Install]
+WantedBy=graphical-session.target

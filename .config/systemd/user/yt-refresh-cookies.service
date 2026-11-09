@@ -1,0 +1,6 @@
+[Unit]
+Description=Refresh YouTube cookies.txt from Zen Browser for ytmpv/ytdl-download
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/yt-refresh-cookies

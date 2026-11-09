@@ -1,0 +1,10 @@
+[Unit]
+Description=Refresh YouTube cookies.txt from Zen daily at 20:10
+
+[Timer]
+OnCalendar=*-*-* 20:10:00
+Persistent=true
+Unit=yt-refresh-cookies.service
+
+[Install]
+WantedBy=timers.target
