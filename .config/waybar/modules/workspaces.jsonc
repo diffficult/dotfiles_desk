@@ -65,6 +65,7 @@
       "class<st>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<foot>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<st-256color>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
+      "class<agent-crash-watch>": "<span font_desc='JetBrainsMono Nerd Font 16'>\uf46f</span>",
       "class<Xfce4-terminal>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<org.wezfurlong.wezterm>": "<span font_desc='JetBrainsMono Nerd Font 16'></span>",
       "class<code-oss>": "<span font_desc='JetBrainsMono Nerd Font 16'>󰨞</span>",
